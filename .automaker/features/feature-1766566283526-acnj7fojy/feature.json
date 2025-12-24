@@ -1,0 +1,142 @@
+{
+  "category": "Frontend",
+  "description": "Add i18n for english and Thai, the language changer is in Header.astro. Translate the whole website for me into Thai and Arabic.",
+  "title": "Add multilingual support for English, Thai, and Arabic",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "ultrathink",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "spec",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766566283526-acnj7fojy",
+  "startedAt": "2025-12-24T08:51:52.908Z",
+  "updatedAt": "2025-12-24T09:16:16.509Z",
+  "planSpec": {
+    "status": "approved",
+    "version": 1,
+    "reviewedByUser": false,
+    "content": "🔧 Tool: Glob\nInput: {\n  \"pattern\": \"**/*.astro\"\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"**/i18n/**\"\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"**/*.json\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/Header.astro\"\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"src/**/*.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/layout/Header.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/astro.config.mjs\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/pages/index.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Hero.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Process.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/layout/Footer.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Showcase.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/PriceEstimation.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/TrustedCultures.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Testimonials.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Contact.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/layouts/BaseLayout.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/Button.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/ProcessStep.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/StatItem.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/TestimonialCard.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/FormInput.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/FormSelect.astro\"\n}\n\n# Specification: Add i18n Support for English, Thai, and Arabic\n\n## 1. Problem\nUsers who speak Thai or Arabic cannot understand the website content, limiting the business reach to non-English speaking markets. The website needs to support multiple languages with a language switcher in the header.\n\n## 2. Solution\nImplement Astro's built-in i18n routing with translation JSON files for English (default), Thai, and Arabic. Create a language switcher dropdown in the Header component, update BaseLayout for RTL support (Arabic), and pass translated strings to all components via props.\n\n## 3. Acceptance Criteria\n\n- **GIVEN** a user is on the website, **WHEN** they click the language button in the header, **THEN** they see a dropdown with English, Thai, and Arabic options\n- **GIVEN** a user selects Thai or Arabic, **WHEN** the page loads, **THEN** all text content is displayed in the selected language\n- **GIVEN** a user selects Arabic, **WHEN** the page loads, **THEN** the page layout is right-to-left (RTL)\n- **GIVEN** a user is on a localized page, **WHEN** they navigate to other pages, **THEN** the language preference is maintained via URL prefix (/th/, /ar/)\n- **GIVEN** the English version, **WHEN** accessed without prefix, **THEN** it displays as the default language\n\n## 4. Files to Modify\n\n| File | Purpose | Action |\n|------|---------|--------|\n| src/i18n/translations/en.json | English translations | create |\n| src/i18n/translations/th.json | Thai translations | create |\n| src/i18n/translations/ar.json | Arabic translations | create |\n| src/i18n/utils.ts | i18n utility functions | create |\n| astro.config.mjs | Configure i18n routing | modify |\n| src/layouts/BaseLayout.astro | Add RTL support, lang attribute | modify |\n| src/components/layout/Header.astro | Add language switcher dropdown | modify |\n| src/components/layout/Footer.astro | Use translated strings | modify |\n| src/pages/index.astro | Pass translations to components | modify |\n| src/pages/th/index.astro | Thai version of homepage | create |\n| src/pages/ar/index.astro | Arabic version of homepage | create |\n| src/components/sections/Hero.astro | Accept translated props | modify |\n| src/components/sections/Showcase.astro | Accept translated props | modify |\n| src/components/sections/Process.astro | Accept translated props | modify |\n| src/components/sections/PriceEstimation.astro | Accept translated props | modify |\n| src/components/sections/TrustedCultures.astro | Accept translated props | modify |\n| src/components/sections/Testimonials.astro | Accept translated props | modify |\n| src/components/sections/Contact.astro | Accept translated props | modify |\n\n## 5. Implementation Tasks\n\n```tasks\n- [ ] T001: Create English translation JSON file | File: src/i18n/translations/en.json\n- [ ] T002: Create Thai translation JSON file | File: src/i18n/translations/th.json\n- [ ] T003: Create Arabic translation JSON file | File: src/i18n/translations/ar.json\n- [ ] T004: Create i18n utility functions (getTranslations, getLangFromUrl) | File: src/i18n/utils.ts\n- [ ] T005: Configure Astro i18n routing in config | File: astro.config.mjs\n- [ ] T006: Update BaseLayout with lang attribute and RTL support | File: src/layouts/BaseLayout.astro\n- [ ] T007: Add language switcher dropdown to Header | File: src/components/layout/Header.astro\n- [ ] T008: Update Footer to use translations | File: src/components/layout/Footer.astro\n- [ ] T009: Update Hero section to accept translations | File: src/components/sections/Hero.astro\n- [ ] T010: Update Showcase section to accept translations | File: src/components/sections/Showcase.astro\n- [ ] T011: Update Process section to accept translations | File: src/components/sections/Process.astro\n- [ ] T012: Update PriceEstimation section to accept translations | File: src/components/sections/PriceEstimation.astro\n- [ ] T013: Update TrustedCultures section to accept translations | File: src/components/sections/TrustedCultures.astro\n- [ ] T014: Update Testimonials section to accept translations | File: src/components/sections/Testimonials.astro\n- [ ] T015: Update Contact section to accept translations | File: src/components/sections/Contact.astro\n- [ ] T016: Update main index.astro to use translations | File: src/pages/index.astro\n- [ ] T017: Create Thai homepage | File: src/pages/th/index.astro\n- [ ] T018: Create Arabic homepage | File: src/pages/ar/index.astro\n```\n\n## 6. Verification\n\n1. Start the dev server: `npm run dev`\n2. Visit `/` - should display English content\n3. Click the language button - should show dropdown with EN, TH, AR options\n4. Select Thai - should redirect to `/th/` with Thai content\n5. Select Arabic - should redirect to `/ar/` with Arabic content and RTL layout\n6. Verify all sections display translated content\n7. Navigate between languages and verify URL prefixes change correctly\n8. Check that Arabic text flows right-to-left",
+    "generatedAt": "2025-12-24T08:53:04.510Z",
+    "tasks": [
+      {
+        "id": "T001",
+        "description": "Create English translation JSON file",
+        "filePath": "src/i18n/translations/en.json",
+        "status": "pending"
+      },
+      {
+        "id": "T002",
+        "description": "Create Thai translation JSON file",
+        "filePath": "src/i18n/translations/th.json",
+        "status": "pending"
+      },
+      {
+        "id": "T003",
+        "description": "Create Arabic translation JSON file",
+        "filePath": "src/i18n/translations/ar.json",
+        "status": "pending"
+      },
+      {
+        "id": "T004",
+        "description": "Create i18n utility functions (getTranslations, getLangFromUrl)",
+        "filePath": "src/i18n/utils.ts",
+        "status": "pending"
+      },
+      {
+        "id": "T005",
+        "description": "Configure Astro i18n routing in config",
+        "filePath": "astro.config.mjs",
+        "status": "pending"
+      },
+      {
+        "id": "T006",
+        "description": "Update BaseLayout with lang attribute and RTL support",
+        "filePath": "src/layouts/BaseLayout.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T007",
+        "description": "Add language switcher dropdown to Header",
+        "filePath": "src/components/layout/Header.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T008",
+        "description": "Update Footer to use translations",
+        "filePath": "src/components/layout/Footer.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T009",
+        "description": "Update Hero section to accept translations",
+        "filePath": "src/components/sections/Hero.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T010",
+        "description": "Update Showcase section to accept translations",
+        "filePath": "src/components/sections/Showcase.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T011",
+        "description": "Update Process section to accept translations",
+        "filePath": "src/components/sections/Process.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T012",
+        "description": "Update PriceEstimation section to accept translations",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T013",
+        "description": "Update TrustedCultures section to accept translations",
+        "filePath": "src/components/sections/TrustedCultures.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T014",
+        "description": "Update Testimonials section to accept translations",
+        "filePath": "src/components/sections/Testimonials.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T015",
+        "description": "Update Contact section to accept translations",
+        "filePath": "src/components/sections/Contact.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T016",
+        "description": "Update main index.astro to use translations",
+        "filePath": "src/pages/index.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T017",
+        "description": "Create Thai homepage",
+        "filePath": "src/pages/th/index.astro",
+        "status": "pending"
+      },
+      {
+        "id": "T018",
+        "description": "Create Arabic homepage",
+        "filePath": "src/pages/ar/index.astro",
+        "status": "pending"
+      }
+    ],
+    "tasksTotal": 18,
+    "tasksCompleted": 18,
+    "approvedAt": "2025-12-24T08:53:04.511Z",
+    "currentTaskId": "T018"
+  },
+  "justFinishedAt": "2025-12-24T09:16:16.509Z"
+}

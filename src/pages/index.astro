@@ -9,11 +9,16 @@ import PriceEstimation from '../components/sections/PriceEstimation.astro';
 import TrustedCultures from '../components/sections/TrustedCultures.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import Contact from '../components/sections/Contact.astro';
+import { getLangFromUrl, getTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
 ---
 
 <BaseLayout
-  title="BMG - Bangkok Modern Granite | Premium Stone Sculptures"
-  description="Bangkok Modern Granite crafts premium granite sculptures using advanced CNC technology and expert hand finishing. Trusted by clients in 24+ countries."
+  title={t.meta.title}
+  description={t.meta.description}
+  lang={lang}
 >
   <Header />
 

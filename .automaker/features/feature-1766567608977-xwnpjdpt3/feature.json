@@ -1,0 +1,21 @@
+{
+  "category": "Frontend",
+  "description": "Change the header.astro items to go to each section in the landing page",
+  "title": "Add navigation links to landing page sections",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766567608977-xwnpjdpt3",
+  "startedAt": "2025-12-24T09:16:13.645Z",
+  "updatedAt": "2025-12-24T09:17:01.800Z",
+  "justFinishedAt": "2025-12-24T09:17:01.800Z"
+}

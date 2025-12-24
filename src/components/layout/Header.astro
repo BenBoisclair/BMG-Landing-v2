@@ -1,18 +1,43 @@
 ---
+import { getLangFromUrl, getLocalizedPath, languages, type Language, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
+
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/product', label: 'Product' },
-  { href: '/process', label: 'Process' },
-  { href: '/global-delivery', label: 'Global Delivery' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '#home', label: t.nav.home },
+  { href: '#product', label: t.nav.product },
+  { href: '#process', label: t.nav.process },
+  { href: '#delivery', label: t.nav.globalDelivery },
+  { href: '#about', label: t.nav.about },
+  { href: '#contact', label: t.nav.contact },
 ];
 
 const currentPath = Astro.url.pathname;
+const currentHash = Astro.url.hash;
 const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
+  // For anchor links, check if we're on the homepage and the hash matches
+  if (href.startsWith('#')) {
+    const pathWithoutLang = currentPath.replace(/^\/(en|th|ar)/, '') || '/';
+    // Active if on homepage and hash matches, or on homepage and it's the #home link
+    if (pathWithoutLang === '/') {
+      return currentHash === href || (href === '#home' && !currentHash);
+    }
+    return false;
+  }
+  // For regular page links
+  const pathWithoutLang = currentPath.replace(/^\/(en|th|ar)/, '') || '/';
+  if (href === '/') return pathWithoutLang === '/';
+  return pathWithoutLang.startsWith(href);
 };
+
+// Get localized paths for each language
+const languageOptions = Object.entries(languages).map(([code, name]) => ({
+  code: code as Language,
+  name,
+  href: getLocalizedPath(code as Language, currentPath),
+  isCurrent: code === currentLang,
+}));
 ---
 
 <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300">
@@ -31,7 +56,7 @@ const isActive = (href: string) => {
             class:list={[
               "text-xl font-medium font-inter transition-colors duration-200",
               isActive(link.href)
-                ? "text-red-600"
+                ? "text-white"
                 : "text-white hover:text-white/80"
             ]}
           >
@@ -40,11 +65,38 @@ const isActive = (href: string) => {
         ))}
       </nav>
 
-      <!-- Language Button -->
-      <div class="hidden lg:flex items-center">
-        <button class="px-6 py-3.5 text-base font-medium font-inter text-white bg-black rounded-lg shadow-sm hover:bg-gray-900 transition-colors duration-200">
-          Language
+      <!-- Language Dropdown (Desktop) -->
+      <div class="hidden lg:flex items-center relative">
+        <button
+          id="language-dropdown-button"
+          class="flex items-center gap-2 px-6 py-3.5 text-base font-medium font-inter text-white bg-black rounded-lg shadow-sm hover:bg-gray-900 transition-colors duration-200"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>{languages[currentLang]}</span>
+          <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
+        <div
+          id="language-dropdown-menu"
+          class="absolute top-full right-0 mt-2 w-40 bg-white rounded-lg shadow-lg overflow-hidden hidden"
+        >
+          {languageOptions.map((lang) => (
+            <a
+              href={lang.href}
+              class:list={[
+                "block px-4 py-3 text-sm font-medium transition-colors duration-200",
+                lang.isCurrent
+                  ? "bg-gray-100 text-red-600"
+                  : "text-gray-700 hover:bg-gray-50"
+              ]}
+              aria-current={lang.isCurrent ? "page" : undefined}
+            >
+              {lang.name}
+            </a>
+          ))}
+        </div>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -72,16 +124,46 @@ const isActive = (href: string) => {
           class:list={[
             "block px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
             isActive(link.href)
-              ? "text-red-600 bg-white/10"
+              ? "text-white bg-white/10"
               : "text-white hover:bg-white/10"
           ]}
         >
           {link.label}
         </a>
       ))}
-      <button class="w-full mt-4 px-6 py-3.5 text-base font-medium font-inter text-white bg-black rounded-lg border border-white/20 hover:bg-white/10 transition-colors duration-200">
-        Language
-      </button>
+      <!-- Language Dropdown (Mobile) -->
+      <div class="mt-4">
+        <button
+          id="mobile-language-dropdown-button"
+          class="w-full flex items-center justify-between px-6 py-3.5 text-base font-medium font-inter text-white bg-black rounded-lg border border-white/20 hover:bg-white/10 transition-colors duration-200"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>{languages[currentLang]}</span>
+          <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div
+          id="mobile-language-dropdown-menu"
+          class="hidden mt-2 bg-white/10 rounded-lg overflow-hidden"
+        >
+          {languageOptions.map((lang) => (
+            <a
+              href={lang.href}
+              class:list={[
+                "block px-6 py-3 text-base font-medium transition-colors duration-200",
+                lang.isCurrent
+                  ? "text-red-400 bg-white/10"
+                  : "text-white hover:bg-white/5"
+              ]}
+              aria-current={lang.isCurrent ? "page" : undefined}
+            >
+              {lang.name}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </nav>
 </header>
@@ -94,11 +176,76 @@ const isActive = (href: string) => {
     mobileMenu?.classList.toggle('hidden');
   });
 
-  // Close menu when clicking a link
-  mobileMenu?.querySelectorAll('a').forEach(link => {
+  // Smooth scroll for anchor links
+  function handleAnchorClick(e: Event) {
+    const link = e.currentTarget as HTMLAnchorElement;
+    const href = link.getAttribute('href');
+
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+
+        // Update URL hash without jumping
+        history.pushState(null, '', href);
+
+        // Close mobile menu if open
+        mobileMenu?.classList.add('hidden');
+      }
+    }
+  }
+
+  // Add smooth scroll to all navigation links
+  document.querySelectorAll('#main-header a[href^="#"]').forEach(link => {
+    link.addEventListener('click', handleAnchorClick);
+  });
+
+  // Close menu when clicking a link (except language dropdown)
+  mobileMenu?.querySelectorAll('a:not([id^="mobile-language"])').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
     });
+  });
+
+  // Desktop Language Dropdown
+  const desktopLangButton = document.getElementById('language-dropdown-button');
+  const desktopLangMenu = document.getElementById('language-dropdown-menu');
+
+  desktopLangButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = desktopLangMenu?.classList.toggle('hidden');
+    desktopLangButton.setAttribute('aria-expanded', String(!isHidden));
+    // Rotate the chevron icon
+    const svg = desktopLangButton.querySelector('svg');
+    svg?.classList.toggle('rotate-180');
+  });
+
+  // Close desktop dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!desktopLangButton?.contains(e.target as Node) && !desktopLangMenu?.contains(e.target as Node)) {
+      desktopLangMenu?.classList.add('hidden');
+      desktopLangButton?.setAttribute('aria-expanded', 'false');
+      desktopLangButton?.querySelector('svg')?.classList.remove('rotate-180');
+    }
+  });
+
+  // Mobile Language Dropdown
+  const mobileLangButton = document.getElementById('mobile-language-dropdown-button');
+  const mobileLangMenu = document.getElementById('mobile-language-dropdown-menu');
+
+  mobileLangButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = mobileLangMenu?.classList.toggle('hidden');
+    mobileLangButton.setAttribute('aria-expanded', String(!isHidden));
+    // Rotate the chevron icon
+    const svg = mobileLangButton.querySelector('svg');
+    svg?.classList.toggle('rotate-180');
   });
 
   // Add blue background to header when scrolling past hero section

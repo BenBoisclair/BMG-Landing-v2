@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
 
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 ---
 
 <section id="home" class="relative h-screen min-h-[600px] max-h-[800px] pt-20 lg:pt-24">
@@ -7,7 +10,7 @@
   <div class="absolute inset-0 z-0">
     <img
       src="/images/Landing/HeroSection/background_1.png"
-      alt="BMG granite sculpture craftsmanship"
+      alt={t.hero.backgroundAlt}
       class="w-full h-full object-cover"
     />
     <!-- Purple overlay -->
@@ -20,7 +23,7 @@
       href="#product"
       class="px-6 py-3 text-2xl font-medium font-inter text-white bg-[#2c266c]/87 rounded-lg shadow-sm hover:bg-[#2c266c] transition-colors duration-200"
     >
-      View more
+      {t.hero.viewMore}
     </a>
   </div>
 </section>

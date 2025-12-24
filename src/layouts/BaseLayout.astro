@@ -1,19 +1,28 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl, getTextDirection, type Language } from '../i18n/utils';
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Language;
 }
+
+// Get language from URL or use prop override
+const urlLang = getLangFromUrl(Astro.url);
 
 const {
   title = 'BMG - Bangkok Modern Granite',
-  description = 'Premium granite sculptures and artistic stonework crafted with precision CNC technology and expert hand finishing.'
+  description = 'Premium granite sculptures and artistic stonework crafted with precision CNC technology and expert hand finishing.',
+  lang = urlLang,
 } = Astro.props;
+
+// Get text direction for the current language (RTL for Arabic)
+const dir = getTextDirection(lang);
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

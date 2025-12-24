@@ -3,6 +3,10 @@ import Button from '../ui/Button.astro';
 import FormInput from '../ui/FormInput.astro';
 import FormSelect from '../ui/FormSelect.astro';
 import FormPhoneInput from '../ui/FormPhoneInput.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 
 const contactInfo = {
   address: [
@@ -21,45 +25,45 @@ const contactInfo = {
 };
 
 const positions = [
-  'Sales Manager',
-  'Project Manager',
-  'Designer',
-  'Architect',
-  'Developer',
-  'Other'
+  t.contact.positions.salesManager,
+  t.contact.positions.projectManager,
+  t.contact.positions.designer,
+  t.contact.positions.architect,
+  t.contact.positions.developer,
+  t.contact.positions.other
 ];
 
 const projectTypes = [
-  'Residential',
-  'Commercial',
-  'Industrial',
-  'Hospitality',
-  'Public Space',
-  'Other'
+  t.contact.projectTypes.residential,
+  t.contact.projectTypes.commercial,
+  t.contact.projectTypes.industrial,
+  t.contact.projectTypes.hospitality,
+  t.contact.projectTypes.publicSpace,
+  t.contact.projectTypes.other
 ];
 
 const budgetRanges = [
-  'Under $10,000',
-  '$10,000 - $50,000',
-  '$50,000 - $100,000',
-  '$100,000 - $500,000',
-  'Over $500,000'
+  t.contact.budgetRanges.under10k,
+  t.contact.budgetRanges['10kTo50k'],
+  t.contact.budgetRanges['50kTo100k'],
+  t.contact.budgetRanges['100kTo500k'],
+  t.contact.budgetRanges.over500k
 ];
 
 const considerations = [
-  'Quality',
-  'Price',
-  'Timeline',
-  'Design',
-  'All of the above'
+  t.contact.considerations.quality,
+  t.contact.considerations.price,
+  t.contact.considerations.timeline,
+  t.contact.considerations.design,
+  t.contact.considerations.allOfTheAbove
 ];
 
 const timelines = [
-  'Immediate',
-  'Within 1 month',
-  '1-3 months',
-  '3-6 months',
-  '6+ months'
+  t.contact.timelines.immediate,
+  t.contact.timelines.within1Month,
+  t.contact.timelines['1To3Months'],
+  t.contact.timelines['3To6Months'],
+  t.contact.timelines['6PlusMonths']
 ];
 ---
 
@@ -70,26 +74,26 @@ const timelines = [
       <div class="bg-white rounded-2xl p-6 lg:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
         <form class="space-y-6" onsubmit="return false;">
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormInput label="First Name" name="firstName" required />
-            <FormInput label="Surname" name="surname" required />
+            <FormInput label={t.contact.form.firstName} name="firstName" required />
+            <FormInput label={t.contact.form.surname} name="surname" required />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormPhoneInput label="Phone" name="phone" required />
-            <FormInput label="Email" name="email" type="email" required />
+            <FormPhoneInput label={t.contact.form.phone} name="phone" required />
+            <FormInput label={t.contact.form.email} name="email" type="email" required />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormInput label="WhatsApp" name="whatsapp" type="tel" />
-            <FormSelect label="Position" name="position" options={positions} />
+            <FormInput label={t.contact.form.whatsapp} name="whatsapp" type="tel" />
+            <FormSelect label={t.contact.form.position} name="position" options={positions} />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormSelect label="Project Type" name="projectType" options={projectTypes} />
-            <FormSelect label="Budget" name="budget" options={budgetRanges} />
+            <FormSelect label={t.contact.form.projectType} name="projectType" options={projectTypes} />
+            <FormSelect label={t.contact.form.budget} name="budget" options={budgetRanges} />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormSelect label="How would you consider us?" name="consideration" options={considerations} />
-            <FormSelect label="What is your expected timeline for this project?" name="timeline" options={timelines} />
+            <FormSelect label={t.contact.form.consideration} name="consideration" options={considerations} />
+            <FormSelect label={t.contact.form.timeline} name="timeline" options={timelines} />
           </div>
-          <FormInput label="Remark" name="remark" type="textarea" rows={4} />
+          <FormInput label={t.contact.form.remark} name="remark" type="textarea" rows={4} />
 
           <!-- Checkbox -->
           <label class="flex items-start gap-3 cursor-pointer">
@@ -98,12 +102,12 @@ const timelines = [
               class="mt-1 w-4 h-4 rounded border-gray-300 text-bmg-primary focus:ring-bmg-primary"
             />
             <span class="text-sm text-gray-600">
-              Consent to Receive SMS Notifications, Alerts & Occasional Marketing Communication from company. Message frequency varies. Message & data rates may apply. You can reply STOP to unsubscribe at any time.
+              {t.contact.form.consent}
             </span>
           </label>
 
           <Button type="submit" variant="process" class="w-full sm:w-auto">
-            Submit
+            {t.contact.form.submit}
           </Button>
         </form>
       </div>
@@ -111,10 +115,10 @@ const timelines = [
       <!-- Contact Information -->
       <div>
         <h2 class="text-3xl lg:text-4xl font-bold mb-4" style="color: #2C266C;">
-          Contact Us
+          {t.contact.title}
         </h2>
         <p class="text-gray-600 mb-8">
-          We are committed to producing the most refined stone sculptures for clients worldwide.
+          {t.contact.description}
         </p>
 
         <div class="space-y-6">

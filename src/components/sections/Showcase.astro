@@ -1,5 +1,9 @@
 ---
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 
 interface ShowcaseModel {
   id: string;
@@ -12,29 +16,29 @@ interface ShowcaseModel {
 const models: ShowcaseModel[] = [
   {
     id: '1',
-    name: 'Sculpture One',
-    description: 'A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry.',
+    name: t.showcase.models['1'].name,
+    description: t.showcase.models['1'].description,
     glbPath: '/models/placeholder.glb',
     thumbnailPath: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=200&h=200&fit=crop',
   },
   {
     id: '2',
-    name: 'Sculpture Two',
-    description: 'An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space.',
+    name: t.showcase.models['2'].name,
+    description: t.showcase.models['2'].description,
     glbPath: '/models/placeholder.glb',
     thumbnailPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=200&h=200&fit=crop',
   },
   {
     id: '3',
-    name: 'Sculpture Three',
-    description: 'A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances.',
+    name: t.showcase.models['3'].name,
+    description: t.showcase.models['3'].description,
     glbPath: '/models/placeholder.glb',
     thumbnailPath: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop',
   },
 ];
 ---
 
-<section id="product" class="py-16 lg:py-24 bg-white">
+<section id="product" class="py-16 lg:py-24 bg-white" data-models={JSON.stringify(models)}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
       <!-- Text Content -->
@@ -45,7 +49,7 @@ const models: ShowcaseModel[] = [
         <p id="showcase-description" class="text-gray-600 text-lg leading-relaxed mb-8">
           {models[0].description}
         </p>
-        <Button href="#process">View More</Button>
+        <Button href="#process">{t.showcase.viewMore}</Button>
       </div>
 
       <!-- 3D Model Viewer -->
@@ -54,7 +58,7 @@ const models: ShowcaseModel[] = [
           <model-viewer
             id="showcase-viewer"
             src={models[0].glbPath}
-            alt="3D sculpture model"
+            alt={t.showcase.modelAlt}
             camera-controls
             disable-zoom
             auto-rotate
@@ -74,7 +78,7 @@ const models: ShowcaseModel[] = [
         <button
           class={`pagination-dot size-5.5 rounded-[5px] transition-colors duration-300 cursor-pointer ${index === 0 ? 'bg-[#d01e2a]' : 'bg-[#d9d9d9]'}`}
           data-index={index}
-          aria-label={`View model ${index + 1}`}
+          aria-label={`${t.showcase.viewModel} ${index + 1}`}
         ></button>
       ))}
     </div>
@@ -128,27 +132,10 @@ const models: ShowcaseModel[] = [
   updateCameraOrbit();
   window.addEventListener('resize', updateCameraOrbit);
 
-  // Model data (must match the Astro frontmatter)
-  const models = [
-    {
-      id: '1',
-      name: 'Sculpture One',
-      description: 'A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry.',
-      glbPath: '/models/placeholder.glb',
-    },
-    {
-      id: '2',
-      name: 'Sculpture Two',
-      description: 'An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space.',
-      glbPath: '/models/placeholder.glb',
-    },
-    {
-      id: '3',
-      name: 'Sculpture Three',
-      description: 'A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances.',
-      glbPath: '/models/placeholder.glb',
-    },
-  ];
+  // Get translated model data from data attribute
+  const showcaseSection = document.getElementById('product');
+  const modelsData = showcaseSection?.dataset.models;
+  const models = modelsData ? JSON.parse(modelsData) : [];
 
   let currentIndex = 0;
 

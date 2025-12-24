@@ -1,42 +1,46 @@
 ---
 import Button from '../ui/Button.astro';
 import ProcessStep from '../ui/ProcessStep.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 
 const steps = [
   {
-    number: '01',
-    title: 'Concept or Existing Mode',
-    description: 'If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together.',
+    number: t.process.steps['1'].number,
+    title: t.process.steps['1'].title,
+    description: t.process.steps['1'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=01',
   },
   {
-    number: '02',
-    title: 'Prototype Creation',
-    description: 'Based on the approved direction, we create a clay or 3D printing model. Adjustments are made until the design meets expectations.',
+    number: t.process.steps['2'].number,
+    title: t.process.steps['2'].title,
+    description: t.process.steps['2'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=02',
   },
   {
-    number: '03',
-    title: '3D Digitalization',
-    description: 'The approved physical prototype is scanned into a detailed 3D model and optimized for CNC carving.',
+    number: t.process.steps['3'].number,
+    title: t.process.steps['3'].title,
+    description: t.process.steps['3'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=03',
   },
   {
-    number: '04',
-    title: 'CNC Carving',
-    description: 'Advanced CNC machines carve the sculpture with precision, faithfully following the finalized 3D data.',
+    number: t.process.steps['4'].number,
+    title: t.process.steps['4'].title,
+    description: t.process.steps['4'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=04',
   },
   {
-    number: '05',
-    title: 'Hand Detailing & Finishing',
-    description: 'Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship.',
+    number: t.process.steps['5'].number,
+    title: t.process.steps['5'].title,
+    description: t.process.steps['5'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=05',
   },
   {
-    number: '06',
-    title: 'Delivery',
-    description: 'The finished piece is carefully packaged and delivered to the customer\'s specified location.',
+    number: t.process.steps['6'].number,
+    title: t.process.steps['6'].title,
+    description: t.process.steps['6'].description,
     icon: 'https://placehold.co/120x120/e2e8f0/64748b?text=06',
   },
 ];
@@ -46,7 +50,7 @@ const steps = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16" style="color: #2C266C;">
-      The Dream Crafting Process
+      {t.process.title}
     </h2>
 
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -55,12 +59,12 @@ const steps = [
         <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl mb-6">
           <img
             src="/images/Landing/ProcessImage.jpg"
-            alt="BMG craftsman creating granite sculpture"
+            alt={t.process.craftingAlt}
             class="w-full h-full object-cover"
           />
         </div>
         <p class="text-gray-600 leading-relaxed">
-          Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam
+          {t.process.description}
         </p>
       </div>
 
@@ -80,7 +84,7 @@ const steps = [
     <!-- CTA Button -->
     <div class="text-center mt-12 lg:mt-16">
       <Button href="#contact" variant="process">
-        Learn more about our process
+        {t.process.learnMore}
       </Button>
     </div>
   </div>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Showcase from '../../components/sections/Showcase.astro';
+import Process from '../../components/sections/Process.astro';
+import PriceEstimation from '../../components/sections/PriceEstimation.astro';
+import TrustedCultures from '../../components/sections/TrustedCultures.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import Contact from '../../components/sections/Contact.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+---
+
+<BaseLayout
+  title={t.meta.title}
+  description={t.meta.description}
+  lang={lang}
+>
+  <Header />
+
+  <main>
+    <Hero />
+    <Showcase />
+    <Process />
+    <PriceEstimation />
+    <TrustedCultures />
+    <Testimonials />
+    <Contact />
+  </main>
+
+  <Footer />
+</BaseLayout>

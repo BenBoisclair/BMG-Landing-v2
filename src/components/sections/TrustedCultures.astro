@@ -1,11 +1,15 @@
 ---
 import StatItem from '../ui/StatItem.astro';
 import InteractiveMap from '../ui/InteractiveMap.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 
 const stats = [
-  { value: '24', label: 'Countries Delivered' },
-  { value: '24', label: 'Project Completed' },
-  { value: '30+', label: 'Years Experiences' },
+  { value: '24', label: t.trustedCultures.stats.countriesDelivered },
+  { value: '24', label: t.trustedCultures.stats.projectsCompleted },
+  { value: '30+', label: t.trustedCultures.stats.yearsExperience },
 ];
 ---
 
@@ -13,7 +17,7 @@ const stats = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16" style="color: #2C266C;">
-      Trusted Across Cultures
+      {t.trustedCultures.title}
     </h2>
 
     <!-- Interactive World Map -->

@@ -1,5 +1,9 @@
 ---
 import TestimonialCard from '../ui/TestimonialCard.astro';
+import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = getTranslations(currentLang);
 
 const testimonials = [
   {
@@ -46,10 +50,10 @@ const testimonials = [
     <!-- Section Header -->
     <div class="text-center mb-12 lg:mb-16 max-w-2xl mx-auto">
       <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase" style="color: #2C266C; font-family: 'Poppins', sans-serif;">
-        What our clients say
+        {t.testimonials.title}
       </h2>
       <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">
-        Community development is often linked with community work or community planning, and may involve stakeholders, foundations,
+        {t.testimonials.description}
       </p>
     </div>
 
@@ -83,7 +87,7 @@ const testimonials = [
             <button
               id="prev-btn"
               class="nav-arrow-btn left-arrow w-12 h-12 flex items-center justify-center transition-all duration-300"
-              aria-label="Previous testimonials"
+              aria-label={t.testimonials.prevButton}
               disabled
             >
               <img
@@ -98,7 +102,7 @@ const testimonials = [
               id="next-btn"
               class="nav-arrow-btn right-arrow w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300"
               style="background-color: #B41E23;"
-              aria-label="Next testimonials"
+              aria-label={t.testimonials.nextButton}
             >
               <img
                 src="/images/Landing/arrow.svg"

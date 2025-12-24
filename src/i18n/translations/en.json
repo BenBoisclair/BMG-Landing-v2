@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "home": "Home",
+    "product": "Product",
+    "process": "Process",
+    "globalDelivery": "Global Delivery",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "viewMore": "View more",
+    "backgroundAlt": "BMG granite sculpture craftsmanship"
+  },
+  "showcase": {
+    "viewMore": "View More",
+    "modelAlt": "3D sculpture model",
+    "viewModel": "View model",
+    "models": {
+      "1": {
+        "name": "Sculpture One",
+        "description": "A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry."
+      },
+      "2": {
+        "name": "Sculpture Two",
+        "description": "An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space."
+      },
+      "3": {
+        "name": "Sculpture Three",
+        "description": "A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances."
+      }
+    }
+  },
+  "process": {
+    "title": "The Dream Crafting Process",
+    "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam",
+    "craftingAlt": "BMG craftsman creating granite sculpture",
+    "learnMore": "Learn more about our process",
+    "steps": {
+      "1": {
+        "number": "01",
+        "title": "Concept or Existing Mode",
+        "description": "If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together."
+      },
+      "2": {
+        "number": "02",
+        "title": "Prototype Creation",
+        "description": "Based on the approved direction, we create a clay or 3D printing model. Adjustments are made until the design meets expectations."
+      },
+      "3": {
+        "number": "03",
+        "title": "3D Digitalization",
+        "description": "The approved physical prototype is scanned into a detailed 3D model and optimized for CNC carving."
+      },
+      "4": {
+        "number": "04",
+        "title": "CNC Carving",
+        "description": "Advanced CNC machines carve the sculpture with precision, faithfully following the finalized 3D data."
+      },
+      "5": {
+        "number": "05",
+        "title": "Hand Detailing & Finishing",
+        "description": "Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship."
+      },
+      "6": {
+        "number": "06",
+        "title": "Delivery",
+        "description": "The finished piece is carefully packaged and delivered to the customer's specified location."
+      }
+    }
+  },
+  "priceEstimation": {
+    "title": "Price Estimation",
+    "bust": {
+      "tab": "Bust",
+      "title": "Bust Price Calculator",
+      "selectSize": "Select Size",
+      "selectMaterial": "Select Material",
+      "detailLevel": "Detail Level",
+      "sizes": {
+        "small": { "label": "Small", "description": "12\" height" },
+        "medium": { "label": "Medium", "description": "18\" height" },
+        "large": { "label": "Large", "description": "24\" height" },
+        "lifesize": { "label": "Life Size", "description": "30\"+ height" }
+      },
+      "materials": {
+        "bronze": "Bronze",
+        "marble": "Marble",
+        "resin": "Resin"
+      },
+      "details": {
+        "standard": "Standard",
+        "detailed": "Detailed",
+        "premium": "Premium"
+      }
+    },
+    "relief": {
+      "tab": "Relief",
+      "title": "Relief Price Calculator",
+      "selectSize": "Select Size (dimensions)",
+      "reliefType": "Relief Type",
+      "selectMaterial": "Select Material",
+      "sizes": {
+        "small": { "label": "Small", "description": "12\" x 16\"" },
+        "medium": { "label": "Medium", "description": "18\" x 24\"" },
+        "large": { "label": "Large", "description": "24\" x 36\"" },
+        "mural": { "label": "Mural", "description": "36\"+ custom" }
+      },
+      "types": {
+        "bas": { "label": "Bas Relief", "description": "Low projection" },
+        "mezzo": { "label": "Mezzo Relief", "description": "Medium projection" },
+        "alto": { "label": "Alto Relief", "description": "High projection" }
+      },
+      "materials": {
+        "bronze": "Bronze",
+        "plaster": "Plaster",
+        "stone": "Stone"
+      }
+    },
+    "estimatedPrice": "Estimated Price",
+    "selectOptions": "Select options above",
+    "selectAllOptions": "Select all options",
+    "priceDisclaimer": "*Final price may vary based on specific requirements",
+    "getCustomQuote": "Get Custom Quote"
+  },
+  "trustedCultures": {
+    "title": "Trusted Across Cultures",
+    "stats": {
+      "countriesDelivered": "Countries Delivered",
+      "projectsCompleted": "Project Completed",
+      "yearsExperience": "Years Experiences"
+    }
+  },
+  "testimonials": {
+    "title": "What our clients say",
+    "description": "Community development is often linked with community work or community planning, and may involve stakeholders, foundations,",
+    "prevButton": "Previous testimonials",
+    "nextButton": "Next testimonials"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "We are committed to producing the most refined stone sculptures for clients worldwide.",
+    "form": {
+      "firstName": "First Name",
+      "surname": "Surname",
+      "phone": "Phone",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "position": "Position",
+      "projectType": "Project Type",
+      "budget": "Budget",
+      "consideration": "How would you consider us?",
+      "timeline": "What is your expected timeline for this project?",
+      "remark": "Remark",
+      "consent": "Consent to Receive SMS Notifications, Alerts & Occasional Marketing Communication from company. Message frequency varies. Message & data rates may apply. You can reply STOP to unsubscribe at any time.",
+      "submit": "Submit"
+    },
+    "positions": {
+      "salesManager": "Sales Manager",
+      "projectManager": "Project Manager",
+      "designer": "Designer",
+      "architect": "Architect",
+      "developer": "Developer",
+      "other": "Other"
+    },
+    "projectTypes": {
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial",
+      "hospitality": "Hospitality",
+      "publicSpace": "Public Space",
+      "other": "Other"
+    },
+    "budgetRanges": {
+      "under10k": "Under $10,000",
+      "10kTo50k": "$10,000 - $50,000",
+      "50kTo100k": "$50,000 - $100,000",
+      "100kTo500k": "$100,000 - $500,000",
+      "over500k": "Over $500,000"
+    },
+    "considerations": {
+      "quality": "Quality",
+      "price": "Price",
+      "timeline": "Timeline",
+      "design": "Design",
+      "allOfTheAbove": "All of the above"
+    },
+    "timelines": {
+      "immediate": "Immediate",
+      "within1Month": "Within 1 month",
+      "1To3Months": "1-3 months",
+      "3To6Months": "3-6 months",
+      "6PlusMonths": "6+ months"
+    }
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "copyright": "Copyright",
+    "allRightsReserved": "All Rights Reserved.",
+    "companyName": "BANGKOK MODERN GRANITE CO.,LTD."
+  },
+  "languageSwitcher": {
+    "english": "English",
+    "thai": "Thai",
+    "arabic": "Arabic",
+    "selectLanguage": "Select Language"
+  },
+  "meta": {
+    "title": "BMG - Bangkok Modern Granite",
+    "description": "Premium granite sculptures and stone craftsmanship by Bangkok Modern Granite"
+  }
+}
