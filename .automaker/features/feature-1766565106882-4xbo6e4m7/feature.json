@@ -1,0 +1,21 @@
+{
+  "category": "Frontend",
+  "description": "Contact section contact form and the links on the right should fill the same space. It should be half half. Please make the button look like the ones in the other sections espcially showcase. Make a button component that is reusable and has hover properties.",
+  "title": "Add reusable button component with hover effects",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766565106882-4xbo6e4m7",
+  "startedAt": "2025-12-24T08:33:22.720Z",
+  "updatedAt": "2025-12-24T08:35:10.785Z",
+  "justFinishedAt": "2025-12-24T08:35:10.785Z"
+}

@@ -158,3 +158,76 @@ Input: {
   "command": "git log --oneline -5",
   "description": "Check recent commits"
 }
+
+Let me check the git status with more detail:
+
+🔧 Tool: Bash
+Input: {
+  "command": "git add -A && git status",
+  "description": "Stage all changes and show status"
+}
+
+Good! Now let me create a commit for the footer color change. Let me commit just the relevant changes:
+
+🔧 Tool: Bash
+Input: {
+  "command": "git diff --cached src/styles/global.css src/components/layout/Footer.astro",
+  "description": "Show the footer-related changes in staging"
+}
+
+Perfect! I can see the changes clearly show:
+1. The new `--color-bmg-footer: #2C266C;` variable added to global.css
+2. The Footer component updated to use `bg-bmg-footer` instead of `bg-gray-900`
+
+Now let me create a commit:
+
+🔧 Tool: Bash
+Input: {
+  "command": "git commit -m \"$(cat <<'EOF'\nUpdate footer color to #2C266C\n\n- Add custom color variable --color-bmg-footer with value #2C266C to global theme\n- Update Footer component to use bg-bmg-footer class instead of bg-gray-900\n- Maintains consistent color naming convention with other BMG brand colors\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>\nEOF\n)\"",
+  "description": "Create commit for footer color changes"
+}
+
+Let me try a different approach:
+
+🔧 Tool: Bash
+Input: {
+  "command": "git commit -m \"Update footer color to #2C266C\n\n- Add custom color variable --color-bmg-footer with value #2C266C to global theme\n- Update Footer component to use bg-bmg-footer class instead of bg-gray-900\n- Maintains consistent color naming convention with other BMG brand colors\"",
+  "description": "Create commit for footer color changes"
+}
+
+Perfect! The commit has been created successfully. Let me verify the changes once more:
+
+🔧 Tool: Bash
+Input: {
+  "command": "git log -1 --stat",
+  "description": "Show the latest commit details"
+}
+
+Excellent! Everything is committed. Let me verify the final state of the files one more time:
+
+🔧 Tool: Bash
+Input: {
+  "command": "grep -n \"bg-bmg-footer\\|#2C266C\" /Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/layout/Footer.astro /Users/benedictboisclair/Projects/BMG-Landing-v2/src/styles/global.css",
+  "description": "Verify footer color implementation"
+}
+
+Perfect! The implementation is complete. Let me create a summary:
+
+<summary>
+## Summary: Footer color should be #2C266C
+
+### Changes Implemented
+- Added a new custom color variable `--color-bmg-footer: #2C266C` to the Tailwind theme configuration in `/src/styles/global.css`
+- Updated the Footer component to use the new `bg-bmg-footer` Tailwind class instead of the generic `bg-gray-900` class
+- The new color #2C266C has been integrated following the existing BMG brand color naming convention
+
+### Files Modified
+1. **src/styles/global.css** - Added `--color-bmg-footer: #2C266C;` to the @theme section
+2. **src/components/layout/Footer.astro** - Changed footer background class from `bg-gray-900` to `bg-bmg-footer`
+
+### Notes for Developer
+- The implementation follows the existing color management pattern in the project, where brand colors are defined as CSS variables in the global theme
+- The color is now reusable throughout the application if needed
+- The Astro build completed successfully, confirming the changes are compatible with the project structure
+- The naming convention `bg-bmg-footer` aligns with other BMG brand color classes in the Tailwind configuration
+</summary>

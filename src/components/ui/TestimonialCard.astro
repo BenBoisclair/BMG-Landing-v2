@@ -9,7 +9,7 @@ interface Props {
 const { name, role, quote, rating = 5 } = Astro.props;
 ---
 
-<div class="testimonial-card bg-white rounded-2xl p-6 lg:p-8">
+<div class="testimonial-card bg-white p-6 lg:p-8">
   <!-- Star Rating -->
   <div class="flex gap-0.5 mb-4" style="width: 101.002px; height: 17.216px;">
     {Array.from({ length: 5 }).map((_, i) => (
@@ -36,10 +36,7 @@ const { name, role, quote, rating = 5 } = Astro.props;
 
 <style>
   .testimonial-card {
-    box-shadow: 0 38.519px 25.481px 0 rgba(56, 56, 56, 0.06),
-                0 20px 13px 0 rgba(56, 56, 56, 0.05),
-                0 8.148px 6.519px 0 rgba(56, 56, 56, 0.04),
-                0 1.852px 3.148px 0 rgba(56, 56, 56, 0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
 
   .testimonial-quote {

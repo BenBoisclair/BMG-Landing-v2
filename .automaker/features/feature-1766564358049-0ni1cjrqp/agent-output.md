@@ -703,3 +703,86 @@ Input: {
   "offset": 0,
   "limit": 25
 }
+
+Perfect! Now let me complete the todo list:
+
+🔧 Tool: TodoWrite
+Input: {
+  "todos": [
+    {
+      "content": "Update contact information (email, location, phone numbers)",
+      "status": "completed",
+      "activeForm": "Updating contact information (email, location, phone numbers)"
+    },
+    {
+      "content": "Update social media handles and links",
+      "status": "completed",
+      "activeForm": "Updating social media handles and links"
+    },
+    {
+      "content": "Test the implementation and verify all changes",
+      "status": "completed",
+      "activeForm": "Testing the implementation and verifying all changes"
+    }
+  ]
+}
+
+<summary>
+## Summary: Contact Information Update
+
+### Changes Implemented
+
+1. **Updated Contact Information**
+   - **Email**: Changed from `enquiry@bkkmodgrn.com` to `bmgthai@bmg.co.th`
+   - **Address**: Updated to:
+     - 9/11 Moo 10 Borommaratchachonnani rd
+     - Sala Thammasop Thawi Watthana
+     - Bangkok 10170
+   - **Phone Numbers**: Updated to:
+     - +66 2 888 7788
+     - +66 87 879 6226
+     - +66 81 445 9999
+
+2. **Updated Social Media Information**
+   - **Facebook**: 
+     - Handle: BMG บางกอกโมเดิร์นแกรนิต
+     - URL: https://www.facebook.com/bmgthailand
+   - **Line**: 
+     - Handle: @bmgstone
+     - URL: https://page.line.me/bmgstone?openQrModal=true
+   - **Instagram**: 
+     - Handle: bangkokmoderngranite
+     - URL: https://www.instagram.com/bangkokmoderngranite
+   - **YouTube**: 
+     - Handle: bmgthai granite
+     - URL: https://www.youtube.com/channel/UC9FCyP3XZHRkvK9vnnh8IMg
+
+3. **Enhanced Social Media Links**
+   - Converted social media entries from static display to clickable links
+   - Added proper `href` attributes pointing to actual social media URLs
+   - Added `target="_blank"` and `rel="noopener noreferrer"` for security and UX
+   - Added hover effects (opacity change and color transition) for better interactivity
+   - Social media icons remain clickable with smooth transitions
+
+### Files Modified
+
+- `/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/Contact.astro`
+
+### Notes for Developer
+
+- All contact information has been successfully updated to match the new details provided
+- The social media links are now fully functional and open in new tabs when clicked
+- The hover effects provide visual feedback to users that the social media items are clickable
+- The build completed successfully with no errors
+- All existing styling and form functionality remains intact
+- The contact section maintains its responsive design and visual consistency with the rest of the site
+
+### Testing Recommendations
+
+- Verify that all social media links open correctly in new tabs
+- Test that the email link (`mailto:`) opens the default email client
+- Confirm that all phone numbers and addresses are displayed correctly
+- Check hover states on social media links for smooth transitions
+- Ensure the contact information displays properly on mobile devices
+
+</summary>

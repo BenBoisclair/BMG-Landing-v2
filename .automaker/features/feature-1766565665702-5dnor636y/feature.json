@@ -1,0 +1,21 @@
+{
+  "category": "Frontend",
+  "description": "The right section in the Contact.astro should use the icons in the images folder",
+  "title": "Update Contact section to use folder icons",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766565665702-5dnor636y",
+  "startedAt": "2025-12-24T08:41:07.489Z",
+  "updatedAt": "2025-12-24T08:44:11.190Z",
+  "justFinishedAt": "2025-12-24T08:44:11.190Z"
+}

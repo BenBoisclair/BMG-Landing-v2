@@ -56,13 +56,13 @@ const testimonials = [
     <!-- Testimonials Carousel Container -->
     <div class="relative">
       <!-- Blue Background Block -->
-      <div class="blue-background-block absolute left-0 right-0" style="background-color: #2C266C;"></div>
+      <div class="blue-background-block absolute left-8 right-8 lg:left-12 lg:right-12" style="background-color: #2C266C;"></div>
 
       <!-- Carousel Wrapper -->
-      <div class="relative">
+      <div class="relative carousel-wrapper">
         <!-- Testimonials Carousel -->
         <div class="testimonials-carousel overflow-hidden px-2 lg:px-0">
-          <div class="testimonials-track flex transition-transform duration-500 ease-in-out" id="testimonials-track">
+          <div class="testimonials-track flex items-center transition-transform duration-500 ease-in-out" id="testimonials-track">
             {testimonials.map((testimonial, index) => (
               <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3">
                 <TestimonialCard
@@ -78,7 +78,7 @@ const testimonials = [
 
         <!-- Navigation Arrows -->
         <div class="flex justify-center mt-8 pb-12 relative z-10">
-          <div class="nav-controls inline-flex bg-white rounded-xl overflow-hidden shadow-lg">
+          <div class="nav-controls inline-flex bg-white rounded-xl overflow-hidden shadow-lg p-1">
             <!-- Left Arrow Button -->
             <button
               id="prev-btn"
@@ -116,15 +116,24 @@ const testimonials = [
 
 <style>
   .blue-background-block {
-    top: 60px;
+    top: 0;
     bottom: 0;
     border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .carousel-wrapper {
+    padding-top: 80px;
+    padding-bottom: 20px;
   }
 
   .testimonials-carousel {
     margin: 0 -12px;
     position: relative;
     z-index: 5;
+  }
+
+  .testimonials-track {
+    min-height: 280px;
   }
 
   .testimonial-slide {

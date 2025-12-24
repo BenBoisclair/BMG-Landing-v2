@@ -1,0 +1,39 @@
+{
+  "category": "Frontend",
+  "description": "The block in the testimonial section should be bigger. The testinomial items should be centered vertically. The first image is what it should look like, second is what it looks like now: ",
+  "title": "Enhance testimonial section layout and sizing",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766565413464-mmioxjn14",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766565449915-b3id00jjy/images/pasted-image-2025-12-24T08-36-53-453Z-1766565413462.png",
+      "filename": "pasted-image-2025-12-24T08-36-53-453Z.png",
+      "mimeType": "image/png"
+    },
+    {
+      "id": "img-1766565443235-t0oewg68f",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766565449915-b3id00jjy/images/pasted-image-2025-12-24T08-37-23-213Z-1766565443232.png",
+      "filename": "pasted-image-2025-12-24T08-37-23-213Z.png",
+      "mimeType": "image/png"
+    },
+    {
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766565449915-b3id00jjy/images/pasted-image-2025-12-24T08-39-29-411Z-1766565569423.png",
+      "filename": "pasted-image-2025-12-24T08-39-29-411Z-1766565569423.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "ultrathink",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766565449915-b3id00jjy",
+  "startedAt": "2025-12-24T08:44:05.494Z",
+  "updatedAt": "2025-12-24T08:44:28.320Z",
+  "justFinishedAt": "2025-12-24T08:44:28.320Z"
+}

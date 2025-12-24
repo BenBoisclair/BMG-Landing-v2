@@ -1,0 +1,20 @@
+{
+  "category": "Frontend",
+  "description": "When the user scrolls down pass the hero section, it should have a blue background like in the designs.",
+  "title": "Add blue background on scroll past hero section",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "in_progress",
+  "id": "feature-1766565713285-ckv63vvwv",
+  "startedAt": "2025-12-24T08:41:55.196Z",
+  "updatedAt": "2025-12-24T08:41:55.527Z"
+}
