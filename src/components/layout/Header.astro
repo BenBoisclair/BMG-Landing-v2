@@ -15,7 +15,7 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 lg:h-24">
       <!-- Logo -->
@@ -31,7 +31,7 @@ const isActive = (href: string) => {
             class:list={[
               "text-xl font-medium font-inter transition-colors duration-200",
               isActive(link.href)
-                ? "text-[#2c266c] [text-shadow:0px_4px_4px_rgba(0,0,0,0.25)]"
+                ? "text-red-600"
                 : "text-white hover:text-white/80"
             ]}
           >
@@ -72,7 +72,7 @@ const isActive = (href: string) => {
           class:list={[
             "block px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
             isActive(link.href)
-              ? "text-[#2c266c] bg-white/10"
+              ? "text-red-600 bg-white/10"
               : "text-white hover:bg-white/10"
           ]}
         >
@@ -100,4 +100,29 @@ const isActive = (href: string) => {
       mobileMenu?.classList.add('hidden');
     });
   });
+
+  // Add blue background to header when scrolling past hero section
+  function handleHeaderScroll() {
+    const heroSection = document.getElementById('home');
+    const header = document.getElementById('main-header');
+
+    if (heroSection && header) {
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      const scrollPosition = window.scrollY;
+
+      if (scrollPosition > heroBottom) {
+        header.classList.remove('bg-transparent');
+        header.classList.add('bg-[#2C266C]');
+      } else {
+        header.classList.remove('bg-[#2C266C]');
+        header.classList.add('bg-transparent');
+      }
+    }
+  }
+
+  // Run on scroll
+  window.addEventListener('scroll', handleHeaderScroll);
+
+  // Run on load to set initial state
+  handleHeaderScroll();
 </script>
