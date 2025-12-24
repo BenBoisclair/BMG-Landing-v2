@@ -1,16 +1,31 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Showcase from '../components/sections/Showcase.astro';
+import Process from '../components/sections/Process.astro';
+import PriceEstimation from '../components/sections/PriceEstimation.astro';
+import TrustedCultures from '../components/sections/TrustedCultures.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Contact from '../components/sections/Contact.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="BMG - Bangkok Modern Granite | Premium Stone Sculptures"
+  description="Bangkok Modern Granite crafts premium granite sculptures using advanced CNC technology and expert hand finishing. Trusted by clients in 24+ countries."
+>
+  <Header />
+
+  <main>
+    <Hero />
+    <Showcase />
+    <Process />
+    <PriceEstimation />
+    <TrustedCultures />
+    <Testimonials />
+    <Contact />
+  </main>
+
+  <Footer />
+</BaseLayout>

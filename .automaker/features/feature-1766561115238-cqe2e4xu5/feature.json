@@ -1,0 +1,28 @@
+{
+  "category": "Frontend",
+  "description": "#2C266C This is the color of the title and the color of the button. Make the button and the title the same as the image. \n\n",
+  "title": "Add matching button and title styling",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766560796186-35qushb91",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766561115238-cqe2e4xu5/images/pasted-image-2025-12-24T07-19-56-149Z-1766560796182.png",
+      "filename": "pasted-image-2025-12-24T07-19-56-149Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766561115238-cqe2e4xu5",
+  "startedAt": "2025-12-24T07:25:17.822Z",
+  "updatedAt": "2025-12-24T07:26:16.920Z",
+  "justFinishedAt": "2025-12-24T07:26:16.920Z"
+}

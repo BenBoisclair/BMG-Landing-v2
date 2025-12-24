@@ -1,0 +1,227 @@
+{
+  "description": "Configuration for interactive world map country regions. Coordinates are based on SVG viewBox (0 0 1311 672).",
+  "colorLegend": {
+    "#392DCA": "Primary Blue - Main markets",
+    "#FF881B": "Orange - Growing markets",
+    "#E23A45": "Red - Emerging markets",
+    "#ACA7E9": "Light Purple - Partner regions"
+  },
+  "countries": [
+    {
+      "id": "usa",
+      "name": "United States",
+      "color": "#392DCA",
+      "x": 250,
+      "y": 220,
+      "radius": 60,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "color": "#392DCA",
+      "x": 280,
+      "y": 150,
+      "radius": 50,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "mexico",
+      "name": "Mexico",
+      "color": "#FF881B",
+      "x": 200,
+      "y": 300,
+      "radius": 35,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "brazil",
+      "name": "Brazil",
+      "color": "#E23A45",
+      "x": 350,
+      "y": 420,
+      "radius": 45,
+      "description": "Emerging market with local partnerships"
+    },
+    {
+      "id": "argentina",
+      "name": "Argentina",
+      "color": "#FF881B",
+      "x": 320,
+      "y": 520,
+      "radius": 30,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "uk",
+      "name": "United Kingdom",
+      "color": "#392DCA",
+      "x": 575,
+      "y": 175,
+      "radius": 25,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "germany",
+      "name": "Germany",
+      "color": "#ACA7E9",
+      "x": 640,
+      "y": 190,
+      "radius": 25,
+      "description": "Partner region with local support"
+    },
+    {
+      "id": "france",
+      "name": "France",
+      "color": "#ACA7E9",
+      "x": 600,
+      "y": 210,
+      "radius": 25,
+      "description": "Partner region with local support"
+    },
+    {
+      "id": "spain",
+      "name": "Spain",
+      "color": "#FF881B",
+      "x": 570,
+      "y": 245,
+      "radius": 25,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "italy",
+      "name": "Italy",
+      "color": "#E23A45",
+      "x": 645,
+      "y": 245,
+      "radius": 25,
+      "description": "Emerging market with local partnerships"
+    },
+    {
+      "id": "poland",
+      "name": "Poland",
+      "color": "#392DCA",
+      "x": 685,
+      "y": 180,
+      "radius": 25,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "sweden",
+      "name": "Sweden",
+      "color": "#ACA7E9",
+      "x": 660,
+      "y": 130,
+      "radius": 25,
+      "description": "Partner region with local support"
+    },
+    {
+      "id": "egypt",
+      "name": "Egypt",
+      "color": "#FF881B",
+      "x": 710,
+      "y": 300,
+      "radius": 30,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "nigeria",
+      "name": "Nigeria",
+      "color": "#E23A45",
+      "x": 620,
+      "y": 380,
+      "radius": 30,
+      "description": "Emerging market with local partnerships"
+    },
+    {
+      "id": "south-africa",
+      "name": "South Africa",
+      "color": "#392DCA",
+      "x": 680,
+      "y": 490,
+      "radius": 30,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "india",
+      "name": "India",
+      "color": "#FF881B",
+      "x": 860,
+      "y": 320,
+      "radius": 40,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "china",
+      "name": "China",
+      "color": "#E23A45",
+      "x": 980,
+      "y": 250,
+      "radius": 50,
+      "description": "Emerging market with local partnerships"
+    },
+    {
+      "id": "japan",
+      "name": "Japan",
+      "color": "#392DCA",
+      "x": 1120,
+      "y": 230,
+      "radius": 25,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "korea",
+      "name": "South Korea",
+      "color": "#ACA7E9",
+      "x": 1080,
+      "y": 250,
+      "radius": 20,
+      "description": "Partner region with local support"
+    },
+    {
+      "id": "singapore",
+      "name": "Singapore",
+      "color": "#FF881B",
+      "x": 960,
+      "y": 400,
+      "radius": 20,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "uae",
+      "name": "UAE",
+      "color": "#392DCA",
+      "x": 780,
+      "y": 310,
+      "radius": 25,
+      "description": "Primary market with full service coverage"
+    },
+    {
+      "id": "saudi",
+      "name": "Saudi Arabia",
+      "color": "#E23A45",
+      "x": 750,
+      "y": 330,
+      "radius": 30,
+      "description": "Emerging market with local partnerships"
+    },
+    {
+      "id": "australia",
+      "name": "Australia",
+      "color": "#FF881B",
+      "x": 1070,
+      "y": 480,
+      "radius": 50,
+      "description": "Growing market with expanding services"
+    },
+    {
+      "id": "newzealand",
+      "name": "New Zealand",
+      "color": "#392DCA",
+      "x": 1190,
+      "y": 540,
+      "radius": 25,
+      "description": "Primary market with full service coverage"
+    }
+  ]
+}

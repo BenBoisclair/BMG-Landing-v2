@@ -1,0 +1,33 @@
+{
+  "category": "Frontend",
+  "description": "Remove the card the 3D model is on and make the 3D model be part of the background in Showcase.vue",
+  "title": "Update 3D model display to background in Showcase",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766560276763-pvyaqgmvt",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766560327350-rzuibhjc8/images/pasted-image-2025-12-24T07-11-16-738Z-1766560276761.png",
+      "filename": "pasted-image-2025-12-24T07-11-16-738Z.png",
+      "mimeType": "image/png"
+    },
+    {
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766560327350-rzuibhjc8/images/pasted-image-2025-12-24T07-16-31-449Z-1766560591480.png",
+      "filename": "pasted-image-2025-12-24T07-16-31-449Z-1766560591480.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "none",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766560327350-rzuibhjc8",
+  "startedAt": "2025-12-24T07:15:21.856Z",
+  "updatedAt": "2025-12-24T07:17:16.484Z",
+  "justFinishedAt": "2025-12-24T07:17:16.484Z"
+}

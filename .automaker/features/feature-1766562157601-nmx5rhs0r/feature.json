@@ -1,0 +1,28 @@
+{
+  "category": "Frontend",
+  "description": "I want to color the map in Trusted section, the map svg in entirely white, the land part of the map. Some of the blocks are colored right now. I want to be able to hover over the block and based on a json, we can see which country is selectable because its colored",
+  "title": "Add interactive country selection map with hover states",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766562149908-pzec5jjxm",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766562157601-nmx5rhs0r/images/pasted-image-2025-12-24T07-42-29-877Z-1766562149906.png",
+      "filename": "pasted-image-2025-12-24T07-42-29-877Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "ultrathink",
+  "branchName": "main",
+  "priority": 1,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "waiting_approval",
+  "id": "feature-1766562157601-nmx5rhs0r",
+  "startedAt": "2025-12-24T07:42:38.471Z",
+  "updatedAt": "2025-12-24T07:47:33.613Z",
+  "justFinishedAt": "2025-12-24T07:47:33.613Z"
+}

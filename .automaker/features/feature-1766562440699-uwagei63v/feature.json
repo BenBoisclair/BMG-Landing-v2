@@ -1,0 +1,21 @@
+{
+  "category": "Frontend",
+  "description": "use the processimage.png for the process image on the left in the process section",
+  "title": "Update process section with processimage.png",
+  "images": [],
+  "imagePaths": [],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "haiku",
+  "thinkingLevel": "none",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "waiting_approval",
+  "id": "feature-1766562440699-uwagei63v",
+  "startedAt": "2025-12-24T07:47:23.217Z",
+  "updatedAt": "2025-12-24T07:48:32.191Z",
+  "justFinishedAt": "2025-12-24T07:48:32.191Z"
+}

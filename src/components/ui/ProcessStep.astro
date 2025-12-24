@@ -1,0 +1,31 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+const { number, title, description, icon } = Astro.props;
+---
+
+<div class="flex gap-4 lg:gap-6 items-start">
+  <div class="flex-shrink-0">
+    <span class="text-2xl lg:text-3xl font-bold text-bmg-gold">{number}</span>
+  </div>
+  <div class="flex-1">
+    <h3 class="text-lg lg:text-xl font-semibold text-gray-900 mb-2">{title}</h3>
+    <p class="text-gray-600 text-sm lg:text-base leading-relaxed">{description}</p>
+  </div>
+  {icon && (
+    <div class="hidden lg:block flex-shrink-0">
+      <div class="w-20 h-20 rounded-xl overflow-hidden bg-gray-200">
+        <img
+          src={icon}
+          alt={`Step ${number} icon`}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  )}
+</div>

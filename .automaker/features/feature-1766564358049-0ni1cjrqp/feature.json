@@ -1,0 +1,37 @@
+{
+  "category": "Frontend",
+  "description": "The contact section contact form should look like this. It has the same theme as the other sections. Such as the button, etc. \n\nInput fields\ndisplay: flex;\nheight: 50px;\npadding: 0 12px;\nflex-direction: column;\njustify-content: center;\nalign-items: flex-start;\ngap: 12px;\nalign-self: stretch;\nborder-radius: 6px;\nborder: 1px solid var(--Primary-Gray-300, #D2D5DA);\nbackground: var(--Primary-Base-White, #FFF);",
+  "title": "Add themed contact form with styled input fields",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766564278759-c48bx4076",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766564358049-0ni1cjrqp/images/pasted-image-2025-12-24T08-17-58-749Z-1766564278758.png",
+      "filename": "pasted-image-2025-12-24T08-17-58-749Z.png",
+      "mimeType": "image/png"
+    },
+    {
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766564358049-0ni1cjrqp/images/pasted-image-2025-12-24T08-23-18-512Z-1766564598521.png",
+      "filename": "pasted-image-2025-12-24T08-23-18-512Z-1766564598521.png",
+      "mimeType": "image/png"
+    },
+    {
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766564358049-0ni1cjrqp/images/pasted-image-2025-12-24T08-23-33-663Z-1766564613674.png",
+      "filename": "pasted-image-2025-12-24T08-23-33-663Z-1766564613674.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "in_progress",
+  "id": "feature-1766564358049-0ni1cjrqp",
+  "startedAt": "2025-12-24T08:29:03.634Z",
+  "updatedAt": "2025-12-24T08:29:03.657Z"
+}

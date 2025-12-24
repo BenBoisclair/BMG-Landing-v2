@@ -1,0 +1,203 @@
+---
+import Button from '../ui/Button.astro';
+
+interface ShowcaseModel {
+  id: string;
+  name: string;
+  description: string;
+  glbPath: string;
+  thumbnailPath: string;
+}
+
+const models: ShowcaseModel[] = [
+  {
+    id: '1',
+    name: 'Sculpture One',
+    description: 'A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry.',
+    glbPath: '/models/placeholder.glb',
+    thumbnailPath: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=200&h=200&fit=crop',
+  },
+  {
+    id: '2',
+    name: 'Sculpture Two',
+    description: 'An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space.',
+    glbPath: '/models/placeholder.glb',
+    thumbnailPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=200&h=200&fit=crop',
+  },
+  {
+    id: '3',
+    name: 'Sculpture Three',
+    description: 'A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances.',
+    glbPath: '/models/placeholder.glb',
+    thumbnailPath: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop',
+  },
+];
+---
+
+<section id="product" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <!-- Text Content -->
+      <div class="order-2 lg:order-1">
+        <h2 id="showcase-title" class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          {models[0].name}
+        </h2>
+        <p id="showcase-description" class="text-gray-600 text-lg leading-relaxed mb-8">
+          {models[0].description}
+        </p>
+        <Button href="#process">View More</Button>
+      </div>
+
+      <!-- 3D Model Viewer -->
+      <div class="order-1 lg:order-2">
+        <div class="aspect-4/5">
+          <model-viewer
+            id="showcase-viewer"
+            src={models[0].glbPath}
+            alt="3D sculpture model"
+            camera-controls
+            disable-zoom
+            auto-rotate
+            touch-action="pan-y"
+            loading="lazy"
+            camera-orbit="0deg 75deg 4m"
+            class="w-full h-full bg-transparent"
+            style="--poster-color: transparent;"
+          ></model-viewer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="flex justify-center gap-2.5 mt-6">
+      {models.map((_, index) => (
+        <button
+          class={`pagination-dot size-5.5 rounded-[5px] transition-colors duration-300 cursor-pointer ${index === 0 ? 'bg-[#d01e2a]' : 'bg-[#d9d9d9]'}`}
+          data-index={index}
+          aria-label={`View model ${index + 1}`}
+        ></button>
+      ))}
+    </div>
+
+    <!-- Thumbnail Gallery -->
+    <div class="mt-12 lg:mt-16">
+      <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide justify-center">
+        {models.map((model, index) => (
+          <button
+            class={`showcase-thumbnail shrink-0 w-32 h-32 lg:w-40 lg:h-40 rounded-xl overflow-hidden snap-start cursor-pointer transition-all duration-300 ${index === 0 ? 'ring-2 ring-[#d01e2a]' : ''}`}
+            data-index={index}
+            aria-label={`View ${model.name}`}
+          >
+            <img
+              src={model.thumbnailPath}
+              alt={model.name}
+              class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '@google/model-viewer';
+
+  // Responsive camera distance calculation
+  function getResponsiveCameraDistance(): string {
+    const width = window.innerWidth;
+    // Smaller screens need more zoom out, larger screens can be closer
+    if (width < 640) {
+      return '5.5m'; // Mobile: most zoomed out
+    } else if (width < 1024) {
+      return '4.5m'; // Tablet
+    } else {
+      return '4m'; // Desktop
+    }
+  }
+
+  function updateCameraOrbit() {
+    const viewer = document.getElementById('showcase-viewer');
+    if (viewer) {
+      const distance = getResponsiveCameraDistance();
+      viewer.setAttribute('camera-orbit', `0deg 75deg ${distance}`);
+    }
+  }
+
+  // Update on load and resize
+  updateCameraOrbit();
+  window.addEventListener('resize', updateCameraOrbit);
+
+  // Model data (must match the Astro frontmatter)
+  const models = [
+    {
+      id: '1',
+      name: 'Sculpture One',
+      description: 'A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry.',
+      glbPath: '/models/placeholder.glb',
+    },
+    {
+      id: '2',
+      name: 'Sculpture Two',
+      description: 'An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space.',
+      glbPath: '/models/placeholder.glb',
+    },
+    {
+      id: '3',
+      name: 'Sculpture Three',
+      description: 'A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances.',
+      glbPath: '/models/placeholder.glb',
+    },
+  ];
+
+  let currentIndex = 0;
+
+  // DOM Elements
+  const viewer = document.getElementById('showcase-viewer');
+  const titleEl = document.getElementById('showcase-title');
+  const descEl = document.getElementById('showcase-description');
+  const thumbnails = document.querySelectorAll('.showcase-thumbnail');
+  const dots = document.querySelectorAll('.pagination-dot');
+
+  function updateShowcase(index: number) {
+    if (index === currentIndex) return;
+
+    const model = models[index];
+    currentIndex = index;
+
+    // Update 3D model
+    viewer?.setAttribute('src', model.glbPath);
+
+    // Update text content
+    if (titleEl) titleEl.textContent = model.name;
+    if (descEl) descEl.textContent = model.description;
+
+    // Update thumbnail active states
+    thumbnails.forEach((thumb, i) => {
+      thumb.classList.toggle('ring-2', i === index);
+      thumb.classList.toggle('ring-[#d01e2a]', i === index);
+    });
+
+    // Update pagination dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-[#d01e2a]', i === index);
+      dot.classList.toggle('bg-[#d9d9d9]', i !== index);
+    });
+  }
+
+  // Thumbnail click handlers
+  thumbnails.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const index = parseInt(thumb.getAttribute('data-index') || '0', 10);
+      updateShowcase(index);
+    });
+  });
+
+  // Dot click handlers
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+      updateShowcase(index);
+    });
+  });
+</script>

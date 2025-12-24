@@ -1,0 +1,28 @@
+{
+  "category": "Frontend",
+  "description": "The Testimonal section should look like this. A blue block in the background. Testimonials on top as a three carousel, you click the white block with 2 arrows to go left or right, the two arrows will be in a red circle if it's clickable, or no block if its not. We have arrow gray left and arrow white right in the folder. Use it to do the arrow and color. Rotate it and use it correctly. The red is #B41E23. The blue is #2C266C. The star for the testinomials is star.svg. Text for the testinomial test is #425466. Name of person is #313131.\n\nImported from figma:\n\nTestinomial text:\ncolor: #425466;\nfont-family: Poppins;\nfont-size: 16px;\nfont-style: normal;\nfont-weight: 400;\nline-height: 30px; /* 187.5% */\n\nPerson name:\ncolor: #313131;\nfont-family: Poppins;\nfont-size: 14px;\nfont-style: normal;\nfont-weight: 600;\nline-height: normal;\n\nPerson role:\ncolor: #425466;\nfont-family: Poppins;\nfont-size: 10px;\nfont-style: normal;\nfont-weight: 400;\nline-height: 100%; /* 10px */\n\nStar size:\nwidth: 101.002px;\nheight: 17.216px;\n\nTestinomial Box:\nbackground: #FFF;\nbox-shadow: 0 38.519px 25.481px 0 rgba(56, 56, 56, 0.06), 0 20px 13px 0 rgba(56, 56, 56, 0.05), 0 8.148px 6.519px 0 rgba(56, 56, 56, 0.04), 0 1.852px 3.148px 0 rgba(56, 56, 56, 0.02);\n\n",
+  "title": "Implement testimonials carousel with navigation",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766562543165-v2pky21ex",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766562894531-4wg8l9drb/images/pasted-image-2025-12-24T07-49-03-152Z-1766562543163.png",
+      "filename": "pasted-image-2025-12-24T07-49-03-152Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "ultrathink",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "waiting_approval",
+  "id": "feature-1766562894531-4wg8l9drb",
+  "startedAt": "2025-12-24T08:00:22.473Z",
+  "updatedAt": "2025-12-24T08:01:09.934Z",
+  "justFinishedAt": "2025-12-24T08:01:09.934Z"
+}

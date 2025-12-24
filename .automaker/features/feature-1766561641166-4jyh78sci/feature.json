@@ -1,0 +1,28 @@
+{
+  "category": "Frontend",
+  "description": "I've added the map SVG in the public folder. The trusted section should look like this image. Use the SVG that I gave you and make the numbers and text at the bottom look like in the image. Make the title like in the other sections and make sure the other sections have the same title styling. ",
+  "title": "Add map SVG with styled trusted section",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766561580614-in4pg1gxd",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766561641166-4jyh78sci/images/pasted-image-2025-12-24T07-33-00-594Z-1766561580612.png",
+      "filename": "pasted-image-2025-12-24T07-33-00-594Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "sonnet",
+  "thinkingLevel": "medium",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "skip",
+  "requirePlanApproval": false,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766561641166-4jyh78sci",
+  "startedAt": "2025-12-24T07:38:32.868Z",
+  "updatedAt": "2025-12-24T07:39:13.001Z",
+  "justFinishedAt": "2025-12-24T07:39:13.001Z"
+}

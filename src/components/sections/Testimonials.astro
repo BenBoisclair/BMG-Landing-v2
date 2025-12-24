@@ -1,0 +1,274 @@
+---
+import TestimonialCard from '../ui/TestimonialCard.astro';
+
+const testimonials = [
+  {
+    name: 'Sabo Masties',
+    role: 'Founder @ Rolex',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+  {
+    name: 'Sam',
+    role: 'Founder @ Migelko',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+  {
+    name: 'Mansur',
+    role: 'Founder @ Google',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'CEO @ TechVentures',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+  {
+    name: 'Michael Brown',
+    role: 'Director @ Artisan Co',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+  {
+    name: 'Emma Wilson',
+    role: 'Partner @ Design Studio',
+    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
+    rating: 5,
+  },
+];
+---
+
+<section id="about" class="py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12 lg:mb-16 max-w-2xl mx-auto">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase" style="color: #2C266C; font-family: 'Poppins', sans-serif;">
+        What our clients say
+      </h2>
+      <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">
+        Community development is often linked with community work or community planning, and may involve stakeholders, foundations,
+      </p>
+    </div>
+
+    <!-- Testimonials Carousel Container -->
+    <div class="relative">
+      <!-- Blue Background Block -->
+      <div class="blue-background-block absolute left-0 right-0" style="background-color: #2C266C;"></div>
+
+      <!-- Carousel Wrapper -->
+      <div class="relative">
+        <!-- Testimonials Carousel -->
+        <div class="testimonials-carousel overflow-hidden px-2 lg:px-0">
+          <div class="testimonials-track flex transition-transform duration-500 ease-in-out" id="testimonials-track">
+            {testimonials.map((testimonial, index) => (
+              <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3">
+                <TestimonialCard
+                  name={testimonial.name}
+                  role={testimonial.role}
+                  quote={testimonial.quote}
+                  rating={testimonial.rating}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div class="flex justify-center mt-8 pb-12 relative z-10">
+          <div class="nav-controls inline-flex bg-white rounded-xl overflow-hidden shadow-lg">
+            <!-- Left Arrow Button -->
+            <button
+              id="prev-btn"
+              class="nav-arrow-btn left-arrow w-12 h-12 flex items-center justify-center transition-all duration-300"
+              aria-label="Previous testimonials"
+              disabled
+            >
+              <img
+                src="/images/Landing/arrow.svg"
+                alt="Previous"
+                class="nav-arrow-img w-5 h-auto rotate-180"
+                id="prev-arrow-img"
+              />
+            </button>
+            <!-- Right Arrow Button -->
+            <button
+              id="next-btn"
+              class="nav-arrow-btn right-arrow w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300"
+              style="background-color: #B41E23;"
+              aria-label="Next testimonials"
+            >
+              <img
+                src="/images/Landing/arrow.svg"
+                alt="Next"
+                class="nav-arrow-img w-5 h-auto"
+                id="next-arrow-img"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blue-background-block {
+    top: 60px;
+    bottom: 0;
+    border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .testimonials-carousel {
+    margin: 0 -12px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .testimonial-slide {
+    padding: 0 12px;
+  }
+
+  .nav-controls {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-arrow-btn {
+    cursor: pointer;
+  }
+
+  .nav-arrow-btn:disabled {
+    cursor: not-allowed;
+  }
+
+  .nav-arrow-btn:not(:disabled):hover {
+    opacity: 0.9;
+  }
+
+  /* Left arrow styling when inactive (gray) */
+  .left-arrow {
+    background-color: transparent;
+  }
+
+  /* SVG is white by default, so we need to make it gray when inactive */
+  .left-arrow .nav-arrow-img {
+    filter: brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
+  }
+
+  .left-arrow:disabled .nav-arrow-img {
+    filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
+    opacity: 0.5;
+  }
+
+  /* Left arrow styling when active (red background, white arrow) */
+  .left-arrow.active {
+    background-color: #B41E23;
+    border-radius: 0.5rem;
+  }
+
+  .left-arrow.active .nav-arrow-img {
+    filter: none;
+  }
+
+  /* Right arrow styling when active (red background) */
+  .right-arrow {
+    background-color: #B41E23;
+  }
+
+  /* White arrow on red background - no filter needed */
+  .right-arrow .nav-arrow-img {
+    filter: none;
+  }
+
+  /* Right arrow styling when inactive */
+  .right-arrow.inactive {
+    background-color: transparent !important;
+  }
+
+  .right-arrow.inactive .nav-arrow-img {
+    filter: brightness(0) saturate(100%) invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(90%);
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('testimonials-track') as HTMLElement;
+    const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+    const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const slides = track.querySelectorAll('.testimonial-slide');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    // Determine visible slides based on screen width
+    const getVisibleSlides = () => {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    };
+
+    const updateCarousel = () => {
+      const visibleSlides = getVisibleSlides();
+      const maxIndex = Math.max(0, totalSlides - visibleSlides);
+
+      // Clamp currentIndex
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+      // Calculate slide width percentage
+      const slideWidthPercent = 100 / visibleSlides;
+      const translateX = -currentIndex * slideWidthPercent;
+
+      track.style.transform = `translateX(${translateX}%)`;
+
+      // Update button states and styling
+      const canGoPrev = currentIndex > 0;
+      const canGoNext = currentIndex < maxIndex;
+
+      prevBtn.disabled = !canGoPrev;
+      nextBtn.disabled = !canGoNext;
+
+      // Update left button styling
+      if (canGoPrev) {
+        prevBtn.classList.add('active');
+      } else {
+        prevBtn.classList.remove('active');
+      }
+
+      // Update right button styling
+      if (canGoNext) {
+        nextBtn.classList.remove('inactive');
+      } else {
+        nextBtn.classList.add('inactive');
+      }
+    };
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const visibleSlides = getVisibleSlides();
+      const maxIndex = Math.max(0, totalSlides - visibleSlides);
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      updateCarousel();
+    });
+
+    // Initial update
+    updateCarousel();
+  });
+</script>

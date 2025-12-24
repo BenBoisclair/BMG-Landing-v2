@@ -1,0 +1,89 @@
+{
+  "category": "Frontend",
+  "description": "The price estimation section should look like this and when you click on either bus or relief, it should show additional options for calculating how much a statue could be. Please help me plan how we can accomplish this and how we can best just complete it. Bitch.",
+  "title": "Price Estimation Section",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766561161444-9az5eqne4",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766561306336-nn541wth2/images/pasted-image-2025-12-24T07-26-01-427Z-1766561161439.png",
+      "filename": "pasted-image-2025-12-24T07-26-01-427Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "ultrathink",
+  "branchName": "main",
+  "priority": 1,
+  "planningMode": "full",
+  "requirePlanApproval": true,
+  "titleGenerating": false,
+  "status": "waiting_approval",
+  "id": "feature-1766561306336-nn541wth2",
+  "startedAt": "2025-12-24T07:39:56.906Z",
+  "updatedAt": "2025-12-24T07:41:11.558Z",
+  "planSpec": {
+    "status": "approved",
+    "version": 1,
+    "reviewedByUser": true,
+    "content": "🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766561306336-nn541wth2/images/pasted-image-2025-12-24T07-26-01-427Z-1766561161439.png\"\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"**/*.{tsx,jsx,ts,js}\"\n}\n\n🔧 Tool: Grep\nInput: {\n  \"pattern\": \"price|estimation|calculator|pricing\",\n  \"-i\": true\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"src/**/*.{astro,tsx,jsx,ts,js}\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/sections/PriceEstimation.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/pages/index.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/components/ui/Button.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/tailwind.config.mjs\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/layouts/BaseLayout.astro\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/src/styles/global.css\"\n}\n\n🔧 Tool: Glob\nInput: {\n  \"pattern\": \"*.{mjs,cjs,js,json}\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/package.json\"\n}\n\n🔧 Tool: Read\nInput: {\n  \"file_path\": \"/Users/benedictboisclair/Projects/BMG-Landing-v2/astro.config.mjs\"\n}\n\n---\n\n# Comprehensive Specification: Price Estimation Tab Interface with Calculator\n\n## 1. Problem Statement\n\nThe current Price Estimation section displays two card-style links for \"Bust\" and \"Relief\" sculptures that simply navigate to the contact section. Users need an interactive tab-based interface that matches the provided design (dark purple toggle tabs) and reveals calculator options when clicked, allowing them to estimate the cost of a sculpture based on configurable parameters.\n\n## 2. User Story\n\n**As a** potential customer visiting the BMG website,  \n**I want** to toggle between \"Bust\" and \"Relief\" sculpture types and see relevant pricing calculator options,  \n**So that** I can estimate the cost of my desired sculpture before contacting the company.\n\n## 3. Acceptance Criteria\n\n### Happy Path\n- **GIVEN** a user viewing the Price Estimation section\n- **WHEN** the page loads\n- **THEN** they see a \"Price Estimation\" header with two toggle tabs (\"Bust\" and \"Relief\") in a dark purple color scheme matching the reference image\n\n- **GIVEN** the Price Estimation section is displayed\n- **WHEN** a user clicks the \"Bust\" tab\n- **THEN** the Bust tab becomes visually active and displays bust-specific calculator options (e.g., size, material, complexity)\n\n- **GIVEN** the Bust tab is active\n- **WHEN** a user clicks the \"Relief\" tab\n- **THEN** the Relief tab becomes active and shows relief-specific calculator options\n\n### Edge Cases\n- **GIVEN** the page loads\n- **WHEN** no tab has been clicked yet\n- **THEN** the first tab (Bust) should be active by default\n\n- **GIVEN** a user has selected options in one tab\n- **WHEN** they switch to another tab\n- **THEN** the previous tab's selections should be preserved (in memory)\n\n### Error Handling\n- **GIVEN** JavaScript is disabled\n- **WHEN** a user views the section\n- **THEN** both tab contents should be visible in a stacked layout (graceful degradation)\n\n## 4. Technical Context\n\n| Aspect | Value |\n|--------|-------|\n| Affected Files | `src/components/sections/PriceEstimation.astro`, new calculator component files |\n| Dependencies | None - pure Astro with client-side JavaScript |\n| Constraints | Must work without framework-specific JS, Tailwind CSS v4, Astro 5.x |\n| Patterns to Follow | Existing component structure in `src/components/`, global.css theme colors (`bmg-primary: #1a1a2e`), Button.astro patterns |\n\n## 5. Non-Goals\n\n- **NOT** implementing actual price calculation logic or backend integration\n- **NOT** storing form data or submitting to a server\n- **NOT** real pricing - just UI structure for calculator inputs\n- **NOT** animated transitions between tabs (can be added later)\n\n## 6. Implementation Tasks\n\n```tasks\n## Phase 1: Foundation - Tab UI Structure\n- [ ] T001: Replace current card grid with tab toggle UI matching reference design | File: src/components/sections/PriceEstimation.astro\n- [ ] T002: Add tab styling with dark purple colors (#2C266C / #5B5594 from reference) | File: src/styles/global.css\n\n## Phase 2: Core Implementation - Calculator Content\n- [ ] T003: Create BustCalculator content section with size/material/complexity options | File: src/components/sections/PriceEstimation.astro\n- [ ] T004: Create ReliefCalculator content section with dimensions/detail level options | File: src/components/sections/PriceEstimation.astro\n- [ ] T005: Add client-side JavaScript for tab switching functionality | File: src/components/sections/PriceEstimation.astro\n\n## Phase 3: Polish & Accessibility\n- [ ] T006: Add ARIA attributes and keyboard navigation for tabs | File: src/components/sections/PriceEstimation.astro\n- [ ] T007: Add graceful degradation for no-JS environments | File: src/components/sections/PriceEstimation.astro\n```\n\n## 7. Success Metrics\n\n| Criteria | Measurement |\n|----------|-------------|\n| Visual match | Tab toggle matches reference image (dark purple toggle with Bust/Relief options) |\n| Tab switching | Clicking tabs toggles content visibility without page reload |\n| Calculator display | Each tab shows relevant calculator form inputs |\n| Accessibility | Tabs navigable via keyboard, proper ARIA roles |\n| No JS fallback | Content visible (stacked) when JavaScript disabled |\n\n## 8. Risks & Mitigations\n\n| Risk | Mitigation |\n|------|------------|\n| Tab styling conflicts with existing Tailwind utilities | Use specific custom CSS classes in global.css with unique naming |\n| Client-side JS hydration issues in Astro | Use `<script>` tag with vanilla JS instead of framework components |\n| Calculator options undefined by client | Provide placeholder options initially; can be refined with client feedback |\n| Color mismatch with brand | Extract exact colors from reference image (#2C266C for dark, #5B5594 for lighter) |\n\n---",
+    "generatedAt": "2025-12-24T07:29:22.045Z",
+    "tasks": [
+      {
+        "id": "T001",
+        "description": "Replace current card grid with tab toggle UI matching reference design",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 1: Foundation - Tab UI Structure",
+        "status": "pending"
+      },
+      {
+        "id": "T002",
+        "description": "Add tab styling with dark purple colors (#2C266C / #5B5594 from reference)",
+        "filePath": "src/styles/global.css",
+        "phase": "Phase 1: Foundation - Tab UI Structure",
+        "status": "pending"
+      },
+      {
+        "id": "T003",
+        "description": "Create BustCalculator content section with size/material/complexity options",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 2: Core Implementation - Calculator Content",
+        "status": "pending"
+      },
+      {
+        "id": "T004",
+        "description": "Create ReliefCalculator content section with dimensions/detail level options",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 2: Core Implementation - Calculator Content",
+        "status": "pending"
+      },
+      {
+        "id": "T005",
+        "description": "Add client-side JavaScript for tab switching functionality",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 2: Core Implementation - Calculator Content",
+        "status": "pending"
+      },
+      {
+        "id": "T006",
+        "description": "Add ARIA attributes and keyboard navigation for tabs",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 3: Polish & Accessibility",
+        "status": "pending"
+      },
+      {
+        "id": "T007",
+        "description": "Add graceful degradation for no-JS environments",
+        "filePath": "src/components/sections/PriceEstimation.astro",
+        "phase": "Phase 3: Polish & Accessibility",
+        "status": "pending"
+      }
+    ],
+    "tasksTotal": 7,
+    "tasksCompleted": 0,
+    "approvedAt": "2025-12-24T07:37:30.096Z"
+  },
+  "justFinishedAt": "2025-12-24T07:41:11.558Z"
+}

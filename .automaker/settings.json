@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "theme": "forest",
+  "currentWorktree": {
+    "path": null,
+    "branch": "main"
+  },
+  "worktrees": [
+    {
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2",
+      "branch": "main",
+      "isMain": true,
+      "isCurrent": true,
+      "hasWorktree": true,
+      "hasChanges": true,
+      "changedFilesCount": 11
+    }
+  ],
+  "boardBackground": {
+    "imagePath": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/board/background.gif",
+    "cardOpacity": 100,
+    "columnOpacity": 100,
+    "columnBorderEnabled": true,
+    "cardGlassmorphism": true,
+    "cardBorderEnabled": true,
+    "cardBorderOpacity": 100,
+    "hideScrollbar": false,
+    "imageVersion": 1766561821578
+  }
+}

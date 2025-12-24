@@ -1,0 +1,38 @@
+{
+  "category": "Frontend",
+  "description": "In Process.vue, make each item of the list have the numbers on the right with it. So they should each have a square to the right.",
+  "title": "Add numbered squares to process list items",
+  "images": [],
+  "imagePaths": [
+    {
+      "id": "img-1766560376504-bpvxbp6fn",
+      "path": "/Users/benedictboisclair/Projects/BMG-Landing-v2/.automaker/features/feature-1766560494441-otzvkdhlw/images/pasted-image-2025-12-24T07-12-56-486Z-1766560376503.png",
+      "filename": "pasted-image-2025-12-24T07-12-56-486Z.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "textFilePaths": [],
+  "skipTests": true,
+  "model": "opus",
+  "thinkingLevel": "high",
+  "branchName": "main",
+  "priority": 2,
+  "planningMode": "lite",
+  "requirePlanApproval": true,
+  "titleGenerating": false,
+  "status": "verified",
+  "id": "feature-1766560494441-otzvkdhlw",
+  "startedAt": "2025-12-24T07:14:56.830Z",
+  "updatedAt": "2025-12-24T07:17:35.111Z",
+  "planSpec": {
+    "status": "approved",
+    "version": 1,
+    "reviewedByUser": true,
+    "generatedAt": "2025-12-24T07:15:33.287Z",
+    "tasks": [],
+    "tasksTotal": 0,
+    "tasksCompleted": 0,
+    "approvedAt": "2025-12-24T07:16:00.375Z"
+  },
+  "justFinishedAt": "2025-12-24T07:17:35.111Z"
+}
