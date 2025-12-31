@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import compress from 'vite-plugin-compression';
 
@@ -33,14 +33,8 @@ export default defineConfig({
   // in specific pages/API routes that need server-side rendering
   output: 'static',
 
-  // Node.js adapter for SSR and API routes
-  // For production, you may want to use a platform-specific adapter:
-  // - @astrojs/vercel for Vercel
-  // - @astrojs/netlify for Netlify
-  // - @astrojs/cloudflare for Cloudflare Pages
-  adapter: node({
-    mode: 'standalone',
-  }),
+  // Vercel adapter for SSR and API routes
+  adapter: vercel(),
 
   vite: {
     plugins: [
