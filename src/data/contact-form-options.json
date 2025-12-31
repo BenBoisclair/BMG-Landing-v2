@@ -1,0 +1,40 @@
+{
+  "description": "Configuration for contact form dropdown options. Keys map to translation paths in i18n files (contact.positions.*, contact.projectTypes.*, etc.). To add/remove options, modify these arrays. To change displayed text, update the corresponding translations.",
+  "positions": [
+    "salesManager",
+    "projectManager",
+    "designer",
+    "architect",
+    "developer",
+    "other"
+  ],
+  "projectTypes": [
+    "residential",
+    "commercial",
+    "industrial",
+    "hospitality",
+    "publicSpace",
+    "other"
+  ],
+  "budgetRanges": [
+    "under10k",
+    "10kTo50k",
+    "50kTo100k",
+    "100kTo500k",
+    "over500k"
+  ],
+  "considerations": [
+    "quality",
+    "price",
+    "timeline",
+    "design",
+    "allOfTheAbove"
+  ],
+  "timelines": [
+    "immediate",
+    "within1Month",
+    "1To3Months",
+    "3To6Months",
+    "6PlusMonths"
+  ]
+}

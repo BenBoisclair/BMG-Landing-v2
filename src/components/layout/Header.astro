@@ -1,16 +1,26 @@
 ---
-import { getLangFromUrl, getLocalizedPath, languages, type Language, getTranslations } from '../../i18n/utils';
+import { useI18n, getLocalizedPath, languages, type Language } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+interface Props {
+  pageType?: 'landing' | 'project';
+}
+
+const { pageType = 'landing' } = Astro.props;
+const { lang: currentLang, t } = useI18n(Astro.url);
+
+// Get the base path for localized links
+const getNavHref = (path: string) => {
+  if (path.startsWith('#')) return path;
+  return getLocalizedPath(currentLang, path);
+};
 
 const navLinks = [
-  { href: '#home', label: t.nav.home },
-  { href: '#product', label: t.nav.product },
-  { href: '#process', label: t.nav.process },
-  { href: '#delivery', label: t.nav.globalDelivery },
-  { href: '#about', label: t.nav.about },
-  { href: '#contact', label: t.nav.contact },
+  { href: '/', label: t.nav.home, isAnchor: false },
+  { href: '/projects', label: t.nav.project, isAnchor: false },
+  { href: '/process', label: t.nav.process, isAnchor: false },
+  { href: '#delivery', label: t.nav.globalDelivery, isAnchor: true },
+  { href: '#about', label: t.nav.about, isAnchor: true },
+  { href: '#contact', label: t.nav.contact, isAnchor: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -40,7 +50,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
 }));
 ---
 
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300">
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300" data-page-type={pageType}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 lg:h-24">
       <!-- Logo -->
@@ -52,7 +62,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
       <nav class="hidden lg:flex items-center gap-12">
         {navLinks.map((link) => (
           <a
-            href={link.href}
+            href={link.isAnchor ? link.href : getNavHref(link.href)}
             class:list={[
               "text-xl font-medium font-inter transition-colors duration-200",
               isActive(link.href)
@@ -120,7 +130,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
     <div class="px-4 py-4 space-y-2">
       {navLinks.map((link) => (
         <a
-          href={link.href}
+          href={link.isAnchor ? link.href : getNavHref(link.href)}
           class:list={[
             "block px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
             isActive(link.href)
@@ -169,107 +179,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
 </header>
 
 <script>
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  menuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-  });
-
-  // Smooth scroll for anchor links
-  function handleAnchorClick(e: Event) {
-    const link = e.currentTarget as HTMLAnchorElement;
-    const href = link.getAttribute('href');
-
-    if (href && href.startsWith('#')) {
-      e.preventDefault();
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-
-        // Update URL hash without jumping
-        history.pushState(null, '', href);
-
-        // Close mobile menu if open
-        mobileMenu?.classList.add('hidden');
-      }
-    }
-  }
-
-  // Add smooth scroll to all navigation links
-  document.querySelectorAll('#main-header a[href^="#"]').forEach(link => {
-    link.addEventListener('click', handleAnchorClick);
-  });
-
-  // Close menu when clicking a link (except language dropdown)
-  mobileMenu?.querySelectorAll('a:not([id^="mobile-language"])').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
-  });
-
-  // Desktop Language Dropdown
-  const desktopLangButton = document.getElementById('language-dropdown-button');
-  const desktopLangMenu = document.getElementById('language-dropdown-menu');
-
-  desktopLangButton?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isHidden = desktopLangMenu?.classList.toggle('hidden');
-    desktopLangButton.setAttribute('aria-expanded', String(!isHidden));
-    // Rotate the chevron icon
-    const svg = desktopLangButton.querySelector('svg');
-    svg?.classList.toggle('rotate-180');
-  });
-
-  // Close desktop dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!desktopLangButton?.contains(e.target as Node) && !desktopLangMenu?.contains(e.target as Node)) {
-      desktopLangMenu?.classList.add('hidden');
-      desktopLangButton?.setAttribute('aria-expanded', 'false');
-      desktopLangButton?.querySelector('svg')?.classList.remove('rotate-180');
-    }
-  });
-
-  // Mobile Language Dropdown
-  const mobileLangButton = document.getElementById('mobile-language-dropdown-button');
-  const mobileLangMenu = document.getElementById('mobile-language-dropdown-menu');
-
-  mobileLangButton?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isHidden = mobileLangMenu?.classList.toggle('hidden');
-    mobileLangButton.setAttribute('aria-expanded', String(!isHidden));
-    // Rotate the chevron icon
-    const svg = mobileLangButton.querySelector('svg');
-    svg?.classList.toggle('rotate-180');
-  });
-
-  // Add blue background to header when scrolling past hero section
-  function handleHeaderScroll() {
-    const heroSection = document.getElementById('home');
-    const header = document.getElementById('main-header');
-
-    if (heroSection && header) {
-      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-      const scrollPosition = window.scrollY;
-
-      if (scrollPosition > heroBottom) {
-        header.classList.remove('bg-transparent');
-        header.classList.add('bg-[#2C266C]');
-      } else {
-        header.classList.remove('bg-[#2C266C]');
-        header.classList.add('bg-transparent');
-      }
-    }
-  }
-
-  // Run on scroll
-  window.addEventListener('scroll', handleHeaderScroll);
-
-  // Run on load to set initial state
-  handleHeaderScroll();
+  // Header functionality is now handled by an external module
+  // This follows Astro best practices for larger scripts
+  import '../../scripts/header';
 </script>

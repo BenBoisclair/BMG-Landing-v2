@@ -13,26 +13,44 @@ const {
   required = false,
 } = Astro.props;
 
-const selectClasses = 'h-[50px] px-3 border-r border-[#D2D5DA] bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1em_1em] bg-[right_0.25rem_center] bg-no-repeat pr-6';
+const selectClasses = 'h-[50px] px-3 border-r border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1em_1em] bg-[right_0.25rem_center] bg-no-repeat pr-6';
 const inputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+const errorMessageClasses = 'text-xs text-red-500 mt-1 hidden';
+
+// Common country codes with their dialing codes
+const countryCodes = [
+  { code: '+66', country: 'Thailand' },
+  { code: '+1', country: 'USA/Canada' },
+  { code: '+44', country: 'UK' },
+  { code: '+86', country: 'China' },
+  { code: '+91', country: 'India' },
+  { code: '+81', country: 'Japan' },
+  { code: '+82', country: 'South Korea' },
+  { code: '+65', country: 'Singapore' },
+  { code: '+971', country: 'UAE' },
+  { code: '+966', country: 'Saudi Arabia' },
+  { code: '+61', country: 'Australia' },
+  { code: '+49', country: 'Germany' },
+  { code: '+33', country: 'France' },
+];
 ---
 
-<div class="space-y-2">
+<div class="space-y-2" data-form-field data-field-name={name} data-validation-type="phone" data-required={required.toString()}>
   <label for={name} class="block text-sm font-medium text-gray-900">
     {label}
     {required && <span class="text-red-500">*</span>}
   </label>
-  <div class="flex rounded-md border border-[#D2D5DA] bg-white overflow-hidden">
+  <div class="flex rounded-md border border-border bg-white overflow-hidden" data-phone-wrapper>
     <select
       id={`${name}-country`}
       name={`${name}-country`}
       class={selectClasses}
+      aria-label="Country code"
+      data-country-select
     >
-      <option value="+66">+66</option>
-      <option value="+1">+1</option>
-      <option value="+44">+44</option>
-      <option value="+86">+86</option>
-      <option value="+91">+91</option>
+      {countryCodes.map(({ code, country }) => (
+        <option value={code} title={country}>{code}</option>
+      ))}
     </select>
     <input
       type="tel"
@@ -41,6 +59,26 @@ const inputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring-bmg-
       placeholder={placeholder}
       required={required}
       class={inputClasses}
+      inputmode="tel"
+      autocomplete="tel"
+      data-input
     />
   </div>
+  <p class={errorMessageClasses} data-error-message aria-live="polite"></p>
 </div>
+
+<style>
+  [data-form-field].has-error [data-phone-wrapper] {
+    border-color: #ef4444;
+  }
+  [data-form-field].has-error [data-input]:focus,
+  [data-form-field].has-error [data-country-select]:focus {
+    --tw-ring-color: #ef4444;
+  }
+  [data-form-field].has-error [data-error-message] {
+    display: block;
+  }
+  [data-form-field].is-valid [data-phone-wrapper] {
+    border-color: #22c55e;
+  }
+</style>

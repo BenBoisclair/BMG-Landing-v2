@@ -1,0 +1,13 @@
+{
+  "category": "Performance",
+  "description": "Implement lazy loading with intersection observer for the 3D model-viewer component. Currently loads the Google Model Viewer library and GLB model immediately on page load. Add a loading state that only initializes the viewer when the user scrolls near the Showcase section or on user interaction.",
+  "id": "feature-1766568195304-b7wwgd9r3",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:05:30.867Z",
+  "updatedAt": "2025-12-24T10:12:05.023Z",
+  "justFinishedAt": "2025-12-24T10:12:05.023Z"
+}

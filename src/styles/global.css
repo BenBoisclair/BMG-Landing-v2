@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -14,10 +13,15 @@
 }
 
 @utility font-inter {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@utility font-poppins {
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 @theme {
+  /* Legacy BMG colors (kept for backward compatibility) */
   --color-bmg-primary: #1a1a2e;
   --color-bmg-secondary: #16213e;
   --color-bmg-accent: #e94560;
@@ -25,6 +29,35 @@
   --color-bmg-gold: #c9a962;
   --color-bmg-gray: #6b7280;
   --color-bmg-footer: #2C266C;
+
+  /* Brand Primary Colors */
+  --color-brand-primary: #2C266C;
+  --color-brand-primary-hover: #231f56;
+  --color-brand-dark: #2d2d5a;
+  --color-brand-medium: #6b6b9d;
+  --color-brand-medium-hover: #5a5a8a;
+
+  /* Accent Colors */
+  --color-accent-red: #B41E23;
+  --color-accent-red-light: #CF2228;
+  --color-accent-red-dark: #85152D;
+  --color-showcase-red: #d01e2a;
+
+  /* Map Colors */
+  --color-map-blue: #392DCA;
+  --color-map-orange: #FF881B;
+  --color-map-red: #E23A45;
+  --color-map-purple: #ACA7E9;
+  --color-map-coverage: #EBECF7;
+
+  /* Text Colors */
+  --color-text-primary: #313131;
+  --color-text-secondary: #425466;
+  --color-text-muted: #828282;
+
+  /* UI Colors */
+  --color-border: #D2D5DA;
+  --color-gray-light: #d9d9d9;
 }
 
 /* Model Viewer Customization */

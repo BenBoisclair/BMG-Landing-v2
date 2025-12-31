@@ -1,0 +1,144 @@
+---
+import { useI18n, getLocalizedPath } from '../../i18n/utils';
+import projectsData from '../../data/projects.json';
+
+interface Project {
+  id: string;
+  image: string;
+  categories: string[];
+}
+
+interface Props {
+  currentProjectId: string;
+  count?: number;
+}
+
+const { currentProjectId, count = 3 } = Astro.props;
+const { t, lang } = useI18n(Astro.url);
+
+// Get all projects as a flat list
+const allProjects: Project[] = projectsData.projectTypes.flatMap(type => type.projects);
+
+// Filter out current project and get random selection
+const otherProjects = allProjects.filter(p => p.id !== currentProjectId);
+const shuffled = otherProjects.sort(() => Math.random() - 0.5);
+const relatedProjects = shuffled.slice(0, count);
+
+// Get project names from translations
+const getProjectName = (projectId: string): string => {
+  const projectTranslations = t.project.projects as Record<string, { name: string }>;
+  return projectTranslations[projectId]?.name || projectId;
+};
+---
+
+<section class="py-12 lg:py-16">
+  <!-- Title (centered, outside blue) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary uppercase tracking-tight">
+      {t.projectDetail.relatedProjects}
+    </h2>
+  </div>
+
+  <!-- Overlap Container -->
+  <div class="relative">
+    <!-- Blue Background Block (absolute positioned) -->
+    <div class="blue-background-block absolute left-4 right-4 lg:left-12 lg:right-12 bg-brand-primary"></div>
+
+    <!-- Content Wrapper (relative with cards overlapping) -->
+    <div class="relative projects-wrapper">
+      <!-- Cards Grid -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+          {relatedProjects.map((project) => (
+            <a
+              href={getLocalizedPath(lang, `/projects/${project.id}`)}
+              class="project-card block"
+            >
+              <div class="aspect-[4/3] overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={getProjectName(project.id)}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="p-4 text-center">
+                <h3 class="project-title">
+                  {getProjectName(project.id)}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Back Button (inside blue area) -->
+      <div class="flex justify-center mt-12 pb-12 relative z-10">
+        <a
+          href={getLocalizedPath(lang, '/projects')}
+          class="back-button"
+        >
+          <span class="rotate-180 text-lg">→</span>
+          <span class="font-medium">{t.projectDetail.back}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blue-background-block {
+    top: 80px; /* Cards overlap by this much */
+    bottom: 0;
+    border-radius: 1.5rem;
+  }
+
+  .projects-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .project-card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .project-card img {
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .project-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accent-red);
+    color: white;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+  }
+
+  .back-button:hover {
+    background-color: #9a1a1e;
+  }
+</style>

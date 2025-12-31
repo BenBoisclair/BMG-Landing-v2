@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { getLangFromUrl, getTextDirection, type Language } from '../i18n/utils';
+import { useI18n, type Language } from '../i18n/utils';
 
 interface Props {
   title?: string;
@@ -8,17 +8,17 @@ interface Props {
   lang?: Language;
 }
 
-// Get language from URL or use prop override
-const urlLang = getLangFromUrl(Astro.url);
+// Get i18n context from URL
+const i18n = useI18n(Astro.url);
 
 const {
   title = 'BMG - Bangkok Modern Granite',
   description = 'Premium granite sculptures and artistic stonework crafted with precision CNC technology and expert hand finishing.',
-  lang = urlLang,
+  lang = i18n.lang,
 } = Astro.props;
 
-// Get text direction for the current language (RTL for Arabic)
-const dir = getTextDirection(lang);
+// Use text direction from i18n context (RTL for Arabic)
+const dir = i18n.dir;
 ---
 
 <!DOCTYPE html>
@@ -28,6 +28,22 @@ const dir = getTextDirection(lang);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preload above-the-fold images for better LCP -->
+    <link rel="preload" as="image" href="/images/Landing/HeroSection/background_1.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/logo.png" fetchpriority="high" />
+
+    <!-- DNS prefetch and preconnect for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload Google Fonts stylesheet for critical weights (400, 600, 700) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap"
+    />
+
     <title>{title}</title>
   </head>
   <body class="bg-white text-gray-900 antialiased">

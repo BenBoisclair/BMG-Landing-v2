@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "product": "Product",
+    "project": "Project",
     "process": "Process",
     "globalDelivery": "Global Delivery",
     "about": "About",
@@ -16,6 +16,7 @@
     "viewMore": "View More",
     "modelAlt": "3D sculpture model",
     "viewModel": "View model",
+    "loading": "Loading 3D Model...",
     "models": {
       "1": {
         "name": "Sculpture One",
@@ -209,5 +210,328 @@
   "meta": {
     "title": "BMG - Bangkok Modern Granite",
     "description": "Premium granite sculptures and stone craftsmanship by Bangkok Modern Granite"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidPhone": "Please enter a valid phone number (7-15 digits)",
+    "invalidUrl": "Please enter a valid URL (including http:// or https://)",
+    "invalidName": "Please enter a valid name (letters only)",
+    "tooShort": "This field is too short",
+    "tooLong": "This field is too long",
+    "invalidFormat": "Invalid format",
+    "formSuccess": "Thank you! Your message has been sent successfully.",
+    "formError": "There was an error submitting your form. Please try again.",
+    "submitting": "Submitting..."
+  },
+  "project": {
+    "title": "Project",
+    "heroAlt": "Project showcase background",
+    "types": {
+      "construction": "Construction",
+      "mechanical": "Mechanical",
+      "electrical": "Electrical"
+    },
+    "sections": {
+      "type1": {
+        "title": "Project type"
+      },
+      "type2": {
+        "title": "Project type"
+      },
+      "type3": {
+        "title": "Project type"
+      }
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "projects": {
+      "type1-project-1": {
+        "name": "White Buddha Statue",
+        "artTitle": "White Buddha Statue",
+        "description": "Carved from a single block of White Thassos marble, this Buddha statue stands as an expression of stillness and light.\n\nThe stone was chosen not for brilliance alone, but for its quiet glow — a surface that absorbs and reflects daylight with a calm, jade-like warmth. In its seated posture, every proportion is attentive: shoulders relaxed, hands gently resting, presence undisturbed.\n\nAt the Vipassana Meditation Center, the statue inhabits a quiet space above the hall. Here, it does not command the room — it opens it.",
+        "material": "White Thassos marble",
+        "customer": "Wat Nawamintararachutis",
+        "location": "Massachusetts, United States"
+      },
+      "type1-project-2": {
+        "name": "Golden Guardian",
+        "artTitle": "Golden Guardian Lion",
+        "description": "A majestic guardian lion carved from premium granite, symbolizing protection and strength.\n\nEvery detail from the flowing mane to the powerful stance has been meticulously crafted by our master artisans, creating a piece that commands attention while maintaining an elegant presence.",
+        "material": "Premium Granite",
+        "customer": "Private Collection",
+        "location": "Bangkok, Thailand"
+      },
+      "type1-project-3": {
+        "name": "Serenity Garden",
+        "artTitle": "Meditation Garden Sculpture",
+        "description": "A harmonious sculpture designed for contemplative spaces, blending traditional Buddhist aesthetics with contemporary minimalism.\n\nThe piece invites stillness and reflection, becoming a focal point for meditation gardens worldwide.",
+        "material": "Carrara Marble",
+        "customer": "Meditation Center",
+        "location": "California, United States"
+      },
+      "type1-project-4": {
+        "name": "Temple Relief",
+        "artTitle": "Sacred Temple Relief",
+        "description": "An intricate relief panel depicting traditional Buddhist narratives, designed for temple interiors.\n\nEach figure and symbol has been carefully researched and rendered to honor the spiritual traditions they represent.",
+        "material": "Sandstone",
+        "customer": "Buddhist Temple",
+        "location": "Chiang Mai, Thailand"
+      },
+      "type2-project-1": {
+        "name": "Modern Buddha",
+        "artTitle": "Contemporary Buddha",
+        "description": "A modern interpretation of the classic Buddha figure, featuring clean lines and geometric forms.\n\nThis piece bridges ancient spirituality with contemporary design sensibilities, perfect for modern architectural spaces.",
+        "material": "Black Granite",
+        "customer": "Luxury Resort",
+        "location": "Bali, Indonesia"
+      },
+      "type2-project-2": {
+        "name": "Lotus Fountain",
+        "artTitle": "Lotus Bloom Fountain",
+        "description": "A stunning water feature centered around a blooming lotus carved from white marble.\n\nThe interplay of water and stone creates a mesmerizing focal point, symbolizing purity and enlightenment.",
+        "material": "White Marble",
+        "customer": "Wellness Spa",
+        "location": "Singapore"
+      },
+      "type2-project-3": {
+        "name": "Garden Buddha",
+        "artTitle": "Garden Meditation Buddha",
+        "description": "A serene Buddha sculpture designed specifically for outdoor garden settings.\n\nWeather-resistant finishing ensures this piece maintains its beauty through all seasons.",
+        "material": "Granite",
+        "customer": "Private Residence",
+        "location": "Sydney, Australia"
+      },
+      "type2-project-4": {
+        "name": "Wisdom Figure",
+        "artTitle": "Enlightened Wisdom",
+        "description": "A contemplative figure representing the pursuit of wisdom and inner peace.\n\nThe graceful pose and serene expression invite meditation and reflection.",
+        "material": "Bronze and Stone",
+        "customer": "University Campus",
+        "location": "Tokyo, Japan"
+      },
+      "type3-project-1": {
+        "name": "Heritage Collection",
+        "artTitle": "Cultural Heritage Series",
+        "description": "A collection of sculptures celebrating Thailand's rich cultural heritage.\n\nEach piece tells a story of tradition, craftsmanship, and artistic excellence passed down through generations.",
+        "material": "Various Stones",
+        "customer": "Museum Collection",
+        "location": "Bangkok, Thailand"
+      },
+      "type3-project-2": {
+        "name": "Memorial Statue",
+        "artTitle": "Commemorative Memorial",
+        "description": "A dignified memorial sculpture honoring important figures and events.\n\nCrafted with reverence and attention to historical accuracy.",
+        "material": "Bronze",
+        "customer": "City Government",
+        "location": "Hong Kong"
+      },
+      "type3-project-3": {
+        "name": "Entrance Guardian",
+        "artTitle": "Grand Entrance Guardians",
+        "description": "Imposing guardian figures designed for grand entrances and ceremonial gates.\n\nThese pieces combine traditional symbolism with impressive scale.",
+        "material": "Granite",
+        "customer": "Corporate Headquarters",
+        "location": "Dubai, UAE"
+      },
+      "type3-project-4": {
+        "name": "Sacred Art",
+        "artTitle": "Sacred Religious Art",
+        "description": "Religious artwork created for places of worship around the world.\n\nEach piece is crafted with deep respect for spiritual traditions and artistic excellence.",
+        "material": "Marble",
+        "customer": "Religious Institution",
+        "location": "Rome, Italy"
+      }
+    }
+  },
+  "projectDetail": {
+    "back": "Back",
+    "gallery": "Gallery",
+    "material": "Material",
+    "customer": "Customer",
+    "location": "Location",
+    "relatedProjects": "Other projects you may like",
+    "viewProject": "View Project"
+  },
+  "processPage": {
+    "title": "The Dream Crafting Process",
+    "heroAlt": "BMG stone crafting process",
+    "steps": {
+      "1": {
+        "number": "01",
+        "title": "Initial Idea",
+        "subtitle": "Concept or Existing Model",
+        "description": "If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together.",
+        "bulletPoints": [
+          "Collaborative design consultation with our expert team",
+          "High-precision 3D scanning of existing models or references",
+          "Concept development and initial sketches",
+          "Review and approval of design direction",
+          "Material and budget discussion"
+        ],
+        "imageAlt": "Design consultation process"
+      },
+      "2": {
+        "number": "02",
+        "title": "Prototype Creation",
+        "subtitle": "Building the Foundation",
+        "description": "Based on the approved direction, we create a clay or 3D printing model. Adjustments are made until the design meets expectations.",
+        "bulletPoints": [
+          "Clay modeling or 3D printing based on initial concept",
+          "Multiple iterations and refinements",
+          "Scale model creation for approval",
+          "Detailed review sessions with client feedback",
+          "Final prototype approval before production"
+        ],
+        "imageAlt": "Prototype creation process"
+      },
+      "3": {
+        "number": "03",
+        "title": "CNC Carving",
+        "subtitle": "Advanced Manufacturing",
+        "description": "Advanced CNC machines carve the sculpture with precision, faithfully following the finalized 3D data for accurate reproduction.",
+        "bulletPoints": [
+          "State-of-the-art CNC machinery operation",
+          "Multi-axis precision carving",
+          "Continuous quality monitoring during production",
+          "Stone selection and preparation",
+          "Initial roughing and detailed finishing passes"
+        ],
+        "imageAlt": "CNC carving machinery"
+      },
+      "4": {
+        "number": "04",
+        "title": "Hand Detailing & Finishing",
+        "subtitle": "Artisan Craftsmanship",
+        "description": "Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship that machines cannot replicate.",
+        "bulletPoints": [
+          "Expert hand carving and refinement",
+          "Surface texture enhancement",
+          "Detail work on intricate features",
+          "Polishing and finishing treatments",
+          "Final quality inspection and approval"
+        ],
+        "imageAlt": "Hand detailing by artisans"
+      },
+      "5": {
+        "number": "05",
+        "title": "Delivery",
+        "subtitle": "Final Transport",
+        "description": "The finished piece is carefully packaged using specialized crating and shipped to the customer's specified location worldwide.",
+        "bulletPoints": [
+          "Custom crating and protective packaging",
+          "Climate-controlled storage if needed",
+          "International shipping coordination",
+          "Real-time tracking and updates",
+          "Insurance and documentation handling"
+        ],
+        "imageAlt": "Sculpture packaging and delivery"
+      },
+      "6": {
+        "number": "06",
+        "title": "Installation",
+        "subtitle": "Handover & Support",
+        "description": "Our team can assist with on-site installation, ensuring proper placement and providing ongoing support for your sculpture.",
+        "bulletPoints": [
+          "Professional on-site installation available",
+          "Placement guidance and recommendations",
+          "Care and maintenance instructions",
+          "Warranty documentation and support",
+          "Long-term relationship and future projects"
+        ],
+        "imageAlt": "Sculpture installation"
+      }
+    }
+  },
+  "materials": {
+    "pageTitle": "Our Materials",
+    "heroAlt": "BMG premium stone materials showcase",
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "detail": {
+      "back": "Back",
+      "gallery": "Gallery",
+      "similarMaterials": "Similar Material"
+    },
+    "categories": {
+      "semi-precious": {
+        "title": "Semi Precious Stone",
+        "tier": "A++"
+      },
+      "luxury": {
+        "title": "Luxury Stone",
+        "tier": "A+"
+      },
+      "classic": {
+        "title": "Classic Stone",
+        "tier": "A"
+      }
+    },
+    "items": {
+      "semi-precious-1": {
+        "name": "Blue Agate",
+        "description": "Stunning blue semi-precious stone with natural banding patterns"
+      },
+      "semi-precious-2": {
+        "name": "Tiger Eye",
+        "description": "Golden-brown chatoyant gemstone with silky luster"
+      },
+      "semi-precious-3": {
+        "name": "Amethyst",
+        "description": "Purple quartz crystal known for its rich violet hues"
+      },
+      "semi-precious-4": {
+        "name": "Rose Quartz",
+        "description": "Soft pink stone symbolizing love and harmony"
+      },
+      "semi-precious-5": {
+        "name": "Green Onyx",
+        "description": "Translucent green stone with elegant veining"
+      },
+      "luxury-1": {
+        "name": "Calacatta Gold",
+        "description": "Premium Italian marble with dramatic gold veining"
+      },
+      "luxury-2": {
+        "name": "Statuario",
+        "description": "Classic white marble with subtle gray patterns"
+      },
+      "luxury-3": {
+        "name": "Nero Marquina",
+        "description": "Deep black Spanish marble with white veins"
+      },
+      "luxury-4": {
+        "name": "Emperador Dark",
+        "description": "Rich brown marble with cream-colored veining"
+      },
+      "luxury-5": {
+        "name": "Travertine Silver",
+        "description": "Natural stone with silver-gray tones and texture"
+      },
+      "classic-1": {
+        "name": "Carrara White",
+        "description": "Timeless Italian marble with soft gray veining"
+      },
+      "classic-2": {
+        "name": "Absolute Black",
+        "description": "Pure black granite with consistent coloring"
+      },
+      "classic-3": {
+        "name": "Kashmir White",
+        "description": "Light granite with burgundy and gray flecks"
+      },
+      "classic-4": {
+        "name": "Baltic Brown",
+        "description": "Warm brown granite with black and tan crystals"
+      },
+      "classic-5": {
+        "name": "Rosa Portogallo",
+        "description": "Pink Portuguese marble with delicate patterns"
+      }
+    }
   }
 }

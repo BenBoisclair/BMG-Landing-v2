@@ -1,0 +1,13 @@
+{
+  "category": "Maintainability",
+  "description": "Move static data (contactInfo, positions, projectTypes, budgetRanges, etc. in Contact.astro) into JSON configuration files alongside translations. This separates concerns between content and presentation, making data updates easier for non-technical stakeholders.",
+  "id": "feature-1766568048531-d17ady8oa",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 3,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:15:43.678Z",
+  "updatedAt": "2025-12-24T10:18:12.542Z",
+  "justFinishedAt": "2025-12-24T10:18:12.542Z"
+}

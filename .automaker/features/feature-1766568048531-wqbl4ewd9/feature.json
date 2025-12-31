@@ -1,0 +1,13 @@
+{
+  "category": "Architecture",
+  "description": "Create a shared FormComponent wrapper that combines FormInput, FormSelect, and FormPhoneInput with consistent validation, error handling, and styling. The Contact section has 7+ form fields with repetitive markup. A unified form field component would reduce code and improve consistency.",
+  "id": "feature-1766568048531-wqbl4ewd9",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:07:21.867Z",
+  "updatedAt": "2025-12-24T10:10:25.853Z",
+  "justFinishedAt": "2025-12-24T10:10:25.853Z"
+}

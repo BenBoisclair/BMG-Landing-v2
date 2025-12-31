@@ -1,0 +1,157 @@
+---
+import { useI18n, getLocalizedPath } from '../../i18n/utils';
+import materialsData from '../../data/materials.json';
+
+interface Material {
+  id: string;
+  image: string;
+  heroImage: string;
+  gallery: string[];
+}
+
+interface Props {
+  currentMaterialId: string;
+  currentCategory: string;
+  count?: number;
+}
+
+const { currentMaterialId, currentCategory, count = 3 } = Astro.props;
+const { t, lang } = useI18n(Astro.url);
+
+// Get materials from same category
+const category = materialsData.categories.find(c => c.id === currentCategory);
+const sameCategoryMaterials = category?.materials.filter(m => m.id !== currentMaterialId) || [];
+
+// If not enough materials in same category, fill from other categories
+let relatedMaterials = [...sameCategoryMaterials];
+
+if (relatedMaterials.length < count) {
+  const otherMaterials = materialsData.categories
+    .filter(c => c.id !== currentCategory)
+    .flatMap(c => c.materials);
+
+  const shuffledOthers = otherMaterials.sort(() => Math.random() - 0.5);
+  relatedMaterials = [...relatedMaterials, ...shuffledOthers].slice(0, count);
+} else {
+  // Shuffle and take count
+  relatedMaterials = relatedMaterials.sort(() => Math.random() - 0.5).slice(0, count);
+}
+
+// Get material names from translations
+const getMaterialName = (materialId: string): string => {
+  const materialTranslations = t.materials.items as Record<string, { name: string }>;
+  return materialTranslations[materialId]?.name || materialId;
+};
+---
+
+<section class="py-12 lg:py-16">
+  <!-- Title (centered, outside blue) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary uppercase tracking-tight">
+      {t.materials.detail.similarMaterials}
+    </h2>
+  </div>
+
+  <!-- Overlap Container -->
+  <div class="relative">
+    <!-- Blue Background Block (absolute positioned) -->
+    <div class="blue-background-block absolute left-4 right-4 lg:left-12 lg:right-12 bg-brand-primary"></div>
+
+    <!-- Content Wrapper (relative with cards overlapping) -->
+    <div class="relative materials-wrapper">
+      <!-- Cards Grid -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+          {relatedMaterials.map((material) => (
+            <a
+              href={getLocalizedPath(lang, `/projects/materials/${material.id}`)}
+              class="material-card block"
+            >
+              <div class="aspect-[4/3] overflow-hidden">
+                <img
+                  src={material.image}
+                  alt={getMaterialName(material.id)}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="p-4 text-center">
+                <h3 class="material-title">
+                  {getMaterialName(material.id)}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Back Button (inside blue area) -->
+      <div class="flex justify-center mt-12 pb-12 relative z-10">
+        <a
+          href={getLocalizedPath(lang, '/projects/materials')}
+          class="back-button"
+        >
+          <span class="rotate-180 text-lg">→</span>
+          <span class="font-medium">{t.materials.detail.back}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .blue-background-block {
+    top: 80px; /* Cards overlap by this much */
+    bottom: 0;
+    border-radius: 1.5rem;
+  }
+
+  .materials-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .material-card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .material-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .material-card img {
+    transition: transform 0.3s;
+  }
+
+  .material-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .material-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accent-red);
+    color: white;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+  }
+
+  .back-button:hover {
+    background-color: #9a1a1e;
+  }
+</style>

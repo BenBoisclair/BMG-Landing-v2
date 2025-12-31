@@ -1,0 +1,13 @@
+{
+  "category": "Performance",
+  "description": "Optimize Google Fonts loading strategy. Currently using two @import statements for Inter and Poppins fonts with default settings. Implement font-display: swap, preload critical weights (400, 600, 700 only), and use the standard font display fallback to reduce layout shift during font loading.",
+  "id": "feature-1766568195304-qyj7eswxh",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:13:49.604Z",
+  "updatedAt": "2025-12-24T10:16:17.208Z",
+  "justFinishedAt": "2025-12-24T10:16:17.208Z"
+}

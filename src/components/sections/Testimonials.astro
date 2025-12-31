@@ -1,9 +1,8 @@
 ---
 import TestimonialCard from '../ui/TestimonialCard.astro';
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import { useI18n } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+const { t } = useI18n(Astro.url);
 
 const testimonials = [
   {
@@ -49,7 +48,7 @@ const testimonials = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-12 lg:mb-16 max-w-2xl mx-auto">
-      <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase" style="color: #2C266C; font-family: 'Poppins', sans-serif;">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase text-brand-primary" style="font-family: 'Poppins', sans-serif;">
         {t.testimonials.title}
       </h2>
       <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">
@@ -60,7 +59,7 @@ const testimonials = [
     <!-- Testimonials Carousel Container -->
     <div class="relative">
       <!-- Blue Background Block -->
-      <div class="blue-background-block absolute left-8 right-8 lg:left-12 lg:right-12" style="background-color: #2C266C;"></div>
+      <div class="blue-background-block absolute left-8 right-8 lg:left-12 lg:right-12 bg-brand-primary"></div>
 
       <!-- Carousel Wrapper -->
       <div class="relative carousel-wrapper">
@@ -100,8 +99,7 @@ const testimonials = [
             <!-- Right Arrow Button -->
             <button
               id="next-btn"
-              class="nav-arrow-btn right-arrow w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300"
-              style="background-color: #B41E23;"
+              class="nav-arrow-btn right-arrow w-12 h-12 flex items-center justify-center rounded-lg transition-all duration-300 bg-accent-red"
               aria-label={t.testimonials.nextButton}
             >
               <img
@@ -177,7 +175,7 @@ const testimonials = [
 
   /* Left arrow styling when active (red background, white arrow) */
   .left-arrow.active {
-    background-color: #B41E23;
+    background-color: var(--color-accent-red);
     border-radius: 0.5rem;
   }
 
@@ -187,7 +185,7 @@ const testimonials = [
 
   /* Right arrow styling when active (red background) */
   .right-arrow {
-    background-color: #B41E23;
+    background-color: var(--color-accent-red);
   }
 
   /* White arrow on red background - no filter needed */
@@ -207,12 +205,17 @@ const testimonials = [
 </style>
 
 <script>
+  import { debounce } from '../../utils/debounce';
+
   document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('testimonials-track') as HTMLElement;
     const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
     const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
 
     if (!track || !prevBtn || !nextBtn) return;
+
+    // Debounced resize handler reference for cleanup
+    let debouncedResizeHandler: ((() => void) & { cancel: () => void }) | null = null;
 
     const slides = track.querySelectorAll('.testimonial-slide');
     const totalSlides = slides.length;
@@ -276,12 +279,24 @@ const testimonials = [
       }
     });
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      updateCarousel();
-    });
+    // Handle window resize with debouncing to prevent excessive recalculations
+    // Using 200ms delay as resize events fire rapidly during window resizing
+    debouncedResizeHandler = debounce(updateCarousel, 200);
+    window.addEventListener('resize', debouncedResizeHandler);
 
     // Initial update
     updateCarousel();
+
+    // Cleanup function for when component is unmounted (SPA navigation)
+    function cleanup() {
+      if (debouncedResizeHandler) {
+        window.removeEventListener('resize', debouncedResizeHandler);
+        debouncedResizeHandler.cancel();
+        debouncedResizeHandler = null;
+      }
+    }
+
+    // Listen for Astro page transitions to cleanup
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
   });
 </script>

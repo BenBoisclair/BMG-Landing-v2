@@ -2,10 +2,13 @@
 interface Props {
   label: string;
   name: string;
-  type?: 'text' | 'email' | 'tel' | 'textarea';
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'url';
   placeholder?: string;
   required?: boolean;
   rows?: number;
+  maxLength?: number;
+  pattern?: string;
+  validationType?: 'email' | 'phone' | 'url' | 'name' | 'text';
 }
 
 const {
@@ -15,13 +18,27 @@ const {
   placeholder = '',
   required = false,
   rows = 4,
+  maxLength,
+  pattern,
+  validationType,
 } = Astro.props;
 
-const inputClasses = 'w-full h-[50px] px-3 flex flex-col justify-center items-start gap-3 rounded-md border border-[#D2D5DA] bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
-const textareaClasses = 'w-full px-3 py-3 flex flex-col justify-start items-start gap-3 rounded-md border border-[#D2D5DA] bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+// Determine validation type based on input type or explicit validationType
+const getValidationType = () => {
+  if (validationType) return validationType;
+  if (type === 'email') return 'email';
+  if (type === 'tel') return 'phone';
+  if (type === 'url') return 'url';
+  return 'text';
+};
+
+const inputClasses = 'w-full h-[50px] px-3 flex flex-col justify-center items-start gap-3 rounded-md border border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+const textareaClasses = 'w-full px-3 py-3 flex flex-col justify-start items-start gap-3 rounded-md border border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+const errorClasses = 'border-red-500 focus:ring-red-500';
+const errorMessageClasses = 'text-xs text-red-500 mt-1 hidden';
 ---
 
-<div class="space-y-2">
+<div class="space-y-2" data-form-field data-field-name={name} data-validation-type={getValidationType()} data-required={required.toString()}>
   <label for={name} class="block text-sm font-medium text-gray-900">
     {label}
     {required && <span class="text-red-500">*</span>}
@@ -33,7 +50,9 @@ const textareaClasses = 'w-full px-3 py-3 flex flex-col justify-start items-star
       rows={rows}
       placeholder={placeholder || label}
       required={required}
+      maxlength={maxLength}
       class={textareaClasses}
+      data-input
     />
   ) : (
     <input
@@ -42,7 +61,26 @@ const textareaClasses = 'w-full px-3 py-3 flex flex-col justify-start items-star
       name={name}
       placeholder={placeholder || label}
       required={required}
+      maxlength={maxLength}
+      pattern={pattern}
       class={inputClasses}
+      data-input
     />
   )}
+  <p class={errorMessageClasses} data-error-message aria-live="polite"></p>
 </div>
+
+<style>
+  [data-form-field].has-error [data-input] {
+    border-color: #ef4444;
+  }
+  [data-form-field].has-error [data-input]:focus {
+    --tw-ring-color: #ef4444;
+  }
+  [data-form-field].has-error [data-error-message] {
+    display: block;
+  }
+  [data-form-field].is-valid [data-input] {
+    border-color: #22c55e;
+  }
+</style>

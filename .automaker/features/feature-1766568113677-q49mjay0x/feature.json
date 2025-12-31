@@ -1,0 +1,13 @@
+{
+  "category": "Security",
+  "description": "Move hardcoded contact information (phone numbers, email, address, social media links) from the Contact.astro component to environment variables or a secure configuration file. Ensure .env files are in .gitignore (already done) and use environment-specific configurations for production.",
+  "id": "feature-1766568113677-q49mjay0x",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:10:27.985Z",
+  "updatedAt": "2025-12-24T10:13:48.387Z",
+  "justFinishedAt": "2025-12-24T10:13:48.387Z"
+}

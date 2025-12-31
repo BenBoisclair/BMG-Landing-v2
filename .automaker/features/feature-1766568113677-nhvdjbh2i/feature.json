@@ -1,0 +1,13 @@
+{
+  "category": "Security",
+  "description": "Configure essential HTTP security headers in Astro's deployment configuration or middleware: X-Content-Type-Options: nosniff, X-Frame-Options: SAMEORIGIN, X-XSS-Protection, Permissions-Policy, and Strict-Transport-Security (HSTS) for HTTPS.",
+  "id": "feature-1766568113677-nhvdjbh2i",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:03:27.864Z",
+  "updatedAt": "2025-12-24T10:05:07.037Z",
+  "justFinishedAt": "2025-12-24T10:05:07.037Z"
+}

@@ -1,0 +1,323 @@
+---
+/**
+ * MaterialCarousel Component
+ *
+ * A coverflow-style carousel for showcasing material images.
+ * Uses Swiper's EffectCoverflow module for the 3D perspective effect.
+ *
+ * Props:
+ * - categoryId: Unique identifier for the category (used for i18n lookup)
+ * - materials: Array of material objects with id and image
+ * - index: Carousel index for unique identifiers when multiple carousels exist
+ */
+import { useI18n, getLocalizedPath } from '../../i18n/utils';
+
+interface Material {
+  id: string;
+  image: string;
+}
+
+interface Props {
+  categoryId: string;
+  materials: Material[];
+  index: number;
+}
+
+const { categoryId, materials, index } = Astro.props;
+const { t, dir, lang } = useI18n(Astro.url);
+
+// Get category translations
+const category = t.materials.categories[categoryId as keyof typeof t.materials.categories];
+const categoryTitle = `${category.title} (${category.tier})`;
+
+// Build materials data for client-side JavaScript
+const materialsData = materials.map(m => ({
+  id: m.id,
+  image: m.image,
+  name: t.materials.items[m.id as keyof typeof t.materials.items]?.name || m.id,
+  description: t.materials.items[m.id as keyof typeof t.materials.items]?.description || ''
+}));
+---
+
+<section class="py-12 lg:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Title -->
+    <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary mb-8 text-center tracking-tight">
+      {categoryTitle}
+    </h2>
+
+    <!-- Swiper Carousel Container -->
+    <div
+      class="material-carousel-container"
+      data-carousel-index={index}
+      data-materials={JSON.stringify(materialsData)}
+      data-rtl={dir === 'rtl' ? 'true' : 'false'}
+    >
+      <div class="swiper material-swiper" data-swiper-id={`material-swiper-${index}`}>
+        <div class="swiper-wrapper">
+          {materials.map((material) => (
+            <div class="swiper-slide material-slide">
+              <a
+                href={getLocalizedPath(lang, `/projects/materials/${material.id}`)}
+                class="material-card block"
+              >
+                <img
+                  src={material.image}
+                  alt={t.materials.items[material.id as keyof typeof t.materials.items]?.name || material.id}
+                  class="material-image"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Material Info Display -->
+      <div class="material-info text-center mt-6">
+        <h3 class="material-name text-2xl lg:text-3xl font-bold text-gray-700 mb-2">
+          {materialsData[0]?.name}
+        </h3>
+        <p class="material-description text-gray-500 text-sm lg:text-base max-w-md mx-auto">
+          {materialsData[0]?.description}
+        </p>
+      </div>
+
+      <!-- Navigation Controls -->
+      <div class="flex justify-center items-center gap-8 mt-6">
+        <!-- Prev Arrow -->
+        <button
+          class="swiper-btn-prev p-2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-30"
+          aria-label={t.materials.pagination.prev}
+          data-swiper-target={`material-swiper-${index}`}
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- Pagination Dots -->
+        <div class="swiper-pagination-custom flex items-center gap-2" data-pagination-target={`material-swiper-${index}`}>
+          {materials.map((_, i) => (
+            <button
+              class:list={[
+                "pagination-dot transition-all duration-300",
+                i === 0 ? "active w-3 h-2 bg-gray-800 rounded-full" : "w-2 h-2 bg-gray-300 rounded-full hover:bg-gray-400"
+              ]}
+              data-slide-index={i}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <!-- Next Arrow -->
+        <button
+          class="swiper-btn-next p-2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-30"
+          aria-label={t.materials.pagination.next}
+          data-swiper-target={`material-swiper-${index}`}
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Swiper from 'swiper';
+  import { EffectCoverflow, Navigation } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/effect-coverflow';
+
+  interface MaterialData {
+    id: string;
+    image: string;
+    name: string;
+    description: string;
+  }
+
+  function initMaterialCarousels() {
+    const containers = document.querySelectorAll('.material-carousel-container');
+
+    containers.forEach((container) => {
+      const swiperEl = container.querySelector('.material-swiper') as HTMLElement;
+      const swiperId = swiperEl?.getAttribute('data-swiper-id');
+      const prevBtn = container.querySelector('.swiper-btn-prev') as HTMLElement;
+      const nextBtn = container.querySelector('.swiper-btn-next') as HTMLElement;
+      const paginationContainer = container.querySelector('.swiper-pagination-custom') as HTMLElement;
+      const materialName = container.querySelector('.material-name') as HTMLElement;
+      const materialDescription = container.querySelector('.material-description') as HTMLElement;
+
+      const materialsData: MaterialData[] = JSON.parse(container.getAttribute('data-materials') || '[]');
+      const isRTL = container.getAttribute('data-rtl') === 'true';
+
+      if (!swiperEl) return;
+
+      const swiper = new Swiper(swiperEl, {
+        modules: [EffectCoverflow, Navigation],
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        initialSlide: 0,
+        loop: false,
+
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 0,
+          depth: 120,
+          modifier: 2,
+          slideShadows: false,
+        },
+
+        navigation: {
+          prevEl: prevBtn,
+          nextEl: nextBtn,
+        },
+
+        breakpoints: {
+          320: {
+            slidesPerView: 1.4,
+            coverflowEffect: {
+              depth: 80,
+              modifier: 1.5,
+            },
+          },
+          640: {
+            slidesPerView: 2.5,
+            coverflowEffect: {
+              depth: 100,
+              modifier: 1.8,
+            },
+          },
+          1024: {
+            slidesPerView: 3.5,
+            coverflowEffect: {
+              depth: 120,
+              modifier: 2,
+            },
+          },
+          1280: {
+            slidesPerView: 4,
+            coverflowEffect: {
+              depth: 140,
+              modifier: 2.2,
+            },
+          },
+        },
+
+        on: {
+          slideChange: function() {
+            const activeIndex = this.activeIndex;
+
+            // Update material info
+            if (materialsData[activeIndex]) {
+              materialName.textContent = materialsData[activeIndex].name;
+              materialDescription.textContent = materialsData[activeIndex].description;
+            }
+
+            // Update pagination dots
+            const dots = paginationContainer?.querySelectorAll('.pagination-dot');
+            dots?.forEach((dot, i) => {
+              if (i === activeIndex) {
+                dot.classList.add('active', 'w-3', 'bg-gray-800');
+                dot.classList.remove('w-2', 'bg-gray-300');
+              } else {
+                dot.classList.remove('active', 'w-3', 'bg-gray-800');
+                dot.classList.add('w-2', 'bg-gray-300');
+              }
+            });
+          },
+        },
+      });
+
+      // Handle pagination dot clicks
+      const dots = paginationContainer?.querySelectorAll('.pagination-dot');
+      dots?.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const slideIndex = parseInt(dot.getAttribute('data-slide-index') || '0');
+          swiper.slideTo(slideIndex);
+        });
+      });
+    });
+  }
+
+  // Initialize on page load
+  initMaterialCarousels();
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initMaterialCarousels);
+</script>
+
+<style is:global>
+  .material-carousel-container {
+    overflow: visible;
+  }
+
+  .material-swiper {
+    padding: 40px 20px 60px;
+    overflow: visible !important;
+  }
+
+  .material-swiper .swiper-wrapper {
+    align-items: center;
+    overflow: visible !important;
+  }
+
+  .material-slide {
+    width: 280px;
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  @media (min-width: 640px) {
+    .material-slide {
+      width: 320px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .material-slide {
+      width: 380px;
+    }
+  }
+
+  .material-card {
+    background: #f5f5f5;
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .swiper-slide-active .material-card {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .material-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Scale effect for non-active slides */
+  .material-slide:not(.swiper-slide-active) {
+    opacity: 0.7;
+  }
+
+  .material-slide:not(.swiper-slide-active) .material-card {
+    transform: scale(0.9);
+  }
+
+  /* Pagination dot animation */
+  .pagination-dot {
+    cursor: pointer;
+  }
+
+  .pagination-dot.active {
+    width: 12px;
+  }
+</style>

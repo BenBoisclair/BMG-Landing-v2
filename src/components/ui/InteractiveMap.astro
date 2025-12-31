@@ -22,14 +22,16 @@ const countriesJson = JSON.stringify(countries);
 <div class="interactive-map-wrapper">
   <div class="interactive-map-container relative">
     <!-- Map SVG Container -->
-    <div id="map-svg-container" class="rounded-2xl overflow-hidden">
+    <div id="map-svg-container" class="rounded-2xl overflow-hidden relative">
+      <!-- Static placeholder shown by default, hidden after interactive SVG loads -->
       <img
         id="map-placeholder"
         src="/images/Landing/Map.svg"
         alt="World map showing global reach"
-        class="w-full h-auto opacity-0 absolute"
+        class="w-full h-auto"
       />
-      <div id="map-svg-wrapper" class="relative w-full"></div>
+      <!-- Interactive SVG wrapper - positioned over placeholder, starts hidden -->
+      <div id="map-svg-wrapper" class="absolute inset-0 w-full h-full hidden"></div>
     </div>
 
     <!-- Tooltip -->
@@ -40,7 +42,7 @@ const countriesJson = JSON.stringify(countries);
     >
       <div class="flex items-center gap-2">
         <span id="tooltip-color-dot" class="w-3 h-3 rounded-full flex-shrink-0"></span>
-        <span id="tooltip-text" class="font-semibold text-sm whitespace-nowrap" style="color: #2C266C;"></span>
+        <span id="tooltip-text" class="font-semibold text-sm whitespace-nowrap text-brand-primary"></span>
       </div>
       <p id="tooltip-description" class="text-xs text-gray-500 mt-1 whitespace-nowrap"></p>
     </div>
@@ -67,29 +69,6 @@ const countriesJson = JSON.stringify(countries);
       ))}
     </svg>
   </div>
-
-  <!-- Map Legend -->
-  <div class="map-legend flex flex-wrap justify-center gap-4 md:gap-6 mt-6 px-4">
-    <div class="legend-item flex items-center gap-2">
-      <span class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #392DCA;"></span>
-      <span class="text-sm text-gray-600">Primary Markets</span>
-    </div>
-    <div class="legend-item flex items-center gap-2">
-      <span class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #FF881B;"></span>
-      <span class="text-sm text-gray-600">Growing Markets</span>
-    </div>
-    <div class="legend-item flex items-center gap-2">
-      <span class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #E23A45;"></span>
-      <span class="text-sm text-gray-600">Emerging Markets</span>
-    </div>
-    <div class="legend-item flex items-center gap-2">
-      <span class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: #ACA7E9;"></span>
-      <span class="text-sm text-gray-600">Partner Regions</span>
-    </div>
-  </div>
-
-  <!-- Interaction hint -->
-  <p class="text-center text-xs text-gray-400 mt-3">Hover over colored regions to see country details</p>
 </div>
 
 <style>
@@ -156,8 +135,8 @@ const countriesJson = JSON.stringify(countries);
     colorToCountries[country.color].push(country);
   });
 
-  // Initialize map when DOM is loaded
-  document.addEventListener('DOMContentLoaded', async () => {
+  // Initialize map - run immediately if DOM ready, otherwise wait
+  async function initMap() {
     const mapWrapper = document.getElementById('map-svg-wrapper');
     const tooltip = document.getElementById('map-tooltip');
     const tooltipText = document.getElementById('tooltip-text');
@@ -285,17 +264,14 @@ const countriesJson = JSON.stringify(countries);
         });
       }
 
-      // Hide placeholder
+      // Show interactive wrapper and hide placeholder
+      mapWrapper.classList.remove('hidden');
       if (placeholder) {
         placeholder.style.display = 'none';
       }
     } catch (error) {
       console.error('Failed to load map SVG:', error);
-      // Show placeholder image as fallback
-      if (placeholder) {
-        placeholder.style.opacity = '1';
-        placeholder.style.position = 'relative';
-      }
+      // Placeholder is already visible as fallback, no action needed
     }
 
     // Set up tooltip interactions for country region circles
@@ -326,5 +302,12 @@ const countriesJson = JSON.stringify(countries);
         console.log(`Selected country: ${countryName}`);
       });
     });
-  });
+  }
+
+  // Run immediately if DOM is ready, otherwise wait for it
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
 </script>

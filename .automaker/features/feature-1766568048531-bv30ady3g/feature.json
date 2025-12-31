@@ -1,0 +1,13 @@
+{
+  "category": "Code Quality",
+  "description": "Extract hardcoded color values and magic strings (e.g., #2C266C, #6b6b9d, #2d2d5a) into a centralized constants file. This makes the codebase easier to maintain and ensures consistent branding across components. Currently, colors are scattered throughout Astro components and CSS, making theme changes difficult.",
+  "id": "feature-1766568048531-bv30ady3g",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T09:20:50.658Z",
+  "updatedAt": "2025-12-24T09:29:36.550Z",
+  "justFinishedAt": "2025-12-24T09:29:36.550Z"
+}

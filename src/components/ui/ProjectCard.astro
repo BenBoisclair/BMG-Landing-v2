@@ -1,0 +1,42 @@
+---
+interface Props {
+  image: string;
+  name: string;
+  categories: string[];
+  categoryLabels: Record<string, string>;
+  href?: string;
+}
+
+const { image, name, categories, categoryLabels, href } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class="relative block w-full aspect-square rounded-lg overflow-hidden group cursor-pointer"
+>
+  <!-- Project Image -->
+  <img
+    src={image}
+    alt={name}
+    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+    loading="lazy"
+    decoding="async"
+  />
+
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+
+  <!-- Content -->
+  <div class="absolute bottom-0 left-0 right-0 p-6">
+    <h3 class="text-lg font-medium text-white mb-4 leading-6">{name}</h3>
+    <div class="flex flex-wrap gap-2">
+      {categories.map((cat) => (
+        <span class="px-2 py-0.5 border border-white/25 rounded-full text-xs text-white">
+          {categoryLabels[cat]}
+        </span>
+      ))}
+    </div>
+  </div>
+</Tag>

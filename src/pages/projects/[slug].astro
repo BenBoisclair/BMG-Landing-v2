@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import ProjectDetailHero from '../../components/sections/ProjectDetailHero.astro';
+import ProjectDetailContent from '../../components/sections/ProjectDetailContent.astro';
+import ProjectDetailGallery from '../../components/sections/ProjectDetailGallery.astro';
+import RelatedProjects from '../../components/sections/RelatedProjects.astro';
+import { getTranslations, defaultLang } from '../../i18n/utils';
+import projectsData from '../../data/projects.json';
+
+// Type definitions
+interface Project {
+  id: string;
+  image: string;
+  heroImage: string;
+  gallery: string[];
+  categories: string[];
+}
+
+interface ProjectTranslation {
+  name: string;
+  artTitle: string;
+  description: string;
+  material: string;
+  customer: string;
+  location: string;
+}
+
+// Generate static paths for all projects
+export function getStaticPaths() {
+  const allProjects: Project[] = projectsData.projectTypes.flatMap(type => type.projects);
+
+  return allProjects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { slug } = Astro.params;
+const { project } = Astro.props as { project: Project };
+
+// Get translations for default language (English)
+const t = getTranslations(defaultLang);
+const projectTranslations = t.project.projects as Record<string, ProjectTranslation>;
+const projectContent = projectTranslations[project.id] || {
+  name: project.id,
+  artTitle: project.id,
+  description: '',
+  material: '',
+  customer: '',
+  location: '',
+};
+---
+
+<BaseLayout
+  title={`${projectContent.name} | ${t.meta.title}`}
+  description={projectContent.description.slice(0, 160)}
+  lang={defaultLang}
+>
+  <Header pageType="project" />
+
+  <main>
+    <ProjectDetailHero
+      heroImage={project.heroImage}
+      projectName={projectContent.name}
+    />
+
+    <ProjectDetailContent
+      artTitle={projectContent.artTitle}
+      description={projectContent.description}
+      material={projectContent.material}
+      customer={projectContent.customer}
+      location={projectContent.location}
+    />
+
+    <ProjectDetailGallery
+      images={project.gallery}
+      projectName={projectContent.name}
+    />
+
+    <RelatedProjects currentProjectId={project.id} />
+  </main>
+
+  <Footer />
+</BaseLayout>

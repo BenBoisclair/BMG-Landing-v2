@@ -1,0 +1,113 @@
+{
+  "description": "Material showcase data. Material names/descriptions are stored in i18n translation files.",
+  "categories": [
+    {
+      "id": "semi-precious",
+      "tier": "A++",
+      "materials": [
+        {
+          "id": "semi-precious-1",
+          "image": "/images/materials/semi-precious-1.jpg",
+          "heroImage": "/images/materials/semi-precious-1.jpg",
+          "gallery": []
+        },
+        {
+          "id": "semi-precious-2",
+          "image": "/images/materials/semi-precious-2.jpg",
+          "heroImage": "/images/materials/semi-precious-2.jpg",
+          "gallery": []
+        },
+        {
+          "id": "semi-precious-3",
+          "image": "/images/materials/semi-precious-3.jpg",
+          "heroImage": "/images/materials/semi-precious-3.jpg",
+          "gallery": []
+        },
+        {
+          "id": "semi-precious-4",
+          "image": "/images/materials/semi-precious-4.jpg",
+          "heroImage": "/images/materials/semi-precious-4.jpg",
+          "gallery": []
+        },
+        {
+          "id": "semi-precious-5",
+          "image": "/images/materials/semi-precious-5.jpg",
+          "heroImage": "/images/materials/semi-precious-5.jpg",
+          "gallery": []
+        }
+      ]
+    },
+    {
+      "id": "luxury",
+      "tier": "A+",
+      "materials": [
+        {
+          "id": "luxury-1",
+          "image": "/images/materials/luxury-1.jpg",
+          "heroImage": "/images/materials/luxury-1.jpg",
+          "gallery": []
+        },
+        {
+          "id": "luxury-2",
+          "image": "/images/materials/luxury-2.jpg",
+          "heroImage": "/images/materials/luxury-2.jpg",
+          "gallery": []
+        },
+        {
+          "id": "luxury-3",
+          "image": "/images/materials/luxury-3.jpg",
+          "heroImage": "/images/materials/luxury-3.jpg",
+          "gallery": []
+        },
+        {
+          "id": "luxury-4",
+          "image": "/images/materials/luxury-4.jpg",
+          "heroImage": "/images/materials/luxury-4.jpg",
+          "gallery": []
+        },
+        {
+          "id": "luxury-5",
+          "image": "/images/materials/luxury-5.jpg",
+          "heroImage": "/images/materials/luxury-5.jpg",
+          "gallery": []
+        }
+      ]
+    },
+    {
+      "id": "classic",
+      "tier": "A",
+      "materials": [
+        {
+          "id": "classic-1",
+          "image": "/images/materials/classic-1.jpg",
+          "heroImage": "/images/materials/classic-1.jpg",
+          "gallery": []
+        },
+        {
+          "id": "classic-2",
+          "image": "/images/materials/classic-2.jpg",
+          "heroImage": "/images/materials/classic-2.jpg",
+          "gallery": []
+        },
+        {
+          "id": "classic-3",
+          "image": "/images/materials/classic-3.jpg",
+          "heroImage": "/images/materials/classic-3.jpg",
+          "gallery": []
+        },
+        {
+          "id": "classic-4",
+          "image": "/images/materials/classic-4.jpg",
+          "heroImage": "/images/materials/classic-4.jpg",
+          "gallery": []
+        },
+        {
+          "id": "classic-5",
+          "image": "/images/materials/classic-5.jpg",
+          "heroImage": "/images/materials/classic-5.jpg",
+          "gallery": []
+        }
+      ]
+    }
+  ]
+}

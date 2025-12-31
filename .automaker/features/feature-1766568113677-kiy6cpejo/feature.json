@@ -1,0 +1,13 @@
+{
+  "category": "Security",
+  "description": "The contact form has `onsubmit=\"return false;\"` and no backend handler, meaning form data is never sent or stored. Implement a backend API endpoint (using Astro API routes) that validates, sanitizes, and securely processes form submissions with CSRF protection.",
+  "id": "feature-1766568113677-kiy6cpejo",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T09:29:39.045Z",
+  "updatedAt": "2025-12-24T09:37:40.421Z",
+  "justFinishedAt": "2025-12-24T09:37:40.421Z"
+}

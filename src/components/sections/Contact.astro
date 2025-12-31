@@ -1,70 +1,51 @@
 ---
 import Button from '../ui/Button.astro';
-import FormInput from '../ui/FormInput.astro';
-import FormSelect from '../ui/FormSelect.astro';
-import FormPhoneInput from '../ui/FormPhoneInput.astro';
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import FormField from '../ui/FormField.astro';
+import { useI18n } from '../../i18n/utils';
+import { contactConfig } from '../../config/contact';
+import formOptionsConfig from '../../data/contact-form-options.json';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+const { t } = useI18n(Astro.url);
 
-const contactInfo = {
-  address: [
-    '9/11 Moo 10 Borommaratchachonnani rd',
-    'Sala Thammasop Thawi Watthana',
-    'Bangkok 10170'
-  ],
-  phone: ['+66 2 888 7788', '+66 87 879 6226', '+66 81 445 9999'],
-  email: 'bmgthai@bmg.co.th',
-  socials: [
-    { name: 'Facebook', handle: 'BMG บางกอกโมเดิร์นแกรนิต', url: 'https://www.facebook.com/bmgthailand', icon: 'facebook' },
-    { name: 'Line', handle: '@bmgstone', url: 'https://page.line.me/bmgstone?openQrModal=true', icon: 'line' },
-    { name: 'Instagram', handle: 'bangkokmoderngranite', url: 'https://www.instagram.com/bangkokmoderngranite', icon: 'instagram' },
-    { name: 'YouTube', handle: 'bmgthai granite', url: 'https://www.youtube.com/channel/UC9FCyP3XZHRkvK9vnnh8IMg', icon: 'youtube' },
-  ],
-};
+// Contact information loaded from environment variables (see src/config/contact.ts)
+const contactInfo = contactConfig;
 
-const positions = [
-  t.contact.positions.salesManager,
-  t.contact.positions.projectManager,
-  t.contact.positions.designer,
-  t.contact.positions.architect,
-  t.contact.positions.developer,
-  t.contact.positions.other
-];
+// Form dropdown options loaded from JSON configuration
+// Keys are defined in contact-form-options.json, values come from translations
+const positions = formOptionsConfig.positions.map(
+  (key) => t.contact.positions[key as keyof typeof t.contact.positions]
+);
 
-const projectTypes = [
-  t.contact.projectTypes.residential,
-  t.contact.projectTypes.commercial,
-  t.contact.projectTypes.industrial,
-  t.contact.projectTypes.hospitality,
-  t.contact.projectTypes.publicSpace,
-  t.contact.projectTypes.other
-];
+const projectTypes = formOptionsConfig.projectTypes.map(
+  (key) => t.contact.projectTypes[key as keyof typeof t.contact.projectTypes]
+);
 
-const budgetRanges = [
-  t.contact.budgetRanges.under10k,
-  t.contact.budgetRanges['10kTo50k'],
-  t.contact.budgetRanges['50kTo100k'],
-  t.contact.budgetRanges['100kTo500k'],
-  t.contact.budgetRanges.over500k
-];
+const budgetRanges = formOptionsConfig.budgetRanges.map(
+  (key) => t.contact.budgetRanges[key as keyof typeof t.contact.budgetRanges]
+);
 
-const considerations = [
-  t.contact.considerations.quality,
-  t.contact.considerations.price,
-  t.contact.considerations.timeline,
-  t.contact.considerations.design,
-  t.contact.considerations.allOfTheAbove
-];
+const considerations = formOptionsConfig.considerations.map(
+  (key) => t.contact.considerations[key as keyof typeof t.contact.considerations]
+);
 
-const timelines = [
-  t.contact.timelines.immediate,
-  t.contact.timelines.within1Month,
-  t.contact.timelines['1To3Months'],
-  t.contact.timelines['3To6Months'],
-  t.contact.timelines['6PlusMonths']
-];
+const timelines = formOptionsConfig.timelines.map(
+  (key) => t.contact.timelines[key as keyof typeof t.contact.timelines]
+);
+
+// Validation translations for client-side script
+const validationTranslations = JSON.stringify({
+  required: t.validation?.required || 'This field is required',
+  invalidEmail: t.validation?.invalidEmail || 'Please enter a valid email address',
+  invalidPhone: t.validation?.invalidPhone || 'Please enter a valid phone number (7-15 digits)',
+  invalidUrl: t.validation?.invalidUrl || 'Please enter a valid URL (including http:// or https://)',
+  invalidName: t.validation?.invalidName || 'Please enter a valid name (letters only)',
+  tooShort: t.validation?.tooShort || 'This field is too short',
+  tooLong: t.validation?.tooLong || 'This field is too long',
+  invalidFormat: t.validation?.invalidFormat || 'Invalid format',
+  formSuccess: t.validation?.formSuccess || 'Thank you! Your message has been sent successfully.',
+  formError: t.validation?.formError || 'There was an error submitting your form. Please try again.',
+  submitting: t.validation?.submitting || 'Submitting...',
+});
 ---
 
 <section id="contact" class="py-16 lg:py-24 bg-white">
@@ -72,33 +53,34 @@ const timelines = [
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
       <!-- Contact Form -->
       <div class="bg-white rounded-2xl p-6 lg:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
-        <form class="space-y-6" onsubmit="return false;">
+        <form class="space-y-6" id="contact-form" novalidate>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormInput label={t.contact.form.firstName} name="firstName" required />
-            <FormInput label={t.contact.form.surname} name="surname" required />
+            <FormField type="text" label={t.contact.form.firstName} name="firstName" validationType="name" required />
+            <FormField type="text" label={t.contact.form.surname} name="surname" validationType="name" required />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormPhoneInput label={t.contact.form.phone} name="phone" required />
-            <FormInput label={t.contact.form.email} name="email" type="email" required />
+            <FormField type="phone" label={t.contact.form.phone} name="phone" required />
+            <FormField type="email" label={t.contact.form.email} name="email" required />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormInput label={t.contact.form.whatsapp} name="whatsapp" type="tel" />
-            <FormSelect label={t.contact.form.position} name="position" options={positions} />
+            <FormField type="tel" label={t.contact.form.whatsapp} name="whatsapp" />
+            <FormField type="select" label={t.contact.form.position} name="position" options={positions} />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormSelect label={t.contact.form.projectType} name="projectType" options={projectTypes} />
-            <FormSelect label={t.contact.form.budget} name="budget" options={budgetRanges} />
+            <FormField type="select" label={t.contact.form.projectType} name="projectType" options={projectTypes} />
+            <FormField type="select" label={t.contact.form.budget} name="budget" options={budgetRanges} />
           </div>
           <div class="grid sm:grid-cols-2 gap-6">
-            <FormSelect label={t.contact.form.consideration} name="consideration" options={considerations} />
-            <FormSelect label={t.contact.form.timeline} name="timeline" options={timelines} />
+            <FormField type="select" label={t.contact.form.consideration} name="consideration" options={considerations} />
+            <FormField type="select" label={t.contact.form.timeline} name="timeline" options={timelines} />
           </div>
-          <FormInput label={t.contact.form.remark} name="remark" type="textarea" rows={4} />
+          <FormField type="textarea" label={t.contact.form.remark} name="remark" rows={4} maxLength={2000} />
 
           <!-- Checkbox -->
           <label class="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
+              name="consent"
               class="mt-1 w-4 h-4 rounded border-gray-300 text-bmg-primary focus:ring-bmg-primary"
             />
             <span class="text-sm text-gray-600">
@@ -114,7 +96,7 @@ const timelines = [
 
       <!-- Contact Information -->
       <div>
-        <h2 class="text-3xl lg:text-4xl font-bold mb-4" style="color: #2C266C;">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-brand-primary">
           {t.contact.title}
         </h2>
         <p class="text-gray-600 mb-8">
@@ -172,3 +154,398 @@ const timelines = [
     </div>
   </div>
 </section>
+
+<script define:vars={{ validationTranslations }}>
+  // Parse translations from server
+  const translations = JSON.parse(validationTranslations);
+
+  // ============================================
+  // CSRF TOKEN GENERATION
+  // ============================================
+
+  const CSRF_TOKEN_KEY = 'bmg_csrf_token';
+  const TOKEN_EXPIRY_MS = 30 * 60 * 1000; // 30 minutes
+
+  function generateSecureToken(length = 32) {
+    const array = new Uint8Array(length);
+    crypto.getRandomValues(array);
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  function generateCSRFToken() {
+    try {
+      const stored = sessionStorage.getItem(CSRF_TOKEN_KEY);
+      if (stored) {
+        const tokenData = JSON.parse(stored);
+        if (tokenData.expiresAt > Date.now()) {
+          return tokenData.token;
+        }
+      }
+    } catch (e) {
+      // Ignore parsing errors
+    }
+
+    // Generate new token
+    const token = generateSecureToken();
+    const tokenData = {
+      token,
+      timestamp: Date.now(),
+      expiresAt: Date.now() + TOKEN_EXPIRY_MS,
+    };
+
+    try {
+      sessionStorage.setItem(CSRF_TOKEN_KEY, JSON.stringify(tokenData));
+    } catch (e) {
+      // Ignore storage errors
+    }
+
+    return token;
+  }
+
+  // ============================================
+  // VALIDATION PATTERNS
+  // ============================================
+
+  const VALIDATION_PATTERNS = {
+    email: /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/,
+    phone: /^[\d\s\-()]+$/,
+    name: /^[\p{L}\p{M}][\p{L}\p{M}\s\-']*[\p{L}\p{M}]$|^[\p{L}\p{M}]$/u,
+  };
+
+  // ============================================
+  // SANITIZATION FUNCTIONS
+  // ============================================
+
+  const HTML_ENTITIES = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;',
+  };
+
+  function sanitizeHTML(input) {
+    if (typeof input !== 'string') return '';
+    return input.replace(/[&<>"'`=/]/g, (char) => HTML_ENTITIES[char] || char);
+  }
+
+  function stripHTMLTags(input) {
+    if (typeof input !== 'string') return '';
+    return input.replace(/<[^>]*>/g, '');
+  }
+
+  function sanitizeForDisplay(input) {
+    if (typeof input !== 'string') return '';
+    return sanitizeHTML(stripHTMLTags(input));
+  }
+
+  function sanitizePhone(input) {
+    if (typeof input !== 'string') return '';
+    return input.replace(/[^\d+\-() ]/g, '').trim();
+  }
+
+  function sanitizeEmail(input) {
+    if (typeof input !== 'string') return '';
+    return input.toLowerCase().trim();
+  }
+
+  function sanitizeName(input) {
+    if (typeof input !== 'string') return '';
+    return input.replace(/[^\p{L}\p{M}\s\-']/gu, '').trim();
+  }
+
+  // ============================================
+  // VALIDATION FUNCTIONS
+  // ============================================
+
+  function validateRequired(value) {
+    const trimmed = value?.trim() || '';
+    return {
+      isValid: trimmed.length > 0,
+      error: trimmed.length > 0 ? undefined : translations.required,
+    };
+  }
+
+  function validateEmail(value) {
+    if (!value || value.trim() === '') return { isValid: true };
+    const sanitized = sanitizeEmail(value);
+    const isValid = VALIDATION_PATTERNS.email.test(sanitized);
+    return {
+      isValid,
+      error: isValid ? undefined : translations.invalidEmail,
+    };
+  }
+
+  function validatePhone(value) {
+    if (!value || value.trim() === '') return { isValid: true };
+    const sanitized = sanitizePhone(value);
+    if (!VALIDATION_PATTERNS.phone.test(sanitized)) {
+      return { isValid: false, error: translations.invalidPhone };
+    }
+    const digitsOnly = sanitized.replace(/\D/g, '');
+    const isValidLength = digitsOnly.length >= 7 && digitsOnly.length <= 15;
+    return {
+      isValid: isValidLength,
+      error: isValidLength ? undefined : translations.invalidPhone,
+    };
+  }
+
+  function validateName(value) {
+    if (!value || value.trim() === '') return { isValid: true };
+    const sanitized = sanitizeName(value);
+    const isValid = VALIDATION_PATTERNS.name.test(sanitized) && sanitized.length >= 1;
+    return {
+      isValid,
+      error: isValid ? undefined : translations.invalidName,
+    };
+  }
+
+  function validateMaxLength(value, maxLength) {
+    const length = value?.length || 0;
+    const isValid = length <= maxLength;
+    return {
+      isValid,
+      error: isValid ? undefined : translations.tooLong,
+    };
+  }
+
+  // ============================================
+  // FORM VALIDATION
+  // ============================================
+
+  function validateField(fieldElement) {
+    const fieldName = fieldElement.dataset.fieldName || '';
+    const validationType = fieldElement.dataset.validationType || 'text';
+    const isRequired = fieldElement.dataset.required === 'true';
+    const input = fieldElement.querySelector('[data-input]');
+    const errorMessage = fieldElement.querySelector('[data-error-message]');
+
+    if (!input) return { isValid: true };
+
+    const value = input.value;
+    let result = { isValid: true };
+
+    // Check required first
+    if (isRequired) {
+      result = validateRequired(value);
+      if (!result.isValid) {
+        showError(fieldElement, errorMessage, result.error || '');
+        return result;
+      }
+    }
+
+    // If empty and not required, it's valid
+    if (!value || value.trim() === '') {
+      clearError(fieldElement, errorMessage);
+      return { isValid: true };
+    }
+
+    // Type-specific validation
+    switch (validationType) {
+      case 'email':
+        result = validateEmail(value);
+        break;
+      case 'phone':
+        result = validatePhone(value);
+        break;
+      case 'name':
+        result = validateName(value);
+        break;
+      case 'text':
+        result = validateMaxLength(value, 2000);
+        break;
+      case 'select':
+        result = { isValid: true };
+        break;
+    }
+
+    if (result.isValid) {
+      showValid(fieldElement, errorMessage);
+    } else {
+      showError(fieldElement, errorMessage, result.error || '');
+    }
+
+    return result;
+  }
+
+  function showError(fieldElement, errorMessage, message) {
+    fieldElement.classList.remove('is-valid');
+    fieldElement.classList.add('has-error');
+    if (errorMessage) {
+      errorMessage.textContent = message;
+    }
+  }
+
+  function showValid(fieldElement, errorMessage) {
+    fieldElement.classList.remove('has-error');
+    fieldElement.classList.add('is-valid');
+    if (errorMessage) {
+      errorMessage.textContent = '';
+    }
+  }
+
+  function clearError(fieldElement, errorMessage) {
+    fieldElement.classList.remove('has-error', 'is-valid');
+    if (errorMessage) {
+      errorMessage.textContent = '';
+    }
+  }
+
+  function validateAllFields(form) {
+    const fields = form.querySelectorAll('[data-form-field]');
+    let allValid = true;
+
+    fields.forEach((field) => {
+      const result = validateField(field);
+      if (!result.isValid) {
+        allValid = false;
+      }
+    });
+
+    return allValid;
+  }
+
+  function getFormData(form) {
+    const formData = new FormData(form);
+    const data = {};
+
+    formData.forEach((value, key) => {
+      if (typeof value === 'string') {
+        switch (key) {
+          case 'email':
+            data[key] = sanitizeEmail(value);
+            break;
+          case 'phone':
+          case 'whatsapp':
+          case 'phone-country':
+            data[key] = sanitizePhone(value);
+            break;
+          case 'firstName':
+          case 'surname':
+            data[key] = sanitizeName(value);
+            break;
+          default:
+            data[key] = sanitizeForDisplay(value);
+        }
+      }
+    });
+
+    return data;
+  }
+
+  function showFormMessage(form, message, type) {
+    let messageEl = form.querySelector('[data-form-message]');
+
+    if (!messageEl) {
+      messageEl = document.createElement('div');
+      messageEl.setAttribute('data-form-message', '');
+      messageEl.setAttribute('role', 'alert');
+      messageEl.className = 'mt-4 p-4 rounded-md text-sm';
+      form.appendChild(messageEl);
+    }
+
+    messageEl.textContent = message;
+    messageEl.classList.remove('bg-green-50', 'text-green-800', 'bg-red-50', 'text-red-800', 'hidden');
+
+    if (type === 'success') {
+      messageEl.classList.add('bg-green-50', 'text-green-800');
+    } else {
+      messageEl.classList.add('bg-red-50', 'text-red-800');
+    }
+  }
+
+  // ============================================
+  // FORM INITIALIZATION
+  // ============================================
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    let isSubmitting = false;
+
+    // Attach blur event listeners for real-time validation
+    const fields = form.querySelectorAll('[data-form-field]');
+    fields.forEach((field) => {
+      const input = field.querySelector('[data-input]');
+      if (input) {
+        input.addEventListener('blur', () => validateField(field));
+        input.addEventListener('input', () => {
+          if (field.classList.contains('has-error')) {
+            validateField(field);
+          }
+        });
+      }
+    });
+
+    // Handle form submission
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (isSubmitting) return;
+
+      // Validate all fields
+      const isValid = validateAllFields(form);
+
+      if (!isValid) {
+        const firstError = form.querySelector('.has-error [data-input]');
+        if (firstError) {
+          firstError.focus();
+        }
+        return;
+      }
+
+      // Get sanitized form data
+      const data = getFormData(form);
+
+      // Show loading state
+      isSubmitting = true;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton?.textContent || '';
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = translations.submitting;
+      }
+
+      try {
+        // Generate CSRF token
+        const csrfToken = generateCSRFToken();
+
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken,
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          showFormMessage(form, translations.formSuccess, 'success');
+          form.reset();
+          // Clear all validation states
+          fields.forEach((field) => {
+            const errorMessage = field.querySelector('[data-error-message]');
+            clearError(field, errorMessage);
+          });
+        } else {
+          const errorData = await response.json().catch(() => ({}));
+          showFormMessage(form, errorData.message || translations.formError, 'error');
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+        showFormMessage(form, translations.formError, 'error');
+      } finally {
+        isSubmitting = false;
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+    });
+  });
+</script>

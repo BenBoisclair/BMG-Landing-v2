@@ -1,0 +1,12 @@
+{
+  "category": "Performance",
+  "description": "Add Astro build optimizations to astro.config.mjs: enable integrations for image optimization (astro/integrations/image), add compression middleware for assets, and implement asset preloading hints for above-the-fold images. Also, consider adding a sitemap and robots.txt for better crawlability.",
+  "id": "feature-1766568195304-bspjdomej",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "startedAt": "2025-12-24T10:00:24.794Z",
+  "updatedAt": "2025-12-24T10:05:29.555Z",
+  "justFinishedAt": "2025-12-24T10:05:29.555Z"
+}

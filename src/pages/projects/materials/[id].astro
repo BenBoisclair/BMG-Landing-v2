@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/layout/Header.astro';
+import Footer from '../../../components/layout/Footer.astro';
+import MaterialDetailHero from '../../../components/sections/MaterialDetailHero.astro';
+import MaterialDetailContent from '../../../components/sections/MaterialDetailContent.astro';
+import MaterialDetailGallery from '../../../components/sections/MaterialDetailGallery.astro';
+import RelatedMaterials from '../../../components/sections/RelatedMaterials.astro';
+import { getTranslations, defaultLang } from '../../../i18n/utils';
+import materialsData from '../../../data/materials.json';
+
+// Type definitions
+interface Material {
+  id: string;
+  image: string;
+  heroImage: string;
+  gallery: string[];
+  category: string;
+}
+
+interface MaterialTranslation {
+  name: string;
+  description: string;
+}
+
+// Generate static paths for all materials
+export function getStaticPaths() {
+  const allMaterials: Material[] = materialsData.categories.flatMap(cat =>
+    cat.materials.map(m => ({
+      ...m,
+      category: cat.id
+    }))
+  );
+
+  return allMaterials.map((material) => ({
+    params: { id: material.id },
+    props: { material },
+  }));
+}
+
+const { id } = Astro.params;
+const { material } = Astro.props as { material: Material };
+
+// Get translations for default language (English)
+const t = getTranslations(defaultLang);
+const materialTranslations = t.materials.items as Record<string, MaterialTranslation>;
+const materialContent = materialTranslations[material.id] || {
+  name: material.id,
+  description: '',
+};
+---
+
+<BaseLayout
+  title={`${materialContent.name} | ${t.meta.title}`}
+  description={materialContent.description.slice(0, 160)}
+  lang={defaultLang}
+>
+  <Header pageType="project" />
+
+  <main>
+    <MaterialDetailHero
+      heroImage={material.heroImage}
+      materialName={materialContent.name}
+    />
+
+    <MaterialDetailContent
+      artTitle={materialContent.name}
+      description={materialContent.description}
+    />
+
+    <MaterialDetailGallery
+      images={material.gallery}
+      materialName={materialContent.name}
+    />
+
+    <RelatedMaterials
+      currentMaterialId={material.id}
+      currentCategory={material.category}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

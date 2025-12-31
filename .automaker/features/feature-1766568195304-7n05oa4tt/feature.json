@@ -1,0 +1,13 @@
+{
+  "category": "Performance",
+  "description": "Implement proper event listener cleanup and debouncing for scroll and resize events. The Header component has a scroll event listener on every page load (handleHeaderScroll). Add debouncing to the resize event listeners in Showcase and Testimonials components to prevent excessive recalculations during window resizing.",
+  "id": "feature-1766568195304-7n05oa4tt",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:11:55.367Z",
+  "updatedAt": "2025-12-24T10:15:41.569Z",
+  "justFinishedAt": "2025-12-24T10:15:41.569Z"
+}

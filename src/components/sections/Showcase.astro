@@ -1,9 +1,13 @@
 ---
 import Button from '../ui/Button.astro';
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import { useI18n } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+// Import local showcase thumbnail images
+import thumbnail1 from '../../assets/images/showcase/thumbnail-1.svg';
+import thumbnail2 from '../../assets/images/showcase/thumbnail-2.svg';
+import thumbnail3 from '../../assets/images/showcase/thumbnail-3.svg';
+
+const { t } = useI18n(Astro.url);
 
 interface ShowcaseModel {
   id: string;
@@ -18,22 +22,22 @@ const models: ShowcaseModel[] = [
     id: '1',
     name: t.showcase.models['1'].name,
     description: t.showcase.models['1'].description,
-    glbPath: '/models/placeholder.glb',
-    thumbnailPath: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=200&h=200&fit=crop',
+    glbPath: '/models/GilaneKao.glb',
+    thumbnailPath: thumbnail1.src,
   },
   {
     id: '2',
     name: t.showcase.models['2'].name,
     description: t.showcase.models['2'].description,
-    glbPath: '/models/placeholder.glb',
-    thumbnailPath: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=200&h=200&fit=crop',
+    glbPath: '/models/GilaneNamTao.glb',
+    thumbnailPath: thumbnail2.src,
   },
   {
     id: '3',
     name: t.showcase.models['3'].name,
     description: t.showcase.models['3'].description,
     glbPath: '/models/placeholder.glb',
-    thumbnailPath: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop',
+    thumbnailPath: thumbnail3.src,
   },
 ];
 ---
@@ -54,19 +58,29 @@ const models: ShowcaseModel[] = [
 
       <!-- 3D Model Viewer -->
       <div class="order-1 lg:order-2">
-        <div class="aspect-4/5">
+        <div class="aspect-4/5 relative" id="model-viewer-container">
+          <!-- Loading State Placeholder -->
+          <div id="model-loading-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 rounded-xl">
+            <div class="w-16 h-16 mb-4">
+              <svg class="animate-spin text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <p class="text-gray-500 text-sm">{t.showcase.loading || 'Loading 3D Model...'}</p>
+          </div>
+          <!-- Model viewer will be initialized when section becomes visible -->
           <model-viewer
             id="showcase-viewer"
-            src={models[0].glbPath}
             alt={t.showcase.modelAlt}
             camera-controls
             disable-zoom
             auto-rotate
             touch-action="pan-y"
-            loading="lazy"
             camera-orbit="0deg 75deg 4m"
-            class="w-full h-full bg-transparent"
+            class="w-full h-full bg-transparent opacity-0 transition-opacity duration-500"
             style="--poster-color: transparent;"
+            data-initial-src={models[0].glbPath}
           ></model-viewer>
         </div>
       </div>
@@ -76,7 +90,7 @@ const models: ShowcaseModel[] = [
     <div class="flex justify-center gap-2.5 mt-6">
       {models.map((_, index) => (
         <button
-          class={`pagination-dot size-5.5 rounded-[5px] transition-colors duration-300 cursor-pointer ${index === 0 ? 'bg-[#d01e2a]' : 'bg-[#d9d9d9]'}`}
+          class={`pagination-dot size-5.5 rounded-[5px] transition-colors duration-300 cursor-pointer ${index === 0 ? 'bg-showcase-red' : 'bg-gray-light'}`}
           data-index={index}
           aria-label={`${t.showcase.viewModel} ${index + 1}`}
         ></button>
@@ -85,16 +99,20 @@ const models: ShowcaseModel[] = [
 
     <!-- Thumbnail Gallery -->
     <div class="mt-12 lg:mt-16">
-      <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide justify-center">
+      <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide justify-center pt-2">
         {models.map((model, index) => (
           <button
-            class={`showcase-thumbnail shrink-0 w-32 h-32 lg:w-40 lg:h-40 rounded-xl overflow-hidden snap-start cursor-pointer transition-all duration-300 ${index === 0 ? 'ring-2 ring-[#d01e2a]' : ''}`}
+            class={`showcase-thumbnail shrink-0 w-32 h-32 lg:w-40 lg:h-40 rounded-xl overflow-hidden snap-start cursor-pointer transition-all duration-300 ${index === 0 ? 'ring-2 ring-showcase-red' : ''}`}
             data-index={index}
             aria-label={`View ${model.name}`}
           >
             <img
               src={model.thumbnailPath}
               alt={model.name}
+              width="160"
+              height="160"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
             />
           </button>
@@ -105,86 +123,190 @@ const models: ShowcaseModel[] = [
 </section>
 
 <script>
-  import '@google/model-viewer';
+  import { debounce } from '../../utils/debounce';
 
-  // Responsive camera distance calculation
-  function getResponsiveCameraDistance(): string {
+  let modelViewerLoaded = false;
+  let modelViewerLoading = false;
+  let debouncedResizeHandler: (() => void) & { cancel: () => void };
+
+  function getResponsiveCameraDistance() {
     const width = window.innerWidth;
-    // Smaller screens need more zoom out, larger screens can be closer
-    if (width < 640) {
-      return '5.5m'; // Mobile: most zoomed out
-    } else if (width < 1024) {
-      return '4.5m'; // Tablet
-    } else {
-      return '4m'; // Desktop
-    }
+    if (width < 640) return '7.5m';
+    if (width < 1024) return '10.5m';
+    return '10.5m';
   }
 
   function updateCameraOrbit() {
-    const viewer = document.getElementById('showcase-viewer');
-    if (viewer) {
-      const distance = getResponsiveCameraDistance();
-      viewer.setAttribute('camera-orbit', `0deg 75deg ${distance}`);
+    const viewerEl = document.getElementById('showcase-viewer');
+    if (viewerEl && modelViewerLoaded) {
+      viewerEl.setAttribute('camera-orbit', `0deg 75deg ${getResponsiveCameraDistance()}`);
     }
   }
 
-  // Update on load and resize
-  updateCameraOrbit();
-  window.addEventListener('resize', updateCameraOrbit);
-
-  // Get translated model data from data attribute
-  const showcaseSection = document.getElementById('product');
-  const modelsData = showcaseSection?.dataset.models;
-  const models = modelsData ? JSON.parse(modelsData) : [];
-
-  let currentIndex = 0;
-
-  // DOM Elements
-  const viewer = document.getElementById('showcase-viewer');
-  const titleEl = document.getElementById('showcase-title');
-  const descEl = document.getElementById('showcase-description');
-  const thumbnails = document.querySelectorAll('.showcase-thumbnail');
-  const dots = document.querySelectorAll('.pagination-dot');
-
-  function updateShowcase(index: number) {
-    if (index === currentIndex) return;
-
-    const model = models[index];
-    currentIndex = index;
-
-    // Update 3D model
-    viewer?.setAttribute('src', model.glbPath);
-
-    // Update text content
-    if (titleEl) titleEl.textContent = model.name;
-    if (descEl) descEl.textContent = model.description;
-
-    // Update thumbnail active states
-    thumbnails.forEach((thumb, i) => {
-      thumb.classList.toggle('ring-2', i === index);
-      thumb.classList.toggle('ring-[#d01e2a]', i === index);
-    });
-
-    // Update pagination dots
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('bg-[#d01e2a]', i === index);
-      dot.classList.toggle('bg-[#d9d9d9]', i !== index);
-    });
+  function showErrorState(placeholder: HTMLElement, onRetry: () => void) {
+    while (placeholder.firstChild) placeholder.removeChild(placeholder.firstChild);
+    const p = document.createElement('p');
+    p.className = 'text-gray-500 text-sm text-center px-4';
+    p.textContent = 'Unable to load 3D viewer.';
+    const br = document.createElement('br');
+    const btn = document.createElement('button');
+    btn.className = 'mt-2 text-blue-600 underline hover:text-blue-800';
+    btn.textContent = 'Try again';
+    btn.addEventListener('click', onRetry);
+    p.appendChild(br);
+    p.appendChild(btn);
+    placeholder.appendChild(p);
   }
 
-  // Thumbnail click handlers
-  thumbnails.forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      const index = parseInt(thumb.getAttribute('data-index') || '0', 10);
-      updateShowcase(index);
-    });
-  });
+  function showLoadingState(placeholder: HTMLElement) {
+    while (placeholder.firstChild) placeholder.removeChild(placeholder.firstChild);
+    const div = document.createElement('div');
+    div.className = 'w-16 h-16 mb-4';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'animate-spin text-gray-400');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('class', 'opacity-25');
+    circle.setAttribute('cx', '12');
+    circle.setAttribute('cy', '12');
+    circle.setAttribute('r', '10');
+    circle.setAttribute('stroke', 'currentColor');
+    circle.setAttribute('stroke-width', '4');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'opacity-75');
+    path.setAttribute('fill', 'currentColor');
+    path.setAttribute('d', 'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z');
+    svg.appendChild(circle);
+    svg.appendChild(path);
+    div.appendChild(svg);
+    const p = document.createElement('p');
+    p.className = 'text-gray-500 text-sm';
+    p.textContent = 'Loading 3D Model...';
+    placeholder.appendChild(div);
+    placeholder.appendChild(p);
+  }
 
-  // Dot click handlers
-  dots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const index = parseInt(dot.getAttribute('data-index') || '0', 10);
-      updateShowcase(index);
+  function init() {
+    const showcaseSection = document.getElementById('product');
+    if (!showcaseSection) return;
+
+    const modelsData = showcaseSection.dataset.models;
+    const models = modelsData ? JSON.parse(modelsData) : [];
+    let currentIndex = 0;
+
+    const viewer = document.getElementById('showcase-viewer');
+    const titleEl = document.getElementById('showcase-title');
+    const descEl = document.getElementById('showcase-description');
+    const thumbnails = document.querySelectorAll('.showcase-thumbnail');
+    const dots = document.querySelectorAll('.pagination-dot');
+    const loadingPlaceholder = document.getElementById('model-loading-placeholder');
+    const modelContainer = document.getElementById('model-viewer-container');
+
+    if (!viewer) return;
+
+    async function loadModelViewer() {
+      if (modelViewerLoaded || modelViewerLoading) return;
+      modelViewerLoading = true;
+
+      try {
+        await import('@google/model-viewer');
+        modelViewerLoaded = true;
+
+        const initialSrc = viewer.getAttribute('data-initial-src');
+        if (initialSrc) viewer.setAttribute('src', initialSrc);
+
+        viewer.addEventListener('load', () => {
+          if (loadingPlaceholder) {
+            loadingPlaceholder.style.opacity = '0';
+            loadingPlaceholder.style.transition = 'opacity 300ms ease-out';
+            setTimeout(() => { loadingPlaceholder.style.display = 'none'; }, 300);
+          }
+          viewer.classList.remove('opacity-0');
+          viewer.classList.add('opacity-100');
+          updateCameraOrbit();
+        }, { once: true });
+
+        debouncedResizeHandler = debounce(updateCameraOrbit, 200);
+        window.addEventListener('resize', debouncedResizeHandler);
+      } catch (error) {
+        console.error('Failed to load model-viewer:', error);
+        modelViewerLoading = false;
+        if (loadingPlaceholder) {
+          showErrorState(loadingPlaceholder, () => {
+            showLoadingState(loadingPlaceholder);
+            loadModelViewer();
+          });
+        }
+      }
+    }
+
+    function setupLazyLoading() {
+      if ('IntersectionObserver' in window && modelContainer) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadModelViewer();
+              observer.disconnect();
+            }
+          });
+        }, { root: null, rootMargin: '200px 0px', threshold: 0 });
+        observer.observe(modelContainer);
+      } else {
+        loadModelViewer();
+      }
+    }
+
+    function updateShowcase(index: number) {
+      if (index === currentIndex || !models[index]) return;
+      const model = models[index];
+      currentIndex = index;
+
+      if (modelViewerLoaded) viewer.setAttribute('src', model.glbPath);
+      if (titleEl) titleEl.textContent = model.name;
+      if (descEl) descEl.textContent = model.description;
+
+      thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('ring-2', i === index);
+        thumb.classList.toggle('ring-showcase-red', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-showcase-red', i === index);
+        dot.classList.toggle('bg-gray-light', i !== index);
+      });
+    }
+
+    const triggerLoad = () => {
+      if (!modelViewerLoaded && !modelViewerLoading) loadModelViewer();
+    };
+
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        triggerLoad();
+        updateShowcase(parseInt(thumb.getAttribute('data-index') || '0', 10));
+      });
     });
-  });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        triggerLoad();
+        updateShowcase(parseInt(dot.getAttribute('data-index') || '0', 10));
+      });
+    });
+
+    setupLazyLoading();
+
+    document.addEventListener('astro:before-swap', () => {
+      if (debouncedResizeHandler) {
+        window.removeEventListener('resize', debouncedResizeHandler);
+        debouncedResizeHandler.cancel();
+      }
+    }, { once: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 </script>

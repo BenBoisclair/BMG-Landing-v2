@@ -1,0 +1,105 @@
+{
+  "description": "Project portfolio data. Project names/descriptions are stored in i18n translation files.",
+  "categories": ["construction", "mechanical", "electrical"],
+  "projectTypes": [
+    {
+      "id": "type1",
+      "projects": [
+        {
+          "id": "type1-project-1",
+          "image": "/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png",
+          "heroImage": "/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type1-project-2",
+          "image": "/images/Product/c0ae66328f0cc5ad849ec800c03045573a8cdcf5.png",
+          "heroImage": "/images/Product/c0ae66328f0cc5ad849ec800c03045573a8cdcf5.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type1-project-3",
+          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type1-project-4",
+          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        }
+      ]
+    },
+    {
+      "id": "type2",
+      "projects": [
+        {
+          "id": "type2-project-1",
+          "image": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "heroImage": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type2-project-2",
+          "image": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "heroImage": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type2-project-3",
+          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type2-project-4",
+          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        }
+      ]
+    },
+    {
+      "id": "type3",
+      "projects": [
+        {
+          "id": "type3-project-1",
+          "image": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "heroImage": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type3-project-2",
+          "image": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "heroImage": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type3-project-3",
+          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        },
+        {
+          "id": "type3-project-4",
+          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "gallery": [],
+          "categories": ["construction", "mechanical", "electrical"]
+        }
+      ]
+    }
+  ]
+}

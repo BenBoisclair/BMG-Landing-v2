@@ -15,10 +15,11 @@ const {
   options = [],
 } = Astro.props;
 
-const selectClasses = 'w-full h-[50px] px-3 flex flex-col justify-center items-start gap-3 rounded-md border border-[#D2D5DA] bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1.5em_1.5em] bg-[right_0.5rem_center] bg-no-repeat pr-10';
+const selectClasses = 'w-full h-[50px] px-3 flex flex-col justify-center items-start gap-3 rounded-md border border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1.5em_1.5em] bg-[right_0.5rem_center] bg-no-repeat pr-10';
+const errorMessageClasses = 'text-xs text-red-500 mt-1 hidden';
 ---
 
-<div class="space-y-2">
+<div class="space-y-2" data-form-field data-field-name={name} data-validation-type="select" data-required={required.toString()}>
   <label for={name} class="block text-sm font-medium text-gray-900">
     {label}
     {required && <span class="text-red-500">*</span>}
@@ -28,10 +29,27 @@ const selectClasses = 'w-full h-[50px] px-3 flex flex-col justify-center items-s
     name={name}
     required={required}
     class={selectClasses}
+    data-input
   >
     <option value="" disabled selected>{placeholder}</option>
     {options.map((option) => (
       <option value={option}>{option}</option>
     ))}
   </select>
+  <p class={errorMessageClasses} data-error-message aria-live="polite"></p>
 </div>
+
+<style>
+  [data-form-field].has-error [data-input] {
+    border-color: #ef4444;
+  }
+  [data-form-field].has-error [data-input]:focus {
+    --tw-ring-color: #ef4444;
+  }
+  [data-form-field].has-error [data-error-message] {
+    display: block;
+  }
+  [data-form-field].is-valid [data-input] {
+    border-color: #22c55e;
+  }
+</style>

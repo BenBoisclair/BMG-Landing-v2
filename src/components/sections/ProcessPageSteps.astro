@@ -1,0 +1,45 @@
+---
+import ProcessPageStep from '../ui/ProcessPageStep.astro';
+import { useI18n } from '../../i18n/utils';
+
+const { t } = useI18n(Astro.url);
+
+// Define step images - using placeholder images for now
+const stepImages = [
+  '/images/Landing/ProcessImage.jpg',
+  '/images/Product/65c3f3941db7b44a78aa5261748a2352f7b0bda4.png',
+  '/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png',
+  '/images/Product/c0ae66328f0cc5ad849ec800c03045573a8cdcf5.png',
+  '/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png',
+  '/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png',
+];
+
+// Build steps array from translations
+const steps = [
+  { ...t.processPage.steps['1'], image: stepImages[0] },
+  { ...t.processPage.steps['2'], image: stepImages[1] },
+  { ...t.processPage.steps['3'], image: stepImages[2] },
+  { ...t.processPage.steps['4'], image: stepImages[3] },
+  { ...t.processPage.steps['5'], image: stepImages[4] },
+  { ...t.processPage.steps['6'], image: stepImages[5] },
+];
+---
+
+<section id="process-steps" class="py-16 lg:py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="space-y-16 lg:space-y-24">
+      {steps.map((step, index) => (
+        <ProcessPageStep
+          stepNumber={step.number}
+          title={step.title}
+          subtitle={step.subtitle}
+          description={step.description}
+          bulletPoints={step.bulletPoints}
+          imageSrc={step.image}
+          imageAlt={step.imageAlt}
+          reverse={index % 2 === 1}
+        />
+      ))}
+    </div>
+  </div>
+</section>

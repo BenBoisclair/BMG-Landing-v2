@@ -1,0 +1,13 @@
+{
+  "category": "Security",
+  "description": "Implement client-side and server-side input validation and sanitization. Validate email, phone, URLs, and textarea inputs against strict patterns. Sanitize all user inputs before displaying or processing to prevent XSS attacks and injection vulnerabilities.",
+  "id": "feature-1766568113677-iohk4v6x0",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:00:33.862Z",
+  "updatedAt": "2025-12-24T10:03:27.118Z",
+  "justFinishedAt": "2025-12-24T10:03:27.118Z"
+}

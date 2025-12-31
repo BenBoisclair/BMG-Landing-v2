@@ -1,0 +1,13 @@
+{
+  "category": "Security",
+  "description": "Add Content Security Policy (CSP) headers in astro.config.mjs via middleware to restrict inline scripts, external script loading, and resource origins. This prevents XSS attacks and unauthorized content injection.",
+  "id": "feature-1766568113677-mn2ce0ejp",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "startedAt": "2025-12-24T10:00:34.044Z",
+  "updatedAt": "2025-12-24T10:02:44.214Z",
+  "branchName": "main",
+  "justFinishedAt": "2025-12-24T10:02:44.214Z"
+}

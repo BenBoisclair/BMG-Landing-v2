@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import ProcessPageHero from '../../components/sections/ProcessPageHero.astro';
+import ProcessPageSteps from '../../components/sections/ProcessPageSteps.astro';
+import { useI18n } from '../../i18n/utils';
+
+const { lang, t } = useI18n(Astro.url);
+---
+
+<BaseLayout
+  title={`${t.processPage.title} | ${t.meta.title}`}
+  description={t.meta.description}
+  lang={lang}
+>
+  <Header pageType="process" />
+
+  <main>
+    <ProcessPageHero />
+    <ProcessPageSteps />
+  </main>
+
+  <Footer />
+</BaseLayout>

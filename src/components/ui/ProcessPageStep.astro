@@ -1,0 +1,76 @@
+---
+interface Props {
+  stepNumber: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  bulletPoints: string[];
+  imageSrc: string;
+  imageAlt: string;
+  reverse?: boolean;
+}
+
+const { stepNumber, title, subtitle, description, bulletPoints, imageSrc, imageAlt, reverse = false } = Astro.props;
+---
+
+<div class={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 items-start`}>
+  <!-- Image Section -->
+  <div class="w-full lg:w-1/2">
+    <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="w-full lg:w-1/2 space-y-4">
+    <!-- Step Badge -->
+    <div class="inline-flex items-center gap-2">
+      <span class="px-3 py-1 bg-brand-primary text-white text-sm font-semibold rounded-full">
+        Step {stepNumber}
+      </span>
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-2xl lg:text-3xl font-bold text-brand-primary">
+      {title}
+    </h2>
+
+    <!-- Subtitle -->
+    <h3 class="text-xl lg:text-2xl font-semibold text-gray-700">
+      {subtitle}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-gray-600 leading-relaxed">
+      {description}
+    </p>
+
+    <!-- Bullet Points -->
+    <ul class="space-y-3 pt-2">
+      {bulletPoints.map((point) => (
+        <li class="flex items-start gap-3">
+          <svg
+            class="w-5 h-5 text-bmg-gold flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+          <span class="text-gray-600">{point}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

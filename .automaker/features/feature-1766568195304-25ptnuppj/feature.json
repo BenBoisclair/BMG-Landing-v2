@@ -1,0 +1,13 @@
+{
+  "category": "Performance",
+  "description": "Replace placeholder image services (unsplash.com, placehold.co) with self-hosted or optimized image assets. Currently using external CDN URLs for showcase thumbnails and process step icons that require network requests. Implement responsive image optimization using Astro's Image component with automatic format conversion (WebP), lazy loading, and size-based variants.",
+  "id": "feature-1766568195304-25ptnuppj",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T10:03:28.504Z",
+  "updatedAt": "2025-12-24T10:07:18.928Z",
+  "justFinishedAt": "2025-12-24T10:07:18.928Z"
+}

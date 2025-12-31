@@ -1,0 +1,13 @@
+{
+  "category": "Code Quality",
+  "description": "Consolidate repeated i18n initialization pattern. Every component duplicates: `const currentLang = getLangFromUrl(Astro.url); const t = getTranslations(currentLang);`. Create a helper or use Astro's built-in context to reduce boilerplate across all components.",
+  "id": "feature-1766568048531-00l1o37yb",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 2,
+  "branchName": "main",
+  "startedAt": "2025-12-24T09:20:51.263Z",
+  "updatedAt": "2025-12-24T09:25:59.758Z",
+  "justFinishedAt": "2025-12-24T09:25:59.758Z"
+}

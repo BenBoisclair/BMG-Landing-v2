@@ -1,8 +1,7 @@
 ---
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import { useI18n } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+const { t } = useI18n(Astro.url);
 const currentYear = new Date().getFullYear();
 ---
 

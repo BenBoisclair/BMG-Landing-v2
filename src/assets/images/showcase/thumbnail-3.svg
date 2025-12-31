@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <pattern id="granite2" patternUnits="userSpaceOnUse" width="25" height="25">
+      <rect width="25" height="25" fill="#78716c"/>
+      <circle cx="6" cy="6" r="2.5" fill="#a8a29e" opacity="0.5"/>
+      <circle cx="18" cy="10" r="2" fill="#57534e" opacity="0.6"/>
+      <circle cx="10" cy="20" r="1.5" fill="#d6d3d1" opacity="0.4"/>
+      <circle cx="22" cy="22" r="1" fill="#44403c" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" fill="url(#granite2)"/>
+  <rect width="200" height="200" fill="#44403c" opacity="0.2"/>
+</svg>

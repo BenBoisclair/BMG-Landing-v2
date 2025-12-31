@@ -1,10 +1,9 @@
 ---
 import StatItem from '../ui/StatItem.astro';
 import InteractiveMap from '../ui/InteractiveMap.astro';
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import { useI18n } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+const { t } = useI18n(Astro.url);
 
 const stats = [
   { value: '24', label: t.trustedCultures.stats.countriesDelivered },
@@ -16,7 +15,7 @@ const stats = [
 <section id="delivery" class="py-16 lg:py-24 bg-bmg-light">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16" style="color: #2C266C;">
+    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-brand-primary">
       {t.trustedCultures.title}
     </h2>
 

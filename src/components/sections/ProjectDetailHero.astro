@@ -1,0 +1,58 @@
+---
+import { useI18n, getLocalizedPath } from '../../i18n/utils';
+
+interface Props {
+  heroImage: string;
+  projectName: string;
+}
+
+const { heroImage, projectName } = Astro.props;
+const { t, lang } = useI18n(Astro.url);
+const backPath = getLocalizedPath(lang, '/projects');
+---
+
+<section class="relative h-[200px] pt-20 lg:pt-24">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/images/Product/7b7fd75f2e187f580cfdc947187b80e2a1b9669f.png"
+      alt={projectName}
+      class="w-full h-full object-cover"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+</section>
+
+<!-- Back Button and Project Title -->
+<div class="bg-white py-8 lg:py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Back Button -->
+    <a
+      href={backPath}
+      class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-lg shadow-sm hover:bg-brand-primary/90 transition-colors mb-6"
+    >
+      <span class="rotate-180 text-lg">→</span>
+      <span class="font-medium">{t.projectDetail.back}</span>
+    </a>
+
+    <!-- Project Name -->
+    <h1 class="text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight">
+      {projectName}
+    </h1>
+  </div>
+</div>
+
+<!-- Hero Image -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="w-full rounded-[29px] overflow-hidden">
+    <img
+      src={heroImage}
+      alt={projectName}
+      class="w-full h-auto max-h-[780px] object-cover"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+</div>

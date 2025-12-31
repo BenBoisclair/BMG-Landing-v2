@@ -1,0 +1,205 @@
+---
+/**
+ * FormField - A unified form field component that combines FormInput, FormSelect, and FormPhoneInput
+ * with consistent validation, error handling, and styling.
+ *
+ * Usage:
+ *   <FormField type="text" label="Name" name="name" required />
+ *   <FormField type="email" label="Email" name="email" required />
+ *   <FormField type="phone" label="Phone" name="phone" required />
+ *   <FormField type="select" label="Country" name="country" options={countries} />
+ *   <FormField type="textarea" label="Message" name="message" rows={4} />
+ */
+
+interface Props {
+  /** Field type - determines the input element and validation */
+  type: 'text' | 'email' | 'tel' | 'phone' | 'textarea' | 'url' | 'select';
+  /** Field label text */
+  label: string;
+  /** Field name attribute */
+  name: string;
+  /** Placeholder text (defaults to label if not provided) */
+  placeholder?: string;
+  /** Whether the field is required */
+  required?: boolean;
+  /** Number of rows for textarea */
+  rows?: number;
+  /** Maximum character length */
+  maxLength?: number;
+  /** HTML pattern attribute for validation */
+  pattern?: string;
+  /** Validation type override (email, phone, url, name, text) */
+  validationType?: 'email' | 'phone' | 'url' | 'name' | 'text' | 'select';
+  /** Options for select type */
+  options?: string[] | { value: string; label: string }[];
+  /** Select placeholder text */
+  selectPlaceholder?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  type,
+  label,
+  name,
+  placeholder = '',
+  required = false,
+  rows = 4,
+  maxLength,
+  pattern,
+  validationType,
+  options = [],
+  selectPlaceholder = 'Please Select...',
+  class: className = '',
+} = Astro.props;
+
+// Determine validation type based on input type or explicit validationType
+const getValidationType = () => {
+  if (validationType) return validationType;
+  if (type === 'email') return 'email';
+  if (type === 'tel' || type === 'phone') return 'phone';
+  if (type === 'url') return 'url';
+  if (type === 'select') return 'select';
+  return 'text';
+};
+
+// Check if type is phone (with country code selector)
+const isPhoneWithCountry = type === 'phone';
+const isSelect = type === 'select';
+const isTextarea = type === 'textarea';
+
+// Common country codes for phone input
+const countryCodes = [
+  { code: '+66', country: 'Thailand' },
+  { code: '+1', country: 'USA/Canada' },
+  { code: '+44', country: 'UK' },
+  { code: '+86', country: 'China' },
+  { code: '+91', country: 'India' },
+  { code: '+81', country: 'Japan' },
+  { code: '+82', country: 'South Korea' },
+  { code: '+65', country: 'Singapore' },
+  { code: '+971', country: 'UAE' },
+  { code: '+966', country: 'Saudi Arabia' },
+  { code: '+61', country: 'Australia' },
+  { code: '+49', country: 'Germany' },
+  { code: '+33', country: 'France' },
+];
+
+// Normalize options to { value, label } format
+const normalizedOptions = options.map(opt =>
+  typeof opt === 'string' ? { value: opt, label: opt } : opt
+);
+
+// Shared styles
+const baseInputClasses = 'w-full px-3 rounded-md border border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+const inputClasses = `${baseInputClasses} h-[50px] flex flex-col justify-center items-start gap-3`;
+const textareaClasses = `${baseInputClasses} py-3 flex flex-col justify-start items-start gap-3`;
+const selectClasses = `${inputClasses} appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1.5em_1.5em] bg-[right_0.5rem_center] bg-no-repeat pr-10`;
+const phoneSelectClasses = 'h-[50px] px-3 border-r border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1em_1em] bg-[right_0.25rem_center] bg-no-repeat pr-6';
+const phoneInputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
+---
+
+<div
+  class:list={['form-field space-y-2', className]}
+  data-form-field
+  data-field-name={name}
+  data-validation-type={getValidationType()}
+  data-required={required.toString()}
+>
+  <label for={name} class="block text-sm font-medium text-gray-900">
+    {label}
+    {required && <span class="text-red-500">*</span>}
+  </label>
+
+  {isPhoneWithCountry ? (
+    <!-- Phone input with country code selector -->
+    <div class="flex rounded-md border border-border bg-white overflow-hidden" data-phone-wrapper>
+      <select
+        id={`${name}-country`}
+        name={`${name}-country`}
+        class={phoneSelectClasses}
+        aria-label="Country code"
+        data-country-select
+      >
+        {countryCodes.map(({ code, country }) => (
+          <option value={code} title={country}>{code}</option>
+        ))}
+      </select>
+      <input
+        type="tel"
+        id={name}
+        name={name}
+        placeholder={placeholder || label}
+        required={required}
+        class={phoneInputClasses}
+        inputmode="tel"
+        autocomplete="tel"
+        data-input
+      />
+    </div>
+  ) : isSelect ? (
+    <!-- Select dropdown -->
+    <select
+      id={name}
+      name={name}
+      required={required}
+      class={selectClasses}
+      data-input
+    >
+      <option value="" disabled selected>{selectPlaceholder}</option>
+      {normalizedOptions.map((opt) => (
+        <option value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  ) : isTextarea ? (
+    <!-- Textarea -->
+    <textarea
+      id={name}
+      name={name}
+      rows={rows}
+      placeholder={placeholder || label}
+      required={required}
+      maxlength={maxLength}
+      class={textareaClasses}
+      data-input
+    />
+  ) : (
+    <!-- Standard input (text, email, tel, url) -->
+    <input
+      type={type === 'phone' ? 'tel' : type}
+      id={name}
+      name={name}
+      placeholder={placeholder || label}
+      required={required}
+      maxlength={maxLength}
+      pattern={pattern}
+      class={inputClasses}
+      data-input
+    />
+  )}
+
+  <p class="form-field__error text-xs text-red-500 mt-1 hidden" data-error-message aria-live="polite"></p>
+</div>
+
+<style>
+  /* Error state styling */
+  .form-field.has-error [data-input],
+  .form-field.has-error [data-phone-wrapper] {
+    border-color: #ef4444;
+  }
+
+  .form-field.has-error [data-input]:focus,
+  .form-field.has-error [data-country-select]:focus {
+    --tw-ring-color: #ef4444;
+  }
+
+  .form-field.has-error .form-field__error {
+    display: block;
+  }
+
+  /* Valid state styling */
+  .form-field.is-valid [data-input],
+  .form-field.is-valid [data-phone-wrapper] {
+    border-color: #22c55e;
+  }
+</style>

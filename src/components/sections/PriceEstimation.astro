@@ -1,27 +1,26 @@
 ---
-import { getLangFromUrl, getTranslations } from '../../i18n/utils';
+import { useI18n } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const t = getTranslations(currentLang);
+const { t } = useI18n(Astro.url);
 ---
 
 <section class="py-16 lg:py-24 bg-white" id="price-estimation">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-8" style="color: #2C266C;">
+    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-8 text-brand-primary">
       {t.priceEstimation.title}
     </h2>
 
     <!-- Tab Container -->
     <div class="w-full">
       <!-- Tab Buttons -->
-      <div class="flex rounded-lg overflow-hidden border-2 border-[#2d2d5a]" role="tablist" aria-label="Price estimation calculator type">
+      <div class="flex rounded-lg overflow-hidden border-2 border-brand-dark" role="tablist" aria-label="Price estimation calculator type">
         <button
           id="bust-tab"
           role="tab"
           aria-selected="false"
           aria-controls="bust-panel"
-          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-[#6b6b9d] hover:bg-[#5a5a8a] transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-[#2d2d5a] focus:ring-offset-2"
+          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-brand-medium hover:bg-brand-medium-hover transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2"
           data-tab="bust"
         >
           {t.priceEstimation.bust.tab}
@@ -31,7 +30,7 @@ const t = getTranslations(currentLang);
           role="tab"
           aria-selected="false"
           aria-controls="relief-panel"
-          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-[#6b6b9d] hover:bg-[#5a5a8a] transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-[#2d2d5a] focus:ring-offset-2"
+          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-brand-medium hover:bg-brand-medium-hover transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2"
           data-tab="relief"
         >
           {t.priceEstimation.relief.tab}
@@ -46,25 +45,25 @@ const t = getTranslations(currentLang);
         aria-labelledby="bust-tab"
         class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200 hidden"
       >
-        <h3 class="text-xl font-semibold text-[#2d2d5a] mb-4">{t.priceEstimation.bust.title}</h3>
+        <h3 class="text-xl font-semibold text-brand-dark mb-4">{t.priceEstimation.bust.title}</h3>
 
         <!-- Size Selection -->
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.bust.selectSize}</label>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button class="bust-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="small" data-price="2500">
+            <button class="bust-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="small" data-price="2500">
               <span class="block font-semibold">{t.priceEstimation.bust.sizes.small.label}</span>
               <span class="block text-sm">{t.priceEstimation.bust.sizes.small.description}</span>
             </button>
-            <button class="bust-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="medium" data-price="4500">
+            <button class="bust-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="medium" data-price="4500">
               <span class="block font-semibold">{t.priceEstimation.bust.sizes.medium.label}</span>
               <span class="block text-sm">{t.priceEstimation.bust.sizes.medium.description}</span>
             </button>
-            <button class="bust-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="large" data-price="7500">
+            <button class="bust-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="large" data-price="7500">
               <span class="block font-semibold">{t.priceEstimation.bust.sizes.large.label}</span>
               <span class="block text-sm">{t.priceEstimation.bust.sizes.large.description}</span>
             </button>
-            <button class="bust-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="lifesize" data-price="12000">
+            <button class="bust-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="lifesize" data-price="12000">
               <span class="block font-semibold">{t.priceEstimation.bust.sizes.lifesize.label}</span>
               <span class="block text-sm">{t.priceEstimation.bust.sizes.lifesize.description}</span>
             </button>
@@ -75,13 +74,13 @@ const t = getTranslations(currentLang);
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.bust.selectMaterial}</label>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <button class="bust-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="bronze" data-multiplier="1">
+            <button class="bust-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="bronze" data-multiplier="1">
               <span class="block font-semibold">{t.priceEstimation.bust.materials.bronze}</span>
             </button>
-            <button class="bust-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="marble" data-multiplier="1.3">
+            <button class="bust-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="marble" data-multiplier="1.3">
               <span class="block font-semibold">{t.priceEstimation.bust.materials.marble}</span>
             </button>
-            <button class="bust-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="resin" data-multiplier="0.6">
+            <button class="bust-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="resin" data-multiplier="0.6">
               <span class="block font-semibold">{t.priceEstimation.bust.materials.resin}</span>
             </button>
           </div>
@@ -91,20 +90,20 @@ const t = getTranslations(currentLang);
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.bust.detailLevel}</label>
           <div class="grid grid-cols-3 gap-3">
-            <button class="bust-detail-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-detail="standard" data-addition="0">
+            <button class="bust-detail-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-detail="standard" data-addition="0">
               <span class="block font-semibold">{t.priceEstimation.bust.details.standard}</span>
             </button>
-            <button class="bust-detail-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-detail="detailed" data-addition="1500">
+            <button class="bust-detail-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-detail="detailed" data-addition="1500">
               <span class="block font-semibold">{t.priceEstimation.bust.details.detailed}</span>
             </button>
-            <button class="bust-detail-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-detail="premium" data-addition="3500">
+            <button class="bust-detail-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-detail="premium" data-addition="3500">
               <span class="block font-semibold">{t.priceEstimation.bust.details.premium}</span>
             </button>
           </div>
         </div>
 
         <!-- Estimated Price Display -->
-        <div class="mt-8 p-4 bg-[#2d2d5a] rounded-lg text-center">
+        <div class="mt-8 p-4 bg-brand-dark rounded-lg text-center">
           <p class="text-white text-sm mb-1">{t.priceEstimation.estimatedPrice}</p>
           <p id="bust-price" class="text-3xl font-bold text-white" data-select-options={t.priceEstimation.selectOptions} data-select-all={t.priceEstimation.selectAllOptions}>{t.priceEstimation.selectOptions}</p>
           <p class="text-white/70 text-xs mt-2">{t.priceEstimation.priceDisclaimer}</p>
@@ -125,25 +124,25 @@ const t = getTranslations(currentLang);
         aria-labelledby="relief-tab"
         class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200 hidden"
       >
-        <h3 class="text-xl font-semibold text-[#2d2d5a] mb-4">{t.priceEstimation.relief.title}</h3>
+        <h3 class="text-xl font-semibold text-brand-dark mb-4">{t.priceEstimation.relief.title}</h3>
 
         <!-- Size Selection -->
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.relief.selectSize}</label>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button class="relief-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="small" data-price="1800">
+            <button class="relief-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="small" data-price="1800">
               <span class="block font-semibold">{t.priceEstimation.relief.sizes.small.label}</span>
               <span class="block text-sm">{t.priceEstimation.relief.sizes.small.description}</span>
             </button>
-            <button class="relief-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="medium" data-price="3500">
+            <button class="relief-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="medium" data-price="3500">
               <span class="block font-semibold">{t.priceEstimation.relief.sizes.medium.label}</span>
               <span class="block text-sm">{t.priceEstimation.relief.sizes.medium.description}</span>
             </button>
-            <button class="relief-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="large" data-price="6000">
+            <button class="relief-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="large" data-price="6000">
               <span class="block font-semibold">{t.priceEstimation.relief.sizes.large.label}</span>
               <span class="block text-sm">{t.priceEstimation.relief.sizes.large.description}</span>
             </button>
-            <button class="relief-size-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-size="mural" data-price="10000">
+            <button class="relief-size-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-size="mural" data-price="10000">
               <span class="block font-semibold">{t.priceEstimation.relief.sizes.mural.label}</span>
               <span class="block text-sm">{t.priceEstimation.relief.sizes.mural.description}</span>
             </button>
@@ -154,15 +153,15 @@ const t = getTranslations(currentLang);
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.relief.reliefType}</label>
           <div class="grid grid-cols-3 gap-3">
-            <button class="relief-type-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-type="bas" data-multiplier="1">
+            <button class="relief-type-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-type="bas" data-multiplier="1">
               <span class="block font-semibold">{t.priceEstimation.relief.types.bas.label}</span>
               <span class="block text-xs">{t.priceEstimation.relief.types.bas.description}</span>
             </button>
-            <button class="relief-type-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-type="mezzo" data-multiplier="1.25">
+            <button class="relief-type-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-type="mezzo" data-multiplier="1.25">
               <span class="block font-semibold">{t.priceEstimation.relief.types.mezzo.label}</span>
               <span class="block text-xs">{t.priceEstimation.relief.types.mezzo.description}</span>
             </button>
-            <button class="relief-type-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-type="alto" data-multiplier="1.5">
+            <button class="relief-type-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-type="alto" data-multiplier="1.5">
               <span class="block font-semibold">{t.priceEstimation.relief.types.alto.label}</span>
               <span class="block text-xs">{t.priceEstimation.relief.types.alto.description}</span>
             </button>
@@ -173,20 +172,20 @@ const t = getTranslations(currentLang);
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.relief.selectMaterial}</label>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <button class="relief-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="bronze" data-addition="800">
+            <button class="relief-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="bronze" data-addition="800">
               <span class="block font-semibold">{t.priceEstimation.relief.materials.bronze}</span>
             </button>
-            <button class="relief-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="plaster" data-addition="0">
+            <button class="relief-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="plaster" data-addition="0">
               <span class="block font-semibold">{t.priceEstimation.relief.materials.plaster}</span>
             </button>
-            <button class="relief-material-btn px-4 py-3 border-2 border-[#2d2d5a] rounded-lg text-[#2d2d5a] hover:bg-[#2d2d5a] hover:text-white transition-colors" data-material="stone" data-addition="1200">
+            <button class="relief-material-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-material="stone" data-addition="1200">
               <span class="block font-semibold">{t.priceEstimation.relief.materials.stone}</span>
             </button>
           </div>
         </div>
 
         <!-- Estimated Price Display -->
-        <div class="mt-8 p-4 bg-[#2d2d5a] rounded-lg text-center">
+        <div class="mt-8 p-4 bg-brand-dark rounded-lg text-center">
           <p class="text-white text-sm mb-1">{t.priceEstimation.estimatedPrice}</p>
           <p id="relief-price" class="text-3xl font-bold text-white" data-select-options={t.priceEstimation.selectOptions} data-select-all={t.priceEstimation.selectAllOptions}>{t.priceEstimation.selectOptions}</p>
           <p class="text-white/70 text-xs mt-2">{t.priceEstimation.priceDisclaimer}</p>
@@ -214,12 +213,12 @@ const t = getTranslations(currentLang);
     function switchTab(activeTab: string) {
       if (activeTab === 'bust') {
         // Update tab styles
-        bustTab?.classList.remove('bg-[#6b6b9d]', 'hover:bg-[#5a5a8a]');
-        bustTab?.classList.add('bg-[#2d2d5a]');
+        bustTab?.classList.remove('bg-brand-medium', 'hover:bg-brand-medium-hover');
+        bustTab?.classList.add('bg-brand-dark');
         bustTab?.setAttribute('aria-selected', 'true');
 
-        reliefTab?.classList.remove('bg-[#2d2d5a]');
-        reliefTab?.classList.add('bg-[#6b6b9d]', 'hover:bg-[#5a5a8a]');
+        reliefTab?.classList.remove('bg-brand-dark');
+        reliefTab?.classList.add('bg-brand-medium', 'hover:bg-brand-medium-hover');
         reliefTab?.setAttribute('aria-selected', 'false');
 
         // Show/hide panels
@@ -227,12 +226,12 @@ const t = getTranslations(currentLang);
         reliefPanel?.classList.add('hidden');
       } else {
         // Update tab styles
-        reliefTab?.classList.remove('bg-[#6b6b9d]', 'hover:bg-[#5a5a8a]');
-        reliefTab?.classList.add('bg-[#2d2d5a]');
+        reliefTab?.classList.remove('bg-brand-medium', 'hover:bg-brand-medium-hover');
+        reliefTab?.classList.add('bg-brand-dark');
         reliefTab?.setAttribute('aria-selected', 'true');
 
-        bustTab?.classList.remove('bg-[#2d2d5a]');
-        bustTab?.classList.add('bg-[#6b6b9d]', 'hover:bg-[#5a5a8a]');
+        bustTab?.classList.remove('bg-brand-dark');
+        bustTab?.classList.add('bg-brand-medium', 'hover:bg-brand-medium-hover');
         bustTab?.setAttribute('aria-selected', 'false');
 
         // Show/hide panels
@@ -262,14 +261,14 @@ const t = getTranslations(currentLang);
         btn.addEventListener('click', (e) => {
           // Remove selected state from siblings
           document.querySelectorAll(selector).forEach(b => {
-            b.classList.remove('bg-[#2d2d5a]', 'text-white');
-            b.classList.add('text-[#2d2d5a]');
+            b.classList.remove('bg-brand-dark', 'text-white');
+            b.classList.add('text-brand-dark');
           });
 
           // Add selected state to clicked button
           const target = e.currentTarget as HTMLElement;
-          target.classList.add('bg-[#2d2d5a]', 'text-white');
-          target.classList.remove('text-[#2d2d5a]');
+          target.classList.add('bg-brand-dark', 'text-white');
+          target.classList.remove('text-brand-dark');
 
           callback(target);
         });

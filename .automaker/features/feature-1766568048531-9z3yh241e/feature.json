@@ -1,0 +1,13 @@
+{
+  "category": "Performance & Maintainability",
+  "description": "Move Header.astro's inline script (~100 lines) into a separate JavaScript module. Extract reusable dropdown logic into utilities and decouple event handling from HTML markup. This follows Astro best practices for larger scripts and makes code more testable and reusable.",
+  "id": "feature-1766568048531-9z3yh241e",
+  "steps": [],
+  "status": "waiting_approval",
+  "skipTests": true,
+  "priority": 1,
+  "branchName": "main",
+  "startedAt": "2025-12-24T09:20:50.906Z",
+  "updatedAt": "2025-12-24T09:24:23.192Z",
+  "justFinishedAt": "2025-12-24T09:24:23.192Z"
+}

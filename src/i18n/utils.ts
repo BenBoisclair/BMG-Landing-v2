@@ -78,3 +78,38 @@ export function isRTL(lang: Language): boolean {
 export function getTextDirection(lang: Language): 'rtl' | 'ltr' {
   return isRTL(lang) ? 'rtl' : 'ltr';
 }
+
+/**
+ * Return type for the useI18n helper
+ */
+export interface I18nContext {
+  lang: Language;
+  t: Translations;
+  dir: 'rtl' | 'ltr';
+  isRTL: boolean;
+}
+
+/**
+ * Combined i18n helper that extracts language from URL and returns all i18n context.
+ * Use this to reduce boilerplate in Astro components.
+ *
+ * @example
+ * // Before (2 lines):
+ * const currentLang = getLangFromUrl(Astro.url);
+ * const t = getTranslations(currentLang);
+ *
+ * // After (1 line):
+ * const { lang, t, dir, isRTL } = useI18n(Astro.url);
+ *
+ * @param url - The URL object from Astro.url
+ * @returns Object containing lang, translations (t), text direction (dir), and isRTL boolean
+ */
+export function useI18n(url: URL): I18nContext {
+  const lang = getLangFromUrl(url);
+  return {
+    lang,
+    t: getTranslations(lang),
+    dir: getTextDirection(lang),
+    isRTL: isRTL(lang),
+  };
+}
