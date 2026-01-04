@@ -72,57 +72,38 @@
   },
   "priceEstimation": {
     "title": "ประมาณการราคา",
+    "stoneGrade": "เลือกเกรดหิน",
+    "dimensions": "กรอกขนาด",
+    "length": "ความยาว",
+    "width": "ความกว้าง",
+    "height": "ความสูง",
+    "volume": "ปริมาตร",
+    "selectGrade": "เลือกเกรดหิน",
+    "enterDimensions": "กรอกขนาด",
+    "grades": {
+      "a": { "label": "เกรด A", "description": "หินคลาสสิก" },
+      "aa": { "label": "เกรด AA", "description": "หินหรูหรา" },
+      "aaPlus": { "label": "เกรด AA+", "description": "หินกึ่งมีค่า" }
+    },
     "bust": {
       "tab": "รูปปั้นครึ่งตัว",
       "title": "เครื่องคำนวณราคารูปปั้นครึ่งตัว",
-      "selectSize": "เลือกขนาด",
-      "selectMaterial": "เลือกวัสดุ",
-      "detailLevel": "ระดับรายละเอียด",
-      "sizes": {
-        "small": { "label": "เล็ก", "description": "ความสูง 12 นิ้ว" },
-        "medium": { "label": "กลาง", "description": "ความสูง 18 นิ้ว" },
-        "large": { "label": "ใหญ่", "description": "ความสูง 24 นิ้ว" },
-        "lifesize": { "label": "ขนาดเท่าจริง", "description": "ความสูง 30 นิ้วขึ้นไป" }
-      },
-      "materials": {
-        "bronze": "บรอนซ์",
-        "marble": "หินอ่อน",
-        "resin": "เรซิน"
-      },
-      "details": {
-        "standard": "มาตรฐาน",
-        "detailed": "มีรายละเอียด",
-        "premium": "พรีเมียม"
-      }
+      "maxDimensions": "สูงสุด: 50 × 50 × 50 ซม."
     },
     "relief": {
       "tab": "ภาพนูน",
       "title": "เครื่องคำนวณราคาภาพนูน",
-      "selectSize": "เลือกขนาด (มิติ)",
-      "reliefType": "ประเภทภาพนูน",
-      "selectMaterial": "เลือกวัสดุ",
-      "sizes": {
-        "small": { "label": "เล็ก", "description": "12\" x 16\"" },
-        "medium": { "label": "กลาง", "description": "18\" x 24\"" },
-        "large": { "label": "ใหญ่", "description": "24\" x 36\"" },
-        "mural": { "label": "จิตรกรรมฝาผนัง", "description": "36 นิ้วขึ้นไป กำหนดเอง" }
-      },
-      "types": {
-        "bas": { "label": "ภาพนูนต่ำ", "description": "ความนูนต่ำ" },
-        "mezzo": { "label": "ภาพนูนกลาง", "description": "ความนูนปานกลาง" },
-        "alto": { "label": "ภาพนูนสูง", "description": "ความนูนสูง" }
-      },
-      "materials": {
-        "bronze": "บรอนซ์",
-        "plaster": "ปูนปลาสเตอร์",
-        "stone": "หิน"
-      }
+      "maxDimensions": "สูงสุด: 50 × 50 × 30 ซม."
     },
     "estimatedPrice": "ราคาประมาณการ",
     "selectOptions": "เลือกตัวเลือกด้านบน",
     "selectAllOptions": "เลือกตัวเลือกทั้งหมด",
     "priceDisclaimer": "*ราคาสุดท้ายอาจแตกต่างกันตามความต้องการเฉพาะ",
-    "getCustomQuote": "รับใบเสนอราคาแบบกำหนดเอง"
+    "getCustomQuote": "รับใบเสนอราคาแบบกำหนดเอง",
+    "validation": {
+      "minValue": "ค่าต้องมากกว่า 0",
+      "maxExceeded": "สูงสุด {max} ซม."
+    }
   },
   "trustedCultures": {
     "title": "ได้รับความไว้วางใจจากหลากหลายวัฒนธรรม",

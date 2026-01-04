@@ -72,57 +72,38 @@
   },
   "priceEstimation": {
     "title": "Price Estimation",
+    "stoneGrade": "Select Stone Grade",
+    "dimensions": "Enter Dimensions",
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "volume": "Volume",
+    "selectGrade": "Select a stone grade",
+    "enterDimensions": "Enter dimensions",
+    "grades": {
+      "a": { "label": "Grade A", "description": "Classic Stone" },
+      "aa": { "label": "Grade AA", "description": "Luxury Stone" },
+      "aaPlus": { "label": "Grade AA+", "description": "Semi-Precious Stone" }
+    },
     "bust": {
       "tab": "Bust",
       "title": "Bust Price Calculator",
-      "selectSize": "Select Size",
-      "selectMaterial": "Select Material",
-      "detailLevel": "Detail Level",
-      "sizes": {
-        "small": { "label": "Small", "description": "12\" height" },
-        "medium": { "label": "Medium", "description": "18\" height" },
-        "large": { "label": "Large", "description": "24\" height" },
-        "lifesize": { "label": "Life Size", "description": "30\"+ height" }
-      },
-      "materials": {
-        "bronze": "Bronze",
-        "marble": "Marble",
-        "resin": "Resin"
-      },
-      "details": {
-        "standard": "Standard",
-        "detailed": "Detailed",
-        "premium": "Premium"
-      }
+      "maxDimensions": "Max: 50 × 50 × 50 cm"
     },
     "relief": {
       "tab": "Relief",
       "title": "Relief Price Calculator",
-      "selectSize": "Select Size (dimensions)",
-      "reliefType": "Relief Type",
-      "selectMaterial": "Select Material",
-      "sizes": {
-        "small": { "label": "Small", "description": "12\" x 16\"" },
-        "medium": { "label": "Medium", "description": "18\" x 24\"" },
-        "large": { "label": "Large", "description": "24\" x 36\"" },
-        "mural": { "label": "Mural", "description": "36\"+ custom" }
-      },
-      "types": {
-        "bas": { "label": "Bas Relief", "description": "Low projection" },
-        "mezzo": { "label": "Mezzo Relief", "description": "Medium projection" },
-        "alto": { "label": "Alto Relief", "description": "High projection" }
-      },
-      "materials": {
-        "bronze": "Bronze",
-        "plaster": "Plaster",
-        "stone": "Stone"
-      }
+      "maxDimensions": "Max: 50 × 50 × 30 cm"
     },
     "estimatedPrice": "Estimated Price",
     "selectOptions": "Select options above",
     "selectAllOptions": "Select all options",
     "priceDisclaimer": "*Final price may vary based on specific requirements",
-    "getCustomQuote": "Get Custom Quote"
+    "getCustomQuote": "Get Custom Quote",
+    "validation": {
+      "minValue": "Value must be greater than 0",
+      "maxExceeded": "Maximum is {max} cm"
+    }
   },
   "trustedCultures": {
     "title": "Trusted Across Cultures",

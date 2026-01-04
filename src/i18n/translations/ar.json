@@ -72,57 +72,38 @@
   },
   "priceEstimation": {
     "title": "تقدير السعر",
+    "stoneGrade": "اختر درجة الحجر",
+    "dimensions": "أدخل الأبعاد",
+    "length": "الطول",
+    "width": "العرض",
+    "height": "الارتفاع",
+    "volume": "الحجم",
+    "selectGrade": "اختر درجة الحجر",
+    "enterDimensions": "أدخل الأبعاد",
+    "grades": {
+      "a": { "label": "الدرجة A", "description": "حجر كلاسيكي" },
+      "aa": { "label": "الدرجة AA", "description": "حجر فاخر" },
+      "aaPlus": { "label": "الدرجة AA+", "description": "حجر شبه كريم" }
+    },
     "bust": {
       "tab": "تمثال نصفي",
       "title": "حاسبة أسعار التمثال النصفي",
-      "selectSize": "اختر الحجم",
-      "selectMaterial": "اختر المادة",
-      "detailLevel": "مستوى التفاصيل",
-      "sizes": {
-        "small": { "label": "صغير", "description": "ارتفاع 12 بوصة" },
-        "medium": { "label": "متوسط", "description": "ارتفاع 18 بوصة" },
-        "large": { "label": "كبير", "description": "ارتفاع 24 بوصة" },
-        "lifesize": { "label": "حجم طبيعي", "description": "ارتفاع 30 بوصة أو أكثر" }
-      },
-      "materials": {
-        "bronze": "برونز",
-        "marble": "رخام",
-        "resin": "راتنج"
-      },
-      "details": {
-        "standard": "قياسي",
-        "detailed": "مفصل",
-        "premium": "فاخر"
-      }
+      "maxDimensions": "الحد الأقصى: 50 × 50 × 50 سم"
     },
     "relief": {
       "tab": "نقش بارز",
       "title": "حاسبة أسعار النقش البارز",
-      "selectSize": "اختر الحجم (الأبعاد)",
-      "reliefType": "نوع النقش البارز",
-      "selectMaterial": "اختر المادة",
-      "sizes": {
-        "small": { "label": "صغير", "description": "12\" × 16\"" },
-        "medium": { "label": "متوسط", "description": "18\" × 24\"" },
-        "large": { "label": "كبير", "description": "24\" × 36\"" },
-        "mural": { "label": "جدارية", "description": "36 بوصة أو أكثر - مخصص" }
-      },
-      "types": {
-        "bas": { "label": "نقش بارز منخفض", "description": "بروز منخفض" },
-        "mezzo": { "label": "نقش بارز متوسط", "description": "بروز متوسط" },
-        "alto": { "label": "نقش بارز عالي", "description": "بروز عالي" }
-      },
-      "materials": {
-        "bronze": "برونز",
-        "plaster": "جص",
-        "stone": "حجر"
-      }
+      "maxDimensions": "الحد الأقصى: 50 × 50 × 30 سم"
     },
     "estimatedPrice": "السعر التقديري",
     "selectOptions": "اختر الخيارات أعلاه",
     "selectAllOptions": "اختر جميع الخيارات",
     "priceDisclaimer": "*قد يختلف السعر النهائي بناءً على المتطلبات المحددة",
-    "getCustomQuote": "احصل على عرض سعر مخصص"
+    "getCustomQuote": "احصل على عرض سعر مخصص",
+    "validation": {
+      "minValue": "القيمة يجب أن تكون أكبر من 0",
+      "maxExceeded": "الحد الأقصى {max} سم"
+    }
   },
   "trustedCultures": {
     "title": "موثوق به عبر الثقافات",

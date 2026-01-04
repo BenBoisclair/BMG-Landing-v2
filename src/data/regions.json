@@ -1,0 +1,149 @@
+{
+  "description": "Region definitions for interactive map hover zones. Coordinates based on SVG viewBox (0 0 1311 672).",
+  "regions": [
+    {
+      "id": "north-america",
+      "name": "North America",
+      "cx": 250,
+      "cy": 200,
+      "r": 70,
+      "project": {
+        "name": "Empire State Plaza",
+        "description": "Premium marble and granite installation for iconic landmark renovation in New York.",
+        "image": "https://picsum.photos/128/128?random=1"
+      }
+    },
+    {
+      "id": "mexico",
+      "name": "Mexico",
+      "cx": 195,
+      "cy": 310,
+      "r": 35,
+      "project": {
+        "name": "Cancun Resort Collection",
+        "description": "Natural stone facades for beachfront luxury hospitality venues.",
+        "image": "https://picsum.photos/128/128?random=2"
+      }
+    },
+    {
+      "id": "south-america",
+      "name": "South America",
+      "cx": 335,
+      "cy": 450,
+      "r": 60,
+      "project": {
+        "name": "Sao Paulo Tower",
+        "description": "Contemporary granite application for South America's tallest residential building.",
+        "image": "https://picsum.photos/128/128?random=3"
+      }
+    },
+    {
+      "id": "uk-ireland",
+      "name": "United Kingdom",
+      "cx": 575,
+      "cy": 170,
+      "r": 30,
+      "project": {
+        "name": "London Heritage Collection",
+        "description": "Restoration-grade limestone for historic preservation projects.",
+        "image": "https://picsum.photos/128/128?random=4"
+      }
+    },
+    {
+      "id": "western-europe",
+      "name": "Western Europe",
+      "cx": 600,
+      "cy": 230,
+      "r": 40,
+      "project": {
+        "name": "Paris Luxury Residences",
+        "description": "Elegant marble finishes for high-end European apartments.",
+        "image": "https://picsum.photos/128/128?random=5"
+      }
+    },
+    {
+      "id": "central-europe",
+      "name": "Central Europe",
+      "cx": 670,
+      "cy": 175,
+      "r": 40,
+      "project": {
+        "name": "Berlin Modern Complex",
+        "description": "Precision-cut stone for contemporary European architecture.",
+        "image": "https://picsum.photos/128/128?random=6"
+      }
+    },
+    {
+      "id": "middle-east",
+      "name": "Middle East",
+      "cx": 765,
+      "cy": 320,
+      "r": 50,
+      "project": {
+        "name": "Dubai Luxury Towers",
+        "description": "Opulent marble and onyx installations for ultra-premium developments.",
+        "image": "https://picsum.photos/128/128?random=7"
+      }
+    },
+    {
+      "id": "africa",
+      "name": "Africa",
+      "cx": 660,
+      "cy": 420,
+      "r": 70,
+      "project": {
+        "name": "Cape Town Luxury Villas",
+        "description": "Natural stone installations for exclusive coastal residences.",
+        "image": "https://picsum.photos/128/128?random=8"
+      }
+    },
+    {
+      "id": "india",
+      "name": "India",
+      "cx": 870,
+      "cy": 330,
+      "r": 50,
+      "project": {
+        "name": "Mumbai Sky Gardens",
+        "description": "Innovative stone landscaping for vertical garden developments.",
+        "image": "https://picsum.photos/128/128?random=9"
+      }
+    },
+    {
+      "id": "east-asia",
+      "name": "East Asia",
+      "cx": 1020,
+      "cy": 250,
+      "r": 70,
+      "project": {
+        "name": "Tokyo Zen Collection",
+        "description": "Minimalist stone designs blending tradition with modernity.",
+        "image": "https://picsum.photos/128/128?random=10"
+      }
+    },
+    {
+      "id": "southeast-asia",
+      "name": "Southeast Asia",
+      "cx": 970,
+      "cy": 400,
+      "r": 40,
+      "project": {
+        "name": "Marina Bay Collection",
+        "description": "Sophisticated stone finishes for Singapore's iconic skyline.",
+        "image": "https://picsum.photos/128/128?random=11"
+      }
+    },
+    {
+      "id": "oceania",
+      "name": "Oceania",
+      "cx": 1100,
+      "cy": 500,
+      "r": 70,
+      "project": {
+        "name": "Sydney Harbor Residences",
+        "description": "Coastal-inspired stone designs for waterfront living.",
+        "image": "https://picsum.photos/128/128?random=12"
+      }
+    }
+  ]
+}

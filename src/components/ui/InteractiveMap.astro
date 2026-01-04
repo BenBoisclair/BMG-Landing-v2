@@ -1,71 +1,94 @@
 ---
 // Interactive World Map Component
-// Displays a hexagonal world map with hoverable country regions
-// The colored hexagons in the SVG are selectable countries
+// Displays a hexagonal world map with hoverable region zones
+// Uses ellipse overlays for reliable hover detection
 
-import countriesData from '../../data/countries.json';
+import regionsData from '../../data/regions.json';
 
-interface Country {
-  id: string;
+interface Project {
   name: string;
-  color: string;
-  x: number;
-  y: number;
-  radius: number;
-  description?: string;
+  description: string;
+  image: string;
 }
 
-const countries: Country[] = countriesData.countries;
-const countriesJson = JSON.stringify(countries);
+interface Region {
+  id: string;
+  name: string;
+  cx: number;
+  cy: number;
+  r: number;
+  project: Project;
+}
+
+const regions: Region[] = regionsData.regions;
 ---
 
 <div class="interactive-map-wrapper">
   <div class="interactive-map-container relative">
     <!-- Map SVG Container -->
     <div id="map-svg-container" class="rounded-2xl overflow-hidden relative">
-      <!-- Static placeholder shown by default, hidden after interactive SVG loads -->
+      <!-- Static map image -->
       <img
-        id="map-placeholder"
+        id="map-image"
         src="/images/Landing/Map.svg"
         alt="World map showing global reach"
-        class="w-full h-auto"
+        class="w-full h-auto block"
       />
-      <!-- Interactive SVG wrapper - positioned over placeholder, starts hidden -->
-      <div id="map-svg-wrapper" class="absolute inset-0 w-full h-full hidden"></div>
     </div>
 
-    <!-- Tooltip -->
+    <!-- Project Tooltip -->
     <div
       id="map-tooltip"
-      class="absolute pointer-events-none bg-white px-4 py-3 rounded-xl shadow-xl opacity-0 transition-all duration-200 z-50 border border-gray-100"
-      style="transform: translate(-50%, -100%); margin-top: -12px;"
+      class="absolute pointer-events-none bg-white p-3 rounded-xl shadow-xl opacity-0 transition-all duration-200 z-50 border border-gray-100 max-w-[300px]"
+      style="transform: translate(-50%, -100%); margin-top: -16px;"
     >
-      <div class="flex items-center gap-2">
-        <span id="tooltip-color-dot" class="w-3 h-3 rounded-full flex-shrink-0"></span>
-        <span id="tooltip-text" class="font-semibold text-sm whitespace-nowrap text-brand-primary"></span>
+      <div class="flex items-start gap-3">
+        <img
+          id="tooltip-image"
+          class="w-16 h-16 rounded-lg object-cover flex-shrink-0 bg-gray-100"
+          alt=""
+        />
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span id="tooltip-region" class="text-xs text-gray-400 truncate"></span>
+          </div>
+          <h4 id="tooltip-project-name" class="font-semibold text-sm text-brand-primary leading-tight mb-1"></h4>
+          <p id="tooltip-description" class="text-xs text-gray-500 line-clamp-2"></p>
+        </div>
       </div>
-      <p id="tooltip-description" class="text-xs text-gray-500 mt-1 whitespace-nowrap"></p>
     </div>
 
-    <!-- Interactive overlay for country regions -->
+    <!-- Region overlay - circle zones for hover detection with visible indicators -->
     <svg
-      id="map-overlay"
+      id="region-overlay"
       class="absolute top-0 left-0 w-full h-full pointer-events-none"
       viewBox="0 0 1311 672"
       preserveAspectRatio="xMidYMid meet"
     >
-      {countries.map((country) => (
-        <circle
-          class="country-region pointer-events-auto cursor-pointer"
-          data-country-id={country.id}
-          data-country-name={country.name}
-          data-country-color={country.color}
-          data-country-description={country.description || ''}
-          cx={country.x}
-          cy={country.y}
-          r={country.radius}
-          fill="transparent"
-        />
+      {regions.map((region) => (
+        <g class="region-group">
+          <!-- Visible indicator dot -->
+          <circle
+            class="region-dot"
+            cx={region.cx}
+            cy={region.cy}
+            r="8"
+            fill="#392DCA"
+          />
+          <!-- Invisible hover zone -->
+          <circle
+            class="region-zone pointer-events-auto cursor-pointer"
+            data-region-id={region.id}
+            data-region-name={region.name}
+            data-project-name={region.project.name}
+            data-project-description={region.project.description}
+            data-project-image={region.project.image}
+            cx={region.cx}
+            cy={region.cy}
+            r={region.r}
+            fill="transparent"
+          />
+        </g>
       ))}
     </svg>
   </div>
@@ -76,235 +99,134 @@ const countriesJson = JSON.stringify(countries);
     position: relative;
   }
 
-  #map-svg-wrapper :global(svg) {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Make colored paths in SVG glow on hover */
-  #map-svg-wrapper :global(path[fill="#392DCA"]),
-  #map-svg-wrapper :global(path[fill="#FF881B"]),
-  #map-svg-wrapper :global(path[fill="#E23A45"]),
-  #map-svg-wrapper :global(path[fill="#ACA7E9"]) {
-    cursor: pointer;
-    transition: filter 0.2s ease, transform 0.2s ease;
-  }
-
-  #map-svg-wrapper :global(path[fill="#392DCA"]:hover),
-  #map-svg-wrapper :global(path[fill="#FF881B"]:hover),
-  #map-svg-wrapper :global(path[fill="#E23A45"]:hover),
-  #map-svg-wrapper :global(path[fill="#ACA7E9"]:hover) {
-    filter: drop-shadow(0 0 6px currentColor) brightness(1.2);
-  }
-
-  /* Subtle pulse animation for colored hexagons */
-  @keyframes subtlePulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
-  }
-
-  #map-svg-wrapper :global(.colored-hex) {
-    animation: subtlePulse 3s ease-in-out infinite;
-  }
-
-  .country-region {
+  /* Visible indicator dots */
+  .region-dot {
     transition: all 0.2s ease;
+    filter: drop-shadow(0 0 4px rgba(57, 45, 202, 0.5));
   }
 
-  .country-region:hover {
-    fill: rgba(255, 255, 255, 0.15);
+  /* Region zone hover styles */
+  .region-zone {
+    transition: fill 0.2s ease;
   }
 
+  .region-zone:hover {
+    fill: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Enlarge dot on hover */
+  .region-zone:hover + .region-dot,
+  .region-group:hover .region-dot {
+    transform-origin: center;
+    r: 12;
+    filter: drop-shadow(0 0 8px rgba(57, 45, 202, 0.8));
+  }
+
+  /* Tooltip styles */
   #map-tooltip {
     backdrop-filter: blur(8px);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  /* Line clamp for description */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Tooltip image loading state */
+  #tooltip-image {
+    transition: opacity 0.2s ease;
+  }
+
+  #tooltip-image[src=""] {
+    opacity: 0;
   }
 </style>
 
-<script define:vars={{ countriesJson }}>
-  // Parse countries data
-  const countries = JSON.parse(countriesJson);
-
-  // Color to country mapping for direct hexagon interactions
-  const colorToCountries = {};
-  countries.forEach(country => {
-    if (!colorToCountries[country.color]) {
-      colorToCountries[country.color] = [];
-    }
-    colorToCountries[country.color].push(country);
-  });
-
-  // Initialize map - run immediately if DOM ready, otherwise wait
-  async function initMap() {
-    const mapWrapper = document.getElementById('map-svg-wrapper');
+<script>
+  // Initialize map interactions
+  function initMap() {
     const tooltip = document.getElementById('map-tooltip');
-    const tooltipText = document.getElementById('tooltip-text');
+    const tooltipImage = document.getElementById('tooltip-image') as HTMLImageElement;
+    const tooltipRegion = document.getElementById('tooltip-region');
+    const tooltipProjectName = document.getElementById('tooltip-project-name');
     const tooltipDescription = document.getElementById('tooltip-description');
-    const tooltipColorDot = document.getElementById('tooltip-color-dot');
-    const placeholder = document.getElementById('map-placeholder');
     const container = document.querySelector('.interactive-map-container');
 
-    if (!mapWrapper || !tooltip || !tooltipText || !container) return;
+    if (!tooltip || !container) return;
 
-    // Helper to show tooltip
-    const showTooltip = (name, color, description, event) => {
-      if (tooltipText) tooltipText.textContent = name;
-      if (tooltipDescription) {
-        tooltipDescription.textContent = description || '';
-        tooltipDescription.style.display = description ? 'block' : 'none';
+    // Show tooltip with project data
+    const showTooltip = (regionName: string, projectData: { name: string; description: string; image: string }, event: MouseEvent) => {
+      if (tooltipRegion) tooltipRegion.textContent = regionName;
+      if (tooltipImage) {
+        tooltipImage.src = projectData.image;
+        tooltipImage.alt = projectData.name;
       }
-      if (tooltipColorDot) tooltipColorDot.style.backgroundColor = color;
+      if (tooltipProjectName) tooltipProjectName.textContent = projectData.name;
+      if (tooltipDescription) tooltipDescription.textContent = projectData.description;
+
       tooltip.style.opacity = '1';
       updateTooltipPosition(event);
     };
 
-    // Helper to hide tooltip
+    // Hide tooltip
     const hideTooltip = () => {
       tooltip.style.opacity = '0';
     };
 
-    // Helper to update tooltip position
-    const updateTooltipPosition = (event) => {
+    // Update tooltip position relative to container
+    const updateTooltipPosition = (event: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
-      tooltip.style.left = `${x}px`;
+
+      // Keep tooltip within bounds
+      const tooltipRect = tooltip.getBoundingClientRect();
+      const maxX = rect.width - tooltipRect.width / 2;
+      const minX = tooltipRect.width / 2;
+
+      const clampedX = Math.max(minX, Math.min(maxX, x));
+
+      tooltip.style.left = `${clampedX}px`;
       tooltip.style.top = `${y}px`;
     };
 
-    // Helper to find nearest country based on coordinates
-    const findNearestCountry = (x, y) => {
-      let nearest = null;
-      let minDistance = Infinity;
+    // Set up hover events for region zones
+    const regionZones = document.querySelectorAll('.region-zone');
 
-      // Get SVG dimensions for scaling
-      const svg = mapWrapper.querySelector('svg');
-      if (!svg) return null;
+    regionZones.forEach((zone) => {
+      zone.addEventListener('mouseenter', (e) => {
+        const regionName = zone.getAttribute('data-region-name') || '';
+        const projectData = {
+          name: zone.getAttribute('data-project-name') || '',
+          description: zone.getAttribute('data-project-description') || '',
+          image: zone.getAttribute('data-project-image') || ''
+        };
 
-      const svgRect = svg.getBoundingClientRect();
-      const scaleX = 1311 / svgRect.width;
-      const scaleY = 672 / svgRect.height;
-
-      const scaledX = x * scaleX;
-      const scaledY = y * scaleY;
-
-      countries.forEach(country => {
-        const distance = Math.sqrt(
-          Math.pow(scaledX - country.x, 2) + Math.pow(scaledY - country.y, 2)
-        );
-        if (distance < country.radius && distance < minDistance) {
-          minDistance = distance;
-          nearest = country;
-        }
+        showTooltip(regionName, projectData, e as MouseEvent);
       });
 
-      return nearest;
-    };
-
-    try {
-      // Fetch and inject SVG
-      const response = await fetch('/images/Landing/Map.svg');
-      const svgText = await response.text();
-      mapWrapper.innerHTML = svgText;
-
-      // Get the injected SVG element
-      const svgElement = mapWrapper.querySelector('svg');
-      if (svgElement) {
-        svgElement.style.width = '100%';
-        svgElement.style.height = 'auto';
-
-        // Find all colored (non-white) hexagon paths and make them interactive
-        const coloredColors = ['#392DCA', '#FF881B', '#E23A45', '#ACA7E9', '#EBECF7'];
-
-        coloredColors.forEach(color => {
-          const paths = svgElement.querySelectorAll(`path[fill="${color}"]`);
-          paths.forEach(path => {
-            path.classList.add('colored-hex');
-
-            // Add hover events to colored hexagons
-            path.addEventListener('mouseenter', (e) => {
-              // Find the nearest country based on hexagon position
-              const bbox = path.getBBox();
-              const centerX = bbox.x + bbox.width / 2;
-              const centerY = bbox.y + bbox.height / 2;
-
-              // Find matching country
-              let matchedCountry = null;
-              let minDist = Infinity;
-
-              countries.forEach(country => {
-                const dist = Math.sqrt(
-                  Math.pow(centerX - country.x, 2) + Math.pow(centerY - country.y, 2)
-                );
-                if (dist < minDist) {
-                  minDist = dist;
-                  matchedCountry = country;
-                }
-              });
-
-              if (matchedCountry && minDist < 100) {
-                showTooltip(matchedCountry.name, matchedCountry.color, matchedCountry.description, e);
-              } else {
-                // Show color category
-                const colorNames = {
-                  '#392DCA': 'Primary Market',
-                  '#FF881B': 'Growing Market',
-                  '#E23A45': 'Emerging Market',
-                  '#ACA7E9': 'Partner Region',
-                  '#EBECF7': 'Coverage Area'
-                };
-                showTooltip(colorNames[color] || 'Active Region', color, '', e);
-              }
-            });
-
-            path.addEventListener('mousemove', updateTooltipPosition);
-            path.addEventListener('mouseleave', hideTooltip);
-          });
-        });
-      }
-
-      // Show interactive wrapper and hide placeholder
-      mapWrapper.classList.remove('hidden');
-      if (placeholder) {
-        placeholder.style.display = 'none';
-      }
-    } catch (error) {
-      console.error('Failed to load map SVG:', error);
-      // Placeholder is already visible as fallback, no action needed
-    }
-
-    // Set up tooltip interactions for country region circles
-    const countryRegions = document.querySelectorAll('.country-region');
-
-    countryRegions.forEach((region) => {
-      region.addEventListener('mouseenter', (e) => {
-        const name = region.getAttribute('data-country-name');
-        const color = region.getAttribute('data-country-color');
-        const description = region.getAttribute('data-country-description');
-        if (name) {
-          showTooltip(name, color || '#392DCA', description || '', e);
-        }
+      zone.addEventListener('mousemove', (e) => {
+        updateTooltipPosition(e as MouseEvent);
       });
 
-      region.addEventListener('mousemove', updateTooltipPosition);
-      region.addEventListener('mouseleave', hideTooltip);
+      zone.addEventListener('mouseleave', () => {
+        hideTooltip();
+      });
 
-      region.addEventListener('click', (e) => {
-        const countryId = region.getAttribute('data-country-id');
-        const countryName = region.getAttribute('data-country-name');
-
-        // Dispatch custom event for potential future use
-        window.dispatchEvent(new CustomEvent('country-selected', {
-          detail: { id: countryId, name: countryName }
-        }));
-
-        console.log(`Selected country: ${countryName}`);
+      // Optional: Click handler for future navigation
+      zone.addEventListener('click', () => {
+        const regionId = zone.getAttribute('data-region-id');
+        const regionName = zone.getAttribute('data-region-name');
+        console.log(`Selected region: ${regionName} (${regionId})`);
       });
     });
   }
 
-  // Run immediately if DOM is ready, otherwise wait for it
+  // Run when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMap);
   } else {
