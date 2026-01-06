@@ -1,7 +1,9 @@
 {
   "nav": {
     "home": "Home",
-    "project": "Project",
+    "products": "Products",
+    "projects": "Projects",
+    "materials": "Materials",
     "process": "Process",
     "globalDelivery": "Global Delivery",
     "about": "About",
@@ -32,6 +34,10 @@
       }
     }
   },
+  "mission": {
+    "title": "our mission",
+    "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam nulla libero urna vitae. Eget elit condimentum amet semper dui. Mauris quam integer mattis turpis auctor est tristique. Aliquam neque id viverra fusce. Ullamcorper tellus nam ut gravida netus leo augue. Duis adipiscing urna lectus a bibendum adipiscing porttitor magna."
+  },
   "process": {
     "title": "The Dream Crafting Process",
     "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam",
@@ -39,34 +45,34 @@
     "learnMore": "Learn more about our process",
     "steps": {
       "1": {
-        "number": "01",
-        "title": "Concept or Existing Mode",
+        "number": "1",
+        "title": "Initial Idea",
+        "titleShort": "Initial Idea",
         "description": "If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together."
       },
       "2": {
-        "number": "02",
-        "title": "Prototype Creation",
-        "description": "Based on the approved direction, we create a clay or 3D printing model. Adjustments are made until the design meets expectations."
+        "number": "2",
+        "title": "3D Modeling",
+        "titleShort": "3D",
+        "description": "Our team creates detailed 3D models from your approved concept, ready for precision manufacturing."
       },
       "3": {
-        "number": "03",
-        "title": "3D Digitalization",
-        "description": "The approved physical prototype is scanned into a detailed 3D model and optimized for CNC carving."
-      },
-      "4": {
-        "number": "04",
+        "number": "3",
         "title": "CNC Carving",
+        "titleShort": "CNC",
         "description": "Advanced CNC machines carve the sculpture with precision, faithfully following the finalized 3D data."
       },
-      "5": {
-        "number": "05",
-        "title": "Hand Detailing & Finishing",
+      "4": {
+        "number": "4",
+        "title": "Hand Finishing",
+        "titleShort": "Hand",
         "description": "Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship."
       },
-      "6": {
-        "number": "06",
+      "5": {
+        "number": "5",
         "title": "Delivery",
-        "description": "The finished piece is carefully packaged and delivered to the customer's specified location."
+        "titleShort": "Delivery",
+        "description": "The finished piece is carefully packaged and delivered to your specified location worldwide."
       }
     }
   },

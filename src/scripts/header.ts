@@ -3,11 +3,12 @@
  * Handles all header-related functionality including:
  * - Mobile menu toggle
  * - Smooth scrolling for anchor links
- * - Language dropdowns (desktop and mobile)
+ * - Products dropdown (hover on desktop, accordion on mobile)
+ * - Language dropdown (desktop)
  * - Header background color change on scroll
  */
 
-import { createDropdown, type DropdownInstance } from './dropdown';
+import { createDropdown, createHoverDropdown, type DropdownInstance } from './dropdown';
 import { throttle } from '../utils/debounce';
 
 // Element IDs - centralized for easy maintenance
@@ -17,10 +18,15 @@ const ELEMENTS = {
   projectHeroSection: 'project-hero',
   mobileMenuButton: 'mobile-menu-button',
   mobileMenu: 'mobile-menu',
+  // Products dropdown (desktop hover)
+  productsDropdown: 'products-dropdown',
+  productsDropdownMenu: 'products-dropdown-menu',
+  // Mobile products accordion
+  mobileProductsButton: 'mobile-products-button',
+  mobileProductsMenu: 'mobile-products-menu',
+  // Language dropdown (desktop only - mobile uses inline flags)
   desktopLangButton: 'language-dropdown-button',
   desktopLangMenu: 'language-dropdown-menu',
-  mobileLangButton: 'mobile-language-dropdown-button',
-  mobileLangMenu: 'mobile-language-dropdown-menu',
 } as const;
 
 // CSS classes for header states
@@ -101,7 +107,46 @@ function initSmoothScrolling(): void {
 }
 
 /**
- * Initializes language dropdown functionality for both desktop and mobile
+ * Initializes the Products dropdown (hover on desktop)
+ */
+function initProductsDropdown(): void {
+  // Desktop Products dropdown with hover behavior
+  const productsDropdown = createHoverDropdown({
+    containerId: ELEMENTS.productsDropdown,
+    menuId: ELEMENTS.productsDropdownMenu,
+    closeDelay: 150,
+  });
+
+  if (productsDropdown) dropdownInstances.push(productsDropdown);
+}
+
+/**
+ * Initializes the mobile Products accordion
+ */
+function initMobileProductsAccordion(): void {
+  const button = document.getElementById(ELEMENTS.mobileProductsButton);
+  const menu = document.getElementById(ELEMENTS.mobileProductsMenu);
+
+  if (!button || !menu) return;
+
+  button.addEventListener('click', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!isExpanded));
+
+    // Toggle menu visibility
+    menu.classList.toggle('hidden');
+
+    // Rotate chevron
+    const svg = button.querySelector('svg');
+    if (svg) {
+      svg.classList.toggle('rotate-180');
+    }
+  });
+}
+
+/**
+ * Initializes language dropdown functionality (desktop only)
+ * Mobile uses inline flag buttons, no dropdown needed
  */
 function initLanguageDropdowns(): void {
   // Desktop language dropdown
@@ -111,16 +156,8 @@ function initLanguageDropdowns(): void {
     closeOnOutsideClick: true,
   });
 
-  // Mobile language dropdown (no outside click close - handled by mobile menu)
-  const mobileDropdown = createDropdown({
-    buttonId: ELEMENTS.mobileLangButton,
-    menuId: ELEMENTS.mobileLangMenu,
-    closeOnOutsideClick: false,
-  });
-
-  // Store instances for potential cleanup
+  // Store instance for potential cleanup
   if (desktopDropdown) dropdownInstances.push(desktopDropdown);
-  if (mobileDropdown) dropdownInstances.push(mobileDropdown);
 }
 
 /**
@@ -180,6 +217,8 @@ function initScrollBehavior(): void {
 export function initHeader(): void {
   initMobileMenu();
   initSmoothScrolling();
+  initProductsDropdown();
+  initMobileProductsAccordion();
   initLanguageDropdowns();
   initScrollBehavior();
 }

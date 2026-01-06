@@ -1,58 +1,59 @@
 ---
-import { Image } from 'astro:assets';
-import Button from '../ui/Button.astro';
-import ProcessStep from '../ui/ProcessStep.astro';
 import { useI18n } from '../../i18n/utils';
 
-// Import local process step icons
-import step01Icon from '../../assets/images/process/step-01.svg';
-import step02Icon from '../../assets/images/process/step-02.svg';
-import step03Icon from '../../assets/images/process/step-03.svg';
-import step04Icon from '../../assets/images/process/step-04.svg';
-import step05Icon from '../../assets/images/process/step-05.svg';
-import step06Icon from '../../assets/images/process/step-06.svg';
-// Import process main image for optimization
-import processImage from '../../../public/images/Landing/ProcessImage.jpg';
+const { t, isRTL } = useI18n(Astro.url);
 
-const { t } = useI18n(Astro.url);
-
+// Step data with placeholder images
 const steps = [
   {
     number: t.process.steps['1'].number,
     title: t.process.steps['1'].title,
+    titleShort: t.process.steps['1'].titleShort,
     description: t.process.steps['1'].description,
-    icon: step01Icon,
+    image: '/images/Landing/ProcessImage.jpg',
   },
   {
     number: t.process.steps['2'].number,
     title: t.process.steps['2'].title,
+    titleShort: t.process.steps['2'].titleShort,
     description: t.process.steps['2'].description,
-    icon: step02Icon,
+    image: '/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png',
   },
   {
     number: t.process.steps['3'].number,
     title: t.process.steps['3'].title,
+    titleShort: t.process.steps['3'].titleShort,
     description: t.process.steps['3'].description,
-    icon: step03Icon,
+    image: '/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png',
   },
   {
     number: t.process.steps['4'].number,
     title: t.process.steps['4'].title,
+    titleShort: t.process.steps['4'].titleShort,
     description: t.process.steps['4'].description,
-    icon: step04Icon,
+    image: '/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png',
   },
   {
     number: t.process.steps['5'].number,
     title: t.process.steps['5'].title,
+    titleShort: t.process.steps['5'].titleShort,
     description: t.process.steps['5'].description,
-    icon: step05Icon,
+    image: '/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png',
   },
-  {
-    number: t.process.steps['6'].number,
-    title: t.process.steps['6'].title,
-    description: t.process.steps['6'].description,
-    icon: step06Icon,
-  },
+];
+
+// Icons for each step (SVG paths)
+const icons = [
+  // Lightbulb - Initial Idea
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.9V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.1A7 7 0 0 0 12 2Z"/></svg>`,
+  // Cube - 3D Modeling
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  // Settings/Cog - CNC
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  // Hand - Hand Finishing
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>`,
+  // Truck - Delivery
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18h2"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>`,
 ];
 ---
 
@@ -63,45 +64,322 @@ const steps = [
       {t.process.title}
     </h2>
 
-    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
-      <!-- Left Column: Main Image + Description -->
-      <div>
-        <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-xl mb-6">
-          <Image
-            src={processImage}
-            alt={t.process.craftingAlt}
-            class="w-full h-full object-cover"
-            widths={[400, 600, 800]}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-            format="webp"
-            quality={80}
+    <!-- Accordion Container -->
+    <div class="accordion-container" dir={isRTL ? 'rtl' : 'ltr'}>
+      {steps.map((step, index) => (
+        <div
+          class:list={['accordion-card', index === 0 && 'expanded']}
+          data-step={index}
+          role="button"
+          tabindex="0"
+          aria-expanded={index === 0 ? 'true' : 'false'}
+        >
+          <!-- Background Image -->
+          <img
+            src={step.image}
+            alt={step.title}
+            class="card-bg"
             loading="lazy"
-            decoding="async"
           />
+
+          <!-- Dark overlay for better text readability -->
+          <div class="card-overlay"></div>
+
+          <!-- Collapsed Content (visible when not expanded) -->
+          <div class="collapsed-content">
+            <span class="step-number">{step.number}</span>
+            <span class="step-title-short">{step.titleShort}</span>
+            <div class="step-icon-container">
+              <div class="step-icon" set:html={icons[index]} />
+            </div>
+          </div>
+
+          <!-- Expanded Content (visible when expanded) -->
+          <div class="expanded-content">
+            <div class="expanded-header">
+              <span class="step-number">{step.number}</span>
+              <span class="step-title">{step.title}</span>
+            </div>
+            <div class="description-panel">
+              <div class="description-icon" set:html={icons[index]} />
+              <p class="description-text">{step.description}</p>
+            </div>
+          </div>
         </div>
-        <p class="text-gray-600 leading-relaxed">
-          {t.process.description}
-        </p>
-      </div>
-
-      <!-- Right Column: Process Steps with Icons -->
-      <div class="space-y-6 lg:space-y-8">
-        {steps.map((step) => (
-          <ProcessStep
-            number={step.number}
-            title={step.title}
-            description={step.description}
-            icon={step.icon}
-          />
-        ))}
-      </div>
-    </div>
-
-    <!-- CTA Button -->
-    <div class="text-center mt-12 lg:mt-16">
-      <Button href="#contact" variant="process">
-        {t.process.learnMore}
-      </Button>
+      ))}
     </div>
   </div>
 </section>
+
+<style>
+  .accordion-container {
+    display: flex;
+    gap: 8px;
+    height: 400px;
+  }
+
+  .accordion-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    flex: 1;
+    transition: flex 300ms ease-in-out;
+    min-width: 0;
+  }
+
+  .accordion-card:focus {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+  }
+
+  .accordion-card.expanded {
+    flex: 4;
+  }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    transition: background 300ms ease-in-out;
+  }
+
+  .accordion-card:not(.expanded) .card-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
+
+  /* Collapsed Content Styles */
+  .collapsed-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem 0.5rem;
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
+    z-index: 10;
+  }
+
+  .expanded .collapsed-content {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .collapsed-content .step-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+  }
+
+  .collapsed-content .step-title-short {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 200px;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  [dir='rtl'] .collapsed-content .step-title-short {
+    writing-mode: vertical-rl;
+    transform: rotate(0deg);
+  }
+
+  .collapsed-content .step-icon-container {
+    margin-top: auto;
+    background: var(--color-brand-primary);
+    border-radius: 8px;
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .collapsed-content .step-icon {
+    color: white;
+    opacity: 0.9;
+  }
+
+  /* Expanded Content Styles */
+  .expanded-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .expanded .expanded-content {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .expanded-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .expanded-header .step-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #e74c3c;
+  }
+
+  .expanded-header .step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .description-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .description-icon {
+    flex-shrink: 0;
+    color: var(--color-brand-primary);
+    opacity: 0.7;
+  }
+
+  .description-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #4a5568;
+    margin: 0;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .accordion-container {
+      height: 350px;
+      gap: 4px;
+    }
+
+    .collapsed-content .step-number {
+      font-size: 1.25rem;
+    }
+
+    .collapsed-content .step-title-short {
+      font-size: 0.75rem;
+    }
+
+    .expanded-header {
+      padding: 1rem;
+    }
+
+    .expanded-header .step-number {
+      font-size: 1.5rem;
+    }
+
+    .expanded-header .step-title {
+      font-size: 1rem;
+    }
+
+    .description-panel {
+      padding: 1rem;
+    }
+
+    .description-text {
+      font-size: 0.75rem;
+    }
+
+    .description-icon {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .accordion-container {
+      height: 300px;
+    }
+
+    .collapsed-content .step-title-short {
+      font-size: 0.65rem;
+      max-height: 150px;
+    }
+
+    .collapsed-content .step-icon-container {
+      transform: scale(0.8);
+      padding: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  function initAccordion() {
+    const cards = document.querySelectorAll('.accordion-card');
+
+    function expandCard(targetCard: Element) {
+      cards.forEach((card) => {
+        card.classList.remove('expanded');
+        card.setAttribute('aria-expanded', 'false');
+      });
+      targetCard.classList.add('expanded');
+      targetCard.setAttribute('aria-expanded', 'true');
+    }
+
+    cards.forEach((card) => {
+      // Desktop: hover to expand
+      card.addEventListener('mouseenter', () => expandCard(card));
+
+      // Mobile: tap to expand
+      card.addEventListener('click', () => expandCard(card));
+
+      // Keyboard accessibility
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          expandCard(card);
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  initAccordion();
+
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:after-swap', initAccordion);
+</script>

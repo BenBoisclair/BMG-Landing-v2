@@ -8,7 +8,7 @@ interface Props {
 
 const { heroImage, materialName } = Astro.props;
 const { t, lang } = useI18n(Astro.url);
-const backPath = getLocalizedPath(lang, '/projects/materials');
+const backPath = getLocalizedPath(lang, '/materials');
 ---
 
 <section class="relative h-[200px] pt-20 lg:pt-24">

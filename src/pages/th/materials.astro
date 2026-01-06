@@ -1,0 +1,59 @@
+---
+/**
+ * Materials Page (Thai)
+ *
+ * Thai language version of the materials showcase page.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import MaterialCarousel from '../../components/sections/MaterialCarousel.astro';
+import { useI18n } from '../../i18n/utils';
+import materialsData from '../../data/materials.json';
+
+const { lang, t } = useI18n(Astro.url);
+---
+
+<BaseLayout
+  title={`${t.materials.pageTitle} | ${t.meta.title}`}
+  description={t.meta.description}
+  lang={lang}
+>
+  <Header pageType="project" />
+
+  <main>
+    <!-- Hero Section -->
+    <section id="materials-hero" class="relative h-[200px] pt-20 lg:pt-24">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="/images/Product/7b7fd75f2e187f580cfdc947187b80e2a1b9669f.png"
+          alt={t.materials.heroAlt}
+          class="w-full h-full object-cover"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <!-- Page Title -->
+    <div class="bg-white py-8 lg:py-12">
+      <h1 class="text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight">
+        {t.materials.pageTitle}
+      </h1>
+    </div>
+
+    <!-- Material Carousels by Category -->
+    <div class="bg-white">
+      {materialsData.categories.map((category, index) => (
+        <MaterialCarousel
+          categoryId={category.id}
+          materials={category.materials}
+          index={index}
+        />
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

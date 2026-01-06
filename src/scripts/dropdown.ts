@@ -113,3 +113,150 @@ export function createDropdowns(configs: DropdownConfig[]): DropdownInstance[] {
     .map(config => createDropdown(config))
     .filter((instance): instance is DropdownInstance => instance !== null);
 }
+
+/**
+ * Configuration for hover-triggered dropdowns
+ */
+export interface HoverDropdownConfig {
+  containerId: string;      // Container element ID that wraps trigger and menu
+  menuId: string;           // Dropdown menu ID
+  closeDelay?: number;      // Delay before closing on mouse leave (default: 150ms)
+  onToggle?: (isOpen: boolean) => void;
+}
+
+/**
+ * Creates a hover-triggered dropdown instance
+ * - Opens on mouseenter (desktop) or click (touch devices)
+ * - Closes on mouseleave with configurable delay
+ * - Falls back to click behavior on touch devices
+ */
+export function createHoverDropdown(config: HoverDropdownConfig): DropdownInstance | null {
+  const { containerId, menuId, closeDelay = 150, onToggle } = config;
+
+  const container = document.getElementById(containerId);
+  const menu = document.getElementById(menuId);
+
+  if (!container || !menu) {
+    console.warn(`HoverDropdown: Could not find elements with IDs "${containerId}" and/or "${menuId}"`);
+    return null;
+  }
+
+  // Find the trigger button/element within container
+  const trigger = container.querySelector('[data-dropdown-trigger]') as HTMLElement ||
+                  container.querySelector('button') as HTMLElement ||
+                  container.firstElementChild as HTMLElement;
+
+  let isDropdownOpen = false;
+  let closeTimeout: ReturnType<typeof setTimeout> | null = null;
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  const updateState = (open: boolean) => {
+    isDropdownOpen = open;
+
+    // Update menu visibility with animation classes
+    if (open) {
+      menu.classList.remove('hidden');
+      menu.classList.add('open');
+    } else {
+      menu.classList.remove('open');
+      menu.classList.add('hidden');
+    }
+
+    // Update ARIA attributes
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', String(open));
+    }
+
+    // Rotate chevron icon if present
+    const svg = trigger?.querySelector('svg');
+    if (svg) {
+      if (open) {
+        svg.classList.add('rotate-180');
+      } else {
+        svg.classList.remove('rotate-180');
+      }
+    }
+
+    // Call optional callback
+    onToggle?.(open);
+  };
+
+  const toggle = () => updateState(!isDropdownOpen);
+  const open = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+      closeTimeout = null;
+    }
+    updateState(true);
+  };
+  const close = () => updateState(false);
+  const closeWithDelay = () => {
+    closeTimeout = setTimeout(() => {
+      updateState(false);
+    }, closeDelay);
+  };
+  const isOpen = () => isDropdownOpen;
+
+  // Mouse event handlers (desktop)
+  const handleMouseEnter = () => {
+    if (!isTouchDevice) {
+      open();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isTouchDevice) {
+      closeWithDelay();
+    }
+  };
+
+  // Click handler (touch devices and fallback)
+  const handleClick = (e: Event) => {
+    if (isTouchDevice) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggle();
+    }
+  };
+
+  // Outside click handler for touch devices
+  const handleOutsideClick = (e: Event) => {
+    if (isTouchDevice && isDropdownOpen) {
+      const target = e.target as Node;
+      if (!container.contains(target)) {
+        close();
+      }
+    }
+  };
+
+  // Attach event listeners
+  container.addEventListener('mouseenter', handleMouseEnter);
+  container.addEventListener('mouseleave', handleMouseLeave);
+
+  if (trigger) {
+    trigger.addEventListener('click', handleClick);
+  }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  // Cleanup function
+  const destroy = () => {
+    if (closeTimeout) {
+      clearTimeout(closeTimeout);
+    }
+    container.removeEventListener('mouseenter', handleMouseEnter);
+    container.removeEventListener('mouseleave', handleMouseLeave);
+    if (trigger) {
+      trigger.removeEventListener('click', handleClick);
+    }
+    document.removeEventListener('click', handleOutsideClick);
+  };
+
+  return {
+    toggle,
+    open,
+    close,
+    isOpen,
+    destroy,
+  };
+}

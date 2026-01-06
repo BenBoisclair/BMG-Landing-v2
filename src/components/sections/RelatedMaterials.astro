@@ -64,7 +64,7 @@ const getMaterialName = (materialId: string): string => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {relatedMaterials.map((material) => (
             <a
-              href={getLocalizedPath(lang, `/projects/materials/${material.id}`)}
+              href={getLocalizedPath(lang, `/materials/${material.id}`)}
               class="material-card block"
             >
               <div class="aspect-[4/3] overflow-hidden">
@@ -89,7 +89,7 @@ const getMaterialName = (materialId: string): string => {
       <!-- Back Button (inside blue area) -->
       <div class="flex justify-center mt-12 pb-12 relative z-10">
         <a
-          href={getLocalizedPath(lang, '/projects/materials')}
+          href={getLocalizedPath(lang, '/materials')}
           class="back-button"
         >
           <span class="rotate-180 text-lg">→</span>

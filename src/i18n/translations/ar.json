@@ -1,7 +1,9 @@
 {
   "nav": {
     "home": "الرئيسية",
-    "project": "المشاريع",
+    "products": "المنتجات",
+    "projects": "المشاريع",
+    "materials": "المواد",
     "process": "العملية",
     "globalDelivery": "التوصيل العالمي",
     "about": "من نحن",
@@ -32,6 +34,10 @@
       }
     }
   },
+  "mission": {
+    "title": "مهمتنا",
+    "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam nulla libero urna vitae. Eget elit condimentum amet semper dui. Mauris quam integer mattis turpis auctor est tristique. Aliquam neque id viverra fusce. Ullamcorper tellus nam ut gravida netus leo augue. Duis adipiscing urna lectus a bibendum adipiscing porttitor magna."
+  },
   "process": {
     "title": "عملية صنع الأحلام",
     "description": "نفخر بعملية الإنتاج الدقيقة في كل خطوة لتقديم أعمال مثالية.",
@@ -39,34 +45,34 @@
     "learnMore": "تعرف على المزيد حول عمليتنا",
     "steps": {
       "1": {
-        "number": "01",
-        "title": "المفهوم أو النموذج الموجود",
+        "number": "1",
+        "title": "الفكرة الأولية",
+        "titleShort": "الفكرة",
         "description": "إذا كان لديك نموذج أو مرجع موجود، نقوم بإجراء مسح ثلاثي الأبعاد عالي الدقة. إذا لم يكن كذلك، نبدأ باستشارة تصميمية لتطوير المفهوم معاً."
       },
       "2": {
-        "number": "02",
-        "title": "إنشاء النموذج الأولي",
-        "description": "بناءً على الاتجاه المعتمد، نقوم بإنشاء نموذج من الطين أو الطباعة ثلاثية الأبعاد. يتم إجراء التعديلات حتى يلبي التصميم التوقعات."
+        "number": "2",
+        "title": "النمذجة ثلاثية الأبعاد",
+        "titleShort": "3D",
+        "description": "يقوم فريقنا بإنشاء نماذج ثلاثية الأبعاد مفصلة من مفهومك المعتمد، جاهزة للتصنيع الدقيق."
       },
       "3": {
-        "number": "03",
-        "title": "الرقمنة ثلاثية الأبعاد",
-        "description": "يتم مسح النموذج الأولي المعتمد إلى نموذج ثلاثي الأبعاد مفصل ومحسّن للنحت بالتحكم الرقمي."
-      },
-      "4": {
-        "number": "04",
+        "number": "3",
         "title": "النحت بالتحكم الرقمي",
+        "titleShort": "CNC",
         "description": "تقوم آلات CNC المتقدمة بنحت المنحوتة بدقة، متبعة بأمانة البيانات ثلاثية الأبعاد النهائية."
       },
-      "5": {
-        "number": "05",
-        "title": "التفاصيل اليدوية والتشطيب",
+      "4": {
+        "number": "4",
+        "title": "التشطيب اليدوي",
+        "titleShort": "يدوي",
         "description": "يقوم الحرفيون المهرة بصقل كل سطح يدوياً لتحقيق العمق والواقعية والحرفية الفائقة."
       },
-      "6": {
-        "number": "06",
+      "5": {
+        "number": "5",
         "title": "التسليم",
-        "description": "يتم تغليف القطعة النهائية بعناية وتسليمها إلى الموقع المحدد من قبل العميل."
+        "titleShort": "التسليم",
+        "description": "يتم تغليف القطعة النهائية بعناية وتسليمها إلى موقعك المحدد في جميع أنحاء العالم."
       }
     }
   },
