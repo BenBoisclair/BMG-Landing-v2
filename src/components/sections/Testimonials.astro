@@ -1,6 +1,7 @@
 ---
 import TestimonialCard from '../ui/TestimonialCard.astro';
 import { useI18n } from '../../i18n/utils';
+import Container from '../ui/Container.astro';
 
 const { t } = useI18n(Astro.url);
 
@@ -45,13 +46,13 @@ const testimonials = [
 ---
 
 <section id="about" class="py-16 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <Container maxWidth="screen-2xl">
     <!-- Section Header -->
     <div class="text-center mb-12 lg:mb-16 max-w-2xl mx-auto">
-      <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase text-brand-primary" style="font-family: 'Poppins', sans-serif;">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-4 uppercase text-brand-primary" style="font-family: 'Montserrat', sans-serif;">
         {t.testimonials.title}
       </h2>
-      <p class="text-gray-600" style="font-family: 'Poppins', sans-serif;">
+      <p class="text-gray-600" style="font-family: 'Montserrat', sans-serif;">
         {t.testimonials.description}
       </p>
     </div>
@@ -59,12 +60,12 @@ const testimonials = [
     <!-- Testimonials Carousel Container -->
     <div class="relative">
       <!-- Blue Background Block -->
-      <div class="blue-background-block absolute left-0 right-0 bg-brand-primary"></div>
+      <div class="blue-background-block absolute left-4 right-4 lg:left-6 lg:right-6 bg-brand-primary"></div>
 
       <!-- Carousel Wrapper -->
       <div class="relative carousel-wrapper">
         <!-- Testimonials Carousel -->
-        <div class="testimonials-carousel overflow-hidden px-2 lg:px-0">
+        <div class="testimonials-carousel px-2 lg:px-0">
           <div class="testimonials-track flex items-center transition-transform duration-500 ease-in-out" id="testimonials-track">
             {testimonials.map((testimonial, index) => (
               <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3">
@@ -113,7 +114,7 @@ const testimonials = [
         </div>
       </div>
     </div>
-  </div>
+  </Container>
 </section>
 
 <style>
@@ -124,14 +125,17 @@ const testimonials = [
   }
 
   .carousel-wrapper {
-    padding-top: 120px;
+    padding-top: 80px;
     padding-bottom: 20px;
   }
 
   .testimonials-carousel {
     margin: 0 -12px;
+    padding: 20px 0;
     position: relative;
     z-index: 5;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .testimonials-track {

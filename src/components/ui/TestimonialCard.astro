@@ -9,7 +9,7 @@ interface Props {
 const { name, role, quote, rating = 5 } = Astro.props;
 ---
 
-<div class="testimonial-card bg-white p-6 lg:p-8">
+<div class="testimonial-card bg-white p-6 lg:p-8 rounded-2xl">
   <!-- Star Rating -->
   <div class="flex gap-0.5 mb-4" style="width: 101.002px; height: 17.216px;">
     {Array.from({ length: 5 }).map((_, i) => (
@@ -36,12 +36,14 @@ const { name, role, quote, rating = 5 } = Astro.props;
 
 <style>
   .testimonial-card {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 12px 40px rgba(0, 0, 0, 0.06);
   }
 
   .testimonial-quote {
     color: var(--color-text-secondary);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -50,7 +52,7 @@ const { name, role, quote, rating = 5 } = Astro.props;
 
   .testimonial-name {
     color: var(--color-text-primary);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -59,7 +61,7 @@ const { name, role, quote, rating = 5 } = Astro.props;
 
   .testimonial-role {
     color: var(--color-text-secondary);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 400;

@@ -1,5 +1,6 @@
 ---
 import { useI18n } from '../../i18n/utils';
+import Container from '../ui/Container.astro';
 
 // Import showcase images
 import thumbnail1 from '../../assets/images/showcase/thumbnail-1.svg';
@@ -8,23 +9,40 @@ import thumbnail3 from '../../assets/images/showcase/thumbnail-3.svg';
 
 const { t } = useI18n(Astro.url);
 
-// Create array of 6 images (using existing 3 thumbnails twice)
+// Create array of 6 images with their model IDs
 const images = [
-  thumbnail1,
-  thumbnail2,
-  thumbnail3,
-  thumbnail1,
-  thumbnail2,
-  thumbnail3,
+  { src: thumbnail1, modelId: '1' },
+  { src: thumbnail2, modelId: '2' },
+  { src: thumbnail3, modelId: '3' },
+  { src: thumbnail1, modelId: '4' },
+  { src: thumbnail2, modelId: '5' },
+  { src: thumbnail3, modelId: '6' },
 ];
+
+// Placeholder 3D model URL (local model)
+const placeholderModelUrl = '/models/Buddha.glb';
+
+// Get all model data for client-side use
+const modelsData = {
+  '1': t.showcase.models['1'],
+  '2': t.showcase.models['2'],
+  '3': t.showcase.models['3'],
+  '4': t.showcase.models['4'],
+  '5': t.showcase.models['5'],
+  '6': t.showcase.models['6'],
+};
 ---
 
+<!-- Load Google Model Viewer -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
 <section id="product" class="py-16 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-      <!-- Text Content -->
+  <Container>
+    <!-- Default State: Mission Text + Image Grid -->
+    <div id="showcase-default" class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <!-- Text Content (Default) -->
       <div>
-        <h2 class="text-4xl lg:text-5xl font-bold text-[#2C266C] mb-6 lowercase">
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#2C266C] mb-6 uppercase">
           {t.mission.title}
         </h2>
         <p class="text-gray-600 text-lg leading-relaxed">
@@ -35,17 +53,139 @@ const images = [
       <!-- Image Grid (2x3) -->
       <div class="grid grid-cols-3 gap-4">
         {images.map((img, index) => (
-          <img
-            src={img.src}
-            alt={`Mission image ${index + 1}`}
-            width="200"
-            height="200"
-            loading="lazy"
-            decoding="async"
-            class="w-full aspect-square rounded-[22px] object-cover"
-          />
+          <button
+            type="button"
+            data-model-id={img.modelId}
+            class="showcase-thumbnail group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2C266C] focus:ring-offset-2 rounded-[22px] transition-transform hover:scale-105"
+          >
+            <img
+              src={img.src.src}
+              alt={`${t.showcase.viewModel} ${index + 1}`}
+              width="200"
+              height="200"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-square rounded-[22px] object-cover"
+            />
+          </button>
         ))}
       </div>
     </div>
-  </div>
+
+    <!-- Selected State: Model Details + 3D Viewer + Thumbnails Row -->
+    <div id="showcase-selected" class="hidden">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <!-- Model Details (Left) - Centered vertically -->
+        <div class="text-center lg:text-left">
+          <h2 id="model-name" class="text-4xl lg:text-5xl font-bold text-[#2C266C] mb-6 uppercase">
+            <!-- Dynamically updated -->
+          </h2>
+          <p id="model-description" class="text-gray-600 text-lg leading-relaxed">
+            <!-- Dynamically updated -->
+          </p>
+        </div>
+
+        <!-- 3D Model Viewer (Right) -->
+        <div class="relative">
+          <!-- Close Button -->
+          <button
+            id="close-viewer"
+            type="button"
+            class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#2C266C]"
+            aria-label={t.showcase.close}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <!-- Model Viewer Container -->
+          <div class="rounded-[22px] overflow-hidden aspect-square">
+            <model-viewer
+              id="model-viewer"
+              src={placeholderModelUrl}
+              alt={t.showcase.modelAlt}
+              camera-controls
+              disable-zoom
+              disable-pan
+              disable-tap
+              auto-rotate
+              shadow-intensity="1"
+              exposure="1"
+              interaction-prompt="none"
+              class="w-full h-full bg-transparent"
+              style="--poster-color: transparent; background-color: transparent;"
+              loading="eager"
+            >
+              <!-- Custom loading indicator (hidden when model loads) -->
+              <div id="model-loading" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="text-center">
+                  <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2C266C] mx-auto mb-2"></div>
+                  <p class="text-sm text-gray-600">{t.showcase.loading}</p>
+                </div>
+              </div>
+            </model-viewer>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </Container>
 </section>
+
+<script define:vars={{ modelsData }}>
+  // DOM Elements
+  const defaultView = document.getElementById('showcase-default');
+  const selectedView = document.getElementById('showcase-selected');
+  const modelName = document.getElementById('model-name');
+  const modelDescription = document.getElementById('model-description');
+  const closeButton = document.getElementById('close-viewer');
+  const thumbnails = document.querySelectorAll('.showcase-thumbnail');
+  const modelViewer = document.getElementById('model-viewer');
+  const modelLoading = document.getElementById('model-loading');
+
+  // Hide loading indicator when model loads
+  if (modelViewer && modelLoading) {
+    modelViewer.addEventListener('load', () => {
+      modelLoading.style.display = 'none';
+    });
+
+    // Also handle progress for immediate feedback
+    modelViewer.addEventListener('progress', (event) => {
+      if (event.detail.totalProgress === 1) {
+        modelLoading.style.display = 'none';
+      }
+    });
+  }
+
+  // Show selected state with model details
+  function showModel(modelId) {
+    const model = modelsData[modelId];
+
+    if (model) {
+      modelName.textContent = model.name;
+      modelDescription.textContent = model.description;
+    }
+
+    // Switch views
+    defaultView.classList.add('hidden');
+    selectedView.classList.remove('hidden');
+  }
+
+  // Return to default state
+  function closeViewer() {
+    selectedView.classList.add('hidden');
+    defaultView.classList.remove('hidden');
+  }
+
+  // Event Listeners - Grid thumbnails
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const modelId = thumb.getAttribute('data-model-id');
+      showModel(modelId);
+    });
+  });
+
+  // Event Listener - Close button
+  closeButton.addEventListener('click', closeViewer);
+</script>

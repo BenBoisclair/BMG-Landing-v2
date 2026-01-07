@@ -5,27 +5,20 @@ const { t } = useI18n(Astro.url);
 ---
 
 <section id="home" class="relative h-screen min-h-[600px] max-h-[800px] pt-20 lg:pt-24">
-  <!-- Background Image -->
+  <!-- Background Video -->
   <div class="absolute inset-0 z-0">
-    <img
-      src="/images/Landing/HeroSection/background_1.png"
-      alt={t.hero.backgroundAlt}
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
       class="w-full h-full object-cover"
-      fetchpriority="high"
-      loading="eager"
-      decoding="async"
-    />
+      poster="/images/Landing/HeroSection/background_1.png"
+    >
+      <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
+    </video>
     <!-- Purple overlay -->
     <div class="absolute inset-0 bg-map-blue/20"></div>
   </div>
 
-  <!-- Content -->
-  <div class="relative z-10 h-full flex flex-col items-center justify-end pb-16 lg:pb-24 px-4">
-    <a
-      href="#product"
-      class="px-6 py-3 text-2xl font-medium font-inter text-white bg-brand-primary/87 rounded-lg shadow-sm hover:bg-brand-primary transition-colors duration-200"
-    >
-      {t.hero.viewMore}
-    </a>
-  </div>
 </section>

@@ -67,12 +67,12 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
 }));
 ---
 
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300" data-page-type={pageType}>
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-page-type={pageType}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 lg:h-24">
       <!-- Logo -->
       <a href="/" class="shrink-0">
-        <img src="/images/logo.png" alt="BMG - Bangkok Modern Granite" class="h-16 lg:h-20 w-auto" />
+        <img src="/images/logo.png" alt="BMG - Bangkok Modern Granite" class="h-12 lg:h-16 w-auto" />
       </a>
 
       <!-- Desktop Navigation -->
@@ -81,7 +81,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
         <a
           href={getNavHref('/')}
           class:list={[
-            "text-base xl:text-lg font-medium font-inter transition-colors duration-200",
+            "text-base xl:text-lg font-medium font-montserrat transition-colors duration-200",
             isActive('/') ? "text-white" : "text-white hover:text-white/80"
           ]}
         >
@@ -93,7 +93,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
           <button
             data-dropdown-trigger
             class:list={[
-              "flex items-center gap-1 text-base xl:text-lg font-medium font-inter transition-colors duration-200",
+              "flex items-center gap-1 text-base xl:text-lg font-medium font-montserrat transition-colors duration-200",
               isProductsActive ? "text-white" : "text-white hover:text-white/80"
             ]}
             aria-expanded="false"
@@ -106,7 +106,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
           </button>
           <div
             id="products-dropdown-menu"
-            class="products-dropdown-menu absolute top-full left-1/2 -translate-x-1/2 pt-3 hidden"
+            class="products-dropdown-menu absolute top-full left-0 pt-3 hidden"
           >
             <div class="bg-white rounded-xl shadow-lg overflow-hidden min-w-[140px] xl:min-w-[160px]">
               {productsDropdownItems.map((item) => (
@@ -131,7 +131,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
           <a
             href={link.isAnchor ? link.href : getNavHref(link.href)}
             class:list={[
-              "text-base xl:text-lg font-medium font-inter transition-colors duration-200",
+              "text-base xl:text-lg font-medium font-montserrat transition-colors duration-200",
               isActive(link.href)
                 ? "text-white"
                 : "text-white hover:text-white/80"
@@ -200,7 +200,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
       <a
         href={getNavHref('/')}
         class:list={[
-          "block px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
+          "block px-4 py-3 text-lg font-medium font-montserrat rounded-lg transition-colors duration-200",
           isActive('/') ? "text-white bg-white/10" : "text-white hover:bg-white/10"
         ]}
       >
@@ -212,7 +212,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
         <button
           id="mobile-products-button"
           class:list={[
-            "w-full flex items-center justify-between px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
+            "w-full flex items-center justify-between px-4 py-3 text-lg font-medium font-montserrat rounded-lg transition-colors duration-200",
             isProductsActive ? "text-white bg-white/10" : "text-white hover:bg-white/10"
           ]}
           aria-expanded="false"
@@ -227,7 +227,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
             <a
               href={getNavHref(item.href)}
               class:list={[
-                "block px-4 py-2.5 text-base font-medium font-inter rounded-lg transition-colors duration-200",
+                "block px-4 py-2.5 text-base font-medium font-montserrat rounded-lg transition-colors duration-200",
                 isActive(item.href)
                   ? "text-red-400 bg-white/10"
                   : "text-white/80 hover:bg-white/5"
@@ -244,7 +244,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
         <a
           href={link.isAnchor ? link.href : getNavHref(link.href)}
           class:list={[
-            "block px-4 py-3 text-lg font-medium font-inter rounded-lg transition-colors duration-200",
+            "block px-4 py-3 text-lg font-medium font-montserrat rounded-lg transition-colors duration-200",
             isActive(link.href)
               ? "text-white bg-white/10"
               : "text-white hover:bg-white/10"
@@ -292,25 +292,20 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
   /* Products Dropdown Animation */
   .products-dropdown-menu {
     opacity: 0;
-    transform: translateX(-50%) translateY(-8px);
+    transform: translateY(-8px);
     transition: opacity 0.2s ease, transform 0.2s ease;
     pointer-events: none;
   }
 
   .products-dropdown-menu.open {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
     pointer-events: auto;
   }
 
   /* RTL support for dropdown */
   [dir="rtl"] .products-dropdown-menu {
     left: auto;
-    right: 50%;
-    transform: translateX(50%) translateY(-8px);
-  }
-
-  [dir="rtl"] .products-dropdown-menu.open {
-    transform: translateX(50%) translateY(0);
+    right: 0;
   }
 </style>

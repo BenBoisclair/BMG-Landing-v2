@@ -1,5 +1,6 @@
 ---
 import { useI18n } from '../../i18n/utils';
+import Container from '../ui/Container.astro';
 
 const { t, isRTL } = useI18n(Astro.url);
 
@@ -58,9 +59,9 @@ const icons = [
 ---
 
 <section id="process" class="py-16 lg:py-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <Container>
     <!-- Section Header -->
-    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-brand-primary">
+    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-brand-primary uppercase">
       {t.process.title}
     </h2>
 
@@ -108,7 +109,7 @@ const icons = [
         </div>
       ))}
     </div>
-  </div>
+  </Container>
 </section>
 
 <style>
@@ -195,21 +196,14 @@ const icons = [
     font-weight: 600;
     color: white;
     text-align: center;
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    transform: rotate(180deg);
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 200px;
     overflow: hidden;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  }
-
-  [dir='rtl'] .collapsed-content .step-title-short {
-    writing-mode: vertical-rl;
-    transform: rotate(0deg);
+    word-break: break-word;
+    padding: 0 0.25rem;
   }
 
   .collapsed-content .step-icon-container {
@@ -337,7 +331,6 @@ const icons = [
 
     .collapsed-content .step-title-short {
       font-size: 0.65rem;
-      max-height: 150px;
     }
 
     .collapsed-content .step-icon-container {

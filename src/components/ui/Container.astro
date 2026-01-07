@@ -1,0 +1,19 @@
+---
+interface Props {
+  maxWidth?: '7xl' | 'screen-2xl' | string;
+  class?: string;
+}
+
+const { maxWidth = '7xl', class: className = '' } = Astro.props;
+
+// Map preset values to Tailwind classes, or use custom value
+const maxWidthClass = maxWidth === '7xl'
+  ? 'max-w-7xl'
+  : maxWidth === 'screen-2xl'
+    ? 'max-w-screen-2xl'
+    : `max-w-[${maxWidth}]`;
+---
+
+<div class:list={[maxWidthClass, 'mx-auto px-2 sm:px-3 lg:px-4', className]}>
+  <slot />
+</div>

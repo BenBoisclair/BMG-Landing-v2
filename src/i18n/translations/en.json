@@ -19,6 +19,7 @@
     "modelAlt": "3D sculpture model",
     "viewModel": "View model",
     "loading": "Loading 3D Model...",
+    "close": "Close",
     "models": {
       "1": {
         "name": "Sculpture One",
@@ -31,6 +32,18 @@
       "3": {
         "name": "Sculpture Three",
         "description": "A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances."
+      },
+      "4": {
+        "name": "Sculpture Four",
+        "description": "A serene meditation figure carved from premium white marble. The peaceful expression and flowing robes embody tranquility, making it ideal for contemplative spaces and gardens."
+      },
+      "5": {
+        "name": "Sculpture Five",
+        "description": "A dynamic abstract form that captures movement in stone. This contemporary piece showcases the versatility of granite, with polished surfaces that reflect light beautifully."
+      },
+      "6": {
+        "name": "Sculpture Six",
+        "description": "A classical portrait bust rendered with exceptional detail. Every feature is carefully sculpted to preserve the subject's likeness for generations to come."
       }
     }
   },

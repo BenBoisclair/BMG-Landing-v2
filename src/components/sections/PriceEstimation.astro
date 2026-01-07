@@ -1,5 +1,6 @@
 ---
 import { useI18n } from '../../i18n/utils';
+import Container from '../ui/Container.astro';
 
 const { t, lang } = useI18n(Astro.url);
 
@@ -17,15 +18,21 @@ const detailImages = {
   realistic: '/images/e1c52a1a4e99255d1ee041a902eb29a962d3d593.png',
 };
 
+// Image paths for sculpture type tabs
+const tabImages = {
+  bust: '/images/13ba63e01b4af986d598682d96e0f684ab188e70.png',
+  relief: '/images/e1c52a1a4e99255d1ee041a902eb29a962d3d593.png',
+};
+
 // Materials page link based on language
 const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
 ---
 
 <section class="py-16 lg:py-24 bg-gray-50" id="price-estimation">
-  <div class="max-w-[896px] mx-auto px-4 sm:px-6 lg:px-8">
+  <Container maxWidth="896px">
     <!-- Section Header -->
     <div class="text-center mb-8">
-      <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-4">
+      <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-4 uppercase">
         {t.priceEstimation.title}
       </h2>
       <p class="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
@@ -40,27 +47,47 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
         <button
           id="bust-tab"
           role="tab"
-          aria-selected="true"
+          aria-selected="false"
           aria-controls="bust-panel"
-          class="flex-1 h-[76px] text-xl font-extrabold text-white bg-brand-primary transition-all duration-300 focus:outline-none"
+          class="group flex-1 flex flex-col overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
           data-tab="bust"
         >
-          {t.priceEstimation.bust.tab}
+          <div class="h-[250px] overflow-hidden">
+            <img
+              src={tabImages.bust}
+              alt="Bust sculpture"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="py-3 text-xl font-extrabold text-white">
+            {t.priceEstimation.bust.tab}
+          </div>
         </button>
         <button
           id="relief-tab"
           role="tab"
           aria-selected="false"
           aria-controls="relief-panel"
-          class="flex-1 h-[76px] text-xl font-extrabold text-white bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
+          class="group flex-1 flex flex-col overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
           data-tab="relief"
         >
-          {t.priceEstimation.relief.tab}
+          <div class="h-[250px] overflow-hidden">
+            <img
+              src={tabImages.relief}
+              alt="Relief sculpture"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="py-3 text-xl font-extrabold text-white">
+            {t.priceEstimation.relief.tab}
+          </div>
         </button>
       </div>
 
-      <!-- Calculator Content -->
-      <div class="p-6 lg:p-8 space-y-8">
+      <!-- Calculator Content (hidden until tab selected) -->
+      <div class="p-6 lg:p-8 space-y-8 hidden" id="calculator-content">
         <!-- Step 1: Dimensions -->
         <div class="space-y-4" data-step="dimensions">
           <h3 class="text-base font-normal text-gray-800">
@@ -330,14 +357,15 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
         </div>
       </div>
     </div>
-  </div>
+  </Container>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // State
     interface CalculatorState {
-      activeTab: 'bust' | 'relief';
+      activeTab: 'bust' | 'relief' | null;  // null until user explicitly selects
+      tabSelected: boolean;  // tracks if user has made an explicit selection
       dimensions: {
         height: number;
         width: number;
@@ -350,7 +378,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     }
 
     const state: CalculatorState = {
-      activeTab: 'bust',
+      activeTab: null,  // no default selection
+      tabSelected: false,
       dimensions: { height: 0, width: 0, depth: 0 },
       stoneGrade: null,
       stonePricePerMm3: 0,
@@ -371,6 +400,13 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     // Tab switching
     function switchTab(tab: 'bust' | 'relief') {
       state.activeTab = tab;
+
+      // Show calculator content on first tab selection
+      if (!state.tabSelected) {
+        state.tabSelected = true;
+        const calculatorContent = document.getElementById('calculator-content');
+        calculatorContent?.classList.remove('hidden');
+      }
 
       if (tab === 'bust') {
         bustTab?.classList.remove('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');

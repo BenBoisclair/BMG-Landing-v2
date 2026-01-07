@@ -32,7 +32,7 @@ const ELEMENTS = {
 // CSS classes for header states
 const HEADER_CLASSES = {
   transparent: 'bg-transparent',
-  scrolled: 'bg-brand-primary',
+  scrolled: 'bg-brand-primary/80 backdrop-blur-md',
 } as const;
 
 let dropdownInstances: DropdownInstance[] = [];
@@ -174,22 +174,27 @@ function updateHeaderBackground(): void {
   const heroId = pageType === 'project' ? ELEMENTS.projectHeroSection : ELEMENTS.heroSection;
   const heroSection = document.getElementById(heroId);
 
+  // Split class strings into arrays for classList operations
+  const transparentClasses = HEADER_CLASSES.transparent.split(' ');
+  const scrolledClasses = HEADER_CLASSES.scrolled.split(' ');
+
   // If no hero section exists, keep solid background
   if (!heroSection) {
-    header.classList.remove(HEADER_CLASSES.transparent);
-    header.classList.add(HEADER_CLASSES.scrolled);
+    header.classList.remove(...transparentClasses);
+    header.classList.add(...scrolledClasses);
     return;
   }
 
-  const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+  // Trigger background change at 60% of hero height for earlier appearance
+  const heroThreshold = heroSection.offsetTop + (heroSection.offsetHeight * 0.6);
   const scrollPosition = window.scrollY;
 
-  if (scrollPosition > heroBottom) {
-    header.classList.remove(HEADER_CLASSES.transparent);
-    header.classList.add(HEADER_CLASSES.scrolled);
+  if (scrollPosition > heroThreshold) {
+    header.classList.remove(...transparentClasses);
+    header.classList.add(...scrolledClasses);
   } else {
-    header.classList.remove(HEADER_CLASSES.scrolled);
-    header.classList.add(HEADER_CLASSES.transparent);
+    header.classList.remove(...scrolledClasses);
+    header.classList.add(...transparentClasses);
   }
 }
 
