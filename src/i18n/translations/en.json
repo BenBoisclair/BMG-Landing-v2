@@ -93,10 +93,12 @@
     "title": "Get Your Price Estimation",
     "subtitle": "Answer a few questions to receive an estimated price and timeline for your sculpture project",
     "bust": {
-      "tab": "Bust Sculpture"
+      "tab": "Bust Sculpture",
+      "tabShort": "Bust"
     },
     "relief": {
-      "tab": "Relief Sculpture"
+      "tab": "Relief Sculpture",
+      "tabShort": "Relief"
     },
     "steps": {
       "dimensions": {

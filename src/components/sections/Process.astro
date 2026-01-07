@@ -295,8 +295,9 @@ const icons = [
     .collapsed-content {
       flex-direction: row;
       justify-content: flex-start;
+      align-items: center;
       gap: 1rem;
-      padding: 0 1rem;
+      padding: 1rem;
     }
 
     .collapsed-content .step-number {
@@ -343,15 +344,23 @@ const icons = [
 
   @media (max-width: 480px) {
     .accordion-container {
-      height: 300px;
+      height: auto;
+      min-height: 400px;
+    }
+
+    .accordion-card:not(.expanded) {
+      min-height: 60px;
+    }
+
+    .accordion-card.expanded {
+      min-height: 280px;
     }
 
     .collapsed-content .step-title-short {
-      font-size: 0.65rem;
+      font-size: 0.75rem;
     }
 
     .collapsed-content .step-icon-container {
-      transform: scale(0.8);
       padding: 0.5rem;
     }
   }

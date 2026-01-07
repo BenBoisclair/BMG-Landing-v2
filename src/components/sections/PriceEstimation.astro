@@ -113,7 +113,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors tab-overlay"></div>
           </div>
           <div class="relative z-10 py-3 px-2 sm:px-6 text-sm sm:text-xl lg:text-3xl font-extrabold text-white uppercase tracking-wider tab-text text-center">
-            {t.priceEstimation.bust.tab}
+            <span class="tab-text-short">{t.priceEstimation.bust.tabShort}</span>
+            <span class="tab-text-full">{t.priceEstimation.bust.tab}</span>
           </div>
         </button>
         <button
@@ -134,7 +135,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors tab-overlay"></div>
           </div>
           <div class="relative z-10 py-3 px-2 sm:px-6 text-sm sm:text-xl lg:text-3xl font-extrabold text-white uppercase tracking-wider tab-text text-center">
-            {t.priceEstimation.relief.tab}
+            <span class="tab-text-short">{t.priceEstimation.relief.tabShort}</span>
+            <span class="tab-text-full">{t.priceEstimation.relief.tab}</span>
           </div>
         </button>
       </div>
@@ -209,8 +211,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
           </div>
 
           <!-- Remark Box -->
-          <div class="bg-[#fff6f6] border-l-4 border-accent-red rounded-r px-4 py-3">
-            <p class="text-sm text-accent-red" set:html={t.priceEstimation.steps.dimensions.remark}></p>
+          <div class="bg-[#fff6f6] border-l-4 border-accent-red rounded-r px-3 py-2 sm:px-4 sm:py-3">
+            <p class="text-xs sm:text-sm text-accent-red" set:html={t.priceEstimation.steps.dimensions.remark}></p>
           </div>
         </div>
 
@@ -246,8 +248,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
                 ))}
               </div>
           <!-- Help Box -->
-          <div class="bg-[#fef2f2] border-l-4 border-accent-red rounded-r px-4 py-3">
-            <p class="text-sm text-[#9f0712]">
+          <div class="bg-[#fef2f2] border-l-4 border-accent-red rounded-r px-3 py-2 sm:px-4 sm:py-3">
+            <p class="text-xs sm:text-sm text-[#9f0712]">
               <span set:html={t.priceEstimation.steps.stoneCategory.help.split('Visit')[0]}></span>
               <a href={materialsLink} class="underline hover:no-underline">Visit our Materials Page</a>
               {t.priceEstimation.steps.stoneCategory.help.split('Materials Page')[1]?.replace('</strong>', '') || ' to learn more about stone categories and find the right grade for your project.'}
@@ -680,6 +682,25 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     white-space: nowrap;
     padding-top: 0;
     padding-bottom: 0;
+  }
+
+  /* Tab text short/full visibility */
+  /* Default: show full text, hide short text */
+  .tab-text-short {
+    display: none;
+  }
+  .tab-text-full {
+    display: inline;
+  }
+
+  /* When calculator is active AND on mobile: show short, hide full */
+  @media (max-width: 639px) {
+    [data-calculator][data-state="active"] .tab-text-short {
+      display: inline;
+    }
+    [data-calculator][data-state="active"] .tab-text-full {
+      display: none;
+    }
   }
   
   @media (min-width: 1024px) {
