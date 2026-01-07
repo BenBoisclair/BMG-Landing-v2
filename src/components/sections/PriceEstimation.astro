@@ -24,14 +24,54 @@ const tabImages = {
   relief: '/images/e1c52a1a4e99255d1ee041a902eb29a962d3d593.png',
 };
 
+const stoneData = [
+  { 
+    id: 'aPlusPlus', 
+    image: stoneImages.aPlusPlus,
+    name: t.priceEstimation.steps.stoneCategory.grades.aPlusPlus.label
+  },
+  { 
+    id: 'aPlus', 
+    image: stoneImages.aPlus,
+    name: t.priceEstimation.steps.stoneCategory.grades.aPlus.label
+  },
+  { 
+    id: 'a', 
+    image: stoneImages.a,
+    name: t.priceEstimation.steps.stoneCategory.grades.a.label
+  },
+];
+
+const detailData = [
+  { 
+    id: 'minimal', 
+    image: detailImages.minimal,
+    name: t.priceEstimation.steps.detailLevel.levels.minimal.label,
+    desc: t.priceEstimation.steps.detailLevel.levels.minimal.description
+  },
+  { 
+    id: 'refine', 
+    image: detailImages.refine,
+    name: t.priceEstimation.steps.detailLevel.levels.refine.label,
+    desc: t.priceEstimation.steps.detailLevel.levels.refine.description
+  },
+  { 
+    id: 'realistic', 
+    image: detailImages.realistic,
+    name: t.priceEstimation.steps.detailLevel.levels.realistic.label,
+    desc: t.priceEstimation.steps.detailLevel.levels.realistic.description
+  },
+];
+
 // Materials page link based on language
 const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
 ---
 
 <section class="py-16 lg:py-24 bg-gray-50" id="price-estimation">
-  <Container maxWidth="896px">
+  <Container>
+    <div class="mx-auto max-w-[700px]">
     <!-- Section Header -->
-    <div class="text-center mb-8">
+    <div class="text-center mb-8" id="section-header">
       <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-4 uppercase">
         {t.priceEstimation.title}
       </h2>
@@ -41,26 +81,38 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     </div>
 
     <!-- Main Calculator Card -->
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden" data-calculator>
+    <!-- Added mx-auto to center it when width changes -->
+    <div 
+      class="bg-white rounded-2xl shadow-xl overflow-hidden mx-auto" 
+      data-calculator 
+      data-state="initial"
+      id="calculator-container"
+    >
       <!-- Tab Header -->
-      <div class="flex border-b border-brand-medium/30" role="tablist" aria-label="Sculpture type">
+      <div 
+        class="flex flex-row border-b border-brand-medium/30 relative h-[200px] sm:h-[300px]" 
+        role="tablist" 
+        aria-label="Sculpture type"
+        id="tab-container"
+      >
         <button
           id="bust-tab"
           role="tab"
           aria-selected="false"
           aria-controls="bust-panel"
-          class="group flex-1 flex flex-col overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
+          class="group flex-1 flex flex-col items-center justify-center overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-colors duration-300 focus:outline-none relative"
           data-tab="bust"
         >
-          <div class="h-[250px] overflow-hidden">
+          <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-500 tab-image-container">
             <img
               src={tabImages.bust}
               alt="Bust sculpture"
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              class="w-full h-full object-cover"
               loading="lazy"
             />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors tab-overlay"></div>
           </div>
-          <div class="py-3 text-xl font-extrabold text-white">
+          <div class="relative z-10 py-3 px-2 sm:px-6 text-sm sm:text-xl lg:text-3xl font-extrabold text-white uppercase tracking-wider tab-text text-center">
             {t.priceEstimation.bust.tab}
           </div>
         </button>
@@ -69,25 +121,30 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
           role="tab"
           aria-selected="false"
           aria-controls="relief-panel"
-          class="group flex-1 flex flex-col overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
+          class="group flex-1 flex flex-col items-center justify-center overflow-hidden bg-[#9b96d3] hover:bg-[#8a85c2] transition-colors duration-300 focus:outline-none relative"
           data-tab="relief"
         >
-          <div class="h-[250px] overflow-hidden">
+          <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-500 tab-image-container">
             <img
               src={tabImages.relief}
               alt="Relief sculpture"
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              class="w-full h-full object-cover"
               loading="lazy"
             />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors tab-overlay"></div>
           </div>
-          <div class="py-3 text-xl font-extrabold text-white">
+          <div class="relative z-10 py-3 px-2 sm:px-6 text-sm sm:text-xl lg:text-3xl font-extrabold text-white uppercase tracking-wider tab-text text-center">
             {t.priceEstimation.relief.tab}
           </div>
         </button>
       </div>
 
       <!-- Calculator Content (hidden until tab selected) -->
-      <div class="p-6 lg:p-8 space-y-8 hidden" id="calculator-content">
+      <!-- Calculator Content (hidden until tab selected) -->
+      <div 
+        class="p-6 lg:p-8 space-y-8 opacity-0 hidden" 
+        id="calculator-content"
+      >
         <!-- Step 1: Dimensions -->
         <div class="space-y-4" data-step="dimensions">
           <h3 class="text-base font-normal text-gray-800">
@@ -163,78 +220,31 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
             {t.priceEstimation.steps.stoneCategory.title}
           </h3>
 
-          <!-- Stone Grade Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" role="radiogroup" aria-label="Stone category">
-            <!-- A++ Semi-Precious -->
-            <button
-              type="button"
-              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-stone="aPlusPlus"
-              data-price="0.00025"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden">
-                <img
-                  src={stoneImages.aPlusPlus}
-                  alt="A++ Semi-Precious stone"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
+              <!-- Stone Category Grid -->
+              <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                {stoneData.map((stone) => (
+                  <label class="cursor-pointer group relative">
+                    <input type="radio" name="stoneType" value={stone.id} class="peer sr-only" />
+                    <div class="
+                      bg-white rounded-[14px] sm:rounded-[22px] border-2 border-transparent 
+                      p-2 sm:p-4 text-center transition-all duration-300
+                      peer-checked:border-[#2C266C] peer-checked:shadow-lg
+                      hover:shadow-md h-full flex flex-col justify-between
+                    ">
+                      <div class="w-full aspect-square bg-gray-100 rounded-[10px] sm:rounded-[18px] mb-2 sm:mb-3 overflow-hidden">
+                        <img 
+                          src={stone.image} 
+                          alt={stone.name}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+                      <span class="block text-xs sm:text-base font-medium text-[#2C266C]">
+                        {stone.name}
+                      </span>
+                    </div>
+                  </label>
+                ))}
               </div>
-              <div class="p-4 text-center">
-                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.aPlusPlus.label}</p>
-                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.aPlusPlus.description}</p>
-              </div>
-            </button>
-
-            <!-- A+ Luxury -->
-            <button
-              type="button"
-              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-stone="aPlus"
-              data-price="0.00015"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden">
-                <img
-                  src={stoneImages.aPlus}
-                  alt="A+ Luxury stone"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-4 text-center">
-                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.aPlus.label}</p>
-                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.aPlus.description}</p>
-              </div>
-            </button>
-
-            <!-- A Classic -->
-            <button
-              type="button"
-              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-stone="a"
-              data-price="0.00010"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden">
-                <img
-                  src={stoneImages.a}
-                  alt="A Classic Granite stone"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-4 text-center">
-                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.a.label}</p>
-                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.a.description}</p>
-              </div>
-            </button>
-          </div>
-
           <!-- Help Box -->
           <div class="bg-[#fef2f2] border-l-4 border-accent-red rounded-r px-4 py-3">
             <p class="text-sm text-[#9f0712]">
@@ -252,77 +262,34 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
           </h3>
 
           <!-- Detail Level Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" role="radiogroup" aria-label="Detail level">
-            <!-- Minimal -->
-            <button
-              type="button"
-              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-detail="minimal"
-              data-addition="0"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden">
-                <img
-                  src={detailImages.minimal}
-                  alt="Minimal detail sculpture"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
+              <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+                {detailData.map((level) => (
+                  <label class="cursor-pointer group relative">
+                    <input type="radio" name="detailLevel" value={level.id} class="peer sr-only" />
+                    <div class="
+                      bg-white rounded-[14px] sm:rounded-[22px] border-2 border-transparent 
+                      p-2 sm:p-4 text-center transition-all duration-300
+                      peer-checked:border-[#2C266C] peer-checked:shadow-lg
+                      hover:shadow-md h-full flex flex-col justify-between
+                    ">
+                      <div class="w-full aspect-square bg-gray-100 rounded-[10px] sm:rounded-[18px] mb-2 sm:mb-3 overflow-hidden">
+                        <img 
+                          src={level.image} 
+                          alt={level.name}
+                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+                      
+                      <span class="block text-xs sm:text-base font-medium text-[#2C266C] mb-0.5 sm:mb-1">
+                        {level.name}
+                      </span>
+                      <span class="block text-[10px] sm:text-sm text-gray-500 leading-tight line-clamp-2">
+                        {level.desc}
+                      </span>
+                    </div>
+                  </label>
+                ))}
               </div>
-              <div class="p-4 text-left">
-                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.minimal.label}</p>
-                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.minimal.description}</p>
-              </div>
-            </button>
-
-            <!-- Refine -->
-            <button
-              type="button"
-              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-detail="refine"
-              data-addition="500"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden relative">
-                <img
-                  src={detailImages.refine}
-                  alt="Refine detail sculpture"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div class="absolute inset-0 bg-black/20"></div>
-              </div>
-              <div class="p-4 text-left">
-                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.refine.label}</p>
-                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.refine.description}</p>
-              </div>
-            </button>
-
-            <!-- Realistic -->
-            <button
-              type="button"
-              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              data-detail="realistic"
-              data-addition="1500"
-              role="radio"
-              aria-checked="false"
-            >
-              <div class="h-32 overflow-hidden">
-                <img
-                  src={detailImages.realistic}
-                  alt="Realistic detail sculpture"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-4 text-left">
-                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.realistic.label}</p>
-                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.realistic.description}</p>
-              </div>
-            </button>
-          </div>
         </div>
 
         <!-- Calculate Button -->
@@ -357,10 +324,13 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
         </div>
       </div>
     </div>
+    </div>
   </Container>
 </section>
 
 <script>
+  import { animate, stagger } from "motion";
+
   document.addEventListener('DOMContentLoaded', () => {
     // State
     interface CalculatorState {
@@ -388,6 +358,11 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     };
 
     // Elements
+    const calculatorContainer = document.getElementById('calculator-container');
+    const tabContainer = document.getElementById('tab-container');
+    const sectionHeader = document.getElementById('section-header');
+    
+    // Original elements
     const bustTab = document.getElementById('bust-tab');
     const reliefTab = document.getElementById('relief-tab');
     const calculateBtn = document.getElementById('calculate-btn');
@@ -396,19 +371,92 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     const dimensionInputs = document.querySelectorAll<HTMLInputElement>('.dimension-input');
     const stoneCards = document.querySelectorAll<HTMLButtonElement>('.stone-card');
     const detailCards = document.querySelectorAll<HTMLButtonElement>('.detail-card');
+    const calculatorContent = document.getElementById('calculator-content');
 
-    // Tab switching
-    function switchTab(tab: 'bust' | 'relief') {
+    // Tab switching with new animation logic
+    // Tab switching with simplified "classy" animation
+    async function switchTab(tab: 'bust' | 'relief') {
       state.activeTab = tab;
 
-      // Show calculator content on first tab selection
+      // FIRST TIME SELECTION: Major layout change
       if (!state.tabSelected) {
         state.tabSelected = true;
-        const calculatorContent = document.getElementById('calculator-content');
-        calculatorContent?.classList.remove('hidden');
+
+        // 1. FADE OUT EVERYTHING (Header + Calculator Container)
+        // We fade out the container so the "snap" resize happens while invisible.
+        const fadeOutPromises = [];
+        
+        if (sectionHeader) {
+          fadeOutPromises.push(
+            animate(sectionHeader, { opacity: 0 } as any, { duration: 0.3 } as any).finished
+          );
+        }
+        
+        if (calculatorContainer) {
+          fadeOutPromises.push(
+            animate(calculatorContainer, { opacity: 0 } as any, { duration: 0.3 } as any).finished
+          );
+        }
+        
+        await Promise.all(fadeOutPromises);
+
+        // 2. STATE SWITCH (Invisible)
+        // Apply all layout changes instantly while opacity is 0.
+        
+        // Hide header completely layout-wise
+        if (sectionHeader) {
+          sectionHeader.style.display = 'none';
+        }
+
+        // Activate calculator state
+        calculatorContainer?.setAttribute('data-state', 'active');
+        
+        // Apply manual styles for the active state to ensure "snap"
+        if (tabContainer) {
+           tabContainer.style.height = '64px';
+        }
+        if (calculatorContainer) {
+           calculatorContainer.style.maxWidth = '700px';
+        }
+        
+        // Show calculator content (still opacity 0 from parent/self)
+        if (calculatorContent) {
+           calculatorContent.classList.remove('hidden');
+           calculatorContent.style.opacity = '1'; // Reset its own opacity if needed
+           
+           // Ensure internal items are visible
+           const sections = calculatorContent.querySelectorAll('[data-step], #submit-area');
+           sections.forEach((el: any) => el.style.opacity = '1');
+        }
+
+        // Hide large images/text so the compact bar is correct
+        // const tabImages = document.querySelectorAll('.tab-image-container');
+        // tabImages.forEach((el: any) => el.style.opacity = '0');
+        
+        const tabTexts = document.querySelectorAll('.tab-text');
+        // We assume CSS handles the font-size snap based on data-state or we rely on the fade.
+        // If we need to force opacity 1 on texts (now small):
+        tabTexts.forEach((el: any) => el.style.opacity = '1');
+
+
+        // 3. FADE IN CALCULATOR (Container)
+        if (calculatorContainer) {
+          animate(calculatorContainer, { opacity: 1 } as any, { duration: 0.4, easing: "ease-out" } as any);
+        }
+        
+      } else {
+        // ALREADY ACTIVE: Just standard tab switching
+        // We don't need to do anything special here as the click handler updates global state references
+        // and 'updateTabVisuals' handles the class toggling.
       }
 
-      if (tab === 'bust') {
+      // Update Visuals for Tabs (Colors, etc.)
+      updateTabVisuals(tab);
+      updateCalculateButton();
+    }
+
+    function updateTabVisuals(activeTab: 'bust' | 'relief') {
+      if (activeTab === 'bust') {
         bustTab?.classList.remove('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
         bustTab?.classList.add('bg-brand-primary');
         bustTab?.setAttribute('aria-selected', 'true');
@@ -425,8 +473,6 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
         bustTab?.classList.add('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
         bustTab?.setAttribute('aria-selected', 'false');
       }
-
-      updateCalculateButton();
     }
 
     bustTab?.addEventListener('click', () => switchTab('bust'));
@@ -620,5 +666,45 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
 
   .dimension-input.border-red-500 {
     border-color: #ef4444;
+  }
+  
+  /* ANIMATION STATES */
+  /* Most states are now handled by Motion One JS, but we keep these for basic layout */
+  
+  [data-calculator][data-state="active"] .tab-image-container {
+    pointer-events: none;
+  }
+
+  [data-calculator][data-state="active"] .tab-text {
+    font-size: 1.125rem; /* text-lg */
+    white-space: nowrap;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  @media (min-width: 1024px) {
+    [data-calculator][data-state="active"] .tab-text {
+      font-size: 1.25rem; /* text-xl */
+    }
+  }
+
+  /* Active Calculator State - Default for contained tabs */
+  [data-calculator][data-state="active"] .tab-overlay {
+    background-color: rgb(44 38 108 / 0.5); /* brand-primary/50 - Light Blue for inactive */
+  }
+
+  [data-calculator][data-state="active"] .group:hover .tab-overlay {
+    background-color: rgb(44 38 108 / 0.6);
+  }
+
+  /* Active/Selected Tab Overlay Style (More Specific) */
+  [data-calculator][data-state="active"] #bust-tab[aria-selected="true"] .tab-overlay,
+  [data-calculator][data-state="active"] #relief-tab[aria-selected="true"] .tab-overlay {
+    background-color: rgb(44 38 108 / 0.85); /* brand-primary/85 - Deep Blue */
+  }
+  
+  [data-calculator][data-state="active"] #bust-tab[aria-selected="true"]:hover .tab-overlay,
+  [data-calculator][data-state="active"] #relief-tab[aria-selected="true"]:hover .tab-overlay {
+    background-color: rgb(44 38 108 / 0.95); /* brand-primary/95 */
   }
 </style>

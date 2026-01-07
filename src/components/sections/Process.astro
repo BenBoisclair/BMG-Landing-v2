@@ -287,16 +287,33 @@ const icons = [
   /* Mobile optimizations */
   @media (max-width: 768px) {
     .accordion-container {
-      height: 350px;
-      gap: 4px;
+      flex-direction: column;
+      height: 600px; /* Increased height for vertical stacking */
+      gap: 8px;
+    }
+
+    .collapsed-content {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 0 1rem;
     }
 
     .collapsed-content .step-number {
       font-size: 1.25rem;
+      margin-bottom: 0;
     }
 
     .collapsed-content .step-title-short {
-      font-size: 0.75rem;
+      font-size: 0.875rem;
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    .collapsed-content .step-icon-container {
+       margin-top: 0;
+       margin-left: auto;
+       padding: 0.5rem;
     }
 
     .expanded-header {
