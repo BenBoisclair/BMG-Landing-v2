@@ -77,38 +77,58 @@
     }
   },
   "priceEstimation": {
-    "title": "تقدير السعر",
-    "stoneGrade": "اختر درجة الحجر",
-    "dimensions": "أدخل الأبعاد",
-    "length": "الطول",
-    "width": "العرض",
-    "height": "الارتفاع",
-    "volume": "الحجم",
-    "selectGrade": "اختر درجة الحجر",
-    "enterDimensions": "أدخل الأبعاد",
-    "grades": {
-      "a": { "label": "الدرجة A", "description": "حجر كلاسيكي" },
-      "aa": { "label": "الدرجة AA", "description": "حجر فاخر" },
-      "aaPlus": { "label": "الدرجة AA+", "description": "حجر شبه كريم" }
-    },
+    "title": "احصل على تقدير السعر",
+    "subtitle": "أجب على بعض الأسئلة للحصول على سعر وجدول زمني تقديري لمشروع المنحوتة الخاص بك",
     "bust": {
-      "tab": "تمثال نصفي",
-      "title": "حاسبة أسعار التمثال النصفي",
-      "maxDimensions": "الحد الأقصى: 50 × 50 × 50 سم"
+      "tab": "تمثال نصفي"
     },
     "relief": {
-      "tab": "نقش بارز",
-      "title": "حاسبة أسعار النقش البارز",
-      "maxDimensions": "الحد الأقصى: 50 × 50 × 30 سم"
+      "tab": "نقش بارز"
     },
+    "steps": {
+      "dimensions": {
+        "title": "1. ما هي الأبعاد؟",
+        "height": "الارتفاع (مم)",
+        "width": "العرض (مم)",
+        "depth": "العمق (مم)",
+        "maxHint": "الحد الأقصى: 3000 مم (3 م)",
+        "remark": "<strong>ملاحظة:</strong> إذا تجاوزت أبعاد المنحوتة 3 أمتار (3000 مم)، يرجى الاتصال بنا مباشرة للحصول على استشارة وعرض سعر مخصص."
+      },
+      "stoneCategory": {
+        "title": "2. ما فئة الحجر؟",
+        "grades": {
+          "aPlusPlus": { "label": "A++", "description": "شبه كريم" },
+          "aPlus": { "label": "A+", "description": "فاخر" },
+          "a": { "label": "A", "description": "جرانيت كلاسيكي" }
+        },
+        "help": "<strong>غير متأكد من الدرجة؟</strong> قم بزيارة صفحة المواد لمعرفة المزيد عن فئات الحجر وإيجاد الدرجة المناسبة لمشروعك."
+      },
+      "detailLevel": {
+        "title": "3. ما مستوى التفاصيل؟",
+        "levels": {
+          "minimal": {
+            "label": "بسيط",
+            "description": "أشكال بسيطة وأسطح ناعمة مع ملمس قليل"
+          },
+          "refine": {
+            "label": "متقن",
+            "description": "ملامح محددة مع بعض الملمس والتفاصيل المنحوتة"
+          },
+          "realistic": {
+            "label": "واقعي",
+            "description": "تفاصيل عالية مع ملمس معقد وحرفية دقيقة"
+          }
+        }
+      }
+    },
+    "calculateButton": "حساب التقدير",
     "estimatedPrice": "السعر التقديري",
-    "selectOptions": "اختر الخيارات أعلاه",
-    "selectAllOptions": "اختر جميع الخيارات",
     "priceDisclaimer": "*قد يختلف السعر النهائي بناءً على المتطلبات المحددة",
+    "selectAllOptions": "يرجى إكمال جميع الاختيارات أعلاه",
     "getCustomQuote": "احصل على عرض سعر مخصص",
     "validation": {
       "minValue": "القيمة يجب أن تكون أكبر من 0",
-      "maxExceeded": "الحد الأقصى {max} سم"
+      "maxExceeded": "الحد الأقصى 3000 مم"
     }
   },
   "trustedCultures": {

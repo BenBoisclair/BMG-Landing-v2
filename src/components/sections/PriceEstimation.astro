@@ -1,26 +1,48 @@
 ---
 import { useI18n } from '../../i18n/utils';
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
+
+// Image paths for stone grades
+const stoneImages = {
+  aPlusPlus: '/images/26d483a8073164eff5528e49cd44d914e594b8e5.png',
+  aPlus: '/images/c267197a2cfe6eb447d0bc2c28a0208a6d93b89e.png',
+  a: '/images/a04e88f2456f5503d20950b28dd386f0f8b55b3b.png',
+};
+
+// Image paths for detail levels
+const detailImages = {
+  minimal: '/images/13ba63e01b4af986d598682d96e0f684ab188e70.png',
+  refine: '/images/13ba63e01b4af986d598682d96e0f684ab188e70.png', // Using minimal as placeholder
+  realistic: '/images/e1c52a1a4e99255d1ee041a902eb29a962d3d593.png',
+};
+
+// Materials page link based on language
+const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
 ---
 
-<section class="py-16 lg:py-24 bg-white" id="price-estimation">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-16 lg:py-24 bg-gray-50" id="price-estimation">
+  <div class="max-w-[896px] mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
-    <h2 class="text-3xl lg:text-4xl font-bold text-center mb-8 text-brand-primary">
-      {t.priceEstimation.title}
-    </h2>
+    <div class="text-center mb-8">
+      <h2 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-4">
+        {t.priceEstimation.title}
+      </h2>
+      <p class="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
+        {t.priceEstimation.subtitle}
+      </p>
+    </div>
 
-    <!-- Tab Container -->
-    <div class="w-full">
-      <!-- Tab Buttons -->
-      <div class="flex rounded-lg overflow-hidden border-2 border-brand-dark" role="tablist" aria-label="Price estimation calculator type">
+    <!-- Main Calculator Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden" data-calculator>
+      <!-- Tab Header -->
+      <div class="flex border-b border-brand-medium/30" role="tablist" aria-label="Sculpture type">
         <button
           id="bust-tab"
           role="tab"
-          aria-selected="false"
+          aria-selected="true"
           aria-controls="bust-panel"
-          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-brand-medium hover:bg-brand-medium-hover transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2"
+          class="flex-1 h-[76px] text-xl font-extrabold text-white bg-brand-primary transition-all duration-300 focus:outline-none"
           data-tab="bust"
         >
           {t.priceEstimation.bust.tab}
@@ -30,235 +52,279 @@ const { t } = useI18n(Astro.url);
           role="tab"
           aria-selected="false"
           aria-controls="relief-panel"
-          class="flex-1 py-4 px-6 text-xl lg:text-2xl font-semibold text-white bg-brand-medium hover:bg-brand-medium-hover transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-brand-dark focus:ring-offset-2"
+          class="flex-1 h-[76px] text-xl font-extrabold text-white bg-[#9b96d3] hover:bg-[#8a85c2] transition-all duration-300 focus:outline-none"
           data-tab="relief"
         >
           {t.priceEstimation.relief.tab}
         </button>
       </div>
 
-      <!-- Tab Panels -->
-      <!-- Bust Calculator Panel -->
-      <div
-        id="bust-panel"
-        role="tabpanel"
-        aria-labelledby="bust-tab"
-        class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200 hidden"
-      >
-        <h3 class="text-xl font-semibold text-brand-dark mb-4">{t.priceEstimation.bust.title}</h3>
+      <!-- Calculator Content -->
+      <div class="p-6 lg:p-8 space-y-8">
+        <!-- Step 1: Dimensions -->
+        <div class="space-y-4" data-step="dimensions">
+          <h3 class="text-base font-normal text-gray-800">
+            {t.priceEstimation.steps.dimensions.title}
+          </h3>
 
-        <!-- Stone Grade Selection -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.stoneGrade}</label>
-          <div class="grid grid-cols-3 gap-3" role="radiogroup" aria-label={t.priceEstimation.stoneGrade}>
-            <button class="bust-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="A" data-price="0.10" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.a.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.a.description}</span>
-            </button>
-            <button class="bust-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="AA" data-price="0.15" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.aa.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.aa.description}</span>
-            </button>
-            <button class="bust-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="AA+" data-price="0.25" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.aaPlus.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.aaPlus.description}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Dimension Inputs -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.dimensions}</label>
+          <!-- Dimension Inputs -->
           <div class="grid grid-cols-3 gap-4">
-            <!-- Length Input -->
-            <div class="dimension-input-group">
-              <label for="bust-length" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.length}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="bust-length"
-                  name="bust-length"
-                  min="1"
-                  max="50"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="bust-length-unit"
-                />
-                <span id="bust-length-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
+            <!-- Height -->
+            <div class="space-y-2">
+              <label for="dimension-height" class="block text-sm text-gray-600">
+                {t.priceEstimation.steps.dimensions.height}
+              </label>
+              <input
+                type="number"
+                id="dimension-height"
+                name="height"
+                min="1"
+                max="3000"
+                placeholder="e.g., 600"
+                class="dimension-input w-full h-[50px] px-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 transition-colors"
+                data-dimension="height"
+              />
+              <p class="text-xs text-gray-500">{t.priceEstimation.steps.dimensions.maxHint}</p>
             </div>
-            <!-- Width Input -->
-            <div class="dimension-input-group">
-              <label for="bust-width" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.width}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="bust-width"
-                  name="bust-width"
-                  min="1"
-                  max="50"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="bust-width-unit"
-                />
-                <span id="bust-width-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
+
+            <!-- Width -->
+            <div class="space-y-2">
+              <label for="dimension-width" class="block text-sm text-gray-600">
+                {t.priceEstimation.steps.dimensions.width}
+              </label>
+              <input
+                type="number"
+                id="dimension-width"
+                name="width"
+                min="1"
+                max="3000"
+                placeholder="e.g., 450"
+                class="dimension-input w-full h-[50px] px-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 transition-colors"
+                data-dimension="width"
+              />
+              <p class="text-xs text-gray-500">{t.priceEstimation.steps.dimensions.maxHint}</p>
             </div>
-            <!-- Height Input -->
-            <div class="dimension-input-group">
-              <label for="bust-height" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.height}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="bust-height"
-                  name="bust-height"
-                  min="1"
-                  max="50"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="bust-height-unit"
-                />
-                <span id="bust-height-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
+
+            <!-- Depth -->
+            <div class="space-y-2">
+              <label for="dimension-depth" class="block text-sm text-gray-600">
+                {t.priceEstimation.steps.dimensions.depth}
+              </label>
+              <input
+                type="number"
+                id="dimension-depth"
+                name="depth"
+                min="1"
+                max="3000"
+                placeholder="e.g., 300"
+                class="dimension-input w-full h-[50px] px-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 transition-colors"
+                data-dimension="depth"
+              />
+              <p class="text-xs text-gray-500">{t.priceEstimation.steps.dimensions.maxHint}</p>
             </div>
           </div>
-          <p class="text-xs text-gray-500 mt-2">{t.priceEstimation.bust.maxDimensions}</p>
-        </div>
 
-        <!-- Volume Display -->
-        <div class="mb-4 p-3 bg-gray-100 rounded-lg">
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-gray-600">{t.priceEstimation.volume}</span>
-            <span id="bust-volume" class="font-medium text-brand-dark">0 cm³</span>
+          <!-- Remark Box -->
+          <div class="bg-[#fff6f6] border-l-4 border-accent-red rounded-r px-4 py-3">
+            <p class="text-sm text-accent-red" set:html={t.priceEstimation.steps.dimensions.remark}></p>
           </div>
         </div>
 
-        <!-- Estimated Price Display -->
-        <div class="mt-8 p-4 bg-brand-dark rounded-lg text-center">
-          <p class="text-white text-sm mb-1">{t.priceEstimation.estimatedPrice}</p>
-          <p id="bust-price" class="text-3xl font-bold text-white" data-select-grade={t.priceEstimation.selectGrade} data-enter-dimensions={t.priceEstimation.enterDimensions}>{t.priceEstimation.selectGrade}</p>
-          <p class="text-white/70 text-xs mt-2">{t.priceEstimation.priceDisclaimer}</p>
+        <!-- Step 2: Stone Category -->
+        <div class="space-y-4" data-step="stone">
+          <h3 class="text-base font-normal text-gray-800">
+            {t.priceEstimation.steps.stoneCategory.title}
+          </h3>
+
+          <!-- Stone Grade Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" role="radiogroup" aria-label="Stone category">
+            <!-- A++ Semi-Precious -->
+            <button
+              type="button"
+              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-stone="aPlusPlus"
+              data-price="0.00025"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden">
+                <img
+                  src={stoneImages.aPlusPlus}
+                  alt="A++ Semi-Precious stone"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-4 text-center">
+                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.aPlusPlus.label}</p>
+                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.aPlusPlus.description}</p>
+              </div>
+            </button>
+
+            <!-- A+ Luxury -->
+            <button
+              type="button"
+              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-stone="aPlus"
+              data-price="0.00015"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden">
+                <img
+                  src={stoneImages.aPlus}
+                  alt="A+ Luxury stone"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-4 text-center">
+                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.aPlus.label}</p>
+                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.aPlus.description}</p>
+              </div>
+            </button>
+
+            <!-- A Classic -->
+            <button
+              type="button"
+              class="stone-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-stone="a"
+              data-price="0.00010"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden">
+                <img
+                  src={stoneImages.a}
+                  alt="A Classic Granite stone"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-4 text-center">
+                <p class="text-base text-gray-700 font-normal">{t.priceEstimation.steps.stoneCategory.grades.a.label}</p>
+                <p class="text-sm text-gray-500 opacity-75">{t.priceEstimation.steps.stoneCategory.grades.a.description}</p>
+              </div>
+            </button>
+          </div>
+
+          <!-- Help Box -->
+          <div class="bg-[#fef2f2] border-l-4 border-accent-red rounded-r px-4 py-3">
+            <p class="text-sm text-[#9f0712]">
+              <span set:html={t.priceEstimation.steps.stoneCategory.help.split('Visit')[0]}></span>
+              <a href={materialsLink} class="underline hover:no-underline">Visit our Materials Page</a>
+              {t.priceEstimation.steps.stoneCategory.help.split('Materials Page')[1]?.replace('</strong>', '') || ' to learn more about stone categories and find the right grade for your project.'}
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3: Detail Level -->
+        <div class="space-y-4" data-step="detail">
+          <h3 class="text-base font-normal text-gray-800">
+            {t.priceEstimation.steps.detailLevel.title}
+          </h3>
+
+          <!-- Detail Level Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" role="radiogroup" aria-label="Detail level">
+            <!-- Minimal -->
+            <button
+              type="button"
+              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-detail="minimal"
+              data-addition="0"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden">
+                <img
+                  src={detailImages.minimal}
+                  alt="Minimal detail sculpture"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-4 text-left">
+                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.minimal.label}</p>
+                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.minimal.description}</p>
+              </div>
+            </button>
+
+            <!-- Refine -->
+            <button
+              type="button"
+              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-detail="refine"
+              data-addition="500"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden relative">
+                <img
+                  src={detailImages.refine}
+                  alt="Refine detail sculpture"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-black/20"></div>
+              </div>
+              <div class="p-4 text-left">
+                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.refine.label}</p>
+                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.refine.description}</p>
+              </div>
+            </button>
+
+            <!-- Realistic -->
+            <button
+              type="button"
+              class="detail-card group bg-white border-2 border-gray-300 rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+              data-detail="realistic"
+              data-addition="1500"
+              role="radio"
+              aria-checked="false"
+            >
+              <div class="h-32 overflow-hidden">
+                <img
+                  src={detailImages.realistic}
+                  alt="Realistic detail sculpture"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-4 text-left">
+                <p class="text-base text-gray-800 font-normal mb-2">{t.priceEstimation.steps.detailLevel.levels.realistic.label}</p>
+                <p class="text-sm text-gray-600 leading-5">{t.priceEstimation.steps.detailLevel.levels.realistic.description}</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button
+          type="button"
+          id="calculate-btn"
+          disabled
+          class="w-full h-14 rounded-lg text-base font-normal transition-all duration-300 bg-gray-300 text-gray-500 cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed enabled:bg-brand-primary enabled:text-white enabled:cursor-pointer enabled:hover:bg-brand-primary/90 flex items-center justify-center gap-2"
+          data-calculate
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+          </svg>
+          <span>{t.priceEstimation.calculateButton}</span>
+        </button>
+
+        <!-- Price Result (Hidden initially) -->
+        <div id="price-result" class="hidden mt-6 p-6 bg-brand-primary rounded-lg text-center" aria-live="polite">
+          <p class="text-white/80 text-sm mb-2">{t.priceEstimation.estimatedPrice}</p>
+          <p id="price-value" class="text-4xl font-bold text-white mb-2">$0.00</p>
+          <p class="text-white/60 text-xs">{t.priceEstimation.priceDisclaimer}</p>
         </div>
 
         <!-- Contact CTA -->
-        <div class="mt-4 text-center">
-          <a href="#contact" class="inline-block px-8 py-3 bg-bmg-gold text-white font-semibold rounded-lg hover:bg-bmg-gold/90 transition-colors">
-            {t.priceEstimation.getCustomQuote}
-          </a>
-        </div>
-      </div>
-
-      <!-- Relief Calculator Panel -->
-      <div
-        id="relief-panel"
-        role="tabpanel"
-        aria-labelledby="relief-tab"
-        class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200 hidden"
-      >
-        <h3 class="text-xl font-semibold text-brand-dark mb-4">{t.priceEstimation.relief.title}</h3>
-
-        <!-- Stone Grade Selection -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.stoneGrade}</label>
-          <div class="grid grid-cols-3 gap-3" role="radiogroup" aria-label={t.priceEstimation.stoneGrade}>
-            <button class="relief-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="A" data-price="0.10" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.a.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.a.description}</span>
-            </button>
-            <button class="relief-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="AA" data-price="0.15" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.aa.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.aa.description}</span>
-            </button>
-            <button class="relief-grade-btn px-4 py-3 border-2 border-brand-dark rounded-lg text-brand-dark hover:bg-brand-dark hover:text-white transition-colors" data-grade="AA+" data-price="0.25" role="radio" aria-checked="false">
-              <span class="block font-semibold">{t.priceEstimation.grades.aaPlus.label}</span>
-              <span class="block text-sm opacity-75">{t.priceEstimation.grades.aaPlus.description}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Dimension Inputs -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">{t.priceEstimation.dimensions}</label>
-          <div class="grid grid-cols-3 gap-4">
-            <!-- Length Input -->
-            <div class="dimension-input-group">
-              <label for="relief-length" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.length}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="relief-length"
-                  name="relief-length"
-                  min="1"
-                  max="50"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="relief-length-unit"
-                />
-                <span id="relief-length-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
-            </div>
-            <!-- Width Input -->
-            <div class="dimension-input-group">
-              <label for="relief-width" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.width}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="relief-width"
-                  name="relief-width"
-                  min="1"
-                  max="50"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="relief-width-unit"
-                />
-                <span id="relief-width-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
-            </div>
-            <!-- Height Input -->
-            <div class="dimension-input-group">
-              <label for="relief-height" class="block text-xs text-gray-500 mb-1">{t.priceEstimation.height}</label>
-              <div class="relative">
-                <input
-                  type="number"
-                  id="relief-height"
-                  name="relief-height"
-                  min="1"
-                  max="30"
-                  step="0.1"
-                  class="dimension-input w-full h-12 px-3 pr-10 border-2 border-gray-300 rounded-lg text-lg font-semibold text-center focus:outline-none focus:border-brand-dark focus:ring-2 focus:ring-brand-dark/20 transition-colors"
-                  placeholder="0"
-                  aria-describedby="relief-height-unit"
-                />
-                <span id="relief-height-unit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm pointer-events-none">cm</span>
-              </div>
-            </div>
-          </div>
-          <p class="text-xs text-gray-500 mt-2">{t.priceEstimation.relief.maxDimensions}</p>
-        </div>
-
-        <!-- Volume Display -->
-        <div class="mb-4 p-3 bg-gray-100 rounded-lg">
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-gray-600">{t.priceEstimation.volume}</span>
-            <span id="relief-volume" class="font-medium text-brand-dark">0 cm³</span>
-          </div>
-        </div>
-
-        <!-- Estimated Price Display -->
-        <div class="mt-8 p-4 bg-brand-dark rounded-lg text-center">
-          <p class="text-white text-sm mb-1">{t.priceEstimation.estimatedPrice}</p>
-          <p id="relief-price" class="text-3xl font-bold text-white" data-select-grade={t.priceEstimation.selectGrade} data-enter-dimensions={t.priceEstimation.enterDimensions}>{t.priceEstimation.selectGrade}</p>
-          <p class="text-white/70 text-xs mt-2">{t.priceEstimation.priceDisclaimer}</p>
-        </div>
-
-        <!-- Contact CTA -->
-        <div class="mt-4 text-center">
-          <a href="#contact" class="inline-block px-8 py-3 bg-bmg-gold text-white font-semibold rounded-lg hover:bg-bmg-gold/90 transition-colors">
+        <div class="text-center pt-4">
+          <a
+            href="#contact"
+            class="inline-block px-8 py-3 bg-bmg-gold text-white font-semibold rounded-lg hover:bg-bmg-gold/90 transition-colors"
+          >
             {t.priceEstimation.getCustomQuote}
           </a>
         </div>
@@ -268,228 +334,255 @@ const { t } = useI18n(Astro.url);
 </section>
 
 <script>
-  // Configuration
-  const CALCULATOR_CONFIG = {
-    bust: {
-      maxLength: 50,
-      maxWidth: 50,
-      maxHeight: 50,
-    },
-    relief: {
-      maxLength: 50,
-      maxWidth: 50,
-      maxHeight: 30,
-    },
-    grades: {
-      'A': 0.10,
-      'AA': 0.15,
-      'AA+': 0.25,
-    },
-  };
-
-  // Tab switching functionality
   document.addEventListener('DOMContentLoaded', () => {
+    // State
+    interface CalculatorState {
+      activeTab: 'bust' | 'relief';
+      dimensions: {
+        height: number;
+        width: number;
+        depth: number;
+      };
+      stoneGrade: string | null;
+      stonePricePerMm3: number;
+      detailLevel: string | null;
+      detailAddition: number;
+    }
+
+    const state: CalculatorState = {
+      activeTab: 'bust',
+      dimensions: { height: 0, width: 0, depth: 0 },
+      stoneGrade: null,
+      stonePricePerMm3: 0,
+      detailLevel: null,
+      detailAddition: 0,
+    };
+
+    // Elements
     const bustTab = document.getElementById('bust-tab');
     const reliefTab = document.getElementById('relief-tab');
-    const bustPanel = document.getElementById('bust-panel');
-    const reliefPanel = document.getElementById('relief-panel');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const priceResult = document.getElementById('price-result');
+    const priceValue = document.getElementById('price-value');
+    const dimensionInputs = document.querySelectorAll<HTMLInputElement>('.dimension-input');
+    const stoneCards = document.querySelectorAll<HTMLButtonElement>('.stone-card');
+    const detailCards = document.querySelectorAll<HTMLButtonElement>('.detail-card');
 
-    function switchTab(activeTab: string) {
-      if (activeTab === 'bust') {
-        bustTab?.classList.remove('bg-brand-medium', 'hover:bg-brand-medium-hover');
-        bustTab?.classList.add('bg-brand-dark');
+    // Tab switching
+    function switchTab(tab: 'bust' | 'relief') {
+      state.activeTab = tab;
+
+      if (tab === 'bust') {
+        bustTab?.classList.remove('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
+        bustTab?.classList.add('bg-brand-primary');
         bustTab?.setAttribute('aria-selected', 'true');
 
-        reliefTab?.classList.remove('bg-brand-dark');
-        reliefTab?.classList.add('bg-brand-medium', 'hover:bg-brand-medium-hover');
+        reliefTab?.classList.remove('bg-brand-primary');
+        reliefTab?.classList.add('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
         reliefTab?.setAttribute('aria-selected', 'false');
-
-        bustPanel?.classList.remove('hidden');
-        reliefPanel?.classList.add('hidden');
       } else {
-        reliefTab?.classList.remove('bg-brand-medium', 'hover:bg-brand-medium-hover');
-        reliefTab?.classList.add('bg-brand-dark');
+        reliefTab?.classList.remove('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
+        reliefTab?.classList.add('bg-brand-primary');
         reliefTab?.setAttribute('aria-selected', 'true');
 
-        bustTab?.classList.remove('bg-brand-dark');
-        bustTab?.classList.add('bg-brand-medium', 'hover:bg-brand-medium-hover');
+        bustTab?.classList.remove('bg-brand-primary');
+        bustTab?.classList.add('bg-[#9b96d3]', 'hover:bg-[#8a85c2]');
         bustTab?.setAttribute('aria-selected', 'false');
-
-        reliefPanel?.classList.remove('hidden');
-        bustPanel?.classList.add('hidden');
       }
+
+      updateCalculateButton();
     }
 
     bustTab?.addEventListener('click', () => switchTab('bust'));
     reliefTab?.addEventListener('click', () => switchTab('relief'));
 
-    // Keyboard navigation for tabs
-    [bustTab, reliefTab].forEach(tab => {
-      tab?.addEventListener('keydown', (e: KeyboardEvent) => {
+    // Dimension inputs
+    dimensionInputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        const dimension = input.dataset.dimension as 'height' | 'width' | 'depth';
+        let value = parseFloat(input.value) || 0;
+
+        // Clamp to max
+        if (value > 3000) {
+          value = 3000;
+          input.value = '3000';
+        }
+
+        state.dimensions[dimension] = Math.max(0, value);
+
+        // Visual validation
+        if (value > 0 && value <= 3000) {
+          input.classList.remove('border-red-500');
+          input.classList.add('border-green-500');
+        } else if (value > 3000) {
+          input.classList.remove('border-green-500');
+          input.classList.add('border-red-500');
+        } else {
+          input.classList.remove('border-green-500', 'border-red-500');
+        }
+
+        updateCalculateButton();
+      });
+    });
+
+    // Stone card selection
+    stoneCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        // Remove selection from all
+        stoneCards.forEach((c) => {
+          c.classList.remove('border-brand-primary', 'ring-2', 'ring-brand-primary');
+          c.classList.add('border-gray-300');
+          c.setAttribute('aria-checked', 'false');
+        });
+
+        // Select this card
+        card.classList.remove('border-gray-300');
+        card.classList.add('border-brand-primary', 'ring-2', 'ring-brand-primary');
+        card.setAttribute('aria-checked', 'true');
+
+        state.stoneGrade = card.dataset.stone || null;
+        state.stonePricePerMm3 = parseFloat(card.dataset.price || '0');
+
+        updateCalculateButton();
+      });
+
+      // Keyboard navigation
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
           e.preventDefault();
-          const currentTab = e.key === 'ArrowRight' ? 'relief' : 'bust';
-          switchTab(currentTab);
-          (currentTab === 'bust' ? bustTab : reliefTab)?.focus();
+          const cards = Array.from(stoneCards);
+          const currentIndex = cards.indexOf(card);
+          let newIndex: number;
+
+          if (e.key === 'ArrowRight') {
+            newIndex = (currentIndex + 1) % cards.length;
+          } else {
+            newIndex = (currentIndex - 1 + cards.length) % cards.length;
+          }
+
+          (cards[newIndex] as HTMLButtonElement).click();
+          (cards[newIndex] as HTMLButtonElement).focus();
         }
       });
     });
 
-    // Calculator State
-    interface CalculatorState {
-      grade: string | null;
-      pricePerCm3: number;
-      length: number;
-      width: number;
-      height: number;
+    // Detail card selection
+    detailCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        // Remove selection from all
+        detailCards.forEach((c) => {
+          c.classList.remove('border-brand-primary', 'ring-2', 'ring-brand-primary');
+          c.classList.add('border-gray-300');
+          c.setAttribute('aria-checked', 'false');
+        });
+
+        // Select this card
+        card.classList.remove('border-gray-300');
+        card.classList.add('border-brand-primary', 'ring-2', 'ring-brand-primary');
+        card.setAttribute('aria-checked', 'true');
+
+        state.detailLevel = card.dataset.detail || null;
+        state.detailAddition = parseFloat(card.dataset.addition || '0');
+
+        updateCalculateButton();
+      });
+
+      // Keyboard navigation
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          const cards = Array.from(detailCards);
+          const currentIndex = cards.indexOf(card);
+          let newIndex: number;
+
+          if (e.key === 'ArrowRight') {
+            newIndex = (currentIndex + 1) % cards.length;
+          } else {
+            newIndex = (currentIndex - 1 + cards.length) % cards.length;
+          }
+
+          (cards[newIndex] as HTMLButtonElement).click();
+          (cards[newIndex] as HTMLButtonElement).focus();
+        }
+      });
+    });
+
+    // Check if all selections are complete
+    function isFormComplete(): boolean {
+      const { dimensions, stoneGrade, detailLevel } = state;
+      return (
+        dimensions.height > 0 &&
+        dimensions.width > 0 &&
+        dimensions.depth > 0 &&
+        stoneGrade !== null &&
+        detailLevel !== null
+      );
     }
 
-    let bustState: CalculatorState = { grade: null, pricePerCm3: 0, length: 0, width: 0, height: 0 };
-    let reliefState: CalculatorState = { grade: null, pricePerCm3: 0, length: 0, width: 0, height: 0 };
-
-    // Update calculation and display
-    function updateCalculation(type: 'bust' | 'relief') {
-      const state = type === 'bust' ? bustState : reliefState;
-      const priceEl = document.getElementById(`${type}-price`);
-      const volumeEl = document.getElementById(`${type}-volume`);
-
-      // Calculate volume
-      const volume = state.length * state.width * state.height;
-
-      // Update volume display
-      if (volumeEl) {
-        volumeEl.textContent = volume > 0 ? `${volume.toLocaleString()} cm³` : '0 cm³';
-      }
-
-      // Calculate and display price
-      if (priceEl) {
-        if (state.grade === null) {
-          priceEl.textContent = priceEl.dataset.selectGrade || 'Select a stone grade';
-        } else if (volume <= 0) {
-          priceEl.textContent = priceEl.dataset.enterDimensions || 'Enter dimensions';
+    // Update calculate button state
+    function updateCalculateButton() {
+      if (calculateBtn) {
+        if (isFormComplete()) {
+          calculateBtn.removeAttribute('disabled');
         } else {
-          const price = volume * state.pricePerCm3;
-          priceEl.textContent = `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+          calculateBtn.setAttribute('disabled', '');
         }
       }
     }
 
-    // Setup grade buttons
-    function setupGradeButtons(type: 'bust' | 'relief') {
-      const state = type === 'bust' ? bustState : reliefState;
-      const buttons = document.querySelectorAll(`.${type}-grade-btn`);
-
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          // Remove active state from all buttons
-          buttons.forEach((b) => {
-            b.classList.remove('bg-brand-dark', 'text-white');
-            b.classList.add('text-brand-dark');
-            b.setAttribute('aria-checked', 'false');
-          });
-
-          // Add active state to clicked button
-          btn.classList.add('bg-brand-dark', 'text-white');
-          btn.classList.remove('text-brand-dark');
-          btn.setAttribute('aria-checked', 'true');
-
-          // Update state
-          const btnEl = btn as HTMLElement;
-          state.grade = btnEl.dataset.grade || null;
-          state.pricePerCm3 = parseFloat(btnEl.dataset.price || '0');
-
-          updateCalculation(type);
-        });
-
-        // Keyboard navigation for grade buttons
-        btn.addEventListener('keydown', (e: KeyboardEvent) => {
-          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            e.preventDefault();
-            const btnsArray = Array.from(buttons);
-            const currentIndex = btnsArray.indexOf(btn);
-            let newIndex: number;
-
-            if (e.key === 'ArrowRight') {
-              newIndex = (currentIndex + 1) % btnsArray.length;
-            } else {
-              newIndex = (currentIndex - 1 + btnsArray.length) % btnsArray.length;
-            }
-
-            (btnsArray[newIndex] as HTMLElement).click();
-            (btnsArray[newIndex] as HTMLElement).focus();
-          }
-        });
-      });
+    // Calculate price
+    function calculatePrice(): number {
+      const { dimensions, stonePricePerMm3, detailAddition } = state;
+      const volume = dimensions.height * dimensions.width * dimensions.depth;
+      const basePrice = volume * stonePricePerMm3;
+      return basePrice + detailAddition;
     }
 
-    // Setup dimension inputs
-    function setupDimensionInputs(type: 'bust' | 'relief') {
-      const state = type === 'bust' ? bustState : reliefState;
-      const config = CALCULATOR_CONFIG[type];
-
-      const dimensions = ['length', 'width', 'height'] as const;
-
-      dimensions.forEach((dim) => {
-        const input = document.getElementById(`${type}-${dim}`) as HTMLInputElement;
-        if (!input) return;
-
-        const maxKey = `max${dim.charAt(0).toUpperCase() + dim.slice(1)}` as keyof typeof config;
-        const max = config[maxKey];
-
-        // Set max attribute
-        input.max = String(max);
-
-        // Input event for real-time updates
-        input.addEventListener('input', () => {
-          let value = parseFloat(input.value) || 0;
-
-          // Clamp to max
-          if (value > max) {
-            value = max;
-            input.value = String(max);
-          }
-
-          // Update state
-          state[dim] = Math.max(0, value);
-
-          // Visual validation
-          if (value > 0 && value <= max) {
-            input.classList.remove('border-red-500');
-            input.classList.add('border-green-500');
-          } else if (value > max) {
-            input.classList.remove('border-green-500');
-            input.classList.add('border-red-500');
-          } else {
-            input.classList.remove('border-green-500', 'border-red-500');
-          }
-
-          updateCalculation(type);
-        });
-
-        // Blur event for final validation
-        input.addEventListener('blur', () => {
-          const value = parseFloat(input.value) || 0;
-          if (value > max) {
-            input.value = String(max);
-            state[dim] = max;
-            updateCalculation(type);
-          }
-          // Reset border color on blur if valid
-          if (value > 0 && value <= max) {
-            input.classList.remove('border-red-500');
-            input.classList.add('border-gray-300');
-          }
-        });
-      });
+    // Format price
+    function formatPrice(price: number): string {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(price);
     }
 
-    // Initialize calculators
-    setupGradeButtons('bust');
-    setupGradeButtons('relief');
-    setupDimensionInputs('bust');
-    setupDimensionInputs('relief');
+    // Calculate button click
+    calculateBtn?.addEventListener('click', () => {
+      if (!isFormComplete()) return;
 
-    // Initialize first tab
-    switchTab('bust');
+      const price = calculatePrice();
+
+      if (priceValue) {
+        priceValue.textContent = formatPrice(price);
+      }
+
+      priceResult?.classList.remove('hidden');
+
+      // Scroll to result
+      priceResult?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Initialize
+    updateCalculateButton();
   });
 </script>
+
+<style>
+  /* Selected card styles */
+  .stone-card[aria-checked="true"],
+  .detail-card[aria-checked="true"] {
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 2px var(--color-brand-primary);
+  }
+
+  /* Input validation states */
+  .dimension-input.border-green-500 {
+    border-color: #22c55e;
+  }
+
+  .dimension-input.border-red-500 {
+    border-color: #ef4444;
+  }
+</style>

@@ -77,38 +77,58 @@
     }
   },
   "priceEstimation": {
-    "title": "Price Estimation",
-    "stoneGrade": "Select Stone Grade",
-    "dimensions": "Enter Dimensions",
-    "length": "Length",
-    "width": "Width",
-    "height": "Height",
-    "volume": "Volume",
-    "selectGrade": "Select a stone grade",
-    "enterDimensions": "Enter dimensions",
-    "grades": {
-      "a": { "label": "Grade A", "description": "Classic Stone" },
-      "aa": { "label": "Grade AA", "description": "Luxury Stone" },
-      "aaPlus": { "label": "Grade AA+", "description": "Semi-Precious Stone" }
-    },
+    "title": "Get Your Price Estimation",
+    "subtitle": "Answer a few questions to receive an estimated price and timeline for your sculpture project",
     "bust": {
-      "tab": "Bust",
-      "title": "Bust Price Calculator",
-      "maxDimensions": "Max: 50 × 50 × 50 cm"
+      "tab": "Bust Sculpture"
     },
     "relief": {
-      "tab": "Relief",
-      "title": "Relief Price Calculator",
-      "maxDimensions": "Max: 50 × 50 × 30 cm"
+      "tab": "Relief Sculpture"
     },
+    "steps": {
+      "dimensions": {
+        "title": "1. What are the dimensions?",
+        "height": "Height (mm)",
+        "width": "Width (mm)",
+        "depth": "Depth (mm)",
+        "maxHint": "Max: 3000mm (3m)",
+        "remark": "<strong>Remark:</strong> If your sculpture dimensions exceed 3 meters (3000mm), please contact us directly for a custom consultation and quote."
+      },
+      "stoneCategory": {
+        "title": "2. What stone category?",
+        "grades": {
+          "aPlusPlus": { "label": "A++", "description": "Semi Precious" },
+          "aPlus": { "label": "A+", "description": "Luxury" },
+          "a": { "label": "A", "description": "Classic Granite" }
+        },
+        "help": "<strong>Not sure which grade?</strong> Visit our Materials Page to learn more about stone categories and find the right grade for your project."
+      },
+      "detailLevel": {
+        "title": "3. How detailed?",
+        "levels": {
+          "minimal": {
+            "label": "Minimal",
+            "description": "Simple forms and smooth surfaces with minimal texture"
+          },
+          "refine": {
+            "label": "Refine",
+            "description": "Defined features with some texture and carved details"
+          },
+          "realistic": {
+            "label": "Realistic",
+            "description": "Highly detailed with complex textures and fine craftsmanship"
+          }
+        }
+      }
+    },
+    "calculateButton": "Calculate Estimation",
     "estimatedPrice": "Estimated Price",
-    "selectOptions": "Select options above",
-    "selectAllOptions": "Select all options",
     "priceDisclaimer": "*Final price may vary based on specific requirements",
+    "selectAllOptions": "Please complete all selections above",
     "getCustomQuote": "Get Custom Quote",
     "validation": {
       "minValue": "Value must be greater than 0",
-      "maxExceeded": "Maximum is {max} cm"
+      "maxExceeded": "Maximum is 3000mm"
     }
   },
   "trustedCultures": {
