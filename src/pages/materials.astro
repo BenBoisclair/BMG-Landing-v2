@@ -2,19 +2,21 @@
 /**
  * Materials Page
  *
- * Showcases the granite materials catalog organized by tier:
+ * Showcases the granite materials catalog with filterable interface.
+ * Features:
+ * - Filter sidebar with search, tier, category, color, stone type, origin
+ * - Carousel view (no filters) or grid view (filters active)
+ *
+ * Categories:
  * - Semi Precious Stone (A++)
  * - Luxury Stone (A+)
  * - Classic Stone (A)
- *
- * Each category displays materials in a coverflow-style carousel.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import MaterialCarousel from '../components/sections/MaterialCarousel.astro';
+import MaterialsFilterableContent from '../components/sections/MaterialsFilterableContent.astro';
 import { useI18n } from '../i18n/utils';
-import materialsData from '../data/materials.json';
 
 const { lang, t } = useI18n(Astro.url);
 ---
@@ -28,7 +30,7 @@ const { lang, t } = useI18n(Astro.url);
 
   <main>
     <!-- Hero Section -->
-    <section id="materials-hero" class="relative h-[200px] pt-20 lg:pt-24">
+    <section id="materials-hero" class="relative h-[140px] sm:h-[160px] md:h-[180px] lg:h-[200px] pt-16 sm:pt-18 md:pt-20 lg:pt-24">
       <div class="absolute inset-0 z-0">
         <img
           src="/images/Product/7b7fd75f2e187f580cfdc947187b80e2a1b9669f.png"
@@ -42,21 +44,15 @@ const { lang, t } = useI18n(Astro.url);
     </section>
 
     <!-- Page Title -->
-    <div class="bg-white py-8 lg:py-12">
-      <h1 class="text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight">
+    <div class="bg-white py-6 sm:py-8 md:py-10 lg:py-12">
+      <h1 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight px-4">
         {t.materials.pageTitle}
       </h1>
     </div>
 
-    <!-- Material Carousels by Category -->
+    <!-- Filterable Materials Content -->
     <div class="bg-white">
-      {materialsData.categories.map((category, index) => (
-        <MaterialCarousel
-          categoryId={category.id}
-          materials={category.materials}
-          index={index}
-        />
-      ))}
+      <MaterialsFilterableContent />
     </div>
   </main>
 

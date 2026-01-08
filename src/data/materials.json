@@ -9,31 +9,46 @@
           "id": "semi-precious-1",
           "image": "/images/materials/semi-precious-1.jpg",
           "heroImage": "/images/materials/semi-precious-1.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["blue"],
+          "stoneType": "agate",
+          "origin": "BR"
         },
         {
           "id": "semi-precious-2",
           "image": "/images/materials/semi-precious-2.jpg",
           "heroImage": "/images/materials/semi-precious-2.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["gold", "brown"],
+          "stoneType": "quartz",
+          "origin": "ZA"
         },
         {
           "id": "semi-precious-3",
           "image": "/images/materials/semi-precious-3.jpg",
           "heroImage": "/images/materials/semi-precious-3.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["purple"],
+          "stoneType": "quartz",
+          "origin": "BR"
         },
         {
           "id": "semi-precious-4",
           "image": "/images/materials/semi-precious-4.jpg",
           "heroImage": "/images/materials/semi-precious-4.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["pink"],
+          "stoneType": "quartz",
+          "origin": "BR"
         },
         {
           "id": "semi-precious-5",
           "image": "/images/materials/semi-precious-5.jpg",
           "heroImage": "/images/materials/semi-precious-5.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["green"],
+          "stoneType": "onyx",
+          "origin": "PK"
         }
       ]
     },
@@ -45,31 +60,46 @@
           "id": "luxury-1",
           "image": "/images/materials/luxury-1.jpg",
           "heroImage": "/images/materials/luxury-1.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["gold", "white"],
+          "stoneType": "marble",
+          "origin": "IT"
         },
         {
           "id": "luxury-2",
           "image": "/images/materials/luxury-2.jpg",
           "heroImage": "/images/materials/luxury-2.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["white"],
+          "stoneType": "marble",
+          "origin": "IT"
         },
         {
           "id": "luxury-3",
           "image": "/images/materials/luxury-3.jpg",
           "heroImage": "/images/materials/luxury-3.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["black", "white"],
+          "stoneType": "marble",
+          "origin": "ES"
         },
         {
           "id": "luxury-4",
           "image": "/images/materials/luxury-4.jpg",
           "heroImage": "/images/materials/luxury-4.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["brown"],
+          "stoneType": "marble",
+          "origin": "ES"
         },
         {
           "id": "luxury-5",
           "image": "/images/materials/luxury-5.jpg",
           "heroImage": "/images/materials/luxury-5.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["silver"],
+          "stoneType": "travertine",
+          "origin": "TR"
         }
       ]
     },
@@ -81,33 +111,73 @@
           "id": "classic-1",
           "image": "/images/materials/classic-1.jpg",
           "heroImage": "/images/materials/classic-1.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["white"],
+          "stoneType": "marble",
+          "origin": "IT"
         },
         {
           "id": "classic-2",
           "image": "/images/materials/classic-2.jpg",
           "heroImage": "/images/materials/classic-2.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["black"],
+          "stoneType": "granite",
+          "origin": "IN"
         },
         {
           "id": "classic-3",
           "image": "/images/materials/classic-3.jpg",
           "heroImage": "/images/materials/classic-3.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["white"],
+          "stoneType": "granite",
+          "origin": "IN"
         },
         {
           "id": "classic-4",
           "image": "/images/materials/classic-4.jpg",
           "heroImage": "/images/materials/classic-4.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["brown"],
+          "stoneType": "granite",
+          "origin": "FI"
         },
         {
           "id": "classic-5",
           "image": "/images/materials/classic-5.jpg",
           "heroImage": "/images/materials/classic-5.jpg",
-          "gallery": []
+          "gallery": [],
+          "colors": ["pink"],
+          "stoneType": "marble",
+          "origin": "PT"
         }
       ]
     }
-  ]
+  ],
+  "filterMetadata": {
+    "colors": [
+      { "id": "blue", "hex": "#3B82F6" },
+      { "id": "gold", "hex": "#D4AF37" },
+      { "id": "purple", "hex": "#8B5CF6" },
+      { "id": "pink", "hex": "#EC4899" },
+      { "id": "green", "hex": "#10B981" },
+      { "id": "black", "hex": "#1F2937" },
+      { "id": "white", "hex": "#F9FAFB" },
+      { "id": "brown", "hex": "#92400E" },
+      { "id": "silver", "hex": "#9CA3AF" }
+    ],
+    "stoneTypes": ["agate", "quartz", "onyx", "marble", "granite", "travertine"],
+    "origins": [
+      { "code": "BR", "name": "Brazil" },
+      { "code": "IT", "name": "Italy" },
+      { "code": "IN", "name": "India" },
+      { "code": "ES", "name": "Spain" },
+      { "code": "ZA", "name": "South Africa" },
+      { "code": "PK", "name": "Pakistan" },
+      { "code": "TR", "name": "Turkey" },
+      { "code": "FI", "name": "Finland" },
+      { "code": "PT", "name": "Portugal" }
+    ]
+  }
 }

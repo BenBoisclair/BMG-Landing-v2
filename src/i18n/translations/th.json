@@ -466,6 +466,51 @@
       "gallery": "แกลเลอรี",
       "similarMaterials": "วัสดุที่คล้ายกัน"
     },
+    "filters": {
+      "title": "กรองวัสดุ",
+      "search": "ค้นหา",
+      "searchPlaceholder": "ค้นหาตามชื่อ...",
+      "tier": "ระดับ",
+      "category": "หมวดหมู่",
+      "color": "สี",
+      "stoneType": "ประเภทหิน",
+      "origin": "ประเทศต้นกำเนิด",
+      "clearAll": "ล้างทั้งหมด",
+      "showFilters": "ตัวกรอง",
+      "hideFilters": "ซ่อนตัวกรอง",
+      "results": "ผลลัพธ์",
+      "noResults": "ไม่มีวัสดุที่ตรงกับตัวกรองของคุณ"
+    },
+    "colors": {
+      "blue": "น้ำเงิน",
+      "gold": "ทอง",
+      "purple": "ม่วง",
+      "pink": "ชมพู",
+      "green": "เขียว",
+      "black": "ดำ",
+      "white": "ขาว",
+      "brown": "น้ำตาล",
+      "silver": "เงิน"
+    },
+    "stoneTypes": {
+      "agate": "อาเกต",
+      "quartz": "ควอตซ์",
+      "onyx": "โอนิกซ์",
+      "marble": "หินอ่อน",
+      "granite": "หินแกรนิต",
+      "travertine": "ทราเวอร์ทีน"
+    },
+    "origins": {
+      "BR": "บราซิล",
+      "IT": "อิตาลี",
+      "IN": "อินเดีย",
+      "ES": "สเปน",
+      "ZA": "แอฟริกาใต้",
+      "PK": "ปากีสถาน",
+      "TR": "ตุรกี",
+      "FI": "ฟินแลนด์",
+      "PT": "โปรตุเกส"
+    },
     "categories": {
       "semi-precious": {
         "title": "หินกึ่งมีค่า",

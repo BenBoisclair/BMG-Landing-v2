@@ -1,0 +1,65 @@
+---
+/**
+ * FilterCheckboxGroup Component
+ *
+ * Reusable checkbox group for filtering.
+ * Used for tier, category, stone type, and origin filters.
+ */
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  filterKey: string;
+  options: Option[];
+  collapsible?: boolean;
+}
+
+const { title, filterKey, options, collapsible = true } = Astro.props;
+---
+
+<div class="filter-checkbox-group" data-filter-group={filterKey}>
+  <button
+    type="button"
+    class:list={[
+      "flex items-center justify-between w-full text-sm font-medium text-gray-700 mb-3",
+      collapsible && "cursor-pointer"
+    ]}
+    data-collapse-toggle={collapsible ? filterKey : undefined}
+    aria-expanded="true"
+  >
+    <span>{title}</span>
+    {collapsible && (
+      <svg class="w-4 h-4 transition-transform" data-collapse-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    )}
+  </button>
+
+  <div class="space-y-2" data-collapse-content={collapsible ? filterKey : undefined}>
+    {options.map((option) => (
+      <label class="flex items-center gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          class="w-4 h-4 text-brand-primary border-gray-300 rounded focus:ring-brand-primary focus:ring-2"
+          value={option.value}
+          data-filter-checkbox={filterKey}
+        />
+        <span class="text-sm text-gray-600 group-hover:text-gray-900">{option.label}</span>
+      </label>
+    ))}
+  </div>
+</div>
+
+<style>
+  [data-collapse-icon].collapsed {
+    transform: rotate(-90deg);
+  }
+
+  [data-collapse-content].collapsed {
+    display: none;
+  }
+</style>

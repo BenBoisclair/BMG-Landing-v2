@@ -1,0 +1,48 @@
+---
+/**
+ * MaterialsFilterableContent Component
+ *
+ * Main orchestrating component for the filterable materials page.
+ * Uses a modal for filters instead of a sidebar.
+ *
+ * Display Logic:
+ * - No filters: Show carousels grouped by tier
+ * - Filters active: Show flat grid view
+ */
+import FilterSidebar from '../materials/FilterSidebar.astro';
+import MaterialCarousel from './MaterialCarousel.astro';
+import MaterialGrid from '../materials/MaterialGrid.astro';
+import materialsData from '../../data/materials.json';
+---
+
+<div class="materials-filterable-content">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8">
+    <!-- Filter Button Row -->
+    <div class="flex justify-end mb-6">
+      <FilterSidebar />
+    </div>
+
+    <!-- Content Area -->
+    <div>
+      <!-- Carousels (default view when no filters) -->
+      <div data-carousels-container>
+        {materialsData.categories.map((category, index) => (
+          <MaterialCarousel
+            categoryId={category.id}
+            materials={category.materials}
+            index={index}
+          />
+        ))}
+      </div>
+
+      <!-- Grid (shown when filters are active) -->
+      <div class="hidden">
+        <MaterialGrid />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../../scripts/materialsFilter.ts';
+</script>

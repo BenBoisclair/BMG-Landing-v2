@@ -1,0 +1,158 @@
+---
+/**
+ * FilterSidebar Component (Modal Version)
+ *
+ * Filter modal that opens from a button.
+ * Works consistently across desktop and mobile.
+ */
+import { useI18n } from '../../i18n/utils';
+import materialsData from '../../data/materials.json';
+import FilterSearch from './FilterSearch.astro';
+import FilterHeader from './FilterHeader.astro';
+import FilterCheckboxGroup from './FilterCheckboxGroup.astro';
+import FilterColorSwatches from './FilterColorSwatches.astro';
+
+const { t } = useI18n(Astro.url);
+
+// Build options for each filter
+const tierOptions = [
+  { value: 'A++', label: 'A++ - ' + t.materials.categories['semi-precious'].title },
+  { value: 'A+', label: 'A+ - ' + t.materials.categories['luxury'].title },
+  { value: 'A', label: 'A - ' + t.materials.categories['classic'].title },
+];
+
+const categoryOptions = [
+  { value: 'semi-precious', label: t.materials.categories['semi-precious'].title },
+  { value: 'luxury', label: t.materials.categories['luxury'].title },
+  { value: 'classic', label: t.materials.categories['classic'].title },
+];
+
+const stoneTypeOptions = materialsData.filterMetadata.stoneTypes.map(type => ({
+  value: type,
+  label: t.materials.stoneTypes[type as keyof typeof t.materials.stoneTypes],
+}));
+
+const originOptions = materialsData.filterMetadata.origins.map(origin => ({
+  value: origin.code,
+  label: t.materials.origins[origin.code as keyof typeof t.materials.origins],
+}));
+---
+
+<!-- Filter Toggle Button -->
+<button
+  type="button"
+  class="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
+  data-filter-modal-toggle
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+  </svg>
+  <span>{t.materials.filters.showFilters}</span>
+  <span class="bg-brand-primary text-white text-xs font-bold px-2 py-0.5 rounded-full hidden" data-filter-badge>0</span>
+</button>
+
+<!-- Modal Overlay -->
+<div
+  class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300"
+  data-filter-modal-overlay
+></div>
+
+<!-- Modal Container -->
+<div
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+  data-filter-modal-container
+>
+  <div
+    class="filter-modal bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] flex flex-col transform scale-95 opacity-0 transition-all duration-300"
+    data-filter-modal
+  >
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200">
+      <h3 class="text-lg font-semibold text-gray-900">{t.materials.filters.title}</h3>
+      <button
+        type="button"
+        class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+        data-filter-modal-close
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Modal Content (Scrollable) -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-6">
+      <FilterHeader />
+      <FilterSearch />
+
+      <div class="border-t border-gray-200 pt-4">
+        <FilterCheckboxGroup
+          title={t.materials.filters.tier}
+          filterKey="tiers"
+          options={tierOptions}
+        />
+      </div>
+
+      <div class="border-t border-gray-200 pt-4">
+        <FilterCheckboxGroup
+          title={t.materials.filters.category}
+          filterKey="categories"
+          options={categoryOptions}
+        />
+      </div>
+
+      <div class="border-t border-gray-200 pt-4">
+        <FilterColorSwatches />
+      </div>
+
+      <div class="border-t border-gray-200 pt-4">
+        <FilterCheckboxGroup
+          title={t.materials.filters.stoneType}
+          filterKey="stoneTypes"
+          options={stoneTypeOptions}
+        />
+      </div>
+
+      <div class="border-t border-gray-200 pt-4">
+        <FilterCheckboxGroup
+          title={t.materials.filters.origin}
+          filterKey="origins"
+          options={originOptions}
+        />
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="p-4 border-t border-gray-200 flex gap-3">
+      <button
+        type="button"
+        class="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+        data-clear-filters
+      >
+        {t.materials.filters.clearAll}
+      </button>
+      <button
+        type="button"
+        class="flex-1 px-4 py-2.5 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-primary/90 transition-colors"
+        data-filter-modal-apply
+      >
+        Apply Filters
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  [data-filter-modal-overlay].open {
+    opacity: 1;
+  }
+
+  [data-filter-modal-container].open {
+    display: flex;
+  }
+
+  [data-filter-modal].open {
+    transform: scale(1);
+    opacity: 1;
+  }
+</style>

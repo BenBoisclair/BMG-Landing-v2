@@ -39,16 +39,18 @@ const materialsData = materials.map(m => ({
 }));
 ---
 
-<section class="py-12 lg:py-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-8 sm:py-10 md:py-12 lg:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8">
     <!-- Section Title -->
-    <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary mb-8 text-center tracking-tight">
+    <h2 class="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold text-brand-primary mb-6 sm:mb-8 text-center tracking-tight">
       {categoryTitle}
     </h2>
 
-    <!-- Swiper Carousel Container -->
-    <div
-      class="material-carousel-container"
+    <!-- Overflow Wrapper - clips horizontal overflow while preserving coverflow effect -->
+    <div class="overflow-x-clip">
+      <!-- Swiper Carousel Container -->
+      <div
+        class="material-carousel-container"
       data-carousel-index={index}
       data-materials={JSON.stringify(materialsData)}
       data-rtl={dir === 'rtl' ? 'true' : 'false'}
@@ -74,11 +76,11 @@ const materialsData = materials.map(m => ({
       </div>
 
       <!-- Material Info Display -->
-      <div class="material-info text-center mt-6">
-        <h3 class="material-name text-2xl lg:text-3xl font-bold text-gray-700 mb-2">
+      <div class="material-info text-center mt-4 sm:mt-6">
+        <h3 class="material-name text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-gray-700 mb-2">
           {materialsData[0]?.name}
         </h3>
-        <p class="material-description text-gray-500 text-sm lg:text-base max-w-md mx-auto">
+        <p class="material-description text-gray-500 text-xs sm:text-sm lg:text-base max-w-md mx-auto px-4">
           {materialsData[0]?.description}
         </p>
       </div>
@@ -122,6 +124,7 @@ const materialsData = materials.map(m => ({
         </button>
       </div>
     </div>
+    </div><!-- Close overflow-x-clip wrapper -->
   </div>
 </section>
 
@@ -179,13 +182,27 @@ const materialsData = materials.map(m => ({
 
         breakpoints: {
           320: {
-            slidesPerView: 1.4,
+            slidesPerView: 1.2,
             coverflowEffect: {
-              depth: 80,
-              modifier: 1.5,
+              depth: 60,
+              modifier: 1.2,
+            },
+          },
+          480: {
+            slidesPerView: 1.5,
+            coverflowEffect: {
+              depth: 70,
+              modifier: 1.4,
             },
           },
           640: {
+            slidesPerView: 2,
+            coverflowEffect: {
+              depth: 80,
+              modifier: 1.6,
+            },
+          },
+          768: {
             slidesPerView: 2.5,
             coverflowEffect: {
               depth: 100,
@@ -193,16 +210,16 @@ const materialsData = materials.map(m => ({
             },
           },
           1024: {
-            slidesPerView: 3.5,
+            slidesPerView: 3,
             coverflowEffect: {
-              depth: 120,
+              depth: 110,
               modifier: 2,
             },
           },
           1280: {
             slidesPerView: 4,
             coverflowEffect: {
-              depth: 140,
+              depth: 120,
               modifier: 2.2,
             },
           },
@@ -254,11 +271,24 @@ const materialsData = materials.map(m => ({
 <style is:global>
   .material-carousel-container {
     overflow: visible;
+    position: relative;
   }
 
   .material-swiper {
-    padding: 40px 20px 60px;
+    padding: 20px 10px 40px;
     overflow: visible !important;
+  }
+
+  @media (min-width: 640px) {
+    .material-swiper {
+      padding: 30px 15px 50px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .material-swiper {
+      padding: 40px 20px 60px;
+    }
   }
 
   .material-swiper .swiper-wrapper {
@@ -267,18 +297,36 @@ const materialsData = materials.map(m => ({
   }
 
   .material-slide {
-    width: 280px;
+    width: 240px;
     height: auto;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
+  @media (min-width: 480px) {
+    .material-slide {
+      width: 260px;
+    }
+  }
+
   @media (min-width: 640px) {
     .material-slide {
-      width: 320px;
+      width: 280px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .material-slide {
+      width: 300px;
     }
   }
 
   @media (min-width: 1024px) {
+    .material-slide {
+      width: 340px;
+    }
+  }
+
+  @media (min-width: 1280px) {
     .material-slide {
       width: 380px;
     }
@@ -286,11 +334,23 @@ const materialsData = materials.map(m => ({
 
   .material-card {
     background: #f5f5f5;
-    border-radius: 24px;
+    border-radius: 16px;
     overflow: hidden;
     aspect-ratio: 4/3;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+  }
+
+  @media (min-width: 640px) {
+    .material-card {
+      border-radius: 20px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .material-card {
+      border-radius: 24px;
+    }
   }
 
   .swiper-slide-active .material-card {

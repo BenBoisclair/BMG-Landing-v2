@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100">
+  <rect fill="#006C35" width="150" height="100"/>
+  <g fill="#fff" transform="translate(75,50)">
+    <text font-family="Arial, sans-serif" font-size="18" text-anchor="middle" y="-5" font-weight="bold" style="direction:rtl">
+      لا إله إلا الله
+    </text>
+    <text font-family="Arial, sans-serif" font-size="14" text-anchor="middle" y="12" font-weight="bold" style="direction:rtl">
+      محمد رسول الله
+    </text>
+    <path d="M-20,25 L-15,30 L-20,35 L-10,30 L0,35 L5,30 L0,25 L10,30 L15,25 L10,20 L20,25 L25,20 L20,15 L-25,15 L-30,20 L-25,25 z" fill="#fff"/>
+  </g>
+</svg>

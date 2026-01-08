@@ -1,0 +1,89 @@
+---
+/**
+ * MaterialGrid Component
+ *
+ * Responsive grid display for filtered materials.
+ * Shows when filters are active (instead of carousels).
+ */
+import { useI18n, getLocalizedPath } from '../../i18n/utils';
+import materialsData from '../../data/materials.json';
+
+const { t, lang } = useI18n(Astro.url);
+
+// Flatten all materials with their category info
+const allMaterials = materialsData.categories.flatMap(category =>
+  category.materials.map(material => ({
+    ...material,
+    categoryId: category.id,
+    tier: category.tier,
+    name: t.materials.items[material.id as keyof typeof t.materials.items]?.name || material.id,
+    description: t.materials.items[material.id as keyof typeof t.materials.items]?.description || '',
+  }))
+);
+---
+
+<div class="material-grid-container" data-material-grid>
+  <!-- No Results Message -->
+  <div class="hidden text-center py-12" data-no-results>
+    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <p class="text-gray-500 text-lg">{t.materials.filters.noResults}</p>
+  </div>
+
+  <!-- Grid of Materials -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6"
+    data-grid-content
+  >
+    {allMaterials.map((material) => (
+      <a
+        href={getLocalizedPath(lang, `/materials/${material.id}`)}
+        class="material-grid-card group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+        data-material-id={material.id}
+        data-category={material.categoryId}
+        data-tier={material.tier}
+        data-colors={JSON.stringify(material.colors)}
+        data-stone-type={material.stoneType}
+        data-origin={material.origin}
+        data-name={material.name.toLowerCase()}
+        data-description={material.description.toLowerCase()}
+      >
+        <div class="aspect-[4/3] overflow-hidden">
+          <img
+            src={material.image}
+            alt={material.name}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="p-4">
+          <div class="flex items-start justify-between gap-2 mb-1">
+            <h3 class="font-semibold text-gray-800 group-hover:text-brand-primary transition-colors">
+              {material.name}
+            </h3>
+            <span class="flex-shrink-0 text-xs font-bold px-2 py-1 bg-gray-100 text-gray-600 rounded">
+              {material.tier}
+            </span>
+          </div>
+          <p class="text-sm text-gray-500 line-clamp-2">
+            {material.description}
+          </p>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .material-grid-card.hidden {
+    display: none;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

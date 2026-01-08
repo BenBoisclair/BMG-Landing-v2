@@ -479,6 +479,51 @@
       "gallery": "Gallery",
       "similarMaterials": "Similar Material"
     },
+    "filters": {
+      "title": "Filter Materials",
+      "search": "Search",
+      "searchPlaceholder": "Search by name...",
+      "tier": "Tier",
+      "category": "Category",
+      "color": "Color",
+      "stoneType": "Stone Type",
+      "origin": "Country of Origin",
+      "clearAll": "Clear all",
+      "showFilters": "Filters",
+      "hideFilters": "Hide Filters",
+      "results": "results",
+      "noResults": "No materials match your filters"
+    },
+    "colors": {
+      "blue": "Blue",
+      "gold": "Gold",
+      "purple": "Purple",
+      "pink": "Pink",
+      "green": "Green",
+      "black": "Black",
+      "white": "White",
+      "brown": "Brown",
+      "silver": "Silver"
+    },
+    "stoneTypes": {
+      "agate": "Agate",
+      "quartz": "Quartz",
+      "onyx": "Onyx",
+      "marble": "Marble",
+      "granite": "Granite",
+      "travertine": "Travertine"
+    },
+    "origins": {
+      "BR": "Brazil",
+      "IT": "Italy",
+      "IN": "India",
+      "ES": "Spain",
+      "ZA": "South Africa",
+      "PK": "Pakistan",
+      "TR": "Turkey",
+      "FI": "Finland",
+      "PT": "Portugal"
+    },
     "categories": {
       "semi-precious": {
         "title": "Semi Precious Stone",

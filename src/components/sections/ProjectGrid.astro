@@ -16,17 +16,17 @@ for (const cat of projectsData.categories) {
 const getProjectPath = (projectId: string) => getLocalizedPath(lang, `/projects/${projectId}`);
 ---
 
-<section class="py-12 lg:py-16 bg-white">
+<section class="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
   <Container>
     {projectsData.projectTypes.map((projectType, index) => (
-      <div class="mb-12 last:mb-0">
+      <div class="mb-8 sm:mb-10 md:mb-12 last:mb-0">
         <!-- Section Title -->
-        <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary mb-8 tracking-tight uppercase">
+        <h2 class="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold text-brand-primary mb-6 sm:mb-8 tracking-tight uppercase">
           {t.project.sections[projectType.id as keyof typeof t.project.sections].title}
         </h2>
 
         <!-- Swiper Carousel -->
-        <div class="project-swiper-container">
+        <div class="project-swiper-container overflow-hidden">
           <div class="swiper project-swiper" data-swiper-id={`swiper-${index}`}>
             <div class="swiper-wrapper">
               {projectType.projects.map((project) => (
@@ -88,18 +88,34 @@ const getProjectPath = (projectId: string) => getLocalizedPath(lang, `/projects/
       new Swiper(container as HTMLElement, {
         modules: [Navigation],
         slidesPerView: 1.2,
-        spaceBetween: 16,
+        spaceBetween: 12,
         grabCursor: true,
         navigation: {
           prevEl: prevBtn as HTMLElement,
           nextEl: nextBtn as HTMLElement,
         },
         breakpoints: {
+          400: {
+            slidesPerView: 1.4,
+            spaceBetween: 12,
+          },
+          480: {
+            slidesPerView: 1.6,
+            spaceBetween: 14,
+          },
           640: {
-            slidesPerView: 2.2,
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+          768: {
+            slidesPerView: 2.5,
             spaceBetween: 16,
           },
           1024: {
+            slidesPerView: 3.5,
+            spaceBetween: 20,
+          },
+          1280: {
             slidesPerView: 4,
             spaceBetween: 24,
           },

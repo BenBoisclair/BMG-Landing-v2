@@ -466,6 +466,51 @@
       "gallery": "المعرض",
       "similarMaterials": "مواد مشابهة"
     },
+    "filters": {
+      "title": "تصفية المواد",
+      "search": "بحث",
+      "searchPlaceholder": "البحث بالاسم...",
+      "tier": "المستوى",
+      "category": "الفئة",
+      "color": "اللون",
+      "stoneType": "نوع الحجر",
+      "origin": "بلد المنشأ",
+      "clearAll": "مسح الكل",
+      "showFilters": "الفلاتر",
+      "hideFilters": "إخفاء الفلاتر",
+      "results": "نتائج",
+      "noResults": "لا توجد مواد تطابق الفلاتر"
+    },
+    "colors": {
+      "blue": "أزرق",
+      "gold": "ذهبي",
+      "purple": "أرجواني",
+      "pink": "وردي",
+      "green": "أخضر",
+      "black": "أسود",
+      "white": "أبيض",
+      "brown": "بني",
+      "silver": "فضي"
+    },
+    "stoneTypes": {
+      "agate": "عقيق",
+      "quartz": "كوارتز",
+      "onyx": "عقيق يماني",
+      "marble": "رخام",
+      "granite": "جرانيت",
+      "travertine": "ترافرتين"
+    },
+    "origins": {
+      "BR": "البرازيل",
+      "IT": "إيطاليا",
+      "IN": "الهند",
+      "ES": "إسبانيا",
+      "ZA": "جنوب أفريقيا",
+      "PK": "باكستان",
+      "TR": "تركيا",
+      "FI": "فنلندا",
+      "PT": "البرتغال"
+    },
     "categories": {
       "semi-precious": {
         "title": "حجر شبه كريم",

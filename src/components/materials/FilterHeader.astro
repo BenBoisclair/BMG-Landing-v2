@@ -1,0 +1,33 @@
+---
+/**
+ * FilterHeader Component
+ *
+ * Shows active filter count, results count, and clear all button.
+ */
+import { useI18n } from '../../i18n/utils';
+
+const { t } = useI18n(Astro.url);
+
+// Get total materials count for initial display
+import materialsData from '../../data/materials.json';
+const totalMaterials = materialsData.categories.reduce(
+  (acc, cat) => acc + cat.materials.length,
+  0
+);
+---
+
+<div class="filter-header flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
+  <div class="flex items-center gap-2">
+    <span class="text-sm text-gray-600" data-results-count>
+      <span data-count>{totalMaterials}</span> {t.materials.filters.results}
+    </span>
+  </div>
+
+  <button
+    type="button"
+    class="text-sm text-brand-primary hover:text-brand-primary/80 font-medium hidden"
+    data-clear-filters
+  >
+    {t.materials.filters.clearAll}
+  </button>
+</div>
