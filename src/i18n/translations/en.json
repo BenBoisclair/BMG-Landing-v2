@@ -927,6 +927,34 @@
       "viscount-white": {
         "name": "Viscount White",
         "description": "Viscount White Granite is a white stone distinguished by linear grey veining and structured movement. Selected for contemporary interiors, it delivers a clean and architectural appearance. Natural variation ensures each slab remains visually distinctive."
+      },
+      "amazonite": {
+        "name": "Amazonite",
+        "description": "Amazonite is a semi-precious stone distinguished by its blue-green tones and crystalline structure. Commonly used in decorative and feature applications, it delivers a vibrant yet refined visual presence. Natural crystal variation ensures every piece is unique."
+      },
+      "azul-bahia": {
+        "name": "Azul Bahia",
+        "description": "Azul Bahia Granite is a rare natural stone known for its intense royal blue color and coarse crystalline texture. Quarried in Brazil, it is prized for its strength and visual impact in luxury applications. Each slab displays natural mineral variation that enhances its bold appearance."
+      },
+      "azul-macaubas": {
+        "name": "Azul Macaubas",
+        "description": "Azul Macaubas Quartzite is a refined stone featuring a white background with strong linear blue veining. Widely used in contemporary architecture, it offers a clean and elegant visual rhythm. Natural variation in the veining ensures each slab remains distinctive."
+      },
+      "patagonia": {
+        "name": "Patagonia",
+        "description": "Patagonia Quartzite is a dramatic natural stone composed of large crystalline fragments in white, beige, grey, and dark tones. Highly valued in luxury interiors, it is often selected as a statement material for feature surfaces. Each slab is visually unique due to its bold natural composition."
+      },
+      "rosso-verona": {
+        "name": "Rosso Verona",
+        "description": "Rosso Verona Marble is a warm terracotta-red stone known for its fine grain and uniform appearance. Quarried in Italy, it has been widely used in historic and architectural applications. Its subtle texture and consistent tone give each slab a timeless character."
+      },
+      "rosso-orbico": {
+        "name": "Rosso Orbico",
+        "description": "Rosso Orbico Marble is a deep red natural stone characterized by warm burgundy tones and soft white veining. Traditionally used in European architecture, it conveys richness and classical elegance. Natural variation within each slab creates a distinctive and refined appearance."
+      },
+      "sila-granite": {
+        "name": "Sila Granite",
+        "description": "Sila Granite is a locally quarried Thai natural stone known for its durability and consistent mineral structure. Commonly used in architectural and exterior applications, it offers strength and practicality. Appearance varies by quarry, giving each slab its own natural character."
       }
     }
   }
