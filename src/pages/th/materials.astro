@@ -7,11 +7,20 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
-import MaterialCarousel from '../../components/sections/MaterialCarousel.astro';
+import MaterialsTabs from '../../components/ui/MaterialsTabs.astro';
+import MaterialsFilter from '../../components/ui/MaterialsFilter.astro';
+import MaterialsGrid from '../../components/sections/MaterialsGrid.astro';
 import { useI18n } from '../../i18n/utils';
 import materialsData from '../../data/materials.json';
 
 const { lang, t } = useI18n(Astro.url);
+
+// Prepare categories data for tabs
+const categories = materialsData.categories.map(cat => ({
+  id: cat.id,
+  tier: cat.tier,
+  label: t.materials.categoryLabels?.[cat.id as keyof typeof t.materials.categoryLabels] || cat.label
+}));
 ---
 
 <BaseLayout
@@ -21,39 +30,94 @@ const { lang, t } = useI18n(Astro.url);
 >
   <Header pageType="project" />
 
-  <main>
-    <!-- Hero Section -->
-    <section id="materials-hero" class="relative h-[200px] pt-20 lg:pt-24">
-      <div class="absolute inset-0 z-0">
-        <img
-          src="/images/Product/7b7fd75f2e187f580cfdc947187b80e2a1b9669f.png"
-          alt={t.materials.heroAlt}
-          class="w-full h-full object-cover"
-          fetchpriority="high"
-          loading="eager"
-          decoding="async"
-        />
+  <main class="pt-28 pb-16 bg-white min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Top Navigation Bar -->
+      <div class="flex justify-center items-center mb-10 relative">
+        <MaterialsTabs categories={categories} />
+
+        <!-- Filter Button - Positioned absolutely on the right -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block">
+          <MaterialsFilter />
+        </div>
       </div>
-    </section>
 
-    <!-- Page Title -->
-    <div class="bg-white py-8 lg:py-12">
-      <h1 class="text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight">
-        {t.materials.pageTitle}
-      </h1>
-    </div>
+      <!-- Mobile Filter Button -->
+      <div class="flex justify-end mb-6 lg:hidden">
+        <MaterialsFilter />
+      </div>
 
-    <!-- Material Carousels by Category -->
-    <div class="bg-white">
+      <!-- Category Label -->
+      <h2
+        class="category-label text-lg font-semibold text-[#293039] mb-6"
+        data-default-label={categories[0]?.label}
+      >
+        {categories[0]?.label}
+      </h2>
+
+      <!-- Materials Grids (one per category, hidden/shown via JS) -->
       {materialsData.categories.map((category, index) => (
-        <MaterialCarousel
-          categoryId={category.id}
-          materials={category.materials}
-          index={index}
-        />
+        <div
+          class:list={[
+            "materials-panel",
+            index !== 0 && "hidden"
+          ]}
+          id={`panel-${category.id}`}
+          data-category={category.id}
+          role="tabpanel"
+          aria-labelledby={`tab-${category.id}`}
+        >
+          <MaterialsGrid
+            materials={category.materials}
+            categoryId={category.id}
+          />
+        </div>
       ))}
     </div>
   </main>
 
   <Footer />
 </BaseLayout>
+
+<script>
+  // Handle tab changes - query DOM inside handler to avoid stale references
+  function handleTabChange(e) {
+    const { categoryId, categoryLabel: label } = e.detail;
+    const categoryLabelEl = document.querySelector('.category-label');
+    const panels = document.querySelectorAll('.materials-panel');
+
+    // Update category label
+    if (categoryLabelEl) {
+      categoryLabelEl.textContent = label;
+    }
+
+    // Show/hide panels
+    panels.forEach((panel) => {
+      const panelCategory = panel.getAttribute('data-category');
+      if (panelCategory === categoryId) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    });
+  }
+
+  // Handle filter changes (placeholder - can be expanded later)
+  function handleFilterChange(e) {
+    const { filterId } = e.detail;
+    console.log('Filter changed:', filterId);
+  }
+
+  // Remove existing listeners to prevent duplicates, then add fresh ones
+  document.removeEventListener('materials-tab-change', handleTabChange);
+  document.removeEventListener('materials-filter-change', handleFilterChange);
+  document.addEventListener('materials-tab-change', handleTabChange);
+  document.addEventListener('materials-filter-change', handleFilterChange);
+</script>
+
+<style>
+  .category-label {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.33px;
+  }
+</style>

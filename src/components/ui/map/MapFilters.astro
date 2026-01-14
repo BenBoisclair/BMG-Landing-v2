@@ -1,0 +1,89 @@
+---
+/**
+ * MapFilters - Region quick-select and category filter chips
+ */
+
+interface Props {
+  regions: Array<{
+    id: string;
+    name: string;
+    bounds: number[][];
+  }>;
+}
+
+const { regions } = Astro.props;
+
+// Sort regions - 'all' first, then alphabetically
+const sortedRegions = regions.sort((a, b) => {
+  if (a.id === 'all') return -1;
+  if (b.id === 'all') return 1;
+  return a.name.localeCompare(b.name);
+});
+---
+
+<div class="map-filters mb-6">
+  <!-- Region Quick-Select -->
+  <div class="region-filters mb-4">
+    <!-- Mobile: Horizontal scroll -->
+    <div class="lg:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
+      <div class="flex gap-2 min-w-max pb-2">
+        {sortedRegions.map((region, index) => (
+          <button
+            data-region={region.id}
+            data-active={index === 0 ? 'true' : 'false'}
+            class="region-btn flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-150
+                   bg-white border border-gray-200 text-text-secondary
+                   hover:border-brand-primary hover:text-brand-primary
+                   data-[active=true]:bg-brand-primary data-[active=true]:text-white data-[active=true]:border-brand-primary"
+          >
+            {region.id === 'all' && <span class="mr-1">🌍</span>}
+            {region.name}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Desktop: Centered flex wrap -->
+    <div class="hidden lg:flex flex-wrap gap-2 justify-center">
+      {sortedRegions.map((region, index) => (
+        <button
+          data-region={region.id}
+          data-active={index === 0 ? 'true' : 'false'}
+          class="region-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-150
+                 bg-white border border-gray-200 text-text-secondary
+                 hover:border-brand-primary hover:text-brand-primary
+                 data-[active=true]:bg-brand-primary data-[active=true]:text-white data-[active=true]:border-brand-primary"
+        >
+          {region.id === 'all' && <span class="mr-1">🌍</span>}
+          {region.name}
+        </button>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Button focus states for accessibility */
+  .region-btn:focus,
+  .category-chip:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(44, 38, 108, 0.3);
+  }
+
+  /* Smooth scrolling on mobile */
+  .overflow-x-auto {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+</style>

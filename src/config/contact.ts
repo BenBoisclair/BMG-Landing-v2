@@ -55,19 +55,19 @@ function parseSocials(value: string | undefined, defaultSocials: SocialLink[]): 
 
 // Default values - used as fallback if environment variables are not set
 const defaultAddress = [
-  '9/11 Moo 10 Borommaratchachonnani rd',
-  'Sala Thammasop Thawi Watthana',
+  '9/11 Moo 10 Boromraj-Chonnee Road',
+  'Sala Dhammasop, Taweewattana',
   'Bangkok 10170'
 ];
 
-const defaultPhones = ['+66 2 888 7788', '+66 87 879 6226', '+66 81 445 9999'];
+const defaultPhones = ['+66 2 888 7788', '+66 0877896226', '+66 81 445 9999'];
 
 const defaultEmail = 'bmgthai@bmg.co.th';
 
 const defaultSocials: SocialLink[] = [
   {
     name: 'Facebook',
-    handle: 'BMG บางกอกโมเดิร์นแกรนิต',
+    handle: 'BMG บางกอกโมเดอร์นแกรนิต',
     url: 'https://www.facebook.com/bmgthailand',
     icon: 'facebook'
   },

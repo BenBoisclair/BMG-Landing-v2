@@ -1,6 +1,6 @@
 ---
 import StatItem from '../ui/StatItem.astro';
-import InteractiveMap from '../ui/InteractiveMap.astro';
+import InteractiveMapV2 from '../ui/InteractiveMapV2.astro';
 import { useI18n } from '../../i18n/utils';
 
 const { t } = useI18n(Astro.url);
@@ -20,8 +20,8 @@ const stats = [
     </h2>
 
     <!-- Interactive World Map -->
-    <div class="relative max-w-5xl mx-auto mb-12 lg:mb-16">
-      <InteractiveMap />
+    <div class="relative max-w-6xl mx-auto mb-12 lg:mb-16">
+      <InteractiveMapV2 />
     </div>
 
     <!-- Statistics -->

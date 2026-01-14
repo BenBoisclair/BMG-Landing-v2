@@ -4,7 +4,6 @@ import Header from '../../../components/layout/Header.astro';
 import Footer from '../../../components/layout/Footer.astro';
 import MaterialDetailHero from '../../../components/sections/MaterialDetailHero.astro';
 import MaterialDetailContent from '../../../components/sections/MaterialDetailContent.astro';
-import MaterialDetailGallery from '../../../components/sections/MaterialDetailGallery.astro';
 import RelatedMaterials from '../../../components/sections/RelatedMaterials.astro';
 import { getTranslations } from '../../../i18n/utils';
 import materialsData from '../../../data/materials.json';
@@ -13,8 +12,7 @@ import materialsData from '../../../data/materials.json';
 interface Material {
   id: string;
   image: string;
-  heroImage: string;
-  gallery: string[];
+  folder: string;
   category: string;
 }
 
@@ -60,18 +58,13 @@ const materialContent = materialTranslations[material.id] || {
 
   <main>
     <MaterialDetailHero
-      heroImage={material.heroImage}
+      heroImage={material.image}
       materialName={materialContent.name}
     />
 
     <MaterialDetailContent
       artTitle={materialContent.name}
       description={materialContent.description}
-    />
-
-    <MaterialDetailGallery
-      images={material.gallery}
-      materialName={materialContent.name}
     />
 
     <RelatedMaterials

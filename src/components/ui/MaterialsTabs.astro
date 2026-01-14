@@ -1,0 +1,128 @@
+---
+/**
+ * MaterialsTabs Component
+ *
+ * Horizontal pill-style tab navigation for material grades.
+ * Active tab has blue background, inactive tabs are transparent.
+ *
+ * Props:
+ * - categories: Array of category objects with id, tier, label
+ */
+import { useI18n } from '../../i18n/utils';
+
+interface Category {
+  id: string;
+  tier: string;
+  label: string;
+}
+
+interface Props {
+  categories: Category[];
+}
+
+const { categories } = Astro.props;
+const { t, dir } = useI18n(Astro.url);
+
+// Map tiers to translation keys
+const gradeLabels: Record<string, string> = {
+  'A++': t.materials.grades?.app || 'A++ Grade',
+  'A+': t.materials.grades?.ap || 'A+ Grade',
+  'A': t.materials.grades?.a || 'A Grade'
+};
+---
+
+<div class="materials-tabs-container" data-rtl={dir === 'rtl' ? 'true' : 'false'}>
+  <nav
+    class="tabs-nav bg-white rounded-full shadow-lg p-2 inline-flex gap-2"
+    role="tablist"
+    aria-label="Material grades"
+  >
+    {categories.map((category, index) => (
+      <button
+        role="tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`panel-${category.id}`}
+        data-tab={category.id}
+        data-tier={category.tier}
+        data-label={category.label}
+        class="tab-btn px-6 py-3 rounded-full font-medium text-base transition-all duration-200"
+      >
+        {gradeLabels[category.tier] || `${category.tier} Grade`}
+      </button>
+    ))}
+  </nav>
+</div>
+
+<script>
+  function initMaterialsTabs() {
+    const containers = document.querySelectorAll('.materials-tabs-container');
+
+    containers.forEach((container) => {
+      const tabs = container.querySelectorAll('.tab-btn');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const categoryId = tab.getAttribute('data-tab');
+          const categoryLabel = tab.getAttribute('data-label');
+
+          // Update tab states - just update aria-selected, CSS handles the rest
+          tabs.forEach((t) => {
+            const isActive = t === tab;
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          });
+
+          // Dispatch custom event for other components to listen to
+          document.dispatchEvent(new CustomEvent('materials-tab-change', {
+            detail: { categoryId, categoryLabel }
+          }));
+        });
+      });
+    });
+  }
+
+  // Initialize on page load
+  initMaterialsTabs();
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initMaterialsTabs);
+</script>
+
+<style>
+  .materials-tabs-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .tabs-nav {
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-btn {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.46px;
+    min-width: 120px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #4a5565;
+  }
+
+  .tab-btn:hover {
+    color: #2C266C;
+  }
+
+  .tab-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(44, 38, 108, 0.3);
+  }
+
+  .tab-btn[aria-selected="true"] {
+    background-color: #2C266C;
+    color: white;
+    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-btn[aria-selected="true"]:hover {
+    color: white;
+  }
+</style>

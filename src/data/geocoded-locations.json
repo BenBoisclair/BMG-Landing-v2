@@ -1,0 +1,119 @@
+{
+  "description": "Pre-geocoded coordinates for project locations. Region assignments based on geography.",
+  "locations": {
+    "type1-project-1": {
+      "lat": 42.3601,
+      "lng": -71.0589,
+      "region": "americas",
+      "country": "United States",
+      "city": "Massachusetts"
+    },
+    "type1-project-2": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "type1-project-3": {
+      "lat": 36.7783,
+      "lng": -119.4179,
+      "region": "americas",
+      "country": "United States",
+      "city": "California"
+    },
+    "type1-project-4": {
+      "lat": 18.7883,
+      "lng": 98.9853,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Chiang Mai"
+    },
+    "type2-project-1": {
+      "lat": -8.3405,
+      "lng": 115.0920,
+      "region": "asia",
+      "country": "Indonesia",
+      "city": "Bali"
+    },
+    "type2-project-2": {
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "region": "asia",
+      "country": "Singapore",
+      "city": "Singapore"
+    },
+    "type2-project-3": {
+      "lat": -33.8688,
+      "lng": 151.2093,
+      "region": "oceania",
+      "country": "Australia",
+      "city": "Sydney"
+    },
+    "type2-project-4": {
+      "lat": 35.6762,
+      "lng": 139.6503,
+      "region": "asia",
+      "country": "Japan",
+      "city": "Tokyo"
+    },
+    "type3-project-1": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "type3-project-2": {
+      "lat": 22.3193,
+      "lng": 114.1694,
+      "region": "asia",
+      "country": "Hong Kong",
+      "city": "Hong Kong"
+    },
+    "type3-project-3": {
+      "lat": 25.2048,
+      "lng": 55.2708,
+      "region": "middle-east",
+      "country": "UAE",
+      "city": "Dubai"
+    },
+    "type3-project-4": {
+      "lat": 41.9028,
+      "lng": 12.4964,
+      "region": "europe",
+      "country": "Italy",
+      "city": "Rome"
+    }
+  },
+  "regions": {
+    "all": {
+      "name": "All Regions",
+      "bounds": [[-60, -180], [80, 180]]
+    },
+    "americas": {
+      "name": "Americas",
+      "bounds": [[-55, -170], [72, -30]]
+    },
+    "europe": {
+      "name": "Europe",
+      "bounds": [[35, -25], [72, 45]]
+    },
+    "asia": {
+      "name": "Asia",
+      "bounds": [[-10, 60], [55, 150]]
+    },
+    "middle-east": {
+      "name": "Middle East",
+      "bounds": [[10, 30], [45, 65]]
+    },
+    "oceania": {
+      "name": "Oceania",
+      "bounds": [[-50, 110], [0, 180]]
+    },
+    "africa": {
+      "name": "Africa",
+      "bounds": [[-35, -20], [38, 55]]
+    }
+  }
+}

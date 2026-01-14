@@ -27,7 +27,7 @@ const navLinks = [
   { href: '/process', label: t.nav.process, isAnchor: false },
   { href: '#delivery', label: t.nav.globalDelivery, isAnchor: true },
   { href: '#about', label: t.nav.about, isAnchor: true },
-  { href: '#contact', label: t.nav.contact, isAnchor: true },
+  { href: '/contacts', label: t.nav.contact, isAnchor: false },
 ];
 
 // Products dropdown items
@@ -67,7 +67,7 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
 }));
 ---
 
-<header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300" data-page-type={pageType}>
+<header id="main-header" class="fixed top-0 left-0 right-0 z-999 bg-transparent transition-all duration-300" data-page-type={pageType}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20 lg:h-24">
       <!-- Logo -->

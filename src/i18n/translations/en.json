@@ -59,33 +59,33 @@
     "steps": {
       "1": {
         "number": "1",
-        "title": "Initial Idea",
-        "titleShort": "Initial Idea",
+        "title": "Concept & Consultation",
+        "titleShort": "Concept",
         "description": "If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together."
       },
       "2": {
         "number": "2",
-        "title": "3D Modeling",
+        "title": "Prototype Creation",
         "titleShort": "3D",
-        "description": "Our team creates detailed 3D models from your approved concept, ready for precision manufacturing."
+        "description": "Based on the approved direction, we create a physical prototype using clay or 3D printing. Refinements are made until the form and details meet expectations."
       },
       "3": {
         "number": "3",
         "title": "CNC Carving",
         "titleShort": "CNC",
-        "description": "Advanced CNC machines carve the sculpture with precision, faithfully following the finalized 3D data."
+        "description": "The approved prototype is digitized and optimized for CNC carving. Advanced CNC machines carve the sculpture with precision, following the finalized 3D Design."
       },
       "4": {
         "number": "4",
-        "title": "Hand Finishing",
+        "title": "Hand Detailing & Finishing",
         "titleShort": "Hand",
         "description": "Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship."
       },
       "5": {
         "number": "5",
-        "title": "Delivery",
+        "title": "Delivery & Installation",
         "titleShort": "Delivery",
-        "description": "The finished piece is carefully packaged and delivered to your specified location worldwide."
+        "description": "The completed work is carefully packaged, transported, and installed on site. Our team ensures precise placement and safety in the final presentation."
       }
     }
   },
@@ -112,9 +112,9 @@
       "stoneCategory": {
         "title": "2. What stone category?",
         "grades": {
-          "aPlusPlus": { "label": "A++", "description": "Semi Precious" },
-          "aPlus": { "label": "A+", "description": "Luxury" },
-          "a": { "label": "A", "description": "Classic Granite" }
+          "aPlusPlus": { "label": "A++", "description": "Jewellery Stone" },
+          "aPlus": { "label": "A+", "description": "Luxury Stone" },
+          "a": { "label": "A", "description": "Natural Stone" }
         },
         "help": "<strong>Not sure which grade?</strong> Visit our Materials Page to learn more about stone categories and find the right grade for your project."
       },
@@ -467,9 +467,31 @@
       }
     }
   },
+  "contactPage": {
+    "title": "Contact Us",
+    "heroAlt": "BMG contact background"
+  },
   "materials": {
     "pageTitle": "Our Materials",
     "heroAlt": "BMG premium stone materials showcase",
+    "grades": {
+      "app": "Jewellery Stone",
+      "ap": "Luxury Stone",
+      "a": "Natural Stone"
+    },
+    "filter": "Filter",
+    "filterOptions": {
+      "allTypes": "All Types",
+      "marble": "Marble",
+      "granite": "Granite",
+      "onyx": "Onyx",
+      "semiPrecious": "Semi-Precious"
+    },
+    "categoryLabels": {
+      "premium": "Premium Italian Marble",
+      "luxury": "Luxury Stone",
+      "classic": "Natural Stone"
+    },
     "pagination": {
       "prev": "Previous",
       "next": "Next"
@@ -480,8 +502,8 @@
       "similarMaterials": "Similar Material"
     },
     "categories": {
-      "semi-precious": {
-        "title": "Semi Precious Stone",
+      "premium": {
+        "title": "Jewellery Stone",
         "tier": "A++"
       },
       "luxury": {
@@ -489,70 +511,422 @@
         "tier": "A+"
       },
       "classic": {
-        "title": "Classic Stone",
+        "title": "Natural Stone",
         "tier": "A"
       }
     },
     "items": {
-      "semi-precious-1": {
-        "name": "Blue Agate",
-        "description": "Stunning blue semi-precious stone with natural banding patterns"
+      "calacatta": {
+        "name": "Calacatta",
+        "description": "Calacatta Marble is a luxurious Italian marble characterized by a white base with expressive grey veining. Valued for its rarity and visual strength, it is widely used in high-end interior design. Each slab presents bold natural patterns that create a striking appearance."
       },
-      "semi-precious-2": {
-        "name": "Tiger Eye",
-        "description": "Golden-brown chatoyant gemstone with silky luster"
-      },
-      "semi-precious-3": {
-        "name": "Amethyst",
-        "description": "Purple quartz crystal known for its rich violet hues"
-      },
-      "semi-precious-4": {
-        "name": "Rose Quartz",
-        "description": "Soft pink stone symbolizing love and harmony"
-      },
-      "semi-precious-5": {
-        "name": "Green Onyx",
-        "description": "Translucent green stone with elegant veining"
-      },
-      "luxury-1": {
+      "calacatta-gold": {
         "name": "Calacatta Gold",
-        "description": "Premium Italian marble with dramatic gold veining"
+        "description": "Calacatta Gold Marble is a prestigious white marble accented with elegant gold and grey veining. Highly regarded in luxury interiors, it conveys refinement and exclusivity. Natural variation within each slab creates a unique and expressive surface."
       },
-      "luxury-2": {
+      "calacatta-borghini": {
+        "name": "Calacatta Borghini",
+        "description": "Calacatta Borghini Marble is a refined white stone with soft grey veining and balanced movement. Often selected for both classic and contemporary interiors, it offers understated elegance. Each slab displays natural variation that enhances its timeless character."
+      },
+      "statuario": {
         "name": "Statuario",
-        "description": "Classic white marble with subtle gray patterns"
+        "description": "Statuario Marble is a premium Italian stone known for its bright white background and bold grey veining. Traditionally used in classical sculpture and architecture, it conveys elegance and prestige. Each slab features dramatic natural movement that enhances its visual presence."
       },
-      "luxury-3": {
+      "paonazzo": {
+        "name": "Paonazzo",
+        "description": "Paonazzo Marble is a rare white stone distinguished by purple and grey veining. Historically used in high-end architecture, it carries artistic and cultural significance. Each slab features dramatic natural patterns."
+      },
+      "arabescato": {
+        "name": "Arabescato",
+        "description": "Arabescato Marble is an Italian stone known for its white base and intricate grey veining. Frequently used in architectural applications, it offers depth and artistic movement. Each slab showcases naturally formed patterns that are visually distinctive."
+      },
+      "arabescato-corchia": {
+        "name": "Arabescato Corchia",
+        "description": "Arabescato Corchia Marble is a premium Italian marble distinguished by bold grey veining and strong movement. Chosen for statement architectural surfaces, it conveys depth and sophistication. Each slab is naturally expressive and visually powerful."
+      },
+      "bianco-dolomiti": {
+        "name": "Bianco Dolomiti",
+        "description": "Bianco Dolomiti Marble is a refined white stone with soft grey veining and a calm visual character. Frequently used in contemporary interiors, it offers a clean and balanced appearance. Subtle natural variation ensures each slab remains elegant and unique."
+      },
+      "thassos": {
+        "name": "Thassos",
+        "description": "Thassos Marble is a pure white stone quarried in Greece and valued for its crystalline structure. Commonly used in refined architectural interiors, it delivers a clean and luminous appearance. Its minimal veining ensures a uniform yet natural finish."
+      },
+      "white-venus": {
+        "name": "White Venus",
+        "description": "White Venus Marble is a soft white stone with gentle warm undertones and minimal veining. Often chosen for serene interiors, it delivers a balanced and refined appearance. Natural variation ensures each slab retains its own identity."
+      },
+      "volakas": {
+        "name": "Volakas",
+        "description": "Volakas Marble is a white Greek marble characterized by soft grey veining and calm movement. Frequently used in modern interiors, it offers brightness and refinement. Each slab features natural variation that adds subtle elegance."
+      },
+      "sky-white": {
+        "name": "Sky White",
+        "description": "Sky White Marble is a bright stone accented with light grey veining across a white base. Selected for elegant interior spaces, it creates a light and refined atmosphere. Delicate natural patterns make every slab unique."
+      },
+      "super-white": {
+        "name": "Super White",
+        "description": "Super White Marble is a contemporary stone known for its bright white to light grey base and subtle linear movement. Widely used in modern luxury interiors, it offers a clean and architectural aesthetic. Gentle veining ensures each slab remains visually distinct."
+      },
+      "panda-white": {
+        "name": "Panda White",
+        "description": "Panda White Marble is a striking stone featuring a white base with bold black veining. Frequently used in contemporary luxury interiors, it delivers strong graphic contrast. Each slab presents dramatic natural patterns that stand out."
+      },
+      "lilac-marble": {
+        "name": "Lilac Marble",
+        "description": "Lilac Marble is a distinctive white stone with soft lilac-toned veining. Commonly used for statement interiors, it introduces subtle color while maintaining elegance. Each slab displays delicate natural variation."
+      },
+      "pietra-grey": {
+        "name": "Pietra Grey",
+        "description": "Pietra Grey Marble is a dark grey stone defined by fine white veining and a clean linear look. Widely used in contemporary architecture, it conveys strength and modern elegance. Each slab presents subtle natural variation."
+      },
+      "silver-shadow": {
+        "name": "Silver Shadow",
+        "description": "Silver Shadow Marble is a grey stone with smooth tonal movement and contemporary appeal. Often specified for modern architectural interiors, it provides a clean and balanced surface. Subtle variation across each slab adds depth."
+      },
+      "grigio-carnico": {
+        "name": "Grigio Carnico",
+        "description": "Grigio Carnico Marble is a dark grey Italian stone with pronounced white veining. Widely used in architectural and interior applications, it offers strong contrast and depth. Natural variation gives each slab a bold visual character."
+      },
+      "cat-eye": {
+        "name": "Cat Eye",
+        "description": "Cat Eye Marble is a grey stone characterized by linear veining and layered movement. Selected for contemporary architectural interiors, it delivers structure and visual rhythm. Natural patterning ensures each slab remains distinctive."
+      },
+      "verde-alpi": {
+        "name": "Verde Alpi",
+        "description": "Verde Alpi Marble is a dramatic green stone characterized by deep tones and contrasting white veining. Widely used for statement interiors, it conveys richness and strength. Each slab displays bold natural patterns."
+      },
+      "verde-guatemala": {
+        "name": "Verde Guatemala",
+        "description": "Verde Guatemala Marble is a dark green stone with subtle veining and dense appearance. Commonly selected for architectural interiors, it offers a bold yet refined aesthetic. Natural variation ensures each slab remains unique."
+      },
+      "nero-marquina": {
         "name": "Nero Marquina",
-        "description": "Deep black Spanish marble with white veins"
+        "description": "Nero Marquina Marble is a deep black stone distinguished by sharp white veining. Widely used in luxury interiors, it is valued for its striking contrast and timeless appeal."
       },
-      "luxury-4": {
+      "black-marquina": {
+        "name": "Black Marquina",
+        "description": "Black Marquina Marble is a black stone characterized by crisp white veining and strong contrast. Commonly referenced in international markets, it offers a bold and refined aesthetic. Natural veining ensures each slab is visually unique."
+      },
+      "black-forest": {
+        "name": "Black Forest",
+        "description": "Black Forest Marble is a dramatic stone with strong linear movement across a dark base. Used for bold architectural statements, it delivers visual intensity. Each slab presents expressive natural patterning."
+      },
+      "titanium-black": {
+        "name": "Titanium Black",
+        "description": "Titanium Black Marble is a bold stone featuring flowing grey and white movement on a dark background. Selected for luxury interiors, it offers strong contrast and depth. Dynamic veining ensures each slab is visually distinctive."
+      },
+      "white-carrara": {
+        "name": "White Carrara",
+        "description": "Carrara Marble is a prestigious white to blue-grey marble quarried in the Carrara region of Italy. This timeless natural stone has been used since ancient Roman times and remains one of the most sought-after materials for luxury interiors. Its distinctive veining patterns ensure that every slab is unique."
+      },
+      "crema-marfil": {
+        "name": "Crema Marfil",
+        "description": "Crema Marfil Marble is a warm beige stone known for its uniform appearance and subtle veining. Widely used in classic and contemporary interiors, it provides warmth and versatility. Gentle natural variation enhances its timeless appeal."
+      },
+      "botticino": {
+        "name": "Botticino",
+        "description": "Botticino Marble is a light beige Italian stone known for its fine texture and understated elegance. Frequently used in architectural and interior applications, it provides a calm and timeless appearance. Subtle natural variation enhances its refined character."
+      },
+      "daino-reale": {
+        "name": "Daino Reale",
+        "description": "Daino Reale Marble is a warm beige stone distinguished by linear veining and structured movement. Commonly used in interior architecture, it offers a balanced and orderly visual effect. Each slab features natural patterns that add depth."
+      },
+      "perlato-sicilia": {
+        "name": "Perlato Sicilia",
+        "description": "Perlato Sicilia Marble is a creamy-toned stone with gentle texture and classic appeal. Often used in traditional and contemporary interiors, it delivers warmth and subtle elegance. Fine grain and natural variation give each slab a distinctive finish."
+      },
+      "emperador-light": {
+        "name": "Emperador Light",
+        "description": "Emperador Light Marble is a brown-toned stone with soft veining and warm character. Widely used in luxury interiors, it brings richness and depth to spaces. Natural variation ensures each slab remains visually unique."
+      },
+      "emperador-dark": {
         "name": "Emperador Dark",
-        "description": "Rich brown marble with cream-colored veining"
+        "description": "Emperador Dark Marble is a deep brown stone known for its dramatic veining and rich tone. Often selected for statement interiors, it conveys warmth and sophistication. Each slab presents bold natural variation."
       },
-      "luxury-5": {
-        "name": "Travertine Silver",
-        "description": "Natural stone with silver-gray tones and texture"
+      "tobacco-brown": {
+        "name": "Tobacco Brown",
+        "description": "Tobacco Brown Marble is a dark brown stone with linear movement and rich tonal depth. Commonly used in interior architecture, it adds warmth and refinement. Natural variation enhances its elegant character."
       },
-      "classic-1": {
-        "name": "Carrara White",
-        "description": "Timeless Italian marble with soft gray veining"
-      },
-      "classic-2": {
-        "name": "Absolute Black",
-        "description": "Pure black granite with consistent coloring"
-      },
-      "classic-3": {
-        "name": "Kashmir White",
-        "description": "Light granite with burgundy and gray flecks"
-      },
-      "classic-4": {
-        "name": "Baltic Brown",
-        "description": "Warm brown granite with black and tan crystals"
-      },
-      "classic-5": {
+      "rosa-portogallo": {
         "name": "Rosa Portogallo",
-        "description": "Pink Portuguese marble with delicate patterns"
+        "description": "Rosa Portogallo Marble is a warm pink stone known for its soft movement and elegant character. Traditionally used in classical architecture, it introduces warmth and subtle color. Natural variation enhances its refined appearance."
+      },
+      "alaska-white": {
+        "name": "Alaska White",
+        "description": "Alaska White Granite is a bright natural stone defined by a white base with bold black and grey mineral accents. Commonly used in contemporary interiors, it delivers strong contrast with a clean architectural look. Each slab presents natural variation that enhances its visual impact."
+      },
+      "jade": {
+        "name": "Jade",
+        "description": "Jade is a prized semi-precious stone known for its rich green color and smooth texture. Historically valued across cultures for its artistic and symbolic significance, it remains a material of refinement and prestige. Natural color variation ensures each piece carries a distinct identity."
+      },
+      "malachite": {
+        "name": "Malachite",
+        "description": "Malachite is a vivid green semi-precious stone distinguished by bold banded patterns. Often used for statement pieces and luxury detailing, it delivers strong visual impact. Each slab showcases naturally formed patterns that are entirely unique."
+      },
+      "onyx-green": {
+        "name": "Green Onyx",
+        "description": "Green Onyx is a translucent stone featuring layered green tones and flowing movement. Selected for premium interior features, it offers depth and elegance when illuminated. Natural banding within each slab creates a distinctive visual expression."
+      },
+      "lapis-lazuli": {
+        "name": "Lapis Lazuli",
+        "description": "Lapis Lazuli is a deep blue semi-precious stone accented with natural golden mineral inclusions. Used since ancient times for art and ornamentation, it remains a symbol of richness and sophistication. Each piece displays unique mineral patterns shaped by nature."
+      },
+      "labradorite": {
+        "name": "Labradorite",
+        "description": "Labradorite is a semi-precious stone recognized for its grey base and blue iridescent flashes. Frequently used in luxury architectural surfaces, it offers a dramatic yet refined appearance. Each slab reveals natural light-reactive patterns that make it distinctive."
+      },
+      "amethyst": {
+        "name": "Amethyst",
+        "description": "Amethyst is a semi-precious stone known for its purple crystalline structure and depth of color. Widely used in decorative and artistic applications, it conveys elegance and visual richness. Natural crystal formations ensure every piece is unique."
+      },
+      "jasper": {
+        "name": "Jasper",
+        "description": "Jasper is a semi-precious stone featuring earthy red and brown tones with bold natural patterns. Commonly used in decorative applications, it delivers a grounded and organic aesthetic. Each piece presents unique formations shaped by geological processes."
+      },
+      "bianco-antico": {
+        "name": "Bianco Antico",
+        "description": "Bianco Antico Granite is a light stone blending white, grey, and beige mineral tones. Popular for both residential and commercial interiors, it offers a timeless and adaptable appearance. Each slab presents gentle natural variation."
+      },
+      "baltic-brown": {
+        "name": "Baltic Brown",
+        "description": "Baltic Brown Granite is a dark brown stone with bold mineral patterning and strong texture. Widely used for durable architectural surfaces, it conveys richness and strength. Each slab displays unique natural formations."
+      },
+      "cafe-bahia": {
+        "name": "Cafe Bahia",
+        "description": "Cafe Bahia Granite is a dark brown natural stone with warm undertones and subtle mineral movement. Commonly used in architectural and interior applications, it delivers depth and richness to surfaces. Each slab displays natural variation that enhances its refined character."
+      },
+      "absolute-black": {
+        "name": "Absolute Black",
+        "description": "Absolute Black Granite is a dense natural stone with a uniform black appearance. Widely used in both residential and commercial architecture, it is valued for its strength and clean finish. Consistent grain ensures a refined and timeless surface."
+      },
+      "black-zimbabwe": {
+        "name": "Black Zimbabwe",
+        "description": "Black Zimbabwe Granite is a premium black stone recognized for its deep color and smooth texture. Commonly selected for high-performance architectural applications, it offers excellent durability. Uniform appearance creates a sleek and modern finish."
+      },
+      "black-galaxy": {
+        "name": "Black Galaxy",
+        "description": "Black Galaxy Granite is a dark stone accented with fine reflective mineral flecks. Quarried in India, it combines visual depth with long-lasting performance. Subtle sparkle across each slab adds dimension while remaining refined."
+      },
+      "blue-pearl": {
+        "name": "Blue Pearl",
+        "description": "Blue Pearl Granite is a distinctive stone featuring iridescent blue and silver mineral crystals. Quarried in Norway, it is often used for luxury statement surfaces. Reflective minerals within each slab create dynamic visual depth."
+      },
+      "crystal-blue": {
+        "name": "Crystal Blue",
+        "description": "Crystal Blue Granite is a cool-toned stone with blue mineral texture and consistent grain. Used in modern architecture, it delivers clarity and strength. Natural variation ensures each slab remains distinctive."
+      },
+      "limestone-cloudy": {
+        "name": "Limestone Cloudy",
+        "description": "Limestone Cloudy is a light natural limestone characterized by soft, cloudy movement across a pale base. Commonly used in architectural interiors, it provides a calm and understated surface. Natural variation within each slab gives it a refined and organic appearance."
+      },
+      "jura-beige": {
+        "name": "Jura Beige",
+        "description": "Jura Beige Limestone is a classic German stone distinguished by its fine fossil texture and warm beige tone. Widely used in architectural and facade applications, it conveys strength and timeless character. Natural fossil patterns ensure each slab remains visually unique."
+      },
+      "moca-creme": {
+        "name": "Moca Creme",
+        "description": "Moca Creme Limestone is a light beige stone characterized by subtle linear fossil markings. Commonly used in contemporary architecture, it offers a structured yet warm visual tone. Each slab displays fine natural detail that contributes to its refined look."
+      },
+      "ivory-limestone": {
+        "name": "Ivory Limestone",
+        "description": "Ivory Limestone is a soft-toned natural stone with a smooth and calm appearance. Frequently selected for minimalist interiors, it delivers warmth without visual heaviness. Gentle natural variation gives each slab a distinct but harmonious character."
+      },
+      "luna-limestone": {
+        "name": "Luna Limestone",
+        "description": "Luna Limestone is a light cream to beige stone with a smooth and consistent surface. Often applied in modern interiors, it offers a clean and calming aesthetic. Subtle natural variation ensures each slab maintains individual character."
+      },
+      "capri-limestone": {
+        "name": "Capri Limestone",
+        "description": "Capri Limestone is a warm-toned natural stone inspired by Mediterranean architecture. Commonly used for interior and exterior surfaces, it delivers a relaxed and timeless appearance. Each slab features gentle natural variation that enhances its character."
+      },
+      "jura-grey": {
+        "name": "Jura Grey",
+        "description": "Jura Grey Limestone is a grey natural stone with fine fossil texture and structured movement. Frequently specified in modern architecture, it offers a clean and contemporary aesthetic. Natural fossil patterns ensure each slab is visually distinctive."
+      },
+      "colonial-white": {
+        "name": "Colonial White",
+        "description": "Colonial White Granite is a light-colored stone featuring subtle grey and beige mineral patterns. Frequently used in residential and commercial interiors, it offers a versatile and timeless appearance. Fine natural texture ensures every slab remains visually distinct."
+      },
+      "dallas-white": {
+        "name": "Dallas White",
+        "description": "Dallas White Granite is a bright stone with fine grey patterning over a white base. Often selected for contemporary interiors, it delivers a spacious and clean visual effect. Each slab features natural mineral variation that enhances its character."
+      },
+      "himalayan-blue": {
+        "name": "Himalayan Blue",
+        "description": "Himalayan Blue Granite is a cool-toned stone with blue-grey mineral texture. Used in contemporary architectural applications, it delivers a clean and modern appearance. Each slab displays natural variation that adds depth."
+      },
+      "giallo-ornamental": {
+        "name": "Giallo Ornamental",
+        "description": "Giallo Ornamental Granite is a warm beige stone with fine mineral speckling. Widely used in interior applications, it offers a classic and versatile appearance. Natural variation across each slab adds subtle visual interest."
+      },
+      "crystal-yellow": {
+        "name": "Crystal Yellow",
+        "description": "Crystal Yellow Granite is a yellow-gold stone with bright mineral speckling. Used in both interior and exterior applications, it brings warmth and durability to surfaces. Natural variation gives each slab a lively yet refined appearance."
+      },
+      "coffee-brown": {
+        "name": "Coffee Brown",
+        "description": "Coffee Brown Granite is a deep brown stone with uniform texture and rich tone. Often used for durable architectural applications, it provides warmth and strength. Each slab maintains consistent mineral structure with slight variation."
+      },
+      "marron-cuba": {
+        "name": "Marron Cuba",
+        "description": "Marron Cuba Granite is a medium to dark brown stone with a consistent and durable grain. Commonly used in architectural and exterior applications, it offers warmth and reliability. Each slab maintains subtle natural variation."
+      },
+      "black-pearl": {
+        "name": "Black Pearl",
+        "description": "Black Pearl Granite is a dark stone with subtle shimmer and layered tonal depth. Often used in contemporary interiors, it provides a refined and elegant surface. Natural mineral movement ensures each slab is visually unique."
+      },
+      "cosmic-black": {
+        "name": "Cosmic Black",
+        "description": "Cosmic Black Granite is a dramatic stone with sweeping movement across a dark base. Selected for statement interiors, it conveys strength and visual intensity. Each slab features expressive natural patterns formed through geology."
+      },
+      "imperial-red": {
+        "name": "Imperial Red",
+        "description": "Imperial Red Granite is a bold red stone known for its strong color and durability. Widely used in monuments and architectural exteriors, it delivers high visual impact. Each slab displays consistent mineral texture with natural variation."
+      },
+      "obsidian": {
+        "name": "Obsidian",
+        "description": "Obsidian is a naturally occurring volcanic glass with a deep black and glossy surface. Often used for artistic and decorative objects, it conveys strength and minimalism. Each piece reflects natural formation with subtle surface variation."
+      },
+      "onyx-blue": {
+        "name": "Onyx Blue",
+        "description": "Onyx Blue is a rare translucent stone defined by cool blue tones and layered depth. Commonly used in statement interior features, it creates a striking visual effect when backlit. Natural variations ensure every slab remains visually unique."
+      },
+      "onyx-honey": {
+        "name": "Honey Onyx",
+        "description": "Honey Onyx is a warm translucent stone with golden amber tones and flowing layers. Commonly used in luxury interior features, it is prized for its glowing appearance when illuminated. Natural banding ensures every piece has its own character."
+      },
+      "onyx-ice": {
+        "name": "Onyx Ice",
+        "description": "Onyx Ice is a light translucent stone with cool white tones and subtle blue accents. Used in contemporary luxury interiors, it delivers a clean and luminous appearance. Natural layering within each slab adds depth and individuality."
+      },
+      "onyx-pink": {
+        "name": "Onyx Pink",
+        "description": "Onyx Pink is a soft pink translucent stone with gentle layering and warmth. Selected for refined decorative applications, it introduces subtle color while maintaining elegance. Natural variations ensure each piece remains visually unique."
+      },
+      "onyx-rainbow-van-gogh": {
+        "name": "Onyx Rainbow",
+        "description": "Onyx Rainbow is a multi-tonal translucent stone defined by layered color variation. Used for statement interior features, it offers strong visual interest and depth. Each slab showcases naturally occurring patterns that are entirely unique."
+      },
+      "onyx-white": {
+        "name": "White Onyx",
+        "description": "White Onyx is a translucent semi-precious stone characterized by soft white layers and flowing movement. Widely used in luxury interior features, it is prized for its luminous effect when backlit. Natural banding ensures each slab is visually unique."
+      },
+      "quartz-crystal": {
+        "name": "Quartz Crystal",
+        "description": "Quartz Crystal is a semi-precious material recognized for its clear to milky appearance and light-reflective qualities. Frequently used in decorative and architectural features, it adds clarity and brightness to luxury interiors. Natural inclusions within each piece create unique visual depth."
+      },
+      "tiger-eye": {
+        "name": "Tiger Eye",
+        "description": "Tiger Eye is a semi-precious stone characterized by warm brown and gold tones with a natural shimmering effect. Traditionally used for decorative elements, it adds warmth and depth to luxury interiors. Natural banding within each piece creates distinctive movement."
+      },
+      "white-jade": {
+        "name": "White Jade",
+        "description": "White Jade is a refined semi-precious stone known for its soft white tone and smooth, elegant surface. Long valued in decorative arts and cultural objects, it conveys purity and understated luxury. Subtle natural variation ensures each piece maintains a calm and timeless character."
+      },
+      "arabescat": {
+        "name": "Arabescato",
+        "description": "Arabescato Marble is an Italian stone known for its white base and intricate grey veining."
+      },
+      "volga-blue": {
+        "name": "Volga Blue",
+        "description": "Volga Blue Granite is a dark stone known for rare blue reflective crystals. Selected for premium architectural surfaces, it creates depth and visual intrigue under light. Natural mineral variation enhances its dramatic character."
+      },
+      "moleanos": {
+        "name": "Moleanos",
+        "description": "Moleanos Limestone is a Portuguese natural stone known for its uniform beige color and refined grain. Often specified for architectural projects, it provides a clean and balanced appearance. Subtle natural variation across each slab adds quiet elegance."
+      },
+      "moleanos-azul": {
+        "name": "Moleanos Azul",
+        "description": "Moleanos Azul Limestone is a cool-toned stone featuring grey with slight blue undertones. Often used in contemporary architectural projects, it delivers a refined and modern appearance. Natural variation across each slab creates gentle visual movement."
+      },
+      "royal-beige-limestone": {
+        "name": "Royal Beige Limestone",
+        "description": "Royal Beige Limestone is a warm beige stone valued for its classic architectural appeal. Widely used in interior and exterior applications, it offers durability and timeless elegance. Natural movement within each slab creates subtle visual interest."
+      },
+      "silver-matrix": {
+        "name": "Silver Matrix",
+        "description": "Silver Matrix Granite is a grey stone characterized by a silvery mineral texture and layered depth. Frequently selected for modern architectural projects, it offers a clean and contemporary appearance. Natural variation across each slab adds subtle visual interest."
+      },
+      "sinai-gold-limestone": {
+        "name": "Sinai Gold Limestone",
+        "description": "Sinai Gold Limestone is a golden-beige natural stone valued for its warm tone and durability. Commonly used in both interior and exterior applications, it brings warmth and elegance to architectural surfaces. Natural variation ensures each slab maintains a distinct character."
+      },
+      "sinai-pearl-limestone": {
+        "name": "Sinai Pearl Limestone",
+        "description": "Sinai Pearl Limestone is a light beige stone with a soft and uniform appearance. Frequently used in architectural applications, it delivers a calm and refined surface. Subtle natural variation enhances its elegant character."
+      },
+      "sunny-creama": {
+        "name": "Sunny Creama",
+        "description": "Sunny Creama Limestone is a warm cream-toned stone known for its subtle texture and consistent appearance. Widely used in architectural interiors, it offers warmth and elegance. Natural variation ensures each slab maintains its own distinct character."
+      },
+      "tan-brown": {
+        "name": "Tan Brown",
+        "description": "Tan Brown Granite is a dark stone featuring brown and black tones with subtle mineral highlights. Commonly used in residential and commercial applications, it offers durability with a rich visual tone. Each slab presents natural mineral variation."
+      },
+      "0nyx-green": {
+        "name": "Green Onyx",
+        "description": "Green Onyx is a translucent stone featuring layered green tones and flowing movement. Selected for premium interior features, it offers depth and elegance when illuminated. Natural banding within each slab creates a distinctive visual expression."
+      },
+      "new-caledonia": {
+        "name": "New Caledonia",
+        "description": "New Caledonia Granite is a stable grey stone with uniform grain and strong durability. Used in both residential and commercial projects, it delivers a clean and reliable appearance. Natural mineral structure ensures consistent quality."
+      },
+      "moon-white": {
+        "name": "Moon White",
+        "description": "Moon White Granite is a light stone with subtle grey movement across a white background. Often selected for bright and modern interiors, it delivers a clean and spacious aesthetic. Gentle natural variation ensures each slab remains visually distinct."
+      },
+      "new-imperial-red": {
+        "name": "New Imperial Red",
+        "description": "New Imperial Red Granite is a deep red stone with a refined and uniform appearance. Commonly used in monuments and architectural exteriors, it delivers strong visual impact with excellent durability. Consistent grain ensures a polished and timeless finish."
+      },
+      "paradiso": {
+        "name": "Paradiso",
+        "description": "Paradiso Granite is a natural stone defined by flowing movement and blended earthy tones. Used in both interior and exterior applications, it offers warmth and visual complexity. Natural grain patterns make each slab distinctive."
+      },
+      "pink-porrino": {
+        "name": "Pink Porrino",
+        "description": "Pink Porrino Granite is a light pink stone with fine mineral texture and soft tone. Often used in architectural and interior applications, it introduces subtle warmth while maintaining durability. Natural mineral variation gives each slab its own character."
+      },
+      "river-white": {
+        "name": "River White",
+        "description": "River White Granite is a soft white stone with gentle grey lines and occasional mineral accents. Used in modern residential and commercial interiors, it offers brightness and refined texture. Natural variation across each slab adds subtle depth."
+      },
+      "rosa-beta": {
+        "name": "Rosa Beta",
+        "description": "Rosa Beta Granite is a pink stone with fine grain and soft visual warmth. Frequently used in architectural exteriors and interiors, it delivers durability with a gentle aesthetic. Consistent texture ensures a refined appearance."
+      },
+      "santa-cecilia": {
+        "name": "Santa Cecilia",
+        "description": "Santa Cecilia Granite is a warm beige stone known for its traditional mineral patterning. Popular in residential and commercial interiors, it delivers warmth and timeless appeal. Natural grain variation ensures each slab maintains its unique character."
+      },
+      "silver-grey": {
+        "name": "Silver Grey",
+        "description": "Silver Grey Granite is a neutral grey stone with even mineral composition and subtle depth. Commonly used in modern architectural projects, it offers a clean and professional appearance. Consistent grain ensures a refined finish."
+      },
+      "steel-grey": {
+        "name": "Steel Grey",
+        "description": "Steel Grey Granite is a medium grey stone with fine, consistent mineral grain. Widely used in contemporary architecture, it delivers durability and modern elegance. Uniform texture ensures a sleek and polished appearance."
+      },
+      "titanium": {
+        "name": "Titanium Granite",
+        "description": "Titanium Granite is a bold black stone accented with gold mineral movement. Selected for statement architectural surfaces, it conveys strength and luxury. Natural variation ensures each slab presents unique patterns."
+      },
+      "tuffa-pink": {
+        "name": "Tuffa Pink",
+        "description": "Tuffa Pink Granite is a pink-toned stone with consistent grain and gentle movement. Used in architectural and decorative applications, it introduces soft warmth to surfaces. Natural texture ensures each slab remains visually distinct."
+      },
+      "via-lactea": {
+        "name": "Via Lactea",
+        "description": "Via Lactea Granite is a black stone distinguished by strong white veining. Used for statement architectural surfaces, it delivers bold contrast and visual drama. Each slab showcases naturally occurring patterns that are unique."
+      },
+      "viscon-white": {
+        "name": "Viscon White",
+        "description": "Viscon White Granite is a stone defined by flowing grey movement over a white base. Widely used in modern residential and commercial interiors, it offers brightness and subtle visual interest. Each slab presents natural variation that adds character."
+      },
+      "viscount-white": {
+        "name": "Viscount White",
+        "description": "Viscount White Granite is a white stone distinguished by linear grey veining and structured movement. Selected for contemporary interiors, it delivers a clean and architectural appearance. Natural variation ensures each slab remains visually distinctive."
       }
     }
   }

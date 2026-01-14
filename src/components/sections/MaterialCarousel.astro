@@ -39,7 +39,7 @@ const materialsData = materials.map(m => ({
 }));
 ---
 
-<section class="py-12 lg:py-16">
+<section class="py-12 lg:py-16 material-section">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Title -->
     <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary mb-8 text-center tracking-tight">
@@ -252,6 +252,10 @@ const materialsData = materials.map(m => ({
 </script>
 
 <style is:global>
+  .material-section {
+    overflow-x: clip;
+  }
+
   .material-carousel-container {
     overflow: visible;
   }

@@ -1,0 +1,148 @@
+---
+/**
+ * MaterialsFilter Component
+ *
+ * Filter button with dropdown for filtering materials by type.
+ * Positioned in the top-right of the materials page.
+ */
+import { useI18n } from '../../i18n/utils';
+
+const { t } = useI18n(Astro.url);
+
+const filterOptions = [
+  { id: 'all', label: t.materials.filterOptions?.allTypes || 'All Types' },
+  { id: 'marble', label: t.materials.filterOptions?.marble || 'Marble' },
+  { id: 'granite', label: t.materials.filterOptions?.granite || 'Granite' },
+  { id: 'onyx', label: t.materials.filterOptions?.onyx || 'Onyx' },
+  { id: 'semi-precious', label: t.materials.filterOptions?.semiPrecious || 'Semi-Precious' }
+];
+---
+
+<div class="materials-filter-container">
+  <button
+    class="filter-btn bg-white rounded-full shadow-lg px-6 py-3 flex items-center gap-2 hover:shadow-xl transition-shadow duration-200"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+  >
+    <!-- Filter Icon -->
+    <svg class="w-5 h-5 text-[#364153]" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 10H15M2.5 5H17.5M7.5 15H12.5" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="filter-label font-medium text-[#364153]">{t.materials.filter || 'Filter'}</span>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div class="filter-dropdown hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 z-50">
+    {filterOptions.map((option, index) => (
+      <button
+        class:list={[
+          "filter-option w-full px-4 py-2 text-left text-sm hover:bg-gray-50 transition-colors",
+          index === 0 ? "text-[#155dfc] font-medium" : "text-[#364153]"
+        ]}
+        data-filter={option.id}
+        data-selected={index === 0 ? 'true' : 'false'}
+      >
+        {option.label}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initMaterialsFilter() {
+    const containers = document.querySelectorAll('.materials-filter-container');
+
+    containers.forEach((container) => {
+      const filterBtn = container.querySelector('.filter-btn') as HTMLButtonElement;
+      const dropdown = container.querySelector('.filter-dropdown') as HTMLElement;
+      const options = container.querySelectorAll('.filter-option');
+
+      if (!filterBtn || !dropdown) return;
+
+      // Toggle dropdown
+      filterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = filterBtn.getAttribute('aria-expanded') === 'true';
+        filterBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+        dropdown.classList.toggle('hidden');
+      });
+
+      // Handle option selection
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          const filterId = option.getAttribute('data-filter');
+
+          // Update selected state
+          options.forEach((opt) => {
+            const isSelected = opt === option;
+            opt.setAttribute('data-selected', isSelected.toString());
+            if (isSelected) {
+              opt.classList.add('text-[#155dfc]', 'font-medium');
+              opt.classList.remove('text-[#364153]');
+            } else {
+              opt.classList.remove('text-[#155dfc]', 'font-medium');
+              opt.classList.add('text-[#364153]');
+            }
+          });
+
+          // Close dropdown
+          filterBtn.setAttribute('aria-expanded', 'false');
+          dropdown.classList.add('hidden');
+
+          // Dispatch custom event
+          document.dispatchEvent(new CustomEvent('materials-filter-change', {
+            detail: { filterId }
+          }));
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!container.contains(e.target as Node)) {
+          filterBtn.setAttribute('aria-expanded', 'false');
+          dropdown.classList.add('hidden');
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  initMaterialsFilter();
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initMaterialsFilter);
+</script>
+
+<style>
+  .materials-filter-container {
+    position: relative;
+  }
+
+  .filter-btn {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.31px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(21, 93, 252, 0.3), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-dropdown {
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-option {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .filter-option:hover {
+    background-color: #f9fafb;
+  }
+</style>

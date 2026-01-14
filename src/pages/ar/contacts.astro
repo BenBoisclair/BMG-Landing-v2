@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import ContactPageHero from '../../components/sections/ContactPageHero.astro';
+import Contact from '../../components/sections/Contact.astro';
+import { useI18n } from '../../i18n/utils';
+
+const { lang, t } = useI18n(Astro.url);
+---
+
+<BaseLayout
+  title={`${t.contactPage.title} | ${t.meta.title}`}
+  description={t.contact.description}
+  lang={lang}
+>
+  <Header pageType="process" />
+
+  <main>
+    <ContactPageHero />
+    <Contact />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -359,6 +359,19 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
       detailAddition: 0,
     };
 
+    // Price lookup tables
+    const stonePrices: { [key: string]: number } = {
+      aPlusPlus: 0.00015,  // Price per mm³
+      aPlus: 0.00012,
+      a: 0.00010,
+    };
+
+    const detailAdditions: { [key: string]: number } = {
+      minimal: 0,
+      refine: 500,
+      realistic: 1200,
+    };
+
     // Elements
     const calculatorContainer = document.getElementById('calculator-container');
     const tabContainer = document.getElementById('tab-container');
@@ -371,8 +384,8 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
     const priceResult = document.getElementById('price-result');
     const priceValue = document.getElementById('price-value');
     const dimensionInputs = document.querySelectorAll<HTMLInputElement>('.dimension-input');
-    const stoneCards = document.querySelectorAll<HTMLButtonElement>('.stone-card');
-    const detailCards = document.querySelectorAll<HTMLButtonElement>('.detail-card');
+    const stoneRadios = document.querySelectorAll<HTMLInputElement>('input[name="stoneType"]');
+    const detailRadios = document.querySelectorAll<HTMLInputElement>('input[name="detailLevel"]');
     const calculatorContent = document.getElementById('calculator-content');
 
     // Tab switching with new animation logic
@@ -509,85 +522,23 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
       });
     });
 
-    // Stone card selection
-    stoneCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        // Remove selection from all
-        stoneCards.forEach((c) => {
-          c.classList.remove('border-brand-primary', 'ring-2', 'ring-brand-primary');
-          c.classList.add('border-gray-300');
-          c.setAttribute('aria-checked', 'false');
-        });
-
-        // Select this card
-        card.classList.remove('border-gray-300');
-        card.classList.add('border-brand-primary', 'ring-2', 'ring-brand-primary');
-        card.setAttribute('aria-checked', 'true');
-
-        state.stoneGrade = card.dataset.stone || null;
-        state.stonePricePerMm3 = parseFloat(card.dataset.price || '0');
-
+    // Stone grade selection via radio inputs
+    stoneRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        const value = radio.value;
+        state.stoneGrade = value;
+        state.stonePricePerMm3 = stonePrices[value] || 0;
         updateCalculateButton();
-      });
-
-      // Keyboard navigation
-      card.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-          e.preventDefault();
-          const cards = Array.from(stoneCards);
-          const currentIndex = cards.indexOf(card);
-          let newIndex: number;
-
-          if (e.key === 'ArrowRight') {
-            newIndex = (currentIndex + 1) % cards.length;
-          } else {
-            newIndex = (currentIndex - 1 + cards.length) % cards.length;
-          }
-
-          (cards[newIndex] as HTMLButtonElement).click();
-          (cards[newIndex] as HTMLButtonElement).focus();
-        }
       });
     });
 
-    // Detail card selection
-    detailCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        // Remove selection from all
-        detailCards.forEach((c) => {
-          c.classList.remove('border-brand-primary', 'ring-2', 'ring-brand-primary');
-          c.classList.add('border-gray-300');
-          c.setAttribute('aria-checked', 'false');
-        });
-
-        // Select this card
-        card.classList.remove('border-gray-300');
-        card.classList.add('border-brand-primary', 'ring-2', 'ring-brand-primary');
-        card.setAttribute('aria-checked', 'true');
-
-        state.detailLevel = card.dataset.detail || null;
-        state.detailAddition = parseFloat(card.dataset.addition || '0');
-
+    // Detail level selection via radio inputs
+    detailRadios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        const value = radio.value;
+        state.detailLevel = value;
+        state.detailAddition = detailAdditions[value] || 0;
         updateCalculateButton();
-      });
-
-      // Keyboard navigation
-      card.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-          e.preventDefault();
-          const cards = Array.from(detailCards);
-          const currentIndex = cards.indexOf(card);
-          let newIndex: number;
-
-          if (e.key === 'ArrowRight') {
-            newIndex = (currentIndex + 1) % cards.length;
-          } else {
-            newIndex = (currentIndex - 1 + cards.length) % cards.length;
-          }
-
-          (cards[newIndex] as HTMLButtonElement).click();
-          (cards[newIndex] as HTMLButtonElement).focus();
-        }
       });
     });
 
@@ -654,13 +605,6 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
 </script>
 
 <style>
-  /* Selected card styles */
-  .stone-card[aria-checked="true"],
-  .detail-card[aria-checked="true"] {
-    border-color: var(--color-brand-primary);
-    box-shadow: 0 0 0 2px var(--color-brand-primary);
-  }
-
   /* Input validation states */
   .dimension-input.border-green-500 {
     border-color: #22c55e;

@@ -1,111 +1,529 @@
 {
-  "description": "Material showcase data. Material names/descriptions are stored in i18n translation files.",
+  "description": "Material showcase data organized by quality tier. Material names/descriptions are stored in i18n translation files.",
   "categories": [
     {
-      "id": "semi-precious",
+      "id": "premium",
       "tier": "A++",
+      "label": "Jewellery Stone",
       "materials": [
         {
-          "id": "semi-precious-1",
-          "image": "/images/materials/semi-precious-1.jpg",
-          "heroImage": "/images/materials/semi-precious-1.jpg",
-          "gallery": []
+          "id": "amethyst",
+          "image": "/Materials/amethyst/S__5611522.jpg",
+          "folder": "amethyst"
         },
         {
-          "id": "semi-precious-2",
-          "image": "/images/materials/semi-precious-2.jpg",
-          "heroImage": "/images/materials/semi-precious-2.jpg",
-          "gallery": []
+          "id": "jade",
+          "image": "/Materials/jade /istockphoto-938335888-612x612.jpg",
+          "folder": "jade "
         },
         {
-          "id": "semi-precious-3",
-          "image": "/images/materials/semi-precious-3.jpg",
-          "heroImage": "/images/materials/semi-precious-3.jpg",
-          "gallery": []
+          "id": "jasper",
+          "image": "/Materials/jasper/1000_F_536737599_nLLecxOHgXCpio9hRQBfxPHge7phaoZU.jpg",
+          "folder": "jasper"
         },
         {
-          "id": "semi-precious-4",
-          "image": "/images/materials/semi-precious-4.jpg",
-          "heroImage": "/images/materials/semi-precious-4.jpg",
-          "gallery": []
+          "id": "labradorite",
+          "image": "/Materials/labradorite/Lemurian-Blue-Granite.jpg",
+          "folder": "labradorite"
         },
         {
-          "id": "semi-precious-5",
-          "image": "/images/materials/semi-precious-5.jpg",
-          "heroImage": "/images/materials/semi-precious-5.jpg",
-          "gallery": []
+          "id": "lapis-lazuli",
+          "image": "/Materials/lapis lazuli/360_F_298432705_pNoewpE0quIJWNFdX1EKmg2CghAELU41.jpg",
+          "folder": "lapis lazuli"
+        },
+        {
+          "id": "malachite",
+          "image": "/Materials/malachite/istockphoto-183770112-612x612.jpg",
+          "folder": "malachite"
+        },
+        {
+          "id": "obsidian",
+          "image": "/Materials/obsidian/S__5611525.jpg",
+          "folder": "obsidian"
+        },
+        {
+          "id": "onyx-blue",
+          "image": "/Materials/onyx blue /S__5603365.jpg",
+          "folder": "onyx blue "
+        },
+        {
+          "id": "onyx-honey",
+          "image": "/Materials/onyx honey /S__5611524.jpg",
+          "folder": "onyx honey "
+        },
+        {
+          "id": "onyx-ice",
+          "image": "/Materials/onyx ice /ice-onyx-book-matched-12mm-polished.jpg",
+          "folder": "onyx ice "
+        },
+        {
+          "id": "onyx-pink",
+          "image": "/Materials/onyx pink /654b16d7c4fded489235d38f_BPO.jpg",
+          "folder": "onyx pink "
+        },
+        {
+          "id": "onyx-rainbow-van-gogh",
+          "image": "/Materials/onyx rainbow (Van Gogh)/67ca9e9c43631894fee16649_VG.jpg",
+          "folder": "onyx rainbow (Van Gogh)"
+        },
+        {
+          "id": "onyx-white",
+          "image": "/Materials/onyx white /S__5603363.jpg",
+          "folder": "onyx white "
+        },
+        {
+          "id": "quartz-crystal",
+          "image": "/Materials/quartz crystal/60746689-quartz-crystal-background-close-up.jpg",
+          "folder": "quartz crystal"
+        },
+        {
+          "id": "tiger-eye",
+          "image": "/Materials/tiger eye /S__5611523.jpg",
+          "folder": "tiger eye "
+        },
+        {
+          "id": "white-jade",
+          "image": "/Materials/white jade /S__5611526.jpg",
+          "folder": "white jade "
+        },
+        {
+          "id": "0nyx-green",
+          "image": "/Materials/0nyx green/S__5603364.jpg",
+          "folder": "0nyx green"
         }
       ]
     },
     {
       "id": "luxury",
       "tier": "A+",
+      "label": "Luxury Stone",
       "materials": [
         {
-          "id": "luxury-1",
-          "image": "/images/materials/luxury-1.jpg",
-          "heroImage": "/images/materials/luxury-1.jpg",
-          "gallery": []
+          "id": "arabescato-corchia",
+          "image": "/Materials/Arabescato Corchia/S__5496834.jpg",
+          "folder": "Arabescato Corchia"
         },
         {
-          "id": "luxury-2",
-          "image": "/images/materials/luxury-2.jpg",
-          "heroImage": "/images/materials/luxury-2.jpg",
-          "gallery": []
+          "id": "calacatta",
+          "image": "/Materials/Calacatta/Calacatta-1.jpg",
+          "folder": "Calacatta"
         },
         {
-          "id": "luxury-3",
-          "image": "/images/materials/luxury-3.jpg",
-          "heroImage": "/images/materials/luxury-3.jpg",
-          "gallery": []
+          "id": "calacatta-borghini",
+          "image": "/Materials/Calacatta Borghini/calacatta_borghini_marble_slabs_2cm_polished.jpg",
+          "folder": "Calacatta Borghini"
         },
         {
-          "id": "luxury-4",
-          "image": "/images/materials/luxury-4.jpg",
-          "heroImage": "/images/materials/luxury-4.jpg",
-          "gallery": []
+          "id": "calacatta-gold",
+          "image": "/Materials/Calacatta Gold/marble_Calacatta-Oro_giQcLiaGa4pDrEzQARwY.jpg",
+          "folder": "Calacatta Gold"
         },
         {
-          "id": "luxury-5",
-          "image": "/images/materials/luxury-5.jpg",
-          "heroImage": "/images/materials/luxury-5.jpg",
-          "gallery": []
+          "id": "paonazzo",
+          "image": "/Materials/Paonazzo/Calacatta-Paonazzo-1600x3200-2_R_12_20.jpg",
+          "folder": "Paonazzo"
+        },
+        {
+          "id": "statuario",
+          "image": "/Materials/Statuario/Marble_0007_STATUARIO_HIDEF1..jpg",
+          "folder": "Statuario"
+        },
+        {
+          "id": "volga-blue",
+          "image": "/Materials/Volga blue /images (7).jpeg",
+          "folder": "Volga blue "
+        },
+        {
+          "id": "blue-pearl",
+          "image": "/Materials/blue pearl/images (6).jpeg",
+          "folder": "blue pearl"
+        },
+        {
+          "id": "crystal-blue",
+          "image": "/Materials/crystal blue /crystal-blue-granite.jpg",
+          "folder": "crystal blue "
+        },
+        {
+          "id": "lilac-marble",
+          "image": "/Materials/lilac marble/S__5505058.jpg",
+          "folder": "lilac marble"
+        },
+        {
+          "id": "panda-white",
+          "image": "/Materials/panda white/649a9e28ec96ee57105ccca2_PandaWhite.jpeg",
+          "folder": "panda white"
+        },
+        {
+          "id": "silver-matrix",
+          "image": "/Materials/silver matrix/silver-grey-matrix-granite-slabs-p742143-1b.jpg",
+          "folder": "silver matrix"
+        },
+        {
+          "id": "sky-white",
+          "image": "/Materials/sky white/S__5611528.jpg",
+          "folder": "sky white"
+        },
+        {
+          "id": "super-white",
+          "image": "/Materials/super white/TVinzmeunu7BbY8YZtjzJLppl7qG5GivAJ0l34gu.jpg",
+          "folder": "super white"
+        },
+        {
+          "id": "thassos",
+          "image": "/Materials/thassos/marmo-bianco-Thassos.jpg",
+          "folder": "thassos"
+        },
+        {
+          "id": "volakas",
+          "image": "/Materials/volakas/Volakas-slider-1024x547.jpg",
+          "folder": "volakas"
+        },
+        {
+          "id": "white-venus",
+          "image": "/Materials/white venus/venus-white-512x299.jpg",
+          "folder": "white venus"
         }
       ]
     },
     {
       "id": "classic",
       "tier": "A",
+      "label": "Natural Stone",
       "materials": [
         {
-          "id": "classic-1",
-          "image": "/images/materials/classic-1.jpg",
-          "heroImage": "/images/materials/classic-1.jpg",
-          "gallery": []
+          "id": "tobacco-brown",
+          "image": "/Materials/Tobacco Brown/S__5505088.jpg",
+          "folder": "Tobacco Brown"
         },
         {
-          "id": "classic-2",
-          "image": "/images/materials/classic-2.jpg",
-          "heroImage": "/images/materials/classic-2.jpg",
-          "gallery": []
+          "id": "royal-beige-limestone",
+          "image": "/Materials/royal beige limestone/Royal-Satin-24-x-24-x-3.4-Limestone-Honed-Lot-NS-01-2.jpg",
+          "folder": "royal beige limestone"
         },
         {
-          "id": "classic-3",
-          "image": "/images/materials/classic-3.jpg",
-          "heroImage": "/images/materials/classic-3.jpg",
-          "gallery": []
+          "id": "alaska-white",
+          "image": "/Materials/Alaska White/S__5513259.jpg",
+          "folder": "Alaska White"
         },
         {
-          "id": "classic-4",
-          "image": "/images/materials/classic-4.jpg",
-          "heroImage": "/images/materials/classic-4.jpg",
-          "gallery": []
+          "id": "arabescat",
+          "image": "/Materials/Arabescat/S__5496835(1).jpg",
+          "folder": "Arabescat"
         },
         {
-          "id": "classic-5",
-          "image": "/images/materials/classic-5.jpg",
-          "heroImage": "/images/materials/classic-5.jpg",
-          "gallery": []
+          "id": "bianco-dolomiti",
+          "image": "/Materials/Bianco Dolomiti/5fecbb5362e9eac5956ea398_BIANCO DOLOMITI_1.jpg",
+          "folder": "Bianco Dolomiti"
+        },
+        {
+          "id": "black-marquina",
+          "image": "/Materials/Black Marquina/654465babddb25762b1d8692_MQB.jpg",
+          "folder": "Black Marquina"
+        },
+        {
+          "id": "botticino",
+          "image": "/Materials/Botticino/botticino-classico-e1693303250808.jpg",
+          "folder": "Botticino"
+        },
+        {
+          "id": "crema-marfil",
+          "image": "/Materials/Crema Marfil/S__5505083.jpg",
+          "folder": "Crema Marfil"
+        },
+        {
+          "id": "daino-reale",
+          "image": "/Materials/Daino Reale/images (4).jpeg",
+          "folder": "Daino Reale"
+        },
+        {
+          "id": "emperador-dark",
+          "image": "/Materials/Emperador Dark/1662449233.jpg",
+          "folder": "Emperador Dark"
+        },
+        {
+          "id": "emperador-light",
+          "image": "/Materials/Emperador Light/67dcfa200ce1a503421df590_LED.jpg",
+          "folder": "Emperador Light"
+        },
+        {
+          "id": "grigio-carnico",
+          "image": "/Materials/Grigio Carnico/Grigio_Carnico.jpg",
+          "folder": "Grigio Carnico"
+        },
+        {
+          "id": "perlato-sicilia",
+          "image": "/Materials/Perlato Sicilia/S__5505085.jpg",
+          "folder": "Perlato Sicilia"
+        },
+        {
+          "id": "pietra-grey",
+          "image": "/Materials/Pietra Grey/pietra-grey.jpg",
+          "folder": "Pietra Grey"
+        },
+        {
+          "id": "silver-shadow",
+          "image": "/Materials/Silver Shadow/S__5505062.jpg",
+          "folder": "Silver Shadow"
+        },
+        {
+          "id": "absolute-black",
+          "image": "/Materials/absolute black /S__5603361.jpg",
+          "folder": "absolute black "
+        },
+        {
+          "id": "baltic-brown",
+          "image": "/Materials/baltic brown/balticbrowncloseup_69a244ab-8cf3-408e-9505-72a04f0a39a5_1024x.jpg",
+          "folder": "baltic brown"
+        },
+        {
+          "id": "bianco-antico",
+          "image": "/Materials/bianco antico/DAL_G446_BiancoAntico_PL_Detail.jpeg",
+          "folder": "bianco antico"
+        },
+        {
+          "id": "black-galaxy",
+          "image": "/Materials/black galaxy /black-galaxy-marble.jpg",
+          "folder": "black galaxy "
+        },
+        {
+          "id": "cafe-bahia",
+          "image": "/Materials/cafe Bahia/cafe-bahia-granite-from-brazil-p5529-1B.jpg",
+          "folder": "cafe Bahia"
+        },
+        {
+          "id": "capri-limestone",
+          "image": "/Materials/capri limestone/grupo-mos-caliza-capri.jpg",
+          "folder": "capri limestone"
+        },
+        {
+          "id": "cat-eye",
+          "image": "/Materials/cat eye/S__5505081.jpg",
+          "folder": "cat eye"
+        },
+        {
+          "id": "ivory-limestone",
+          "image": "/Materials/ivory limestone/sgi-5000-0209-anatolia-limestone-serene-ivory-natural-stone-field-tile-honed-straight-edge-rectangle-12x24.webp",
+          "folder": "ivory limestone"
+        },
+        {
+          "id": "jura-beige",
+          "image": "/Materials/jura beige/Jura-Beige-Limestone.jpg",
+          "folder": "jura beige"
+        },
+        {
+          "id": "jura-grey",
+          "image": "/Materials/jura grey /jura-grey-2-1.webp",
+          "folder": "jura grey "
+        },
+        {
+          "id": "limestone-cloudy",
+          "image": "/Materials/limestone cloudy /casablanca-k_1.jpg",
+          "folder": "limestone cloudy "
+        },
+        {
+          "id": "luna-limestone",
+          "image": "/Materials/luna limestone/limestone-crema-luna-europa.jpg",
+          "folder": "luna limestone"
+        },
+        {
+          "id": "moca-creme",
+          "image": "/Materials/moca creme/Moca-Creme-Fine_1-1-uai-1091x613.jpg",
+          "folder": "moca creme"
+        },
+        {
+          "id": "moleanos",
+          "image": "/Materials/moleanos/moleanos.jpg",
+          "folder": "moleanos"
+        },
+        {
+          "id": "moleanos-azul",
+          "image": "/Materials/moleanos azul /49v8L8f034.webp",
+          "folder": "moleanos azul "
+        },
+        {
+          "id": "sinai-gold-limestone",
+          "image": "/Materials/sinai gold limestone /5e3263face1911f3679cd3ea_SUNNY GOLD POLISHED__M1-thumbnail-90.jpg",
+          "folder": "sinai gold limestone "
+        },
+        {
+          "id": "sinai-pearl-limestone",
+          "image": "/Materials/sinai pearl limestone /SINAI PEARL STONETECH LIMESTONE.jpg",
+          "folder": "sinai pearl limestone "
+        },
+        {
+          "id": "sunny-creama",
+          "image": "/Materials/sunny creama/Sunny-cream-เนื้อหิน.webp",
+          "folder": "sunny creama"
+        },
+        {
+          "id": "tan-brown",
+          "image": "/Materials/tan brown /S__5603360.jpg",
+          "folder": "tan brown "
+        },
+        {
+          "id": "black-forest",
+          "image": "/Materials/Black Forest/S__5505093.jpg",
+          "folder": "Black Forest"
+        },
+        {
+          "id": "dallas-white",
+          "image": "/Materials/Dallas white /Dallas_White_Granite_Polished-closeup_509x.jpg",
+          "folder": "Dallas white "
+        },
+        {
+          "id": "himalayan-blue",
+          "image": "/Materials/Himalayan blue /20.-HIMALAYAN-BLUE-GRANITE.jpg",
+          "folder": "Himalayan blue "
+        },
+        {
+          "id": "nero-marquina",
+          "image": "/Materials/Nero Marquina/nero-marquinia-e1691662409680.jpg",
+          "folder": "Nero Marquina"
+        },
+        {
+          "id": "new-caledonia",
+          "image": "/Materials/New Caledonia /S__5603359.jpg",
+          "folder": "New Caledonia "
+        },
+        {
+          "id": "rosa-portogallo",
+          "image": "/Materials/Rosa Portogallo/Roso-Portogalo.png",
+          "folder": "Rosa Portogallo"
+        },
+        {
+          "id": "titanium-black",
+          "image": "/Materials/Titanium Black /S__5513242.jpg",
+          "folder": "Titanium Black "
+        },
+        {
+          "id": "verde-alpi",
+          "image": "/Materials/Verde Alpi/verde-alpi.jpeg",
+          "folder": "Verde Alpi"
+        },
+        {
+          "id": "verde-guatemala",
+          "image": "/Materials/Verde Guatemala/images (5).jpeg",
+          "folder": "Verde Guatemala"
+        },
+        {
+          "id": "black-pearl",
+          "image": "/Materials/black pearl/images (5).jpeg",
+          "folder": "black pearl"
+        },
+        {
+          "id": "black-zimbabwe",
+          "image": "/Materials/black. zimbabwe/stone-connection-south-africa-zimbabwe-granite-02-min.jpg",
+          "folder": "black. zimbabwe"
+        },
+        {
+          "id": "coffee-brown",
+          "image": "/Materials/coffee brown /coffee-brown.jpg",
+          "folder": "coffee brown "
+        },
+        {
+          "id": "colonial-white",
+          "image": "/Materials/colonial white /674e89cc21e12ef7200130d5_CLW.jpg",
+          "folder": "colonial white "
+        },
+        {
+          "id": "cosmic-black",
+          "image": "/Materials/cosmic black/03_texture_cosmic_black.jpg",
+          "folder": "cosmic black"
+        },
+        {
+          "id": "crystal-yellow",
+          "image": "/Materials/crystal yellow /crystal-yellow-granite.jpg",
+          "folder": "crystal yellow "
+        },
+        {
+          "id": "giallo-ornamental",
+          "image": "/Materials/giallo ornamental/images (4).jpeg",
+          "folder": "giallo ornamental"
+        },
+        {
+          "id": "imperial-red",
+          "image": "/Materials/imperial red /imperial_red_granite.jpg",
+          "folder": "imperial red "
+        },
+        {
+          "id": "marron-cuba",
+          "image": "/Materials/marron cuba /cafe-guaiba-granite-p164492-1B.jpg",
+          "folder": "marron cuba "
+        },
+        {
+          "id": "moon-white",
+          "image": "/Materials/moon white /S__5603357.jpg",
+          "folder": "moon white "
+        },
+        {
+          "id": "new-imperial-red",
+          "image": "/Materials/new imperial red /S__5603362.jpg",
+          "folder": "new imperial red "
+        },
+        {
+          "id": "paradiso",
+          "image": "/Materials/paradiso/25.-PARADISO-CLASSIC-GRANITE.jpg",
+          "folder": "paradiso"
+        },
+        {
+          "id": "pink-porrino",
+          "image": "/Materials/pink porrino /pink-porrino-tile-5153-3B.jpeg",
+          "folder": "pink porrino "
+        },
+        {
+          "id": "river-white",
+          "image": "/Materials/river white /RiverWhiteGranite.jpg",
+          "folder": "river white "
+        },
+        {
+          "id": "rosa-beta",
+          "image": "/Materials/rosa beta /images (8).jpeg",
+          "folder": "rosa beta "
+        },
+        {
+          "id": "santa-cecilia",
+          "image": "/Materials/santa cecilia /santa_20cecilia_4000x.jpg",
+          "folder": "santa cecilia "
+        },
+        {
+          "id": "silver-grey",
+          "image": "/Materials/silver grey/silvergrey2_04d13f48-6b1c-4b32-9a8e-6074a22cbc64_800x.jpg",
+          "folder": "silver grey"
+        },
+        {
+          "id": "steel-grey",
+          "image": "/Materials/steel grey/SteelGreyGranite.jpg",
+          "folder": "steel grey"
+        },
+        {
+          "id": "titanium",
+          "image": "/Materials/titanium /titanium-granite-slab-granix.jpg",
+          "folder": "titanium "
+        },
+        {
+          "id": "tuffa-pink",
+          "image": "/Materials/tuffa pink /1626158043_2.jpg",
+          "folder": "tuffa pink "
+        },
+        {
+          "id": "via-lactea",
+          "image": "/Materials/via lactea/Via-Lactea-Granite.png",
+          "folder": "via lactea"
+        },
+        {
+          "id": "viscon-white",
+          "image": "/Materials/viscon white /Viscon-White-Granite-Tiles.jpg",
+          "folder": "viscon white "
+        },
+        {
+          "id": "viscount-white",
+          "image": "/Materials/viscount white /Viscount20White20-20Close20Up.jpg",
+          "folder": "viscount white "
+        },
+        {
+          "id": "white-carrara",
+          "image": "/Materials/white carrara /close-up-white-marble-background.jpg",
+          "folder": "white carrara "
         }
       ]
     }

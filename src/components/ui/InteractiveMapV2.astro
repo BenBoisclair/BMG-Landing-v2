@@ -1,0 +1,743 @@
+---
+/**
+ * InteractiveMapV2 - Leaflet-powered world map with project markers
+ * Features: Click-to-zoom, pulsing markers, hover tooltips, click popups, filters
+ */
+import projectsData from '../../data/projects.json';
+import geocodedData from '../../data/geocoded-locations.json';
+import { useI18n } from '../../i18n/utils';
+import MapFilters from './map/MapFilters.astro';
+import MapSidebar from './map/MapSidebar.astro';
+
+const { t, lang } = useI18n(Astro.url);
+
+// Flatten all projects
+const allProjects = projectsData.projectTypes.flatMap(type => type.projects);
+
+// Build markers data to pass to client
+const markersData = allProjects
+  .filter(project => geocodedData.locations[project.id as keyof typeof geocodedData.locations])
+  .map(project => {
+    const geo = geocodedData.locations[project.id as keyof typeof geocodedData.locations];
+    const projectTranslations = t.project?.projects?.[project.id as keyof typeof t.project.projects];
+
+    // Get first sentence of description for sidebar
+    const fullDescription = projectTranslations?.description || '';
+    const shortDescription = fullDescription.split('\n')[0].substring(0, 80);
+
+    return {
+      id: project.id,
+      name: projectTranslations?.name || project.id,
+      location: projectTranslations?.location || '',
+      description: shortDescription,
+      image: project.image,
+      categories: project.categories,
+      lat: geo.lat,
+      lng: geo.lng,
+      region: geo.region,
+      country: geo.country,
+    };
+  });
+
+// Region data
+const regions = Object.entries(geocodedData.regions).map(([id, data]) => ({
+  id,
+  name: data.name,
+  bounds: data.bounds,
+}));
+---
+
+<div class="interactive-map-v2">
+  <!-- Filters -->
+  <MapFilters regions={regions} />
+
+  <!-- Map Container with Sidebar -->
+  <div class="map-wrapper relative overflow-hidden rounded-2xl">
+    <div
+      id="leaflet-map"
+      class="w-full h-[350px] sm:h-[450px] lg:h-[600px] bg-brand-primary/10"
+    >
+      <!-- Loading Skeleton -->
+      <div id="map-loading" class="absolute inset-0 flex items-center justify-center">
+        <div class="flex flex-col items-center gap-4">
+          <div class="flex gap-2">
+            <div class="w-3 h-3 bg-brand-primary/30 rounded-full animate-pulse"></div>
+            <div class="w-3 h-3 bg-brand-primary/30 rounded-full animate-pulse" style="animation-delay: 100ms"></div>
+            <div class="w-3 h-3 bg-brand-primary/30 rounded-full animate-pulse" style="animation-delay: 200ms"></div>
+          </div>
+          <p class="text-text-muted text-sm">Loading map...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Sidebar -->
+    <MapSidebar projects={markersData} />
+
+    <!-- Popup Container (rendered via JS) -->
+    <div id="map-popup-container" class="hidden"></div>
+  </div>
+</div>
+
+<!-- Pass data to client -->
+<script define:vars={{ markersData, regions, lang }}>
+  window.__MAP_DATA__ = {
+    markers: markersData,
+    regions: regions,
+    lang: lang
+  };
+</script>
+
+<!-- Client-side Leaflet initialization -->
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  // Get data from server
+  const mapData = (window as any).__MAP_DATA__;
+  const { markers, regions, lang } = mapData;
+
+  // Map configuration - Light theme
+  const STADIA_LIGHT = 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
+  const TILE_ATTRIBUTION = '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>';
+
+  // State
+  let currentRegion = 'all';
+  let map: L.Map | null = null;
+  let markerLayer: L.LayerGroup | null = null;
+
+  // Initialize map
+  function initMap() {
+    const container = document.getElementById('leaflet-map');
+    if (!container || map) return;
+
+    // Remove loading state
+    const loading = document.getElementById('map-loading');
+
+    // Create map
+    map = L.map(container, {
+      center: [20, 40],
+      zoom: 2,
+      minZoom: 2,
+      maxZoom: 12,
+      zoomControl: true,
+      attributionControl: false,
+    });
+
+    // Add tile layer
+    L.tileLayer(STADIA_LIGHT, {
+      attribution: TILE_ATTRIBUTION,
+    }).addTo(map);
+
+    // Create marker layer group
+    markerLayer = L.layerGroup().addTo(map);
+
+    // Render markers
+    renderMarkers(markers);
+
+    // Hide loading after tiles load
+    map.on('load', () => {
+      if (loading) loading.style.display = 'none';
+    });
+
+    // Fallback: hide loading after timeout
+    setTimeout(() => {
+      if (loading) loading.style.display = 'none';
+    }, 2000);
+  }
+
+  // Create pulsing marker HTML
+  function createMarkerHTML(count: number = 1): string {
+    const badge = count > 1
+      ? `<span class="marker-badge">${count}</span>`
+      : '';
+
+    return `
+      <div class="marker-container">
+        <div class="marker-pulse"></div>
+        <div class="marker-dot"></div>
+        ${badge}
+      </div>
+    `;
+  }
+
+  // Group markers by location
+  function groupMarkersByLocation(markers: any[]) {
+    const groups = new Map();
+
+    markers.forEach(marker => {
+      const key = `${marker.lat.toFixed(3)},${marker.lng.toFixed(3)}`;
+      const existing = groups.get(key) || [];
+      groups.set(key, [...existing, marker]);
+    });
+
+    return groups;
+  }
+
+  // Create popup content
+  function createPopupContent(markerData: any[], lang: string): string {
+    if (markerData.length === 1) {
+      const m = markerData[0];
+      return `
+        <div class="map-popup">
+          <div class="popup-image">
+            <img src="${m.image}" alt="${m.name}" />
+          </div>
+          <div class="popup-content">
+            <h3 class="popup-title">${m.name}</h3>
+            <p class="popup-location">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              ${m.location}
+            </p>
+            <div class="popup-categories">
+              ${m.categories.map((cat: string) => `<span class="category-tag">${cat}</span>`).join('')}
+            </div>
+            <a href="/${lang}/projects/${m.id}" class="popup-btn">View Project</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Multiple projects at location
+    return `
+      <div class="map-popup map-popup-list">
+        <div class="popup-header">
+          <span class="popup-count">${markerData.length} Projects</span>
+          <span class="popup-location-header">${markerData[0].location}</span>
+        </div>
+        <div class="popup-list">
+          ${markerData.map(m => `
+            <a href="/${lang}/projects/${m.id}" class="popup-list-item">
+              <img src="${m.image}" alt="${m.name}" class="list-item-image" />
+              <div class="list-item-content">
+                <span class="list-item-name">${m.name}</span>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // Create tooltip content
+  function createTooltipContent(markerData: any): string {
+    return `
+      <div class="map-tooltip">
+        <img src="${markerData.image}" alt="${markerData.name}" class="tooltip-image" />
+        <div class="tooltip-content">
+          <span class="tooltip-name">${markerData.name}</span>
+          <span class="tooltip-location">${markerData.location}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  // Render markers
+  function renderMarkers(markersToRender: any[]) {
+    if (!markerLayer) return;
+
+    // Clear existing markers
+    markerLayer.clearLayers();
+
+    // Group by location
+    const groups = groupMarkersByLocation(markersToRender);
+
+    groups.forEach((markerData, key) => {
+      const [lat, lng] = key.split(',').map(Number);
+
+      // Create custom icon
+      const icon = L.divIcon({
+        className: 'custom-marker',
+        html: createMarkerHTML(markerData.length),
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+      });
+
+      // Create marker
+      const marker = L.marker([lat, lng], { icon });
+
+      // Add tooltip (hover)
+      if (markerData.length === 1) {
+        marker.bindTooltip(createTooltipContent(markerData[0]), {
+          className: 'custom-tooltip',
+          direction: 'top',
+          offset: [0, -10],
+        });
+      }
+
+      // Add popup (click)
+      marker.bindPopup(createPopupContent(markerData, lang), {
+        className: 'custom-popup',
+        maxWidth: 300,
+        offset: [0, -10],
+      });
+
+      marker.addTo(markerLayer!);
+    });
+  }
+
+  // Filter markers by region
+  function filterMarkers() {
+    let filtered = [...markers];
+
+    // Filter by region
+    if (currentRegion && currentRegion !== 'all') {
+      filtered = filtered.filter(m => m.region === currentRegion);
+    }
+
+    renderMarkers(filtered);
+  }
+
+  // Zoom to region
+  function zoomToRegion(regionId: string) {
+    if (!map) return;
+
+    const region = regions.find((r: any) => r.id === regionId);
+    if (!region) return;
+
+    const bounds = L.latLngBounds(
+      [region.bounds[0][0], region.bounds[0][1]],
+      [region.bounds[1][0], region.bounds[1][1]]
+    );
+
+    map.fitBounds(bounds, {
+      padding: [20, 20],
+      duration: 0.3
+    });
+  }
+
+  // Event listeners for filters
+  function setupFilterListeners() {
+    // Region buttons
+    document.querySelectorAll('[data-region]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const regionId = target.dataset.region;
+
+        // Update active state
+        document.querySelectorAll('[data-region]').forEach(b => {
+          b.setAttribute('data-active', 'false');
+        });
+        target.setAttribute('data-active', 'true');
+
+        // Update state and filter
+        currentRegion = regionId || 'all';
+        filterMarkers();
+
+        // Zoom to region
+        if (regionId) {
+          zoomToRegion(regionId);
+        }
+      });
+    });
+  }
+
+  // Sidebar functionality
+  let sidebarOpen = false;
+  let selectedProjectId: string | null = null;
+
+  function setupSidebar() {
+    const toggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('map-sidebar');
+
+    if (!toggle || !sidebar) return;
+
+    // Toggle sidebar
+    toggle.addEventListener('click', () => {
+      sidebarOpen = !sidebarOpen;
+      toggle.setAttribute('aria-expanded', sidebarOpen.toString());
+      sidebar.classList.toggle('open', sidebarOpen);
+      sidebar.setAttribute('aria-hidden', (!sidebarOpen).toString());
+    });
+
+    // Card click handlers
+    document.querySelectorAll('.sidebar-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const projectId = target.dataset.projectId;
+
+        if (!projectId || !map) return;
+
+        // Find marker data
+        const markerData = markers.find((m: any) => m.id === projectId);
+        if (!markerData) return;
+
+        // Highlight card
+        selectSidebarCard(projectId);
+
+        // Pan to marker and open popup
+        map.setView([markerData.lat, markerData.lng], 6, {
+          animate: true,
+          duration: 0.5
+        });
+
+        // Find and open the marker popup
+        markerLayer?.eachLayer((layer: any) => {
+          if (layer.getLatLng) {
+            const latLng = layer.getLatLng();
+            if (Math.abs(latLng.lat - markerData.lat) < 0.001 &&
+                Math.abs(latLng.lng - markerData.lng) < 0.001) {
+              layer.openPopup();
+            }
+          }
+        });
+      });
+    });
+  }
+
+  function selectSidebarCard(projectId: string) {
+    // Remove previous selection
+    document.querySelectorAll('.sidebar-card.selected').forEach(card => {
+      card.classList.remove('selected');
+    });
+
+    // Add selection to new card
+    const card = document.querySelector(`[data-project-id="${projectId}"]`);
+    if (card) {
+      card.classList.add('selected');
+      selectedProjectId = projectId;
+
+      // Scroll card into view
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // Expose for marker click handling
+  (window as any).__selectSidebarCard = selectSidebarCard;
+
+  // Initialize on DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    initMap();
+    setupFilterListeners();
+    setupSidebar();
+  });
+
+  // Also try on astro:page-load for view transitions
+  document.addEventListener('astro:page-load', () => {
+    initMap();
+    setupFilterListeners();
+    setupSidebar();
+  });
+</script>
+
+<style>
+  /* Marker styles */
+  :global(.custom-marker) {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  :global(.marker-container) {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.marker-dot) {
+    width: 12px;
+    height: 12px;
+    background: #392DCA;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(57, 45, 202, 0.4);
+    position: relative;
+    z-index: 2;
+    transition: transform 150ms ease-out;
+  }
+
+  :global(.marker-container:hover .marker-dot) {
+    transform: scale(1.2);
+  }
+
+  :global(.marker-pulse) {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(57, 45, 202, 0.4);
+    border-radius: 50%;
+    animation: pulse-ring 1.5s ease-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  :global(.marker-badge) {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #2C266C;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    z-index: 3;
+    border: 1.5px solid white;
+  }
+
+  /* Tooltip styles */
+  :global(.custom-tooltip) {
+    background: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  :global(.custom-tooltip::before) {
+    display: none !important;
+  }
+
+  :global(.map-tooltip) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    max-width: 200px;
+  }
+
+  :global(.tooltip-image) {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  :global(.tooltip-content) {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  :global(.tooltip-name) {
+    font-weight: 600;
+    color: #2C266C;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.tooltip-location) {
+    font-size: 11px;
+    color: #828282;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Popup styles */
+  :global(.custom-popup .leaflet-popup-content-wrapper) {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  :global(.custom-popup .leaflet-popup-content) {
+    margin: 0;
+    width: auto !important;
+  }
+
+  :global(.custom-popup .leaflet-popup-tip) {
+    background: white;
+  }
+
+  :global(.map-popup) {
+    width: 280px;
+  }
+
+  :global(.popup-image) {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  :global(.popup-image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.popup-image::after) {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 50%);
+  }
+
+  :global(.popup-content) {
+    padding: 16px;
+  }
+
+  :global(.popup-title) {
+    font-weight: 600;
+    color: #2C266C;
+    font-size: 16px;
+    margin: 0 0 6px 0;
+  }
+
+  :global(.popup-location) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: #828282;
+    margin: 0 0 12px 0;
+  }
+
+  :global(.popup-categories) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  :global(.category-tag) {
+    padding: 4px 10px;
+    background: rgba(44, 38, 108, 0.1);
+    color: #2C266C;
+    font-size: 11px;
+    border-radius: 20px;
+    text-transform: capitalize;
+  }
+
+  :global(.popup-btn) {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    background: #2C266C;
+    color: #FFFFFF !important;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 150ms ease-out;
+  }
+
+  :global(.popup-btn:hover) {
+    background: #231f56;
+    color: #FFFFFF !important;
+  }
+
+  /* Multi-project popup */
+  :global(.map-popup-list) {
+    width: 260px;
+  }
+
+  :global(.popup-header) {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.popup-count) {
+    font-weight: 600;
+    color: #2C266C;
+    font-size: 14px;
+  }
+
+  :global(.popup-location-header) {
+    font-size: 12px;
+    color: #828282;
+  }
+
+  :global(.popup-list) {
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  :global(.popup-list-item) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    transition: background 150ms ease-out;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  :global(.popup-list-item:last-child) {
+    border-bottom: none;
+  }
+
+  :global(.popup-list-item:hover) {
+    background: #f8f8fa;
+  }
+
+  :global(.list-item-image) {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  :global(.list-item-name) {
+    font-weight: 500;
+    color: #2C266C;
+    font-size: 13px;
+  }
+
+  /* Leaflet overrides */
+  :global(.leaflet-control-zoom) {
+    border: none !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+  }
+
+  :global(.leaflet-control-zoom a) {
+    background: white !important;
+    color: #2C266C !important;
+    border-bottom: 1px solid #eee !important;
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 18px !important;
+  }
+
+  :global(.leaflet-control-zoom a:last-child) {
+    border-bottom: none !important;
+  }
+
+  :global(.leaflet-control-zoom a:hover) {
+    background: #f5f5f5 !important;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    :global(.marker-pulse) {
+      animation: none;
+    }
+
+    :global(.marker-dot) {
+      transition-duration: 0ms;
+    }
+  }
+</style>
