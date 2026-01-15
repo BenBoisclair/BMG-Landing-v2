@@ -90,6 +90,11 @@
           "id": "0nyx-green",
           "image": "/materials/0nyx green/S__5603364.jpg",
           "folder": "0nyx green"
+        },
+        {
+          "id": "amazonite",
+          "image": "/materials/amazonite/S__5611548.jpg",
+          "folder": "amazonite"
         }
       ]
     },
@@ -182,6 +187,31 @@
           "id": "white-venus",
           "image": "/materials/white venus/venus-white-512x299.jpg",
           "folder": "white venus"
+        },
+        {
+          "id": "rosso-verona",
+          "image": "/materials/rosso verona/Rosso_Verona.jpg",
+          "folder": "rosso verona"
+        },
+        {
+          "id": "rosso-orbico",
+          "image": "/materials/rosso orbico/DAL_G446_BiancoAntico_PL_Detail.jpeg",
+          "folder": "rosso orbico"
+        },
+        {
+          "id": "azul-bahia",
+          "image": "/materials/azul bahia /blue_bahia_granite.jpg",
+          "folder": "azul bahia "
+        },
+        {
+          "id": "azul-macaubas",
+          "image": "/materials/azul macaubas/S__5611549.jpg",
+          "folder": "azul macaubas"
+        },
+        {
+          "id": "patagonia",
+          "image": "/materials/patagonia/Patagonia-F2214-2-scaled.jpg",
+          "folder": "patagonia"
         }
       ]
     },
@@ -526,39 +556,14 @@
           "folder": "white carrara "
         },
         {
-          "id": "rosso-verona",
-          "image": "/materials/rosso verona/Rosso_Verona.jpg",
-          "folder": "rosso verona"
-        },
-        {
-          "id": "rosso-orbico",
-          "image": "/materials/rosso orbico/DAL_G446_BiancoAntico_PL_Detail.jpeg",
-          "folder": "rosso orbico"
-        },
-        {
-          "id": "sila-granite",
+          "id": "thai-grey",
           "image": "/materials/sila granite/sila .jpg",
           "folder": "sila granite"
         },
         {
-          "id": "amazonite",
-          "image": "/materials/amazonite/S__5611548.jpg",
-          "folder": "amazonite"
-        },
-        {
-          "id": "azul-bahia",
-          "image": "/materials/azul bahia /blue_bahia_granite.jpg",
-          "folder": "azul bahia "
-        },
-        {
-          "id": "azul-macaubas",
-          "image": "/materials/azul macaubas/S__5611549.jpg",
-          "folder": "azul macaubas"
-        },
-        {
-          "id": "patagonia",
-          "image": "/materials/patagonia/Patagonia-F2214-2-scaled.jpg",
-          "folder": "patagonia"
+          "id": "thai-pink",
+          "image": "/materials/pink thai /S__5619715.jpg",
+          "folder": "pink thai "
         }
       ]
     }

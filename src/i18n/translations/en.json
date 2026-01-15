@@ -952,9 +952,13 @@
         "name": "Rosso Orbico",
         "description": "Rosso Orbico Marble is a deep red natural stone characterized by warm burgundy tones and soft white veining. Traditionally used in European architecture, it conveys richness and classical elegance. Natural variation within each slab creates a distinctive and refined appearance."
       },
-      "sila-granite": {
-        "name": "Sila Granite",
-        "description": "Sila Granite is a locally quarried Thai natural stone known for its durability and consistent mineral structure. Commonly used in architectural and exterior applications, it offers strength and practicality. Appearance varies by quarry, giving each slab its own natural character."
+      "thai-grey": {
+        "name": "Thai Grey",
+        "description": "Thai Grey Granite is a locally quarried Thai natural stone known for its durability and consistent mineral structure. Commonly used in architectural and exterior applications, it offers strength and practicality. Appearance varies by quarry, giving each slab its own natural character."
+      },
+      "thai-pink": {
+        "name": "Pink Thai",
+        "description": "Pink Thai Granite is a natural stone characterized by soft pink tones and fine, consistent mineral grain. Quarried locally in Thailand, it is commonly used in architectural and exterior applications for its strength and durability. Subtle natural variation across each slab gives it a calm and balanced appearance."
       }
     }
   }
