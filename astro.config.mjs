@@ -103,14 +103,14 @@ export default defineConfig({
         // Default fallback - only allow same origin
         "default-src 'self'",
 
-        // Images - self, data URIs (for inline images), blob (for model-viewer)
-        "img-src 'self' data: blob:",
+        // Images - self, data URIs (for inline images), blob (for model-viewer), Stadia Maps (for Leaflet tiles)
+        "img-src 'self' data: blob: https://tiles.stadiamaps.com",
 
         // Fonts - self + Google Fonts
         "font-src 'self' https://fonts.gstatic.com data:",
 
-        // Connections - self + blob (for model-viewer WebGL)
-        "connect-src 'self' blob:",
+        // Connections - self + blob (for model-viewer WebGL) + Stadia Maps (for Leaflet tiles)
+        "connect-src 'self' blob: https://tiles.stadiamaps.com",
 
         // Frames - none (no iframes allowed)
         "frame-src 'none'",
