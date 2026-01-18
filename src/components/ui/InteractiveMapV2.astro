@@ -92,8 +92,12 @@ const regions = Object.entries(geocodedData.regions).map(([id, data]) => ({
 <script>
   import L from 'leaflet';
 
-  // Get data from server
+  // Get data from server (with defensive null check)
   const mapData = (window as any).__MAP_DATA__;
+  if (!mapData) {
+    console.error('Map data not available - CSP may be blocking inline scripts');
+    throw new Error('Map initialization failed: __MAP_DATA__ is undefined');
+  }
   const { markers, regions, lang } = mapData;
 
   // Map configuration - Light theme

@@ -127,8 +127,8 @@ export default defineConfig({
         // Web Workers - self + blob (needed for model-viewer)
         "worker-src 'self' blob:",
 
-        // Media (audio/video) - self
-        "media-src 'self'",
+        // Media (audio/video) - self + Pexels videos
+        "media-src 'self' https://videos.pexels.com",
 
         // Manifests - self
         "manifest-src 'self'",
@@ -138,24 +138,25 @@ export default defineConfig({
       ],
 
       // Style sources configuration
-      // Astro will automatically add hashes for inline styles
+      // 'unsafe-inline' required for Leaflet and model-viewer dynamic styles
       styleDirective: {
         resources: [
           "'self'",
+          "'unsafe-inline'", // Required for Leaflet/model-viewer dynamic styles
           'https://fonts.googleapis.com', // Google Fonts stylesheets
         ],
       },
 
       // Script sources configuration
-      // Astro will automatically add hashes for inline scripts
+      // 'unsafe-inline' required for Leaflet/model-viewer dynamic scripts
+      // 'wasm-unsafe-eval' required for model-viewer WebAssembly 3D rendering
       scriptDirective: {
         resources: [
           "'self'",
+          "'unsafe-inline'", // Required for Leaflet/model-viewer dynamic scripts
+          "'wasm-unsafe-eval'", // Required for model-viewer WebAssembly
           'blob:', // Required for model-viewer Web Workers
         ],
-        // 'unsafe-eval' may be needed for model-viewer WASM
-        // If you encounter issues, uncomment the following:
-        // hashes: [],
       },
     },
   },
