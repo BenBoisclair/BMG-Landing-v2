@@ -9,6 +9,16 @@ import thumbnail3 from '../../assets/images/showcase/thumbnail-3.svg';
 
 const { t } = useI18n(Astro.url);
 
+// Model definitions with their GLB files
+const models = [
+  { id: '1', modelUrl: '/models/Buddha (Light).glb' },
+  { id: '2', modelUrl: '/models/Lakshmi.glb' },
+  { id: '3', modelUrl: '/models/PraPikanet.glb' },
+  { id: '4', modelUrl: '/models/PraWisanu.glb' },
+  { id: '5', modelUrl: '/models/Roman Pole.glb' },
+  { id: '6', modelUrl: '/models/Varaha Avatar.glb' },
+];
+
 // Create array of 6 images with their model IDs
 const images = [
   { src: thumbnail1, modelId: '1' },
@@ -19,17 +29,17 @@ const images = [
   { src: thumbnail3, modelId: '6' },
 ];
 
-// Placeholder 3D model URL (local model)
-const placeholderModelUrl = '/models/Buddha.glb';
+// Default model URL (first model)
+const defaultModelUrl = models[0].modelUrl;
 
-// Get all model data for client-side use
+// Get all model data for client-side use (includes name, description, and model URL)
 const modelsData = {
-  '1': t.showcase.models['1'],
-  '2': t.showcase.models['2'],
-  '3': t.showcase.models['3'],
-  '4': t.showcase.models['4'],
-  '5': t.showcase.models['5'],
-  '6': t.showcase.models['6'],
+  '1': { ...t.showcase.models['1'], modelUrl: models[0].modelUrl },
+  '2': { ...t.showcase.models['2'], modelUrl: models[1].modelUrl },
+  '3': { ...t.showcase.models['3'], modelUrl: models[2].modelUrl },
+  '4': { ...t.showcase.models['4'], modelUrl: models[3].modelUrl },
+  '5': { ...t.showcase.models['5'], modelUrl: models[4].modelUrl },
+  '6': { ...t.showcase.models['6'], modelUrl: models[5].modelUrl },
 };
 ---
 
@@ -38,7 +48,7 @@ const modelsData = {
   import '@google/model-viewer';
 </script>
 
-<section id="product" class="py-16 lg:py-24 bg-white">
+<section id="product" class="py-8 lg:py-12 bg-white">
   <Container>
     <!-- Default State: Mission Text + Image Grid -->
     <div id="showcase-default" class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -105,7 +115,7 @@ const modelsData = {
           <div class="rounded-[22px] overflow-hidden aspect-square">
             <model-viewer
               id="model-viewer"
-              src={placeholderModelUrl}
+              src={defaultModelUrl}
               alt={t.showcase.modelAlt}
               camera-controls
               disable-zoom
@@ -167,6 +177,13 @@ const modelsData = {
     if (model) {
       modelName.textContent = model.name;
       modelDescription.textContent = model.description;
+
+      // Load the specific 3D model
+      if (model.modelUrl && modelViewer) {
+        // Show loading indicator
+        modelLoading.style.display = 'flex';
+        modelViewer.setAttribute('src', model.modelUrl);
+      }
     }
 
     // Switch views

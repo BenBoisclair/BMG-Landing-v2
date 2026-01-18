@@ -1,89 +1,117 @@
 {
   "description": "Pre-geocoded coordinates for project locations. Region assignments based on geography.",
   "locations": {
-    "type1-project-1": {
-      "lat": 42.3601,
-      "lng": -71.0589,
+    "religious-1": {
+      "lat": 41.9001,
+      "lng": -71.0898,
       "region": "americas",
       "country": "United States",
-      "city": "Massachusetts"
+      "city": "Taunton, Massachusetts"
     },
-    "type1-project-2": {
+    "religious-2": {
+      "lat": 14.9799,
+      "lng": 102.0978,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Nakhon Ratchasima"
+    },
+    "religious-3": {
       "lat": 13.7563,
       "lng": 100.5018,
       "region": "asia",
       "country": "Thailand",
       "city": "Bangkok"
     },
-    "type1-project-3": {
-      "lat": 36.7783,
-      "lng": -119.4179,
-      "region": "americas",
-      "country": "United States",
-      "city": "California"
-    },
-    "type1-project-4": {
-      "lat": 18.7883,
-      "lng": 98.9853,
-      "region": "asia",
-      "country": "Thailand",
-      "city": "Chiang Mai"
-    },
-    "type2-project-1": {
-      "lat": -8.3405,
-      "lng": 115.0920,
-      "region": "asia",
-      "country": "Indonesia",
-      "city": "Bali"
-    },
-    "type2-project-2": {
-      "lat": 1.3521,
-      "lng": 103.8198,
-      "region": "asia",
-      "country": "Singapore",
-      "city": "Singapore"
-    },
-    "type2-project-3": {
-      "lat": -33.8688,
-      "lng": 151.2093,
-      "region": "oceania",
-      "country": "Australia",
-      "city": "Sydney"
-    },
-    "type2-project-4": {
-      "lat": 35.6762,
-      "lng": 139.6503,
-      "region": "asia",
-      "country": "Japan",
-      "city": "Tokyo"
-    },
-    "type3-project-1": {
+    "religious-4": {
       "lat": 13.7563,
       "lng": 100.5018,
       "region": "asia",
       "country": "Thailand",
       "city": "Bangkok"
     },
-    "type3-project-2": {
-      "lat": 22.3193,
-      "lng": 114.1694,
+    "religious-5": {
+      "lat": 17.4138,
+      "lng": 102.7872,
       "region": "asia",
-      "country": "Hong Kong",
-      "city": "Hong Kong"
+      "country": "Thailand",
+      "city": "Udon Thani"
     },
-    "type3-project-3": {
-      "lat": 25.2048,
-      "lng": 55.2708,
-      "region": "middle-east",
-      "country": "UAE",
-      "city": "Dubai"
+    "religious-6": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
     },
-    "type3-project-4": {
-      "lat": 41.9028,
-      "lng": 12.4964,
-      "region": "europe",
-      "country": "Italy",
-      "city": "Rome"
+    "religious-7": {
+      "lat": 45.5152,
+      "lng": -122.6784,
+      "region": "americas",
+      "country": "United States",
+      "city": "Oregon"
+    },
+    "religious-8": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "religious-9": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "legacy-1": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "legacy-2": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "legacy-3": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "architectural-1": {
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "architectural-2": {
+      "lat": 13.6820,
+      "lng": 101.0779,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Chachoengsao"
+    },
+    "architectural-3": {
+      "lat": 13.7437,
+      "lng": 100.4888,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Bangkok"
+    },
+    "architectural-4": {
+      "lat": 14.9799,
+      "lng": 102.0978,
+      "region": "asia",
+      "country": "Thailand",
+      "city": "Nakhon Ratchasima"
     }
   },
   "regions": {

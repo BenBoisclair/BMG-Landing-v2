@@ -3,6 +3,7 @@
  * InteractiveMapV2 - Leaflet-powered world map with project markers
  * Features: Click-to-zoom, pulsing markers, hover tooltips, click popups, filters
  */
+import 'leaflet/dist/leaflet.css'; // Import at build time to avoid CSP issues
 import projectsData from '../../data/projects.json';
 import geocodedData from '../../data/geocoded-locations.json';
 import { useI18n } from '../../i18n/utils';
@@ -90,7 +91,6 @@ const regions = Object.entries(geocodedData.regions).map(([id, data]) => ({
 <!-- Client-side Leaflet initialization -->
 <script>
   import L from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
 
   // Get data from server
   const mapData = (window as any).__MAP_DATA__;

@@ -3,9 +3,8 @@
     "home": "Home",
     "products": "Products",
     "projects": "Projects",
-    "materials": "Materials",
+    "materials": "Natural Stones",
     "process": "Process",
-    "globalDelivery": "Global Delivery",
     "about": "About",
     "contact": "Contact",
     "language": "Language"
@@ -22,70 +21,70 @@
     "close": "Close",
     "models": {
       "1": {
-        "name": "Sculpture One",
-        "description": "A stunning granite sculpture showcasing traditional craftsmanship. Each piece is meticulously hand-carved by our master artisans, featuring intricate details that capture the essence of timeless artistry."
+        "name": "Buddha",
+        "description": "A serene Buddha sculpture radiating peace and enlightenment. Hand-carved from premium stone, this piece embodies the tranquility of Buddhist teachings, perfect for meditation spaces and spiritual gardens."
       },
       "2": {
-        "name": "Sculpture Two",
-        "description": "An elegant modern piece that blends contemporary design with classical techniques. The smooth curves and bold lines create a striking visual statement for any space."
+        "name": "Lakshmi",
+        "description": "The Hindu goddess of wealth, fortune, and prosperity. This elegant sculpture captures Lakshmi's grace and benevolence, with intricate details showcasing traditional craftsmanship at its finest."
       },
       "3": {
-        "name": "Sculpture Three",
-        "description": "A majestic guardian figure inspired by ancient traditions. This imposing sculpture stands as a symbol of protection and cultural heritage, perfect for grand entrances."
+        "name": "Pra Pikanet",
+        "description": "The Thai representation of Lord Ganesha, remover of obstacles and god of beginnings. This majestic sculpture features the beloved elephant-headed deity in a pose of blessing and wisdom."
       },
       "4": {
-        "name": "Sculpture Four",
-        "description": "A serene meditation figure carved from premium white marble. The peaceful expression and flowing robes embody tranquility, making it ideal for contemplative spaces and gardens."
+        "name": "Pra Wisanu",
+        "description": "Lord Vishnu, the preserver and protector in Hindu tradition. This powerful sculpture depicts the supreme deity with divine attributes, symbolizing cosmic order and eternal truth."
       },
       "5": {
-        "name": "Sculpture Five",
-        "description": "A dynamic abstract form that captures movement in stone. This contemporary piece showcases the versatility of granite, with polished surfaces that reflect light beautifully."
+        "name": "Roman Pole",
+        "description": "A classical architectural column inspired by Roman antiquity. This elegant piece combines traditional European design with master stonecraft, perfect for grand entrances and monumental spaces."
       },
       "6": {
-        "name": "Sculpture Six",
-        "description": "A classical portrait bust rendered with exceptional detail. Every feature is carefully sculpted to preserve the subject's likeness for generations to come."
+        "name": "Varaha Avatar",
+        "description": "The boar incarnation of Lord Vishnu, who rescued the earth from cosmic waters. This dynamic sculpture captures the powerful moment of divine intervention, carved with exceptional detail and reverence."
       }
     }
   },
   "mission": {
-    "title": "our mission",
-    "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam nulla libero urna vitae. Eget elit condimentum amet semper dui. Mauris quam integer mattis turpis auctor est tristique. Aliquam neque id viverra fusce. Ullamcorper tellus nam ut gravida netus leo augue. Duis adipiscing urna lectus a bibendum adipiscing porttitor magna."
+    "title": "BMG Bangkok Modern granite C., Ltd. ",
+    "description": "BMG is a sacred bespoke stone sculpture atelier.\nWe transform sacred and personal legacies into timeless stone art through anapproval-first, technology-led process and mastery-level Thai craftsmanship.\nNo stone before approval. No surprises."
   },
   "process": {
-    "title": "The Dream Crafting Process",
+    "title": "The Crafting Process",
     "description": "Lorem ipsum dolor sit amet consectetur. Auctor eget porttitor auctor viverra gravida amet. Quam",
     "craftingAlt": "BMG craftsman creating granite sculpture",
     "learnMore": "Learn more about our process",
     "steps": {
       "1": {
         "number": "1",
-        "title": "Concept & Consultation",
-        "titleShort": "Concept",
-        "description": "If you have an existing model or reference, we perform high-precision 3D scanning. If not, we begin with a design consultation to develop the concept together."
+        "title": "Consultation with Purpose",
+        "titleShort": "Consultation",
+        "description": "We begin with dialogue. Whether the commission is sacred, commemorative, or personal, we listen carefully because we seek clarity rather than assumption. Every symbol, proportion, and gesture is considered for meaning rather than just form. This first step ensures that the essence of the work is honored before a single mark is made."
       },
       "2": {
         "number": "2",
-        "title": "Prototype Creation",
+        "title": "Modeling the Vision",
         "titleShort": "3D",
-        "description": "Based on the approved direction, we create a physical prototype using clay or 3D printing. Refinements are made until the form and details meet expectations."
+        "description": "Once aligned, we translate the concept into physical reality through precise 3D modeling and clay prototyping. Clients review every detail, from posture to expression, until it feels complete. No stone is touched until the form is fully approved, and this is where the vision becomes visible and where trust is built."
       },
       "3": {
         "number": "3",
-        "title": "CNC Carving",
+        "title": "Carving with Discipline",
         "titleShort": "CNC",
-        "description": "The approved prototype is digitized and optimized for CNC carving. Advanced CNC machines carve the sculpture with precision, following the finalized 3D Design."
+        "description": "With the approved model confirmed, we engage our CNC system. Multi-axis machining allows us to execute complex geometries with millimetric precision because it protects the integrity of the approved design. This is not automation for speed but rather technology in service of fidelity."
       },
       "4": {
         "number": "4",
-        "title": "Hand Detailing & Finishing",
+        "title": "Finishing by Hand",
         "titleShort": "Hand",
-        "description": "Skilled artisans refine every surface by hand to achieve depth, realism, and premium craftsmanship."
+        "description": "After the machine, the hands begin. Our master artisans refine surface, expression, and subtle presence with tools and intuition that have been honed over decades. No machine can interpret warmth or grace, and it is this stage where the piece becomes truly alive with softness, reverence, and soul."
       },
       "5": {
         "number": "5",
-        "title": "Delivery & Installation",
+        "title": "Global Delivery with Integrity",
         "titleShort": "Delivery",
-        "description": "The completed work is carefully packaged, transported, and installed on site. Our team ensures precise placement and safety in the final presentation."
+        "description": "Once complete, each piece is inspected and documented. It is then crated for international shipment using museum-grade standards. Installation guides, support, and care documentation ensure that the artwork arrives and endures exactly as intended."
       }
     }
   },
@@ -112,9 +111,18 @@
       "stoneCategory": {
         "title": "2. What stone category?",
         "grades": {
-          "aPlusPlus": { "label": "A++", "description": "Jewellery Stone" },
-          "aPlus": { "label": "A+", "description": "Luxury Stone" },
-          "a": { "label": "A", "description": "Natural Stone" }
+          "aPlusPlus": {
+            "label": "A++",
+            "description": "Jewellery Stone"
+          },
+          "aPlus": {
+            "label": "A+",
+            "description": "Luxury Stone"
+          },
+          "a": {
+            "label": "A",
+            "description": "Natural Stone"
+          }
         },
         "help": "<strong>Not sure which grade?</strong> Visit our Materials Page to learn more about stone categories and find the right grade for your project."
       },
@@ -146,19 +154,65 @@
       "maxExceeded": "Maximum is 3000mm"
     }
   },
-  "trustedCultures": {
-    "title": "Trusted Across Cultures",
+  "Our Passed Project": {
+    "title": "Our Passed Project",
     "stats": {
       "countriesDelivered": "Countries Delivered",
       "projectsCompleted": "Project Completed",
       "yearsExperience": "Years Experiences"
     }
   },
+  "trustedCultures": {
+    "title": "Trusted by Cultures Worldwide",
+    "stats": {
+      "countriesDelivered": "Countries Delivered",
+      "projectsCompleted": "Projects Completed",
+      "yearsExperience": "Years Experience"
+    }
+  },
   "testimonials": {
     "title": "What our clients say",
     "description": "Community development is often linked with community work or community planning, and may involve stakeholders, foundations,",
     "prevButton": "Previous testimonials",
-    "nextButton": "Next testimonials"
+    "nextButton": "Next testimonials",
+    "items": [
+      {
+        "name": "Sabo Masties",
+        "role": "Founder @ Rolex",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      },
+      {
+        "name": "Sam",
+        "role": "Founder @ Migelko",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      },
+      {
+        "name": "Mansur",
+        "role": "Founder @ Google",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "CEO @ TechVentures",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      },
+      {
+        "name": "Michael Brown",
+        "role": "Director @ Artisan Co",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      },
+      {
+        "name": "Emma Wilson",
+        "role": "Partner @ Design Studio",
+        "quote": "Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.",
+        "rating": 5
+      }
+    ]
   },
   "contact": {
     "title": "Contact Us",
@@ -247,22 +301,22 @@
     "submitting": "Submitting..."
   },
   "project": {
-    "title": "Project",
+    "title": "Our Gallery",
     "heroAlt": "Project showcase background",
     "types": {
-      "construction": "Construction",
-      "mechanical": "Mechanical",
-      "electrical": "Electrical"
+      "religious": "Religious",
+      "legacy": "Legacy",
+      "architectural": "Architectural"
     },
     "sections": {
-      "type1": {
-        "title": "Project type"
+      "religious": {
+        "title": "Religious Sculptures"
       },
-      "type2": {
-        "title": "Project type"
+      "legacy": {
+        "title": "Legacy & Memorial"
       },
-      "type3": {
-        "title": "Project type"
+      "architectural": {
+        "title": "Architectural Works"
       }
     },
     "pagination": {
@@ -270,101 +324,133 @@
       "next": "Next"
     },
     "projects": {
-      "type1-project-1": {
-        "name": "White Buddha Statue",
-        "artTitle": "White Buddha Statue",
-        "description": "Carved from a single block of White Thassos marble, this Buddha statue stands as an expression of stillness and light.\n\nThe stone was chosen not for brilliance alone, but for its quiet glow — a surface that absorbs and reflects daylight with a calm, jade-like warmth. In its seated posture, every proportion is attentive: shoulders relaxed, hands gently resting, presence undisturbed.\n\nAt the Vipassana Meditation Center, the statue inhabits a quiet space above the hall. Here, it does not command the room — it opens it.",
-        "material": "White Thassos marble",
+      "religious-1": {
+        "name": "Enlightenment Buddha",
+        "artTitle": "Enlightenment Buddha – Wat Nawamintararachutis",
+        "description": "Commissioned by a respected Thai monastery for their sister temple in the United States, this Enlightenment Buddha was sculpted to serve as the spiritual heart of Wat Nawamintararachutis in Taunton, Massachusetts — a temple built in honor of His Majesty King Rama IX. As Buddhism takes root abroad, this sacred figure offers a constant presence for those seeking stillness, prayer, and renewal.\n\nThe statue resides in the meditation hall on the second floor — a quiet, light-filled space designed for deep contemplation. Pilgrims and practitioners gather beneath this image not simply to observe it, but to be guided by it. Carved from fine Thassos white marble sourced from Greece, the stone was chosen for its crystal clarity and its capacity to reflect light with dignity. When sunlight moves through the room, the surface glows in silence — never imposing, always present.\n\nThe original artist appointed by the temple traveled from Thailand to our studio to oversee the final refinements. Working side-by-side with BMG's master-level artisans, every line, fold, and facial proportion was resolved with reverence. The final polish — full gloss across every surface — was applied with care to ensure purity, balance, and spiritual precision.\n\nToday, the Buddha anchors the meditation hall as a still guardian. It does not draw attention; it centers it. With each seated gathering, it offers clarity not through words, but through form — carved once, present always.",
+        "material": "Thassos White Marble (Greece)",
         "customer": "Wat Nawamintararachutis",
-        "location": "Massachusetts, United States"
+        "location": "Taunton, Massachusetts, USA"
       },
-      "type1-project-2": {
-        "name": "Golden Guardian",
-        "artTitle": "Golden Guardian Lion",
-        "description": "A majestic guardian lion carved from premium granite, symbolizing protection and strength.\n\nEvery detail from the flowing mane to the powerful stance has been meticulously crafted by our master artisans, creating a piece that commands attention while maintaining an elegant presence.",
-        "material": "Premium Granite",
-        "customer": "Private Collection",
+      "religious-2": {
+        "name": "Chedi Phra Thad Phut Tha Phucha",
+        "artTitle": "Chedi Phra Thad Phut Tha Phucha – Wat Ratanawan",
+        "description": "Commissioned by the Sangha of Wat Ratanawan under the leadership of Venerable Luang Por Nyanadhammo, this monumental stupa was created as a vessel of sacred remembrance. Named Chedi Phra Thad Phut Tha Phucha, it was constructed to enshrine holy relics of the Buddha and his disciples, standing not only as a physical landmark but as a beacon of merit and collective devotion.\n\nThe structure is the largest known granite stupa in the Buddhist tradition. The largest stone block used measured 2.5 x 1.2 x 8.8 meters and weighed 105 tons — quarried and lifted with two forklifts working in precise harmony. Every piece was shaped by CNC-guided wire saw and then finished by hand. Our team worked in close collaboration with the monks at every stage, with many of us choosing to temporarily ordain during installation — an act of respect and shared spiritual intention.\n\nOnce the granite structure was completed, the entire body was clad in gold-finished stainless steel — a material chosen for its lasting brilliance and purity of presence. During the opening ceremony, over 250 monks gathered in unison with thousands of lay practitioners. The atmosphere was one of stillness and significance, a shared recognition that this chedi would outlast all who stood before it.\n\nToday, the stupa reflects not only light, but lineage — rising against the sky as a physical embodiment of devotion, community, and the noble path.",
+        "material": "Granite with Gold Stainless Steel",
+        "customer": "Wat Ratanawan Monastery",
+        "location": "Nakhon Ratchasima, Thailand"
+      },
+      "religious-3": {
+        "name": "Ganesh",
+        "artTitle": "Sacred Ganesh – Personal Commission",
+        "description": "This sculpture was commissioned by Mo Amena Pinit, who approached the work with a clear personal vision of Ganesh already formed. Rather than referencing an existing depiction, the intention was to give form to an image held internally — one defined by feeling, balance, and presence.\n\nThe sculpture developed through careful interpretation. Proportion, posture, and expression were shaped gradually, guided by her original intent and refined as the form emerged. The process remained focused on clarity and alignment, allowing the sculpture to take shape without excess or deviation.\n\nThe completed work stands as a spiritual piece shaped by personal belief, where an internal vision was translated into a lasting form and allowed to remain quietly present.",
+        "material": "White Carrara Marble",
+        "customer": "Mo Amena Pinit",
         "location": "Bangkok, Thailand"
       },
-      "type1-project-3": {
-        "name": "Serenity Garden",
-        "artTitle": "Meditation Garden Sculpture",
-        "description": "A harmonious sculpture designed for contemplative spaces, blending traditional Buddhist aesthetics with contemporary minimalism.\n\nThe piece invites stillness and reflection, becoming a focal point for meditation gardens worldwide.",
-        "material": "Carrara Marble",
-        "customer": "Meditation Center",
-        "location": "California, United States"
+      "religious-4": {
+        "name": "Buddha Cover Jade",
+        "artTitle": "Buddha Encasing Sacred Jade",
+        "description": "A sacred Buddha sculpture created to encase and protect precious jade relics. Carved from White Carrara marble, this piece serves as both a protective vessel and a devotional centerpiece.\n\nThe design honors traditional Buddhist iconography while providing a dignified enclosure for the sacred materials within. Every proportion was carefully considered to maintain spiritual authenticity and visual harmony.",
+        "material": "White Carrara Marble",
+        "customer": "Wat Suwannaphum Phutthachayanti",
+        "location": "Thailand"
       },
-      "type1-project-4": {
-        "name": "Temple Relief",
-        "artTitle": "Sacred Temple Relief",
-        "description": "An intricate relief panel depicting traditional Buddhist narratives, designed for temple interiors.\n\nEach figure and symbol has been carefully researched and rendered to honor the spiritual traditions they represent.",
-        "material": "Sandstone",
-        "customer": "Buddhist Temple",
-        "location": "Chiang Mai, Thailand"
+      "religious-5": {
+        "name": "Wat Pa Phu Kon Buddha",
+        "artTitle": "Sacred Buddha – Wat Pa Phu Kon",
+        "description": "Created for Wat Pa Phu Kon, this White Carrara marble Buddha embodies the serene presence that defines this renowned forest monastery. The sculpture was crafted with deep respect for the contemplative traditions of the temple.\n\nEvery detail was refined to support meditation and spiritual practice, with surfaces polished to reflect natural light in a way that enhances rather than distracts from the devotional atmosphere.",
+        "material": "White Carrara Marble",
+        "customer": "Wat Pa Phu Kon",
+        "location": "Udon Thani, Thailand"
       },
-      "type2-project-1": {
-        "name": "Modern Buddha",
-        "artTitle": "Contemporary Buddha",
-        "description": "A modern interpretation of the classic Buddha figure, featuring clean lines and geometric forms.\n\nThis piece bridges ancient spirituality with contemporary design sensibilities, perfect for modern architectural spaces.",
-        "material": "Black Granite",
-        "customer": "Luxury Resort",
-        "location": "Bali, Indonesia"
+      "religious-6": {
+        "name": "Somdet Phra Wannarat",
+        "artTitle": "Somdet Phra Wannarat Memorial",
+        "description": "A commemorative sculpture honoring the revered Buddhist patriarch Somdet Phra Wannarat, created for Wat Bowonniwet Vihara — one of Thailand's most significant royal temples.\n\nCarved from Black African granite, the piece captures the dignified presence of this important religious figure. The dark stone was selected for its ability to convey gravitas and permanence, befitting the legacy being honored.",
+        "material": "Black African Granite",
+        "customer": "Wat Bowonniwet Vihara",
+        "location": "Bangkok, Thailand"
       },
-      "type2-project-2": {
-        "name": "Lotus Fountain",
-        "artTitle": "Lotus Bloom Fountain",
-        "description": "A stunning water feature centered around a blooming lotus carved from white marble.\n\nThe interplay of water and stone creates a mesmerizing focal point, symbolizing purity and enlightenment.",
+      "religious-7": {
+        "name": "Pacific Hermitage Buddha",
+        "artTitle": "Buddha – Pacific Hermitage",
+        "description": "Created for Pacific Hermitage in Oregon, this Buddha sculpture brings the contemplative traditions of Theravada Buddhism to the Pacific Northwest. Carved from red sandstone, the piece connects to ancient sculptural traditions while serving a contemporary monastic community.\n\nThe warm tones of the sandstone complement the natural forest setting of the hermitage, creating a harmonious presence for meditation and spiritual practice.",
+        "material": "Red Sandstone",
+        "customer": "Pacific Hermitage",
+        "location": "Oregon, USA"
+      },
+      "religious-8": {
+        "name": "Wat Pa Phuritatta Buddha",
+        "artTitle": "Buddha – Wat Pa Phuritatta Pattipatharam",
+        "description": "A serene Buddha sculpture crafted from Super White marble for Wat Pa Phuritatta Pattipatharam. The pristine white stone was selected to embody purity and spiritual clarity.\n\nThe sculpture serves as a focal point for meditation and devotion, with every surface refined to support contemplative practice.",
+        "material": "Super White Marble",
+        "customer": "Wat Pa Phuritatta Pattipatharam",
+        "location": "Thailand"
+      },
+      "religious-9": {
+        "name": "Phra Khanthararat",
+        "artTitle": "พระคันธราช – Sacred Commission",
+        "description": "A sacred sculpture commissioned by Sonlapratan, crafted from white stone to embody spiritual presence and devotional significance.\n\nThe piece was created with careful attention to traditional iconography and proportions, ensuring authenticity and spiritual resonance in the final work.",
         "material": "White Marble",
-        "customer": "Wellness Spa",
-        "location": "Singapore"
+        "customer": "Sonlapratan",
+        "location": "Thailand"
       },
-      "type2-project-3": {
-        "name": "Garden Buddha",
-        "artTitle": "Garden Meditation Buddha",
-        "description": "A serene Buddha sculpture designed specifically for outdoor garden settings.\n\nWeather-resistant finishing ensures this piece maintains its beauty through all seasons.",
-        "material": "Granite",
-        "customer": "Private Residence",
-        "location": "Sydney, Australia"
-      },
-      "type2-project-4": {
-        "name": "Wisdom Figure",
-        "artTitle": "Enlightened Wisdom",
-        "description": "A contemplative figure representing the pursuit of wisdom and inner peace.\n\nThe graceful pose and serene expression invite meditation and reflection.",
-        "material": "Bronze and Stone",
-        "customer": "University Campus",
-        "location": "Tokyo, Japan"
-      },
-      "type3-project-1": {
-        "name": "Heritage Collection",
-        "artTitle": "Cultural Heritage Series",
-        "description": "A collection of sculptures celebrating Thailand's rich cultural heritage.\n\nEach piece tells a story of tradition, craftsmanship, and artistic excellence passed down through generations.",
-        "material": "Various Stones",
-        "customer": "Museum Collection",
+      "legacy-1": {
+        "name": "Grandfather Portrait",
+        "artTitle": "อากง – Memorial Portrait",
+        "description": "This sculpture was created after the grandfather had already passed, making the work an act of careful reconstruction guided by memory rather than direct observation. With no opportunity for live sittings, the form was developed from hundreds of family photographs — studied to understand expressions, posture, and the quiet details that defined his presence.\n\nThe process required precision, restraint, and continual dialogue with the family. Each stage — from digital modeling to carving and hand-finishing — was reviewed and approved to ensure the sculpture remained faithful not only to physical likeness, but to character and legacy. White Carrara marble was selected for its ability to hold softness and dignity, allowing the final work to convey warmth without excess.\n\nRather than capturing a single moment, the sculpture embodies collective remembrance. Crafted with care and intention at every step, it stands as a lasting presence — where personal legacy is preserved through disciplined process, material integrity, and mastery-level craftsmanship.",
+        "material": "White Carrara Marble",
+        "customer": "BMG",
         "location": "Bangkok, Thailand"
       },
-      "type3-project-2": {
-        "name": "Memorial Statue",
-        "artTitle": "Commemorative Memorial",
-        "description": "A dignified memorial sculpture honoring important figures and events.\n\nCrafted with reverence and attention to historical accuracy.",
-        "material": "Bronze",
-        "customer": "City Government",
-        "location": "Hong Kong"
+      "legacy-2": {
+        "name": "Grandmother Portrait",
+        "artTitle": "อาม่า – Memorial Portrait",
+        "description": "This sculpture was initiated while the grandmother was still alive, allowing the process to begin from direct presence rather than memory alone. A full scan was conducted to capture form and proportion, establishing the foundation of the work before carving commenced.\n\nThe project was intentionally paused before completion. After her passing, the sculpture was resumed, refined, and completed in time to be delivered for her funeral services. The process unfolded with sensitivity to both timing and execution, allowing the work to remain faithful to who she was, without urgency or excess.",
+        "material": "White Carrara Marble",
+        "customer": "BMG",
+        "location": "Bangkok, Thailand"
       },
-      "type3-project-3": {
-        "name": "Entrance Guardian",
-        "artTitle": "Grand Entrance Guardians",
-        "description": "Imposing guardian figures designed for grand entrances and ceremonial gates.\n\nThese pieces combine traditional symbolism with impressive scale.",
-        "material": "Granite",
-        "customer": "Corporate Headquarters",
-        "location": "Dubai, UAE"
+      "legacy-3": {
+        "name": "Jade Memorial",
+        "artTitle": "Jade Bone Memorial",
+        "description": "A sacred memorial piece crafted from Green Italy stone to honor and preserve the memory of a loved one. This intimate work was commissioned by Wuttipong Chaisang as a vessel for remembrance.\n\nThe green stone was selected for its connection to life and renewal, creating a piece that honors the past while offering comfort to those who remain.",
+        "material": "Green Italy Stone",
+        "customer": "Wuttipong Chaisang",
+        "location": "Thailand"
       },
-      "type3-project-4": {
-        "name": "Sacred Art",
-        "artTitle": "Sacred Religious Art",
-        "description": "Religious artwork created for places of worship around the world.\n\nEach piece is crafted with deep respect for spiritual traditions and artistic excellence.",
-        "material": "Marble",
-        "customer": "Religious Institution",
-        "location": "Rome, Italy"
+      "architectural-1": {
+        "name": "Infinity Bridge Fountain",
+        "artTitle": "Infinity Bridge Fountain – Private Residence",
+        "description": "Commissioned by a revered waterworks patron and his Feng Shui master, this sacred sculpture serves not only as a water feature but as a symbolic convergence of flow, continuity, and grounded prosperity.\n\nA singular, oversized block of Thai granite — selected for both its geological resilience and harmonious grain — was sculpted into a continuous infinity loop to anchor the front court of the client's home. According to spiritual counsel, water was to pass through this form as a 'bridge of continuity,' ensuring wealth and energy would flow uninterrupted through the residence.\n\nThe form was resolved through multiple guided sessions with the patron and his spiritual advisor, each curve refined to exacting standards — down to a tolerance of 0.1 millimeters. This fidelity was achieved through a calibrated combination of CNC precision and artisan eye, ensuring that not a single gesture deviated from the original spiritual intent.\n\nFinal placement involved multi-tiered basin alignment to cradle the sculpture in concentric circles of water, echoing the continuous motion of the piece itself. Every line, polish, and plane was executed to instill presence without excess — a silent architecture of blessing and form.",
+        "material": "Thai Granite",
+        "customer": "Sunwa",
+        "location": "Bangkok, Thailand"
+      },
+      "architectural-2": {
+        "name": "Wat Sothorn Marble Restoration",
+        "artTitle": "A Legacy Etched in Stone – Wat Sothorn",
+        "description": "For over two decades, the Grand Ubosot (main chapel) of Wat Sothorn Wararam Worawihan in Chachoengsao has stood as a testament not just to faith, but to a profound collaboration between spirit and artistry. This was not a mere construction project; it was a pilgrimage of dedication, culminating in a monument of national significance.\n\nAround 26 years ago, in an endeavor supported by His Majesty the King, the esteemed leadership of the temple sought to adorn the exterior and interior walls of the new Ubosot. The vision was massive, requiring a material worthy of its spiritual gravity — a material whose legacy transcended eras.\n\nThe choice was made: Statuario marble, sourced exclusively from the very Italian quarries that yielded the masterpieces of Michelangelo.\n\nThis commitment to perfection necessitated a journey. A monk and the project consultant traveled with our team to the ancient quarries of Italy. This was a mission of reverence: to personally hand-select each raw block of Statuario, ensuring that every slab destined for Wat Sothorn held the luminosity, purity, and character required for a place of such sanctity.\n\nThe marble, already immortalized by the Renaissance masters, found its new purpose in Thailand. It now serves as the permanent skin of the Grand Ubosot, its cool, luminous white and subtle grey veining reflecting the quiet clarity of devotion.",
+        "material": "Statuario Marble (Italy)",
+        "customer": "Wat Sothorn Wararam Worawihan",
+        "location": "Chachoengsao, Thailand"
+      },
+      "architectural-3": {
+        "name": "Wat Arun Legacy Guardians",
+        "artTitle": "Legacy Guardians – Wat Arun",
+        "description": "At Wat Arun, one of Thailand's most iconic temples, stood a collection of Chinese stone guardians dating back over 200 years — lions, door sentinels, and noble figures placed to protect sacred thresholds. Time had softened their edges and fractured their forms. The task was not to repair, but to resurrect — to protect the artist's original intent and allow the legacy to live forward without interruption.\n\nBMG approached this commission as a sacred responsibility. Using 3D scanning technology, we captured not only the broken fragments but the millimeter-precise soul of each figure. Every surface, curve, and texture was recorded in full fidelity. This raw data became the spiritual blueprint for renewal.\n\nEach form was re-sculpted from green marble — a dense, enduring stone chosen for both longevity and surface character. Using a 5-axis CNC system, we translated the scan into exact material dimensions. Then, with the original artifacts laid side by side, our artisans refined every contour by hand. Where the machine delivered structure, the human hand restored presence.\n\nFrom lions to Western-style gatekeepers, every element was matched — not copied, but continued. Each is now reborn not as a replica, but as an immutable extension of the original. This is not restoration. It is remembrance in form.",
+        "material": "Green Marble",
+        "customer": "Wat Arun Ratchawararam",
+        "location": "Bangkok, Thailand"
+      },
+      "architectural-4": {
+        "name": "Wat Pa Dan Wiwek Monument",
+        "artTitle": "Sacred Monument – Wat Pa Dan Wiwek",
+        "description": "A monumental work created for Wat Pa Dan Wiwek, combining Black African granite with Thai granite to create a structure of lasting significance.\n\nThe dual-stone approach was selected to achieve both visual impact and structural integrity, with the contrasting materials creating a dialogue between darkness and light that enhances the spiritual presence of the monument.",
+        "material": "Black African & Thai Granite",
+        "customer": "Wat Pa Dan Wiwek",
+        "location": "Thailand"
       }
     }
   },

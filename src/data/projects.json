@@ -1,103 +1,131 @@
 {
   "description": "Project portfolio data. Project names/descriptions are stored in i18n translation files.",
-  "categories": ["construction", "mechanical", "electrical"],
+  "categories": ["religious", "legacy", "architectural"],
   "projectTypes": [
     {
-      "id": "type1",
+      "id": "religious",
       "projects": [
         {
-          "id": "type1-project-1",
-          "image": "/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png",
-          "heroImage": "/images/Product/14f34ea2cb60093c0f497dfe6d8813a559d4e77e.png",
+          "id": "religious-1",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["religious"]
         },
         {
-          "id": "type1-project-2",
-          "image": "/images/Product/c0ae66328f0cc5ad849ec800c03045573a8cdcf5.png",
-          "heroImage": "/images/Product/c0ae66328f0cc5ad849ec800c03045573a8cdcf5.png",
+          "id": "religious-2",
+          "image": "/images/Product/building-exterior.png",
+          "heroImage": "/images/Product/building-exterior.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["religious"]
         },
         {
-          "id": "type1-project-3",
-          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
-          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "id": "religious-3",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["religious"]
         },
         {
-          "id": "type1-project-4",
-          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
-          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "id": "religious-4",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["religious"]
+        },
+        {
+          "id": "religious-5",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
+          "gallery": [],
+          "categories": ["religious"]
+        },
+        {
+          "id": "religious-6",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
+          "gallery": [],
+          "categories": ["religious"]
+        },
+        {
+          "id": "religious-7",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
+          "gallery": [],
+          "categories": ["religious"]
+        },
+        {
+          "id": "religious-8",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
+          "gallery": [],
+          "categories": ["religious"]
+        },
+        {
+          "id": "religious-9",
+          "image": "/images/Product/buddha-halo.png",
+          "heroImage": "/images/Product/buddha-halo.png",
+          "gallery": [],
+          "categories": ["religious"]
         }
       ]
     },
     {
-      "id": "type2",
+      "id": "legacy",
       "projects": [
         {
-          "id": "type2-project-1",
-          "image": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
-          "heroImage": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "id": "legacy-1",
+          "image": "/images/Product/consultation-meeting.png",
+          "heroImage": "/images/Product/consultation-meeting.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["legacy"]
         },
         {
-          "id": "type2-project-2",
-          "image": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
-          "heroImage": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "id": "legacy-2",
+          "image": "/images/Product/consultation-meeting.png",
+          "heroImage": "/images/Product/consultation-meeting.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["legacy"]
         },
         {
-          "id": "type2-project-3",
-          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
-          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "id": "legacy-3",
+          "image": "/images/Product/consultation-meeting.png",
+          "heroImage": "/images/Product/consultation-meeting.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
-        },
-        {
-          "id": "type2-project-4",
-          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
-          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
-          "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["legacy"]
         }
       ]
     },
     {
-      "id": "type3",
+      "id": "architectural",
       "projects": [
         {
-          "id": "type3-project-1",
-          "image": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
-          "heroImage": "/images/Product/61721bfd3545cc1f28b7d88df67402d03a702c72.png",
+          "id": "architectural-1",
+          "image": "/images/Product/curved-building.png",
+          "heroImage": "/images/Product/curved-building.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["architectural"]
         },
         {
-          "id": "type3-project-2",
-          "image": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
-          "heroImage": "/images/Product/cfed607ff81726a1c506035e52b049b8f097509e.png",
+          "id": "architectural-2",
+          "image": "/images/Product/building-exterior.png",
+          "heroImage": "/images/Product/building-exterior.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["architectural"]
         },
         {
-          "id": "type3-project-3",
-          "image": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
-          "heroImage": "/images/Product/5699ac09f2407f7415000dada3fa4ccf742d51a6.png",
+          "id": "architectural-3",
+          "image": "/images/Product/orange-building.png",
+          "heroImage": "/images/Product/orange-building.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["architectural"]
         },
         {
-          "id": "type3-project-4",
-          "image": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
-          "heroImage": "/images/Product/85bb80af71d14ba9f96b4618f1d257cc7e95d757.png",
+          "id": "architectural-4",
+          "image": "/images/Product/construction-scaffolding.png",
+          "heroImage": "/images/Product/construction-scaffolding.png",
           "gallery": [],
-          "categories": ["construction", "mechanical", "electrical"]
+          "categories": ["architectural"]
         }
       ]
     }
