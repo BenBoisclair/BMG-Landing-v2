@@ -1,11 +1,14 @@
 ---
 import ProcessPageStep from '../ui/ProcessPageStep.astro';
 import { useI18n } from '../../i18n/utils';
+import { getAllProcessSteps, type SanityProcessStep } from '../../lib/queries/processSteps';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
 
-// Define step images - using placeholder images for now
-const stepImages = [
+// Default step images (fallback)
+const defaultStepImages = [
   '/images/Landing/ProcessImage.jpg',
   '/images/Product/bmg-logo.png',
   '/images/Product/consultation-meeting.png',
@@ -14,15 +17,53 @@ const stepImages = [
   '/images/Product/building-exterior.png',
 ];
 
-// Build steps array from translations
-const steps = [
-  { ...t.processPage.steps['1'], image: stepImages[0] },
-  { ...t.processPage.steps['2'], image: stepImages[1] },
-  { ...t.processPage.steps['3'], image: stepImages[2] },
-  { ...t.processPage.steps['4'], image: stepImages[3] },
-  { ...t.processPage.steps['5'], image: stepImages[4] },
-  { ...t.processPage.steps['6'], image: stepImages[5] },
-];
+// Fetch process steps from Sanity
+const sanitySteps = await getAllProcessSteps();
+
+// Helper to get step image URL
+const getStepImage = (step: SanityProcessStep, index: number): string => {
+  if (step.image?.asset) {
+    return urlFor(step.image).width(800).height(600).format('webp').url();
+  }
+  return defaultStepImages[index] || defaultStepImages[0];
+};
+
+// Helper to get localized bullet points
+const getBulletPoints = (step: SanityProcessStep): string[] => {
+  if (step.bulletPoints && step.bulletPoints.length > 0) {
+    return step.bulletPoints
+      .map(bp => getLocalizedValue(bp, lang as Language))
+      .filter((bp): bp is string => bp !== undefined);
+  }
+  // Fallback to i18n
+  const i18nStep = t.processPage.steps[step.stepNumber.toString() as keyof typeof t.processPage.steps];
+  return i18nStep?.bulletPoints || [];
+};
+
+// Build steps array from Sanity data with i18n fallback
+const steps = sanitySteps.length > 0
+  ? sanitySteps.map((step, index) => {
+      const stepKey = step.stepNumber.toString() as keyof typeof t.processPage.steps;
+      const i18nStep = t.processPage.steps[stepKey];
+      return {
+        number: step.stepNumber,
+        title: getLocalizedValue(step.title, lang as Language) || i18nStep?.title || '',
+        subtitle: getLocalizedValue(step.subtitle, lang as Language) || i18nStep?.subtitle || '',
+        description: getLocalizedValue(step.description, lang as Language) || i18nStep?.description || '',
+        bulletPoints: getBulletPoints(step),
+        image: getStepImage(step, index),
+        imageAlt: getLocalizedValue(step.title, lang as Language) || i18nStep?.title || 'Process step',
+      };
+    })
+  : // Fallback to i18n if Sanity returns empty
+    [
+      { ...t.processPage.steps['1'], image: defaultStepImages[0] },
+      { ...t.processPage.steps['2'], image: defaultStepImages[1] },
+      { ...t.processPage.steps['3'], image: defaultStepImages[2] },
+      { ...t.processPage.steps['4'], image: defaultStepImages[3] },
+      { ...t.processPage.steps['5'], image: defaultStepImages[4] },
+      { ...t.processPage.steps['6'], image: defaultStepImages[5] },
+    ];
 ---
 
 <section id="process-steps" class="py-16 lg:py-24 bg-gray-50">

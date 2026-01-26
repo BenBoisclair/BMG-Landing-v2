@@ -1,13 +1,8 @@
 ---
 import { useI18n, getLocalizedPath } from '../../i18n/utils';
-import materialsData from '../../data/materials.json';
-
-interface Material {
-  id: string;
-  image: string;
-  heroImage: string;
-  gallery: string[];
-}
+import { getMaterialsByCategory, getAllMaterials, type SanityMaterial } from '../../lib/queries/materials';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
 interface Props {
   currentMaterialId: string;
@@ -18,18 +13,20 @@ interface Props {
 const { currentMaterialId, currentCategory, count = 3 } = Astro.props;
 const { t, lang } = useI18n(Astro.url);
 
-// Get materials from same category
-const category = materialsData.categories.find(c => c.id === currentCategory);
-const sameCategoryMaterials = category?.materials.filter(m => m.id !== currentMaterialId) || [];
+// Fetch materials from Sanity
+const sameCategoryMaterials = await getMaterialsByCategory(currentCategory as 'premium' | 'luxury' | 'classic');
+const filteredSameCategory = sameCategoryMaterials.filter(
+  m => (m.internalId?.current || m._id) !== currentMaterialId
+);
 
 // If not enough materials in same category, fill from other categories
-let relatedMaterials = [...sameCategoryMaterials];
+let relatedMaterials: SanityMaterial[] = [...filteredSameCategory];
 
 if (relatedMaterials.length < count) {
-  const otherMaterials = materialsData.categories
-    .filter(c => c.id !== currentCategory)
-    .flatMap(c => c.materials);
-
+  const allMaterials = await getAllMaterials();
+  const otherMaterials = allMaterials.filter(
+    m => m.category !== currentCategory && (m.internalId?.current || m._id) !== currentMaterialId
+  );
   const shuffledOthers = otherMaterials.sort(() => Math.random() - 0.5);
   relatedMaterials = [...relatedMaterials, ...shuffledOthers].slice(0, count);
 } else {
@@ -37,10 +34,23 @@ if (relatedMaterials.length < count) {
   relatedMaterials = relatedMaterials.sort(() => Math.random() - 0.5).slice(0, count);
 }
 
-// Get material names from translations
-const getMaterialName = (materialId: string): string => {
+// Helper to get material name
+const getMaterialName = (material: SanityMaterial): string => {
+  const sanityName = getLocalizedValue(material.name, lang as Language);
+  if (sanityName) return sanityName;
+
+  const materialId = material.internalId?.current || material._id;
   const materialTranslations = t.materials.items as Record<string, { name: string }>;
   return materialTranslations[materialId]?.name || materialId;
+};
+
+// Helper to get image URL
+const getImageUrl = (material: SanityMaterial): string => {
+  if (material.mainImage?.asset) {
+    return urlFor(material.mainImage).width(600).height(450).format('webp').url();
+  }
+  const materialId = material.internalId?.current || material._id;
+  return `/materials/${materialId}/${materialId}.jpg`;
 };
 ---
 
@@ -62,27 +72,30 @@ const getMaterialName = (materialId: string): string => {
       <!-- Cards Grid -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-          {relatedMaterials.map((material) => (
-            <a
-              href={getLocalizedPath(lang, `/materials/${material.id}`)}
-              class="material-card block"
-            >
-              <div class="aspect-[4/3] overflow-hidden">
-                <img
-                  src={material.image}
-                  alt={getMaterialName(material.id)}
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="p-4 text-center">
-                <h3 class="material-title">
-                  {getMaterialName(material.id)}
-                </h3>
-              </div>
-            </a>
-          ))}
+          {relatedMaterials.map((material) => {
+            const materialId = material.internalId?.current || material._id;
+            return (
+              <a
+                href={getLocalizedPath(lang, `/materials/${materialId}`)}
+                class="material-card block"
+              >
+                <div class="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={getImageUrl(material)}
+                    alt={getMaterialName(material)}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="p-4 text-center">
+                  <h3 class="material-title">
+                    {getMaterialName(material)}
+                  </h3>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
 

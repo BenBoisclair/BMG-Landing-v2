@@ -6,14 +6,17 @@
  * Each card shows a material image with the name below.
  *
  * Props:
- * - materials: Array of material objects with id, image
+ * - materials: Array of material objects with id, image (string or Sanity image)
  * - categoryId: Category identifier for i18n lookup
  */
 import { useI18n, getLocalizedPath } from '../../i18n/utils';
+import { urlFor } from '../../lib/sanityImage';
 
 interface Material {
   id: string;
-  image: string;
+  image: string | any; // Can be string path or Sanity image object
+  name?: string; // Optional pre-resolved name from Sanity
+  sanityImage?: any; // Original Sanity image reference
 }
 
 interface Props {
@@ -23,12 +26,31 @@ interface Props {
 
 const { materials, categoryId } = Astro.props;
 const { t, lang } = useI18n(Astro.url);
+
+// Helper to get image URL - handles both Sanity images and static paths
+function getImageUrl(material: Material): string {
+  // If sanityImage exists and has asset reference, use Sanity CDN
+  if (material.sanityImage?.asset) {
+    return urlFor(material.sanityImage).width(600).height(450).format('webp').url();
+  }
+  // If image is a Sanity image object
+  if (material.image?.asset) {
+    return urlFor(material.image).width(600).height(450).format('webp').url();
+  }
+  // Fallback to static image path
+  return typeof material.image === 'string' ? material.image : '/images/placeholder.jpg';
+}
 ---
 
 <div class="materials-grid-container" data-category={categoryId}>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {materials.map((material) => {
-      const materialName = t.materials.items[material.id as keyof typeof t.materials.items]?.name || material.id;
+      // Use pre-resolved name from Sanity or fallback to i18n
+      const materialName = material.name ||
+        t.materials.items[material.id as keyof typeof t.materials.items]?.name ||
+        material.id;
+      const imageUrl = getImageUrl(material);
+
       return (
         <a
           href={getLocalizedPath(lang, `/materials/${material.id}`)}
@@ -38,7 +60,7 @@ const { t, lang } = useI18n(Astro.url);
           <div class="material-card bg-white rounded-[10px] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
             <div class="aspect-[4/3] overflow-hidden">
               <img
-                src={material.image}
+                src={imageUrl}
                 alt={materialName}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"

@@ -2,44 +2,77 @@
 import ProjectCard from '../ui/ProjectCard.astro';
 import { useI18n, getLocalizedPath } from '../../i18n/utils';
 import Container from '../ui/Container.astro';
-import projectsData from '../../data/projects.json';
+import { getProjectsGroupedByCategory, type SanityProject } from '../../lib/queries/projects';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
 const { t, lang } = useI18n(Astro.url);
 
+// Fetch projects from Sanity
+const projectsByCategory = await getProjectsGroupedByCategory();
+
+// Project types with their data
+const projectTypes = [
+  { id: 'religious', projects: projectsByCategory.religious },
+  { id: 'legacy', projects: projectsByCategory.legacy },
+  { id: 'architectural', projects: projectsByCategory.architectural },
+].filter(type => type.projects.length > 0);
+
 // Build category labels from translations
-const categoryLabels: Record<string, string> = {};
-for (const cat of projectsData.categories) {
-  categoryLabels[cat] = t.project.types[cat as keyof typeof t.project.types];
-}
+const categoryLabels: Record<string, string> = {
+  religious: t.project.types.religious,
+  legacy: t.project.types.legacy,
+  architectural: t.project.types.architectural,
+};
 
 // Helper to get project detail path
 const getProjectPath = (projectId: string) => getLocalizedPath(lang, `/projects/${projectId}`);
+
+// Helper to get project name
+const getProjectName = (project: SanityProject): string => {
+  const sanityName = getLocalizedValue(project.name, lang as Language);
+  if (sanityName) return sanityName;
+
+  const projectId = project.internalId?.current || project._id;
+  return t.project.projects[projectId as keyof typeof t.project.projects]?.name || projectId;
+};
+
+// Helper to get image URL
+const getImageUrl = (project: SanityProject): string => {
+  if (project.mainImage?.asset) {
+    return urlFor(project.mainImage).width(600).height(400).format('webp').url();
+  }
+  return '/images/placeholder.jpg';
+};
 ---
 
 <section class="py-12 lg:py-16 bg-white">
   <Container>
-    {projectsData.projectTypes.map((projectType, index) => (
+    {projectTypes.map((projectType, index) => (
       <div class="mb-12 last:mb-0">
         <!-- Section Title -->
         <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary mb-8 tracking-tight uppercase">
-          {t.project.sections[projectType.id as keyof typeof t.project.sections].title}
+          {t.project.sections[projectType.id as keyof typeof t.project.sections]?.title || categoryLabels[projectType.id]}
         </h2>
 
         <!-- Swiper Carousel -->
         <div class="project-swiper-container">
           <div class="swiper project-swiper" data-swiper-id={`swiper-${index}`}>
             <div class="swiper-wrapper">
-              {projectType.projects.map((project) => (
-                <div class="swiper-slide">
-                  <ProjectCard
-                    image={project.image}
-                    name={t.project.projects[project.id as keyof typeof t.project.projects]?.name || project.id}
-                    categories={project.categories}
-                    categoryLabels={categoryLabels}
-                    href={getProjectPath(project.id)}
-                  />
-                </div>
-              ))}
+              {projectType.projects.map((project) => {
+                const projectId = project.internalId?.current || project._id;
+                return (
+                  <div class="swiper-slide">
+                    <ProjectCard
+                      image={getImageUrl(project)}
+                      name={getProjectName(project)}
+                      categories={[projectType.id]}
+                      categoryLabels={categoryLabels}
+                      href={getProjectPath(projectId)}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
 

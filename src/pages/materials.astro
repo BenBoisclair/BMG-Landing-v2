@@ -12,25 +12,39 @@ import MaterialsTabs from '../components/ui/MaterialsTabs.astro';
 import MaterialsFilter from '../components/ui/MaterialsFilter.astro';
 import MaterialsGrid from '../components/sections/MaterialsGrid.astro';
 import { useI18n } from '../i18n/utils';
-import materialsData from '../data/materials.json';
+import { getAllMaterials, type SanityMaterial } from '../lib/queries/materials';
+import { getLocalizedValue, type Language } from '../lib/sanity';
 
 const { lang, t } = useI18n(Astro.url);
 
-// Prepare categories data for tabs
-const categories = materialsData.categories.map(cat => ({
-  id: cat.id,
-  tier: cat.tier,
-  label: t.materials.categoryLabels?.[cat.id as keyof typeof t.materials.categoryLabels] || cat.label
-}));
+// Fetch materials from Sanity
+const sanityMaterials = await getAllMaterials();
 
-// Build materials data with translations for client-side use
-const allMaterials = materialsData.categories.flatMap(cat =>
-  cat.materials.map(m => ({
-    ...m,
-    category: cat.id,
-    name: t.materials.items[m.id as keyof typeof t.materials.items]?.name || m.id
-  }))
-);
+// Group materials by category
+const materialsByCategory = {
+  premium: sanityMaterials.filter(m => m.category === 'premium'),
+  luxury: sanityMaterials.filter(m => m.category === 'luxury'),
+  classic: sanityMaterials.filter(m => m.category === 'classic'),
+};
+
+// Prepare categories data for tabs
+const categories = [
+  { id: 'premium', tier: 'A++', label: t.materials.categoryLabels?.premium || 'Premium' },
+  { id: 'luxury', tier: 'A+', label: t.materials.categoryLabels?.luxury || 'Luxury' },
+  { id: 'classic', tier: 'A', label: t.materials.categoryLabels?.classic || 'Classic' },
+];
+
+// Transform Sanity materials to format expected by MaterialsGrid
+function transformMaterials(materials: SanityMaterial[], category: string) {
+  return materials.map(m => ({
+    id: m.internalId?.current || m._id,
+    image: m.mainImage, // Will be processed by MaterialsGrid using Sanity image URL
+    folder: m.internalId?.current || m._id,
+    category,
+    name: getLocalizedValue(m.name, lang as Language) || m.internalId?.current || 'Material',
+    sanityImage: m.mainImage, // Keep original Sanity image reference
+  }));
+}
 ---
 
 <BaseLayout
@@ -66,7 +80,7 @@ const allMaterials = materialsData.categories.flatMap(cat =>
       </h2>
 
       <!-- Materials Grids (one per category, hidden/shown via JS) -->
-      {materialsData.categories.map((category, index) => (
+      {categories.map((category, index) => (
         <div
           class:list={[
             "materials-panel",
@@ -78,7 +92,7 @@ const allMaterials = materialsData.categories.flatMap(cat =>
           aria-labelledby={`tab-${category.id}`}
         >
           <MaterialsGrid
-            materials={category.materials}
+            materials={transformMaterials(materialsByCategory[category.id as keyof typeof materialsByCategory], category.id)}
             categoryId={category.id}
           />
         </div>

@@ -2,47 +2,33 @@
 import TestimonialCard from '../ui/TestimonialCard.astro';
 import { useI18n } from '../../i18n/utils';
 import Container from '../ui/Container.astro';
+import { getAllTestimonials, type SanityTestimonial } from '../../lib/queries/testimonials';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
 
-const testimonials = [
-  {
-    name: 'Sabo Masties',
-    role: 'Founder @ Rolex',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-  {
-    name: 'Sam',
-    role: 'Founder @ Migelko',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-  {
-    name: 'Mansur',
-    role: 'Founder @ Google',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-  {
-    name: 'Sarah Chen',
-    role: 'CEO @ TechVentures',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-  {
-    name: 'Michael Brown',
-    role: 'Director @ Artisan Co',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-  {
-    name: 'Emma Wilson',
-    role: 'Partner @ Design Studio',
-    quote: 'Yet preference connection unpleasant yet melancholy but end appearance. And excellence partiality estimating terminated day everything.',
-    rating: 5,
-  },
-];
+// Fetch testimonials from Sanity
+const sanityTestimonials = await getAllTestimonials();
+
+// Transform Sanity testimonials to component format
+const testimonials = sanityTestimonials.map(testimonial => ({
+  name: testimonial.name,
+  role: testimonial.role || '',
+  quote: getLocalizedValue(testimonial.quote, lang as Language) || '',
+  rating: testimonial.rating || 5,
+  avatar: testimonial.avatar?.asset
+    ? urlFor(testimonial.avatar).width(100).height(100).format('webp').url()
+    : undefined,
+}));
+
+// Fallback to i18n testimonials if Sanity returns empty
+const finalTestimonials = testimonials.length > 0 ? testimonials : (t.testimonials.items as Array<{
+  name: string;
+  role: string;
+  quote: string;
+  rating: number;
+}>);
 ---
 
 <section id="about" class="py-16 lg:py-24 bg-white">
@@ -67,7 +53,7 @@ const testimonials = [
         <!-- Testimonials Carousel -->
         <div class="testimonials-carousel px-2 lg:px-0">
           <div class="testimonials-track flex items-center transition-transform duration-500 ease-in-out" id="testimonials-track">
-            {testimonials.map((testimonial, index) => (
+            {finalTestimonials.map((testimonial, index) => (
               <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3">
                 <TestimonialCard
                   name={testimonial.name}

@@ -7,79 +7,95 @@ import ProjectDetailContent from '../../components/sections/ProjectDetailContent
 import ProjectDetailGallery from '../../components/sections/ProjectDetailGallery.astro';
 import RelatedProjects from '../../components/sections/RelatedProjects.astro';
 import { getTranslations, defaultLang } from '../../i18n/utils';
-import projectsData from '../../data/projects.json';
-
-// Type definitions
-interface Project {
-  id: string;
-  image: string;
-  heroImage: string;
-  gallery: string[];
-  categories: string[];
-}
-
-interface ProjectTranslation {
-  name: string;
-  artTitle: string;
-  description: string;
-  material: string;
-  customer: string;
-  location: string;
-}
+import { getAllProjects, getProjectById, type SanityProject } from '../../lib/queries/projects';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
 // Generate static paths for all projects
-export function getStaticPaths() {
-  const allProjects: Project[] = projectsData.projectTypes.flatMap(type => type.projects);
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
 
-  return allProjects.map((project) => ({
-    params: { slug: project.id },
-    props: { project },
+  return projects.map((project) => ({
+    params: { slug: project.internalId?.current || project._id },
+    props: { projectId: project.internalId?.current || project._id },
   }));
 }
 
 const { slug } = Astro.params;
-const { project } = Astro.props as { project: Project };
+const { projectId } = Astro.props;
 
-// Get translations for default language (English)
+// Fetch project from Sanity
+const project = await getProjectById(projectId);
+
+// Fallback to i18n translations if Sanity data is incomplete
 const t = getTranslations(defaultLang);
-const projectTranslations = t.project.projects as Record<string, ProjectTranslation>;
-const projectContent = projectTranslations[project.id] || {
-  name: project.id,
-  artTitle: project.id,
-  description: '',
-  material: '',
-  customer: '',
-  location: '',
-};
+const lang = defaultLang as Language;
+
+// Get localized content from Sanity or fallback to i18n
+const projectName = getLocalizedValue(project?.name, lang) ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.name ||
+  slug;
+
+const artTitle = getLocalizedValue(project?.artTitle, lang) ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.artTitle ||
+  projectName;
+
+const description = getLocalizedValue(project?.description, lang) ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.description ||
+  '';
+
+const material = getLocalizedValue(project?.material, lang) ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.material ||
+  '';
+
+const customer = project?.customer ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.customer ||
+  '';
+
+const location = getLocalizedValue(project?.location, lang) ||
+  t.project.projects[slug as keyof typeof t.project.projects]?.location ||
+  '';
+
+// Get image URLs
+const heroImageUrl = project?.heroImage?.asset
+  ? urlFor(project.heroImage).width(1920).height(800).format('webp').url()
+  : project?.mainImage?.asset
+    ? urlFor(project.mainImage).width(1920).height(800).format('webp').url()
+    : '/images/placeholder.jpg';
+
+// Get gallery images
+const galleryImages = project?.gallery?.length
+  ? project.gallery.map(img => urlFor(img).width(800).height(600).format('webp').url())
+  : [];
 ---
 
 <BaseLayout
-  title={`${projectContent.name} | ${t.meta.title}`}
-  description={projectContent.description.slice(0, 160)}
+  title={`${projectName} | ${t.meta.title}`}
+  description={description.slice(0, 160)}
   lang={defaultLang}
 >
   <Header pageType="project" />
 
   <main>
     <ProjectDetailHero
-      heroImage={project.heroImage}
-      projectName={projectContent.name}
+      heroImage={heroImageUrl}
+      projectName={projectName}
     />
 
     <ProjectDetailContent
-      artTitle={projectContent.artTitle}
-      description={projectContent.description}
-      material={projectContent.material}
-      customer={projectContent.customer}
-      location={projectContent.location}
+      artTitle={artTitle}
+      description={description}
+      material={material}
+      customer={customer}
+      location={location}
     />
 
     <ProjectDetailGallery
-      images={project.gallery}
-      projectName={projectContent.name}
+      images={galleryImages}
+      projectName={projectName}
     />
 
-    <RelatedProjects currentProjectId={project.id} />
+    <RelatedProjects currentProjectId={slug} />
   </main>
 
   <Footer />
