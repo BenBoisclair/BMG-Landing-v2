@@ -6,70 +6,70 @@ import MaterialDetailHero from '../../../components/sections/MaterialDetailHero.
 import MaterialDetailContent from '../../../components/sections/MaterialDetailContent.astro';
 import RelatedMaterials from '../../../components/sections/RelatedMaterials.astro';
 import { getTranslations } from '../../../i18n/utils';
-import materialsData from '../../../data/materials.json';
-
-// Type definitions
-interface Material {
-  id: string;
-  image: string;
-  folder: string;
-  category: string;
-}
-
-interface MaterialTranslation {
-  name: string;
-  description: string;
-}
+import { getAllMaterials, getMaterialById, type SanityMaterial } from '../../../lib/queries/materials';
+import { getLocalizedValue, type Language } from '../../../lib/sanity';
+import { urlFor } from '../../../lib/sanityImage';
 
 // Generate static paths for all materials
-export function getStaticPaths() {
-  const allMaterials: Material[] = materialsData.categories.flatMap(cat =>
-    cat.materials.map(m => ({
-      ...m,
-      category: cat.id
-    }))
-  );
+export async function getStaticPaths() {
+  const materials = await getAllMaterials();
 
-  return allMaterials.map((material) => ({
-    params: { id: material.id },
-    props: { material },
+  return materials.map((material) => ({
+    params: { id: material.internalId?.current || material._id },
+    props: { materialId: material.internalId?.current || material._id },
   }));
 }
 
 const lang = 'ar';
 const { id } = Astro.params;
-const { material } = Astro.props as { material: Material };
+const { materialId } = Astro.props;
 
-// Get Arabic translations
+// Fetch material from Sanity
+const material = await getMaterialById(materialId);
+
+// Fallback to i18n translations if Sanity data is incomplete
 const t = getTranslations(lang);
-const materialTranslations = t.materials.items as Record<string, MaterialTranslation>;
-const materialContent = materialTranslations[material.id] || {
-  name: material.id,
-  description: '',
-};
+
+// Get localized content from Sanity or fallback to i18n
+const materialName = getLocalizedValue(material?.name, lang as Language) ||
+  t.materials.items[id as keyof typeof t.materials.items]?.name ||
+  id;
+
+const materialDescription = getLocalizedValue(material?.description, lang as Language) ||
+  t.materials.items[id as keyof typeof t.materials.items]?.description ||
+  '';
+
+// Get image URL - prefer Sanity, fallback to static
+const heroImageUrl = material?.mainImage?.asset
+  ? urlFor(material.mainImage).width(1920).height(800).format('webp').url()
+  : `/materials/${id}/${id}.jpg`;
+
+const category = material?.category || 'classic';
 ---
 
 <BaseLayout
-  title={`${materialContent.name} | ${t.meta.title}`}
-  description={materialContent.description.slice(0, 160)}
+  title={`${materialName} | ${t.meta.title}`}
+  description={materialDescription.slice(0, 160)}
   lang={lang}
 >
   <Header pageType="project" />
 
   <main>
     <MaterialDetailHero
-      heroImage={material.image}
-      materialName={materialContent.name}
+      heroImage={heroImageUrl}
+      materialName={materialName}
     />
 
     <MaterialDetailContent
-      artTitle={materialContent.name}
-      description={materialContent.description}
+      artTitle={materialName}
+      description={materialDescription}
+      price={material?.price}
+      priceUnit={material?.priceUnit}
     />
 
     <RelatedMaterials
-      currentMaterialId={material.id}
-      currentCategory={material.category}
+      currentMaterialId={id}
+      currentCategory={category}
     />
   </main>
 

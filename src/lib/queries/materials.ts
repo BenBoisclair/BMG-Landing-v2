@@ -8,6 +8,8 @@ export interface SanityMaterial {
   category: 'premium' | 'luxury' | 'classic';
   mainImage: any;
   gallery: any[];
+  price?: number;
+  priceUnit?: string;
   seo?: {
     metaTitle?: { en?: string; th?: string; ar?: string };
     metaDescription?: { en?: string; th?: string; ar?: string };
@@ -27,6 +29,8 @@ export async function getAllMaterials(): Promise<SanityMaterial[]> {
       category,
       mainImage,
       gallery,
+      price,
+      priceUnit,
       seo,
       order
     }
@@ -47,6 +51,8 @@ export async function getMaterialsByCategory(
       category,
       mainImage,
       gallery,
+      price,
+      priceUnit,
       seo,
       order
     }
@@ -67,6 +73,8 @@ export async function getMaterialById(id: string): Promise<SanityMaterial | null
       category,
       mainImage,
       gallery,
+      price,
+      priceUnit,
       seo,
       order
     }

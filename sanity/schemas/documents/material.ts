@@ -66,6 +66,25 @@ export const material = defineType({
       description: 'Additional images for the material gallery',
     }),
     defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      description: 'Optional price in dollars (leave empty to hide)',
+    }),
+    defineField({
+      name: 'priceUnit',
+      title: 'Price Unit',
+      type: 'string',
+      description: 'e.g., "per m²", "per slab", "per piece"',
+      options: {
+        list: [
+          { title: 'Per square meter (m²)', value: 'per m²' },
+          { title: 'Per slab', value: 'per slab' },
+          { title: 'Per piece', value: 'per piece' },
+        ],
+      },
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seoFields',

@@ -4,13 +4,20 @@ import { useI18n } from '../../i18n/utils';
 interface Props {
   artTitle: string;
   description: string;
+  price?: number;
+  priceUnit?: string;
 }
 
-const { artTitle, description } = Astro.props;
+const { artTitle, description, price, priceUnit } = Astro.props;
 const { isRTL } = useI18n(Astro.url);
 
 // Split description into paragraphs
 const paragraphs = description.split('\n\n').filter(p => p.trim());
+
+// Format price with 2 decimal places if needed
+const formattedPrice = price != null
+  ? price % 1 === 0 ? price.toString() : price.toFixed(2)
+  : null;
 ---
 
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -19,6 +26,18 @@ const paragraphs = description.split('\n\n').filter(p => p.trim());
     <h2 class="text-3xl lg:text-4xl font-semibold text-brand-primary tracking-tight mb-6">
       {artTitle}
     </h2>
+
+    {/* Price display - only shown when price is set */}
+    {formattedPrice && (
+      <div class="mb-8">
+        <div class="inline-flex items-baseline gap-2 bg-brand-primary/5 border border-brand-primary/20 rounded-lg px-4 py-3">
+          <span class="text-2xl font-bold text-brand-primary">${formattedPrice}</span>
+          {priceUnit && (
+            <span class="text-sm text-gray-600">{priceUnit}</span>
+          )}
+        </div>
+      </div>
+    )}
 
     <!-- Description -->
     <div class="space-y-4 text-gray-600 leading-relaxed">
