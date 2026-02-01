@@ -5,8 +5,14 @@ import Footer from '../components/layout/Footer.astro';
 import ContactPageHero from '../components/sections/ContactPageHero.astro';
 import Contact from '../components/sections/Contact.astro';
 import { useI18n } from '../i18n/utils';
+import { getSiteSettings } from '../lib/queries/siteSettings';
+import { pageHeroImage } from '../lib/sanityImage';
 
 const { lang, t } = useI18n(Astro.url);
+const siteSettings = await getSiteSettings();
+const heroImageUrl = siteSettings?.contactPageHeroImage
+  ? pageHeroImage(siteSettings.contactPageHeroImage)
+  : undefined;
 ---
 
 <BaseLayout
@@ -17,7 +23,7 @@ const { lang, t } = useI18n(Astro.url);
   <Header pageType="process" />
 
   <main>
-    <ContactPageHero />
+    <ContactPageHero backgroundImage={heroImageUrl} />
     <Contact />
   </main>
 

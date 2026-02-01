@@ -1,0 +1,1051 @@
+{
+  "nav": {
+    "home": "首页",
+    "products": "产品",
+    "projects": "项目",
+    "materials": "天然石材",
+    "process": "流程",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "language": "语言"
+  },
+  "hero": {
+    "viewMore": "查看更多",
+    "backgroundAlt": "BMG花岗岩雕塑工艺"
+  },
+  "showcase": {
+    "viewMore": "查看更多",
+    "modelAlt": "3D雕塑模型",
+    "viewModel": "查看模型",
+    "loading": "3D模型加载中...",
+    "close": "关闭",
+    "models": {
+      "1": {
+        "name": "佛像",
+        "description": "一尊散发着平和与智慧的宁静佛像雕塑。由优质石材手工雕刻而成，这件作品体现了佛教教义的宁静，适合冥想空间和精神花园。"
+      },
+      "2": {
+        "name": "拉克什米",
+        "description": "印度教财富、命运和繁荣女神。这尊优雅的雕塑捕捉了拉克什米的优雅和仁慈，精细的细节展示了传统工艺的最高水平。"
+      },
+      "3": {
+        "name": "象神",
+        "description": "泰国版本的象头神甘尼许，障碍的消除者和开端之神。这尊雄伟的雕塑展示了象头神在祝福和智慧姿态中的形象。"
+      },
+      "4": {
+        "name": "毗湿奴",
+        "description": "印度教传统中的守护者和保护者毗湿奴神。这尊强大的雕塑展示了具有神圣属性的最高神灵，象征着宇宙秩序和永恒真理。"
+      },
+      "5": {
+        "name": "罗马柱",
+        "description": "受罗马古典建筑启发的经典建筑柱。这件优雅的作品将传统欧洲设计与大师级石雕工艺相结合，适合宏伟的入口和纪念性空间。"
+      },
+      "6": {
+        "name": "瓦拉哈化身",
+        "description": "毗湿奴神的野猪化身，他从宇宙之水中拯救了地球。这座动态雕塑以非凡的细节和虔诚捕捉了神圣干预的强大时刻。"
+      }
+    }
+  },
+  "mission": {
+    "title": "BMG 曼谷现代花岗岩有限公司",
+    "description": "BMG是一家神圣的定制石雕工作室。\n我们通过批准优先、技术驱动的流程和大师级泰国工艺，将神圣和个人传承转化为永恒的石雕艺术。\n批准前不动石料。没有意外。"
+  },
+  "process": {
+    "title": "制作流程",
+    "description": "了解我们的雕塑制作流程",
+    "craftingAlt": "BMG工匠制作花岗岩雕塑",
+    "learnMore": "了解更多我们的流程",
+    "steps": {
+      "1": {
+        "number": "1",
+        "title": "有目的的咨询",
+        "titleShort": "咨询",
+        "description": "我们从对话开始。无论委托是神圣的、纪念性的还是个人的，我们都会仔细倾听，因为我们寻求的是清晰而非假设。每个符号、比例和姿态都被考虑其意义而非仅仅是形式。"
+      },
+      "2": {
+        "number": "2",
+        "title": "愿景建模",
+        "titleShort": "3D",
+        "description": "一旦达成一致，我们通过精确的3D建模和粘土原型将概念转化为物理现实。客户审查每个细节，从姿势到表情，直到感觉完整。"
+      },
+      "3": {
+        "number": "3",
+        "title": "精准雕刻",
+        "titleShort": "CNC",
+        "description": "确认批准的模型后，我们启用CNC系统。多轴加工使我们能够以毫米级精度执行复杂的几何形状，因为它保护了批准设计的完整性。"
+      },
+      "4": {
+        "number": "4",
+        "title": "手工精修",
+        "titleShort": "手工",
+        "description": "机器加工后，手工工作开始。我们的大师级工匠用数十年磨练的工具和直觉来精炼表面、表情和微妙的存在感。没有任何机器能够诠释温暖或优雅。"
+      },
+      "5": {
+        "number": "5",
+        "title": "诚信全球配送",
+        "titleShort": "配送",
+        "description": "完成后，每件作品都经过检查和记录。然后使用博物馆级标准进行国际运输包装。"
+      }
+    }
+  },
+  "priceEstimation": {
+    "title": "获取价格估算",
+    "subtitle": "回答几个问题，获取您雕塑项目的估计价格和时间线",
+    "bust": {
+      "tab": "胸像雕塑",
+      "tabShort": "胸像"
+    },
+    "relief": {
+      "tab": "浮雕雕塑",
+      "tabShort": "浮雕"
+    },
+    "steps": {
+      "dimensions": {
+        "title": "1. 尺寸是多少？",
+        "height": "高度 (毫米)",
+        "width": "宽度 (毫米)",
+        "depth": "深度 (毫米)",
+        "maxHint": "最大: 3000毫米 (3米)",
+        "remark": "<strong>备注:</strong> 如果您的雕塑尺寸超过3米（3000毫米），请直接联系我们进行定制咨询和报价。"
+      },
+      "stoneCategory": {
+        "title": "2. 石材类别是什么？",
+        "grades": {
+          "aPlusPlus": {
+            "label": "A++",
+            "description": "珠宝级石材"
+          },
+          "aPlus": {
+            "label": "A+",
+            "description": "奢华石材"
+          },
+          "a": {
+            "label": "A",
+            "description": "天然石材"
+          }
+        },
+        "help": "<strong>不确定选择哪个等级？</strong> 访问我们的材料页面了解更多关于石材类别的信息，找到适合您项目的等级。"
+      },
+      "detailLevel": {
+        "title": "3. 需要多精细？",
+        "levels": {
+          "minimal": {
+            "label": "简约",
+            "description": "简单形式和光滑表面，纹理最少"
+          },
+          "refine": {
+            "label": "精致",
+            "description": "有一定纹理和雕刻细节的明确特征"
+          },
+          "realistic": {
+            "label": "逼真",
+            "description": "高度精细，具有复杂纹理和精细工艺"
+          }
+        }
+      }
+    },
+    "calculateButton": "计算估价",
+    "estimatedPrice": "估计价格",
+    "priceDisclaimer": "*最终价格可能因具体要求而异",
+    "selectAllOptions": "请完成上述所有选择",
+    "getCustomQuote": "获取定制报价",
+    "validation": {
+      "minValue": "数值必须大于0",
+      "maxExceeded": "最大为3000毫米"
+    }
+  },
+  "Our Passed Project": {
+    "title": "我们的已完成项目",
+    "stats": {
+      "countriesDelivered": "交付国家",
+      "projectsCompleted": "完成项目",
+      "yearsExperience": "年经验"
+    }
+  },
+  "trustedCultures": {
+    "title": "受全球文化信赖",
+    "stats": {
+      "countriesDelivered": "交付国家",
+      "projectsCompleted": "完成项目",
+      "yearsExperience": "年经验"
+    }
+  },
+  "testimonials": {
+    "title": "客户评价",
+    "description": "社区发展通常与社区工作或社区规划相关联，可能涉及利益相关者、基金会，",
+    "prevButton": "上一个评价",
+    "nextButton": "下一个评价",
+    "items": [
+      {
+        "name": "萨博·马斯蒂斯",
+        "role": "创始人 @ 劳力士",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      },
+      {
+        "name": "山姆",
+        "role": "创始人 @ 米格尔科",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      },
+      {
+        "name": "曼苏尔",
+        "role": "创始人 @ 谷歌",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      },
+      {
+        "name": "陈莎拉",
+        "role": "CEO @ 科技创投",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      },
+      {
+        "name": "迈克尔·布朗",
+        "role": "总监 @ 工匠公司",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      },
+      {
+        "name": "艾玛·威尔逊",
+        "role": "合伙人 @ 设计工作室",
+        "quote": "尽管不愉快的偏好连接仍然忧郁但最终表现。卓越的偏袒估计终止了一切。",
+        "rating": 5
+      }
+    ]
+  },
+  "contact": {
+    "title": "联系我们",
+    "description": "我们致力于为全球客户制作最精致的石雕。",
+    "form": {
+      "firstName": "名字",
+      "surname": "姓氏",
+      "phone": "电话",
+      "email": "电子邮件",
+      "whatsapp": "WhatsApp",
+      "position": "职位",
+      "projectType": "项目类型",
+      "budget": "预算",
+      "consideration": "您如何看待我们？",
+      "timeline": "您对这个项目的预期时间线是什么？",
+      "remark": "备注",
+      "consent": "同意接收公司的短信通知、提醒和偶尔的营销通信。消息频率各异。可能会收取消息和数据费用。您可以随时回复STOP取消订阅。",
+      "submit": "提交"
+    },
+    "positions": {
+      "salesManager": "销售经理",
+      "projectManager": "项目经理",
+      "designer": "设计师",
+      "architect": "建筑师",
+      "developer": "开发商",
+      "other": "其他"
+    },
+    "projectTypes": {
+      "residential": "住宅",
+      "commercial": "商业",
+      "industrial": "工业",
+      "hospitality": "酒店",
+      "publicSpace": "公共空间",
+      "other": "其他"
+    },
+    "budgetRanges": {
+      "under10k": "低于 $10,000",
+      "10kTo50k": "$10,000 - $50,000",
+      "50kTo100k": "$50,000 - $100,000",
+      "100kTo500k": "$100,000 - $500,000",
+      "over500k": "超过 $500,000"
+    },
+    "considerations": {
+      "quality": "质量",
+      "price": "价格",
+      "timeline": "时间线",
+      "design": "设计",
+      "allOfTheAbove": "以上所有"
+    },
+    "timelines": {
+      "immediate": "立即",
+      "within1Month": "1个月内",
+      "1To3Months": "1-3个月",
+      "3To6Months": "3-6个月",
+      "6PlusMonths": "6个月以上"
+    }
+  },
+  "footer": {
+    "privacyPolicy": "隐私政策",
+    "termsConditions": "条款和条件",
+    "copyright": "版权所有",
+    "allRightsReserved": "保留所有权利。",
+    "companyName": "曼谷现代花岗岩有限公司"
+  },
+  "languageSwitcher": {
+    "english": "英语",
+    "thai": "泰语",
+    "arabic": "阿拉伯语",
+    "selectLanguage": "选择语言"
+  },
+  "meta": {
+    "title": "BMG - 曼谷现代花岗岩",
+    "description": "曼谷现代花岗岩提供的优质花岗岩雕塑和石雕工艺"
+  },
+  "validation": {
+    "required": "此字段为必填项",
+    "invalidEmail": "请输入有效的电子邮件地址",
+    "invalidPhone": "请输入有效的电话号码（7-15位数字）",
+    "invalidUrl": "请输入有效的URL（包括http://或https://）",
+    "invalidName": "请输入有效的姓名（仅限字母）",
+    "tooShort": "此字段太短",
+    "tooLong": "此字段太长",
+    "invalidFormat": "格式无效",
+    "formSuccess": "谢谢！您的消息已成功发送。",
+    "formError": "提交表单时出错。请重试。",
+    "submitting": "提交中..."
+  },
+  "project": {
+    "title": "我们的画廊",
+    "heroAlt": "项目展示背景",
+    "types": {
+      "religious": "宗教",
+      "legacy": "传承",
+      "architectural": "建筑"
+    },
+    "sections": {
+      "religious": {
+        "title": "宗教雕塑"
+      },
+      "legacy": {
+        "title": "传承与纪念"
+      },
+      "architectural": {
+        "title": "建筑作品"
+      }
+    },
+    "pagination": {
+      "prev": "上一页",
+      "next": "下一页"
+    },
+    "projects": {
+      "religious-1": {
+        "name": "觉悟佛像",
+        "artTitle": "觉悟佛像 – 那瓦明塔拉朱提寺",
+        "description": "由一座受人尊敬的泰国寺院委托，为其在美国的姊妹寺庙制作，这尊觉悟佛像被雕刻成为马萨诸塞州汤顿那瓦明塔拉朱提寺的精神中心。",
+        "material": "萨索斯白色大理石（希腊）",
+        "customer": "那瓦明塔拉朱提寺",
+        "location": "美国马萨诸塞州汤顿"
+      },
+      "religious-2": {
+        "name": "佛塔舍利塔",
+        "artTitle": "佛塔舍利塔 – 拉塔纳万寺",
+        "description": "由尊敬的隆波年纳达摩领导的拉塔纳万寺僧团委托，这座纪念性舍利塔被创建为神圣记忆的容器。",
+        "material": "花岗岩与金色不锈钢",
+        "customer": "拉塔纳万寺",
+        "location": "泰国呵叻府"
+      },
+      "religious-3": {
+        "name": "象神",
+        "artTitle": "神圣象神 – 私人委托",
+        "description": "这座雕塑由Mo Amena Pinit委托，她对象神有清晰的个人愿景。",
+        "material": "白色卡拉拉大理石",
+        "customer": "Mo Amena Pinit",
+        "location": "泰国曼谷"
+      },
+      "religious-4": {
+        "name": "佛像覆玉",
+        "artTitle": "包裹神圣玉石的佛像",
+        "description": "一尊神圣的佛像雕塑，用于包裹和保护珍贵的玉石舍利。",
+        "material": "白色卡拉拉大理石",
+        "customer": "素万纳普佛塔占提寺",
+        "location": "泰国"
+      },
+      "religious-5": {
+        "name": "帕富空寺佛像",
+        "artTitle": "神圣佛像 – 帕富空寺",
+        "description": "为帕富空寺创作，这座白色卡拉拉大理石佛像体现了这座著名森林寺庙的宁静存在。",
+        "material": "白色卡拉拉大理石",
+        "customer": "帕富空寺",
+        "location": "泰国乌隆他尼"
+      },
+      "religious-6": {
+        "name": "僧王纪念像",
+        "artTitle": "僧王纪念像",
+        "description": "为泰国最重要的皇家寺庙之一波旺尼威维哈拉寺制作的纪念雕塑，以纪念受人尊敬的佛教僧王。",
+        "material": "黑色非洲花岗岩",
+        "customer": "波旺尼威维哈拉寺",
+        "location": "泰国曼谷"
+      },
+      "religious-7": {
+        "name": "太平洋隐修院佛像",
+        "artTitle": "佛像 – 太平洋隐修院",
+        "description": "为俄勒冈州太平洋隐修院创作，这座佛像雕塑将上座部佛教的冥想传统带到了太平洋西北地区。",
+        "material": "红砂岩",
+        "customer": "太平洋隐修院",
+        "location": "美国俄勒冈州"
+      },
+      "religious-8": {
+        "name": "普里塔塔寺佛像",
+        "artTitle": "佛像 – 普里塔塔帕提帕塔拉姆寺",
+        "description": "为普里塔塔帕提帕塔拉姆寺用超白大理石制作的宁静佛像雕塑。",
+        "material": "超白大理石",
+        "customer": "普里塔塔帕提帕塔拉姆寺",
+        "location": "泰国"
+      },
+      "religious-9": {
+        "name": "帕干塔拉",
+        "artTitle": "帕干塔拉 – 神圣委托",
+        "description": "由Sonlapratan委托的神圣雕塑，用白色石材制作，以体现精神存在和虔诚意义。",
+        "material": "白色大理石",
+        "customer": "Sonlapratan",
+        "location": "泰国"
+      },
+      "legacy-1": {
+        "name": "祖父肖像",
+        "artTitle": "阿公 – 纪念肖像",
+        "description": "这座雕塑是在祖父去世后创作的，使这件作品成为以记忆而非直接观察为指导的精心重建行为。",
+        "material": "白色卡拉拉大理石",
+        "customer": "BMG",
+        "location": "泰国曼谷"
+      },
+      "legacy-2": {
+        "name": "祖母肖像",
+        "artTitle": "阿嬷 – 纪念肖像",
+        "description": "这座雕塑是在祖母还在世时开始的，使创作过程能够从直接存在而非仅从记忆开始。",
+        "material": "白色卡拉拉大理石",
+        "customer": "BMG",
+        "location": "泰国曼谷"
+      },
+      "legacy-3": {
+        "name": "玉石纪念",
+        "artTitle": "玉骨纪念",
+        "description": "用绿色意大利石材制作的神圣纪念作品，以纪念和保存对亲人的怀念。",
+        "material": "绿色意大利石材",
+        "customer": "Wuttipong Chaisang",
+        "location": "泰国"
+      },
+      "architectural-1": {
+        "name": "无限桥喷泉",
+        "artTitle": "无限桥喷泉 – 私人住宅",
+        "description": "由一位受人尊敬的水利工程赞助人及其风水大师委托，这座神圣雕塑不仅是水景，还是流动、连续和稳固繁荣的象征性汇聚。",
+        "material": "泰国花岗岩",
+        "customer": "Sunwa",
+        "location": "泰国曼谷"
+      },
+      "architectural-2": {
+        "name": "索托恩寺大理石修复",
+        "artTitle": "石刻传承 – 索托恩寺",
+        "description": "二十多年来，差春绍府索托恩瓦拉拉姆沃拉维哈拉寺的大殿不仅是信仰的见证，更是精神与艺术深厚合作的证明。",
+        "material": "斯塔图阿里奥大理石（意大利）",
+        "customer": "索托恩瓦拉拉姆沃拉维哈拉寺",
+        "location": "泰国差春绍"
+      },
+      "architectural-3": {
+        "name": "黎明寺传承守护者",
+        "artTitle": "传承守护者 – 黎明寺",
+        "description": "在泰国最具标志性的寺庙之一黎明寺，矗立着一批可追溯到200多年前的中国石雕守护者。",
+        "material": "绿色大理石",
+        "customer": "黎明寺",
+        "location": "泰国曼谷"
+      },
+      "architectural-4": {
+        "name": "帕丹维威克寺纪念碑",
+        "artTitle": "神圣纪念碑 – 帕丹维威克寺",
+        "description": "为帕丹维威克寺创作的纪念性作品，将黑色非洲花岗岩与泰国花岗岩结合，创造具有持久意义的结构。",
+        "material": "黑色非洲花岗岩与泰国花岗岩",
+        "customer": "帕丹维威克寺",
+        "location": "泰国"
+      }
+    }
+  },
+  "projectDetail": {
+    "back": "返回",
+    "gallery": "画廊",
+    "material": "材料",
+    "customer": "客户",
+    "location": "位置",
+    "relatedProjects": "您可能喜欢的其他项目",
+    "viewProject": "查看项目"
+  },
+  "processPage": {
+    "title": "梦想制作流程",
+    "heroAlt": "BMG石雕制作流程",
+    "steps": {
+      "1": {
+        "number": "01",
+        "title": "初步构想",
+        "subtitle": "概念或现有模型",
+        "description": "如果您有现有模型或参考，我们进行高精度3D扫描。如果没有，我们从设计咨询开始，共同发展概念。",
+        "bulletPoints": [
+          "与我们专家团队的协作设计咨询",
+          "现有模型或参考的高精度3D扫描",
+          "概念发展和初步草图",
+          "设计方向的审查和批准",
+          "材料和预算讨论"
+        ],
+        "imageAlt": "设计咨询流程"
+      },
+      "2": {
+        "number": "02",
+        "title": "原型创建",
+        "subtitle": "奠定基础",
+        "description": "根据批准的方向，我们创建粘土或3D打印模型。进行调整直到设计达到预期。",
+        "bulletPoints": [
+          "基于初始概念的粘土建模或3D打印",
+          "多次迭代和改进",
+          "用于批准的比例模型创建",
+          "客户反馈的详细审查会议",
+          "生产前的最终原型批准"
+        ],
+        "imageAlt": "原型创建流程"
+      },
+      "3": {
+        "number": "03",
+        "title": "CNC雕刻",
+        "subtitle": "先进制造",
+        "description": "先进的CNC机器精确雕刻雕塑，忠实遵循最终的3D数据以实现准确复制。",
+        "bulletPoints": [
+          "最先进的CNC机械操作",
+          "多轴精密雕刻",
+          "生产过程中持续质量监控",
+          "石材选择和准备",
+          "初步粗加工和详细精加工过程"
+        ],
+        "imageAlt": "CNC雕刻机械"
+      },
+      "4": {
+        "number": "04",
+        "title": "手工细节和精修",
+        "subtitle": "工匠技艺",
+        "description": "熟练的工匠手工精炼每个表面，以实现机器无法复制的深度、真实感和优质工艺。",
+        "bulletPoints": [
+          "专家手工雕刻和改进",
+          "表面纹理增强",
+          "精细特征的细节工作",
+          "抛光和精修处理",
+          "最终质量检查和批准"
+        ],
+        "imageAlt": "工匠手工细节"
+      },
+      "5": {
+        "number": "05",
+        "title": "配送",
+        "subtitle": "最终运输",
+        "description": "成品使用专业装箱精心包装，运送到客户指定的全球任何位置。",
+        "bulletPoints": [
+          "定制装箱和保护性包装",
+          "必要时的气候控制存储",
+          "国际运输协调",
+          "实时跟踪和更新",
+          "保险和文件处理"
+        ],
+        "imageAlt": "雕塑包装和配送"
+      },
+      "6": {
+        "number": "06",
+        "title": "安装",
+        "subtitle": "交付与支持",
+        "description": "我们的团队可以协助现场安装，确保正确放置并为您的雕塑提供持续支持。",
+        "bulletPoints": [
+          "提供专业现场安装",
+          "放置指导和建议",
+          "护理和维护说明",
+          "保修文件和支持",
+          "长期关系和未来项目"
+        ],
+        "imageAlt": "雕塑安装"
+      }
+    }
+  },
+  "contactPage": {
+    "title": "联系我们",
+    "heroAlt": "BMG联系背景"
+  },
+  "materials": {
+    "pageTitle": "我们的材料",
+    "heroAlt": "BMG优质石材展示",
+    "grades": {
+      "app": "珠宝级石材",
+      "ap": "奢华石材",
+      "a": "天然石材"
+    },
+    "filter": "筛选",
+    "filterOptions": {
+      "allTypes": "所有类型",
+      "marble": "大理石",
+      "granite": "花岗岩",
+      "onyx": "玛瑙",
+      "semiPrecious": "半宝石"
+    },
+    "categoryLabels": {
+      "premium": "优质意大利大理石",
+      "luxury": "奢华石材",
+      "classic": "天然石材"
+    },
+    "pagination": {
+      "prev": "上一页",
+      "next": "下一页"
+    },
+    "detail": {
+      "back": "返回",
+      "gallery": "画廊",
+      "similarMaterials": "相似材料"
+    },
+    "categories": {
+      "premium": {
+        "title": "珠宝级石材",
+        "tier": "A++"
+      },
+      "luxury": {
+        "title": "奢华石材",
+        "tier": "A+"
+      },
+      "classic": {
+        "title": "天然石材",
+        "tier": "A"
+      }
+    },
+    "items": {
+      "calacatta": {
+        "name": "卡拉卡塔",
+        "description": "卡拉卡塔大理石是一种奢华的意大利大理石，以白色底面和富有表现力的灰色纹理为特征。"
+      },
+      "calacatta-gold": {
+        "name": "卡拉卡塔金",
+        "description": "卡拉卡塔金大理石是一种声望卓著的白色大理石，饰有优雅的金色和灰色纹理。"
+      },
+      "calacatta-borghini": {
+        "name": "卡拉卡塔博尔吉尼",
+        "description": "卡拉卡塔博尔吉尼大理石是一种精致的白色石材，具有柔和的灰色纹理和平衡的流动感。"
+      },
+      "statuario": {
+        "name": "斯塔图阿里奥",
+        "description": "斯塔图阿里奥大理石是一种优质意大利石材，以其明亮的白色背景和大胆的灰色纹理著称。"
+      },
+      "paonazzo": {
+        "name": "帕奥纳佐",
+        "description": "帕奥纳佐大理石是一种稀有的白色石材，以紫色和灰色纹理而闻名。"
+      },
+      "arabescato": {
+        "name": "阿拉贝斯卡托",
+        "description": "阿拉贝斯卡托大理石是一种意大利石材，以其白色底面和复杂的灰色纹理著称。"
+      },
+      "arabescato-corchia": {
+        "name": "阿拉贝斯卡托科尔基亚",
+        "description": "阿拉贝斯卡托科尔基亚大理石是一种优质意大利大理石，以大胆的灰色纹理和强烈的流动感著称。"
+      },
+      "bianco-dolomiti": {
+        "name": "多洛米蒂白",
+        "description": "多洛米蒂白大理石是一种精致的白色石材，具有柔和的灰色纹理和宁静的视觉特征。"
+      },
+      "thassos": {
+        "name": "萨索斯",
+        "description": "萨索斯大理石是在希腊开采的纯白色石材，因其晶体结构而备受珍视。"
+      },
+      "white-venus": {
+        "name": "白色维纳斯",
+        "description": "白色维纳斯大理石是一种柔和的白色石材，具有温和的暖色调和极少的纹理。"
+      },
+      "volakas": {
+        "name": "沃拉卡斯",
+        "description": "沃拉卡斯大理石是一种白色希腊大理石，以柔和的灰色纹理和平静的流动感为特征。"
+      },
+      "sky-white": {
+        "name": "天空白",
+        "description": "天空白大理石是一种明亮的石材，白色底面上饰有浅灰色纹理。"
+      },
+      "super-white": {
+        "name": "超级白",
+        "description": "超级白大理石是一种现代石材，以其明亮的白色至浅灰色底面和微妙的线性流动著称。"
+      },
+      "panda-white": {
+        "name": "熊猫白",
+        "description": "熊猫白大理石是一种引人注目的石材，白色底面上有大胆的黑色纹理。"
+      },
+      "lilac-marble": {
+        "name": "丁香大理石",
+        "description": "丁香大理石是一种独特的白色石材，具有柔和的丁香色纹理。"
+      },
+      "pietra-grey": {
+        "name": "皮埃特拉灰",
+        "description": "皮埃特拉灰大理石是一种深灰色石材，以细腻的白色纹理和干净的线性外观著称。"
+      },
+      "silver-shadow": {
+        "name": "银影",
+        "description": "银影大理石是一种灰色石材，具有平滑的色调流动和现代感。"
+      },
+      "grigio-carnico": {
+        "name": "卡尔尼科灰",
+        "description": "卡尔尼科灰大理石是一种深灰色意大利石材，具有明显的白色纹理。"
+      },
+      "cat-eye": {
+        "name": "猫眼",
+        "description": "猫眼大理石是一种灰色石材，以线性纹理和层叠的流动感为特征。"
+      },
+      "verde-alpi": {
+        "name": "阿尔卑斯绿",
+        "description": "阿尔卑斯绿大理石是一种戏剧性的绿色石材，以深沉的色调和对比鲜明的白色纹理为特征。"
+      },
+      "verde-guatemala": {
+        "name": "危地马拉绿",
+        "description": "危地马拉绿大理石是一种深绿色石材，具有微妙的纹理和致密的外观。"
+      },
+      "nero-marquina": {
+        "name": "尼罗马奎纳",
+        "description": "尼罗马奎纳大理石是一种深黑色石材，以锋利的白色纹理著称。"
+      },
+      "black-marquina": {
+        "name": "黑马奎纳",
+        "description": "黑马奎纳大理石是一种黑色石材，以清晰的白色纹理和强烈的对比著称。"
+      },
+      "black-forest": {
+        "name": "黑森林",
+        "description": "黑森林大理石是一种戏剧性石材，深色底面上有强烈的线性流动。"
+      },
+      "titanium-black": {
+        "name": "钛黑",
+        "description": "钛黑大理石是一种大胆的石材，深色背景上有流动的灰色和白色运动。"
+      },
+      "white-carrara": {
+        "name": "白卡拉拉",
+        "description": "卡拉拉大理石是一种声望卓著的白色至蓝灰色大理石，产自意大利卡拉拉地区。"
+      },
+      "crema-marfil": {
+        "name": "奶油象牙",
+        "description": "奶油象牙大理石是一种温暖的米色石材，以其均匀的外观和微妙的纹理著称。"
+      },
+      "botticino": {
+        "name": "博蒂奇诺",
+        "description": "博蒂奇诺大理石是一种浅米色意大利石材，以其细腻的质地和低调的优雅著称。"
+      },
+      "daino-reale": {
+        "name": "皇家鹿",
+        "description": "皇家鹿大理石是一种温暖的米色石材，以线性纹理和结构化的流动著称。"
+      },
+      "perlato-sicilia": {
+        "name": "西西里珍珠",
+        "description": "西西里珍珠大理石是一种奶油色石材，具有柔和的质地和经典的魅力。"
+      },
+      "emperador-light": {
+        "name": "浅皇帝",
+        "description": "浅皇帝大理石是一种棕色调石材，具有柔和的纹理和温暖的特性。"
+      },
+      "emperador-dark": {
+        "name": "深皇帝",
+        "description": "深皇帝大理石是一种深棕色石材，以其戏剧性的纹理和丰富的色调著称。"
+      },
+      "tobacco-brown": {
+        "name": "烟草棕",
+        "description": "烟草棕大理石是一种深棕色石材，具有线性流动和丰富的色调深度。"
+      },
+      "rosa-portogallo": {
+        "name": "葡萄牙玫瑰",
+        "description": "葡萄牙玫瑰大理石是一种温暖的粉色石材，以其柔和的流动和优雅的特性著称。"
+      },
+      "alaska-white": {
+        "name": "阿拉斯加白",
+        "description": "阿拉斯加白花岗岩是一种明亮的天然石材，以白色底面和大胆的黑色和灰色矿物点缀著称。"
+      },
+      "jade": {
+        "name": "翡翠",
+        "description": "翡翠是一种珍贵的半宝石，以其丰富的绿色和光滑的质地著称。"
+      },
+      "malachite": {
+        "name": "孔雀石",
+        "description": "孔雀石是一种鲜艳的绿色半宝石，以大胆的条纹图案著称。"
+      },
+      "onyx-green": {
+        "name": "绿色玛瑙",
+        "description": "绿色玛瑙是一种半透明石材，具有层叠的绿色调和流动的运动。"
+      },
+      "lapis-lazuli": {
+        "name": "青金石",
+        "description": "青金石是一种深蓝色半宝石，饰有天然金色矿物内含物。"
+      },
+      "labradorite": {
+        "name": "拉长石",
+        "description": "拉长石是一种半宝石，以其灰色底面和蓝色虹彩闪光著称。"
+      },
+      "amethyst": {
+        "name": "紫水晶",
+        "description": "紫水晶是一种半宝石，以其紫色晶体结构和色彩深度著称。"
+      },
+      "jasper": {
+        "name": "碧玉",
+        "description": "碧玉是一种半宝石，具有土红色和棕色调以及大胆的自然图案。"
+      },
+      "bianco-antico": {
+        "name": "古董白",
+        "description": "古董白花岗岩是一种浅色石材，融合了白色、灰色和米色矿物色调。"
+      },
+      "baltic-brown": {
+        "name": "波罗的海棕",
+        "description": "波罗的海棕花岗岩是一种深棕色石材，具有大胆的矿物图案和强烈的质感。"
+      },
+      "cafe-bahia": {
+        "name": "巴伊亚咖啡",
+        "description": "巴伊亚咖啡花岗岩是一种深棕色天然石材，具有温暖的底色和微妙的矿物流动。"
+      },
+      "absolute-black": {
+        "name": "绝对黑",
+        "description": "绝对黑花岗岩是一种致密的天然石材，具有均匀的黑色外观。"
+      },
+      "black-zimbabwe": {
+        "name": "津巴布韦黑",
+        "description": "津巴布韦黑花岗岩是一种优质黑色石材，以其深沉的颜色和光滑的质地著称。"
+      },
+      "black-galaxy": {
+        "name": "黑银河",
+        "description": "黑银河花岗岩是一种深色石材，饰有细小的反光矿物斑点。"
+      },
+      "blue-pearl": {
+        "name": "蓝珍珠",
+        "description": "蓝珍珠花岗岩是一种独特的石材，具有虹彩蓝色和银色矿物晶体。"
+      },
+      "crystal-blue": {
+        "name": "水晶蓝",
+        "description": "水晶蓝花岗岩是一种冷色调石材，具有蓝色矿物质地和一致的纹理。"
+      },
+      "limestone-cloudy": {
+        "name": "云石灰岩",
+        "description": "云石灰岩是一种浅色天然石灰岩，以浅色底面上柔和的云状流动为特征。"
+      },
+      "jura-beige": {
+        "name": "侏罗米色",
+        "description": "侏罗米色石灰岩是一种经典的德国石材，以其细腻的化石质地和温暖的米色调著称。"
+      },
+      "moca-creme": {
+        "name": "摩卡奶油",
+        "description": "摩卡奶油石灰岩是一种浅米色石材，以微妙的线性化石痕迹为特征。"
+      },
+      "ivory-limestone": {
+        "name": "象牙石灰岩",
+        "description": "象牙石灰岩是一种柔和色调的天然石材，具有光滑平静的外观。"
+      },
+      "luna-limestone": {
+        "name": "月亮石灰岩",
+        "description": "月亮石灰岩是一种浅奶油色至米色石材，具有光滑一致的表面。"
+      },
+      "capri-limestone": {
+        "name": "卡普里石灰岩",
+        "description": "卡普里石灰岩是一种受地中海建筑启发的温暖色调天然石材。"
+      },
+      "jura-grey": {
+        "name": "侏罗灰",
+        "description": "侏罗灰石灰岩是一种灰色天然石材，具有细腻的化石质地和结构化的流动。"
+      },
+      "colonial-white": {
+        "name": "殖民白",
+        "description": "殖民白花岗岩是一种浅色石材，具有微妙的灰色和米色矿物图案。"
+      },
+      "dallas-white": {
+        "name": "达拉斯白",
+        "description": "达拉斯白花岗岩是一种明亮的石材，白色底面上有细腻的灰色图案。"
+      },
+      "himalayan-blue": {
+        "name": "喜马拉雅蓝",
+        "description": "喜马拉雅蓝花岗岩是一种冷色调石材，具有蓝灰色矿物质地。"
+      },
+      "giallo-ornamental": {
+        "name": "装饰黄",
+        "description": "装饰黄花岗岩是一种温暖的米色石材，具有细小的矿物斑点。"
+      },
+      "crystal-yellow": {
+        "name": "水晶黄",
+        "description": "水晶黄花岗岩是一种黄金色石材，具有明亮的矿物斑点。"
+      },
+      "coffee-brown": {
+        "name": "咖啡棕",
+        "description": "咖啡棕花岗岩是一种深棕色石材，具有均匀的质地和丰富的色调。"
+      },
+      "marron-cuba": {
+        "name": "古巴栗",
+        "description": "古巴栗花岗岩是一种中至深棕色石材，具有一致耐用的纹理。"
+      },
+      "black-pearl": {
+        "name": "黑珍珠",
+        "description": "黑珍珠花岗岩是一种深色石材，具有微妙的光泽和层叠的色调深度。"
+      },
+      "cosmic-black": {
+        "name": "宇宙黑",
+        "description": "宇宙黑花岗岩是一种戏剧性石材，深色底面上有广阔的流动。"
+      },
+      "imperial-red": {
+        "name": "帝国红",
+        "description": "帝国红花岗岩是一种大胆的红色石材，以其强烈的颜色和耐久性著称。"
+      },
+      "obsidian": {
+        "name": "黑曜石",
+        "description": "黑曜石是一种天然形成的火山玻璃，具有深黑色和光滑的表面。"
+      },
+      "onyx-blue": {
+        "name": "蓝色玛瑙",
+        "description": "蓝色玛瑙是一种罕见的半透明石材，以冷蓝色调和层叠深度著称。"
+      },
+      "onyx-honey": {
+        "name": "蜂蜜玛瑙",
+        "description": "蜂蜜玛瑙是一种温暖的半透明石材，具有金琥珀色调和流动的层次。"
+      },
+      "onyx-ice": {
+        "name": "冰玛瑙",
+        "description": "冰玛瑙是一种浅色半透明石材，具有冷白色调和微妙的蓝色点缀。"
+      },
+      "onyx-pink": {
+        "name": "粉色玛瑙",
+        "description": "粉色玛瑙是一种柔和的粉色半透明石材，具有柔和的层次和温暖感。"
+      },
+      "onyx-rainbow-van-gogh": {
+        "name": "彩虹玛瑙",
+        "description": "彩虹玛瑙是一种多色调半透明石材，以层叠的色彩变化著称。"
+      },
+      "onyx-white": {
+        "name": "白色玛瑙",
+        "description": "白色玛瑙是一种半透明半宝石，以柔和的白色层次和流动的运动为特征。"
+      },
+      "quartz-crystal": {
+        "name": "水晶石英",
+        "description": "水晶石英是一种半宝石材料，以其透明至乳白色外观和光反射特性著称。"
+      },
+      "tiger-eye": {
+        "name": "虎眼石",
+        "description": "虎眼石是一种半宝石，以温暖的棕色和金色调以及天然闪烁效果为特征。"
+      },
+      "white-jade": {
+        "name": "白玉",
+        "description": "白玉是一种精致的半宝石，以其柔和的白色调和光滑优雅的表面著称。"
+      },
+      "arabescat": {
+        "name": "阿拉贝斯卡托",
+        "description": "阿拉贝斯卡托大理石是一种意大利石材，以其白色底面和复杂的灰色纹理著称。"
+      },
+      "volga-blue": {
+        "name": "伏尔加蓝",
+        "description": "伏尔加蓝花岗岩是一种深色石材，以罕见的蓝色反光晶体著称。"
+      },
+      "moleanos": {
+        "name": "莫莱阿诺斯",
+        "description": "莫莱阿诺斯石灰岩是一种葡萄牙天然石材，以其均匀的米色和精致的纹理著称。"
+      },
+      "moleanos-azul": {
+        "name": "莫莱阿诺斯蓝",
+        "description": "莫莱阿诺斯蓝石灰岩是一种冷色调石材，具有微蓝色底色的灰色。"
+      },
+      "royal-beige-limestone": {
+        "name": "皇家米色石灰岩",
+        "description": "皇家米色石灰岩是一种温暖的米色石材，因其经典的建筑魅力而备受珍视。"
+      },
+      "silver-matrix": {
+        "name": "银色矩阵",
+        "description": "银色矩阵花岗岩是一种灰色石材，以银色矿物质地和层叠深度为特征。"
+      },
+      "sinai-gold-limestone": {
+        "name": "西奈金石灰岩",
+        "description": "西奈金石灰岩是一种金米色天然石材，因其温暖的色调和耐久性而备受珍视。"
+      },
+      "sinai-pearl-limestone": {
+        "name": "西奈珍珠石灰岩",
+        "description": "西奈珍珠石灰岩是一种浅米色石材，具有柔和均匀的外观。"
+      },
+      "sunny-creama": {
+        "name": "阳光奶油",
+        "description": "阳光奶油石灰岩是一种温暖的奶油色石材，以其微妙的质地和一致的外观著称。"
+      },
+      "tan-brown": {
+        "name": "棕褐色",
+        "description": "棕褐色花岗岩是一种深色石材，具有棕色和黑色调以及微妙的矿物高光。"
+      },
+      "0nyx-green": {
+        "name": "绿色玛瑙",
+        "description": "绿色玛瑙是一种半透明石材，具有层叠的绿色调和流动的运动。"
+      },
+      "new-caledonia": {
+        "name": "新喀里多尼亚",
+        "description": "新喀里多尼亚花岗岩是一种稳定的灰色石材，具有均匀的纹理和强大的耐久性。"
+      },
+      "moon-white": {
+        "name": "月亮白",
+        "description": "月亮白花岗岩是一种浅色石材，白色背景上有微妙的灰色流动。"
+      },
+      "new-imperial-red": {
+        "name": "新帝国红",
+        "description": "新帝国红花岗岩是一种深红色石材，具有精致均匀的外观。"
+      },
+      "paradiso": {
+        "name": "天堂",
+        "description": "天堂花岗岩是一种天然石材，以流动的运动和混合的大地色调著称。"
+      },
+      "pink-porrino": {
+        "name": "波里诺粉",
+        "description": "波里诺粉花岗岩是一种浅粉色石材，具有细腻的矿物质地和柔和的色调。"
+      },
+      "river-white": {
+        "name": "河流白",
+        "description": "河流白花岗岩是一种柔和的白色石材，具有轻柔的灰色线条和偶尔的矿物点缀。"
+      },
+      "rosa-beta": {
+        "name": "贝塔玫瑰",
+        "description": "贝塔玫瑰花岗岩是一种粉色石材，具有细腻的纹理和柔和的视觉温暖。"
+      },
+      "santa-cecilia": {
+        "name": "圣塞西莉亚",
+        "description": "圣塞西莉亚花岗岩是一种温暖的米色石材，以其传统的矿物图案著称。"
+      },
+      "silver-grey": {
+        "name": "银灰",
+        "description": "银灰花岗岩是一种中性灰色石材，具有均匀的矿物成分和微妙的深度。"
+      },
+      "steel-grey": {
+        "name": "钢灰",
+        "description": "钢灰花岗岩是一种中灰色石材，具有细腻一致的矿物纹理。"
+      },
+      "titanium": {
+        "name": "钛花岗岩",
+        "description": "钛花岗岩是一种大胆的黑色石材，饰有金色矿物流动。"
+      },
+      "tuffa-pink": {
+        "name": "凝灰岩粉",
+        "description": "凝灰岩粉花岗岩是一种粉色调石材，具有一致的纹理和柔和的流动。"
+      },
+      "via-lactea": {
+        "name": "银河",
+        "description": "银河花岗岩是一种黑色石材，以强烈的白色纹理著称。"
+      },
+      "viscon-white": {
+        "name": "威斯康白",
+        "description": "威斯康白花岗岩是一种石材，以白色底面上流动的灰色运动著称。"
+      },
+      "viscount-white": {
+        "name": "子爵白",
+        "description": "子爵白花岗岩是一种白色石材，以线性灰色纹理和结构化的流动著称。"
+      },
+      "amazonite": {
+        "name": "天河石",
+        "description": "天河石是一种半宝石，以其蓝绿色调和晶体结构著称。"
+      },
+      "azul-bahia": {
+        "name": "巴伊亚蓝",
+        "description": "巴伊亚蓝花岗岩是一种罕见的天然石材，以其强烈的皇家蓝色和粗糙的晶体质地著称。"
+      },
+      "azul-macaubas": {
+        "name": "马考巴斯蓝",
+        "description": "马考巴斯蓝石英岩是一种精致的石材，白色背景上有强烈的线性蓝色纹理。"
+      },
+      "patagonia": {
+        "name": "巴塔哥尼亚",
+        "description": "巴塔哥尼亚石英岩是一种戏剧性的天然石材，由白色、米色、灰色和深色调的大型晶体碎片组成。"
+      },
+      "rosso-verona": {
+        "name": "维罗纳红",
+        "description": "维罗纳红大理石是一种温暖的赤陶红石材，以其细腻的纹理和均匀的外观著称。"
+      },
+      "rosso-orbico": {
+        "name": "奥比科红",
+        "description": "奥比科红大理石是一种深红色天然石材，以温暖的酒红色调和柔和的白色纹理为特征。"
+      },
+      "thai-grey": {
+        "name": "泰国灰",
+        "description": "泰国灰花岗岩是一种本地开采的泰国天然石材，以其耐久性和一致的矿物结构著称。"
+      },
+      "thai-pink": {
+        "name": "泰国粉",
+        "description": "泰国粉花岗岩是一种天然石材，以柔和的粉色调和细腻一致的矿物纹理为特征。"
+      }
+    }
+  }
+}

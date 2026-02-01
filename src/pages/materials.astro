@@ -8,17 +8,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import MaterialsPageHero from '../components/sections/MaterialsPageHero.astro';
 import MaterialsTabs from '../components/ui/MaterialsTabs.astro';
 import MaterialsFilter from '../components/ui/MaterialsFilter.astro';
 import MaterialsGrid from '../components/sections/MaterialsGrid.astro';
 import { useI18n } from '../i18n/utils';
 import { getAllMaterials, type SanityMaterial } from '../lib/queries/materials';
+import { getSiteSettings } from '../lib/queries/siteSettings';
 import { getLocalizedValue, type Language } from '../lib/sanity';
+import { pageHeroImage } from '../lib/sanityImage';
 
 const { lang, t } = useI18n(Astro.url);
 
-// Fetch materials from Sanity
+// Fetch materials and site settings from Sanity
 const sanityMaterials = await getAllMaterials();
+const siteSettings = await getSiteSettings();
+const heroImageUrl = siteSettings?.materialsPageHeroImage
+  ? pageHeroImage(siteSettings.materialsPageHeroImage)
+  : undefined;
 
 // Group materials by category
 const materialsByCategory = {
@@ -27,11 +34,29 @@ const materialsByCategory = {
   classic: sanityMaterials.filter(m => m.category === 'classic'),
 };
 
-// Prepare categories data for tabs
+// Prepare categories data for tabs (CMS values with translation fallback)
 const categories = [
-  { id: 'premium', tier: 'A++', label: t.materials.categoryLabels?.premium || 'Premium' },
-  { id: 'luxury', tier: 'A+', label: t.materials.categoryLabels?.luxury || 'Luxury' },
-  { id: 'classic', tier: 'A', label: t.materials.categoryLabels?.classic || 'Classic' },
+  {
+    id: 'premium',
+    tier: 'A++',
+    label: getLocalizedValue(siteSettings?.materialsCategoryPremium, lang as Language)
+           || t.materials.categoryLabels?.premium
+           || 'Premium'
+  },
+  {
+    id: 'luxury',
+    tier: 'A+',
+    label: getLocalizedValue(siteSettings?.materialsCategoryLuxury, lang as Language)
+           || t.materials.categoryLabels?.luxury
+           || 'Luxury'
+  },
+  {
+    id: 'classic',
+    tier: 'A',
+    label: getLocalizedValue(siteSettings?.materialsCategoryClassic, lang as Language)
+           || t.materials.categoryLabels?.classic
+           || 'Classic'
+  },
 ];
 
 // Transform Sanity materials to format expected by MaterialsGrid
@@ -54,7 +79,10 @@ function transformMaterials(materials: SanityMaterial[], category: string) {
 >
   <Header pageType="project" />
 
-  <main class="pt-28 pb-16 bg-white min-h-screen">
+  <main>
+    <MaterialsPageHero backgroundImage={heroImageUrl} />
+
+    <div class="pb-16 bg-white min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Top Navigation Bar -->
       <div class="flex justify-center items-center mb-10 relative">
@@ -97,6 +125,7 @@ function transformMaterials(materials: SanityMaterial[], category: string) {
           />
         </div>
       ))}
+    </div>
     </div>
   </main>
 

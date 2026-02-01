@@ -1,11 +1,15 @@
 import en from './translations/en.json';
 import th from './translations/th.json';
 import ar from './translations/ar.json';
+import hi from './translations/hi.json';
+import zh from './translations/zh.json';
 
 export const languages = {
   en: 'English',
   th: 'ไทย',
   ar: 'العربية',
+  hi: 'हिन्दी',
+  zh: '简体中文',
 } as const;
 
 export const defaultLang = 'en' as const;
@@ -18,6 +22,8 @@ const translations: Record<Language, Translations> = {
   en,
   th,
   ar,
+  hi,
+  zh,
 };
 
 /**
@@ -50,7 +56,7 @@ export function getLangFromUrl(url: URL): Language {
  */
 export function getLocalizedPath(lang: Language, currentPath: string = '/'): string {
   // Remove any existing language prefix from the path
-  const pathWithoutLang = currentPath.replace(/^\/(en|th|ar)/, '') || '/';
+  const pathWithoutLang = currentPath.replace(/^\/(en|th|ar|hi|zh)/, '') || '/';
 
   // For default language, no prefix needed
   if (lang === defaultLang) {

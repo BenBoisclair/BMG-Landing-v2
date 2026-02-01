@@ -23,5 +23,17 @@ export const localizedText = defineType({
       type: 'text',
       rows: 4,
     },
+    {
+      name: 'hi',
+      title: 'हिन्दी (Hindi)',
+      type: 'text',
+      rows: 4,
+    },
+    {
+      name: 'zh',
+      title: '简体中文 (Chinese)',
+      type: 'text',
+      rows: 4,
+    },
   ],
 });

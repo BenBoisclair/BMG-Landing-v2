@@ -5,8 +5,14 @@ import Footer from '../components/layout/Footer.astro';
 import ProcessPageHero from '../components/sections/ProcessPageHero.astro';
 import ProcessPageSteps from '../components/sections/ProcessPageSteps.astro';
 import { useI18n } from '../i18n/utils';
+import { getSiteSettings } from '../lib/queries/siteSettings';
+import { pageHeroImage } from '../lib/sanityImage';
 
 const { lang, t } = useI18n(Astro.url);
+const siteSettings = await getSiteSettings();
+const heroImageUrl = siteSettings?.processPageHeroImage
+  ? pageHeroImage(siteSettings.processPageHeroImage)
+  : undefined;
 ---
 
 <BaseLayout
@@ -17,7 +23,7 @@ const { lang, t } = useI18n(Astro.url);
   <Header pageType="process" />
 
   <main>
-    <ProcessPageHero />
+    <ProcessPageHero backgroundImage={heroImageUrl} />
     <ProcessPageSteps />
   </main>
 

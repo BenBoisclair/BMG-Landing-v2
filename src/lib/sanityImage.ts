@@ -27,6 +27,9 @@ export const testimonialAvatar = (src: SanityImageSource) =>
 export const ogImage = (src: SanityImageSource) =>
   urlFor(src).width(1200).height(630).format('jpg').url();
 
+export const pageHeroImage = (src: SanityImageSource) =>
+  urlFor(src).width(1920).height(400).format('webp').url();
+
 // Generic responsive image helper
 export function getResponsiveImageUrl(
   src: SanityImageSource,

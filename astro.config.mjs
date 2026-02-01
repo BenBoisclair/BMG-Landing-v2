@@ -32,6 +32,8 @@ export default defineConfig({
           en: 'en',
           th: 'th',
           ar: 'ar',
+          hi: 'hi',
+          zh: 'zh',
         },
       },
       // Filter out any API routes and studio
@@ -55,6 +57,10 @@ export default defineConfig({
   adapter: vercel(),
 
   vite: {
+    // Pre-bundle Swiper modules to avoid 504 errors during dev
+    optimizeDeps: {
+      include: ['swiper', 'swiper/modules'],
+    },
     // Inject Sanity env vars at build time
     define: {
       'import.meta.env.PUBLIC_SANITY_PROJECT_ID': JSON.stringify(PUBLIC_SANITY_PROJECT_ID),
@@ -95,7 +101,7 @@ export default defineConfig({
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'th', 'ar'],
+    locales: ['en', 'th', 'ar', 'hi', 'zh'],
     routing: {
       prefixDefaultLocale: false,
     },

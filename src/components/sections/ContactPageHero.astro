@@ -1,14 +1,20 @@
 ---
 import { useI18n } from '../../i18n/utils';
 
+interface Props {
+  backgroundImage?: string;
+}
+
+const { backgroundImage } = Astro.props;
 const { t } = useI18n(Astro.url);
+const heroImage = backgroundImage || '/images/Product/hero-background.png';
 ---
 
 <section id="contact-hero" class="relative h-[200px] pt-20 lg:pt-24">
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
     <img
-      src="/images/Product/hero-background.png"
+      src={heroImage}
       alt={t.contactPage.heroAlt}
       class="w-full h-full object-cover"
       fetchpriority="high"

@@ -1,24 +1,68 @@
 ---
-import { useI18n } from '../../i18n/utils';
+import { getSiteSettings } from '../../lib/queries/siteSettings';
+import { urlFor } from '../../lib/sanityImage';
+import { parseVideoUrl } from '../../lib/videoUtils';
 
-const { t } = useI18n(Astro.url);
+// Fetch site settings with error handling
+let siteSettings = null;
+try {
+  siteSettings = await getSiteSettings();
+} catch (error) {
+  console.error('Failed to fetch site settings:', error);
+}
+
+// Compute video URL (priority: uploaded > external)
+const rawVideoUrl = siteSettings?.heroVideoUrl || siteSettings?.heroVideoExternalUrl;
+const videoInfo = parseVideoUrl(rawVideoUrl);
+
+// Poster fallback
+const posterUrl = siteSettings?.heroPoster
+  ? urlFor(siteSettings.heroPoster).width(1920).height(1080).format('webp').url()
+  : '/images/Landing/HeroSection/background_1.png';
 ---
 
 <section id="home" class="relative h-screen min-h-[600px] max-h-[800px] pt-20 lg:pt-24">
-  <!-- Background Video -->
-  <div class="absolute inset-0 z-0">
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      class="w-full h-full object-cover"
-      poster="/images/Landing/HeroSection/background_1.png"
-    >
-      <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-    </video>
-    <!-- Purple overlay -->
+  <!-- Background Video/Image -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    {videoInfo.type === 'youtube' || videoInfo.type === 'vimeo' ? (
+      <div class="relative w-full h-full">
+        {/* Poster fallback (shows if iframe fails to load) */}
+        <img
+          src={posterUrl}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        />
+        {/* Iframe overlays the poster */}
+        <iframe
+          src={videoInfo.embedUrl}
+          class="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
+          allow="autoplay; fullscreen"
+          title="Hero background video"
+          aria-hidden="true"
+        />
+      </div>
+    ) : videoInfo.type === 'direct' ? (
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover"
+        poster={posterUrl}
+        aria-hidden="true"
+      >
+        <source src={videoInfo.directUrl} />
+      </video>
+    ) : (
+      <img
+        src={posterUrl}
+        alt=""
+        class="w-full h-full object-cover"
+        aria-hidden="true"
+      />
+    )}
+    <!-- Overlay -->
     <div class="absolute inset-0 bg-map-blue/20"></div>
   </div>
-
 </section>

@@ -38,7 +38,7 @@ function getImageUrl(material: Material): string {
     return urlFor(material.image).width(600).height(450).format('webp').url();
   }
   // Fallback to static image path
-  return typeof material.image === 'string' ? material.image : '/images/placeholder.jpg';
+  return typeof material.image === 'string' ? material.image : '/images/Product/bmg-logo.png';
 }
 ---
 

@@ -5,8 +5,14 @@ import Footer from '../../../components/layout/Footer.astro';
 import ProjectHero from '../../../components/sections/ProjectHero.astro';
 import ProjectGrid from '../../../components/sections/ProjectGrid.astro';
 import { useI18n } from '../../../i18n/utils';
+import { getSiteSettings } from '../../../lib/queries/siteSettings';
+import { pageHeroImage } from '../../../lib/sanityImage';
 
 const { lang, t } = useI18n(Astro.url);
+const siteSettings = await getSiteSettings();
+const heroImageUrl = siteSettings?.projectsPageHeroImage
+  ? pageHeroImage(siteSettings.projectsPageHeroImage)
+  : undefined;
 ---
 
 <BaseLayout
@@ -17,7 +23,7 @@ const { lang, t } = useI18n(Astro.url);
   <Header pageType="project" />
 
   <main>
-    <ProjectHero />
+    <ProjectHero backgroundImage={heroImageUrl} />
     <ProjectGrid />
   </main>
 

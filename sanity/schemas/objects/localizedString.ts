@@ -20,8 +20,18 @@ export const localizedString = defineType({
       title: 'العربية (Arabic)',
       type: 'string',
     },
+    {
+      name: 'hi',
+      title: 'हिन्दी (Hindi)',
+      type: 'string',
+    },
+    {
+      name: 'zh',
+      title: '简体中文 (Chinese)',
+      type: 'string',
+    },
   ],
   options: {
-    columns: 3,
+    columns: 5,
   },
 });

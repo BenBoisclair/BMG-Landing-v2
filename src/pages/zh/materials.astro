@@ -1,8 +1,8 @@
 ---
 /**
- * Materials Page (Thai)
+ * Materials Page (Chinese)
  *
- * Thai language version of the materials showcase page.
+ * Simplified Chinese language version of the materials showcase page.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
@@ -62,11 +62,11 @@ const categories = [
 function transformMaterials(materials: SanityMaterial[], category: string) {
   return materials.map(m => ({
     id: m.internalId?.current || m._id,
-    image: m.mainImage,
+    image: m.mainImage, // Will be processed by MaterialsGrid using Sanity image URL
     folder: m.internalId?.current || m._id,
     category,
     name: getLocalizedValue(m.name, lang as Language) || m.internalId?.current || 'Material',
-    sanityImage: m.mainImage,
+    sanityImage: m.mainImage, // Keep original Sanity image reference
   }));
 }
 ---

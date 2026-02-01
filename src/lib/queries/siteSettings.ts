@@ -30,10 +30,18 @@ export interface SanitySiteSettings {
   heroTitle?: { en?: string; th?: string; ar?: string };
   heroSubtitle?: { en?: string; th?: string; ar?: string };
   heroVideoUrl?: string;
+  heroVideoExternalUrl?: string;
   heroPoster?: any;
   missionTitle?: { en?: string; th?: string; ar?: string };
   missionDescription?: { en?: string; th?: string; ar?: string };
   statistics?: SanityStatistic[];
+  materialsCategoryPremium?: { en?: string; th?: string; ar?: string };
+  materialsCategoryLuxury?: { en?: string; th?: string; ar?: string };
+  materialsCategoryClassic?: { en?: string; th?: string; ar?: string };
+  materialsPageHeroImage?: any;
+  projectsPageHeroImage?: any;
+  processPageHeroImage?: any;
+  contactPageHeroImage?: any;
   addresses?: string[];
   phones?: string[];
   email?: string;
@@ -61,10 +69,18 @@ export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
       heroTitle,
       heroSubtitle,
       "heroVideoUrl": heroVideo.asset->url,
+      heroVideoExternalUrl,
       heroPoster,
       missionTitle,
       missionDescription,
       statistics,
+      materialsCategoryPremium,
+      materialsCategoryLuxury,
+      materialsCategoryClassic,
+      materialsPageHeroImage,
+      projectsPageHeroImage,
+      processPageHeroImage,
+      contactPageHeroImage,
       addresses,
       phones,
       email,

@@ -19,6 +19,8 @@ const flagMap: Record<Language, string> = {
   en: 'gb',
   th: 'th',
   ar: 'sa',
+  hi: 'in',
+  zh: 'cn',
 };
 
 // Navigation links (excluding Products dropdown items)
@@ -41,7 +43,7 @@ const currentHash = Astro.url.hash;
 const isActive = (href: string) => {
   // For anchor links, check if we're on the homepage and the hash matches
   if (href.startsWith('#')) {
-    const pathWithoutLang = currentPath.replace(/^\/(en|th|ar)/, '') || '/';
+    const pathWithoutLang = currentPath.replace(/^\/(en|th|ar|hi|zh)/, '') || '/';
     // Active if on homepage and hash matches, or on homepage and it's the #home link
     if (pathWithoutLang === '/') {
       return currentHash === href || (href === '#home' && !currentHash);
@@ -49,7 +51,7 @@ const isActive = (href: string) => {
     return false;
   }
   // For regular page links
-  const pathWithoutLang = currentPath.replace(/^\/(en|th|ar)/, '') || '/';
+  const pathWithoutLang = currentPath.replace(/^\/(en|th|ar|hi|zh)/, '') || '/';
   if (href === '/') return pathWithoutLang === '/';
   return pathWithoutLang.startsWith(href);
 };

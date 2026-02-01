@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Showcase from '../../components/sections/Showcase.astro';
+import Process from '../../components/sections/Process.astro';
+import PriceEstimation from '../../components/sections/PriceEstimation.astro';
+import TrustedCultures from '../../components/sections/TrustedCultures.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import Contact from '../../components/sections/Contact.astro';
+import { useI18n } from '../../i18n/utils';
+import { getSiteSettings } from '../../lib/queries/siteSettings';
+import { urlFor } from '../../lib/sanityImage';
+
+const { lang, t } = useI18n(Astro.url);
+
+// Fetch site settings for hero video
+const siteSettings = await getSiteSettings();
+
+// Priority: uploaded video URL > external URL
+const heroVideoUrl = siteSettings?.heroVideoUrl || siteSettings?.heroVideoExternalUrl;
+const heroPosterUrl = siteSettings?.heroPoster ? urlFor(siteSettings.heroPoster).width(1920).height(1080).format('webp').url() : undefined;
+---
+
+<BaseLayout
+  title={t.meta.title}
+  description={t.meta.description}
+  lang={lang}
+>
+  <Header />
+
+  <main>
+    <Hero videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
+    <Showcase />
+    <Process />
+    <PriceEstimation />
+    <TrustedCultures />
+    <Testimonials />
+    <Contact />
+  </main>
+
+  <Footer />
+</BaseLayout>

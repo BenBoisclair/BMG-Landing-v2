@@ -10,12 +10,12 @@ const { t } = useI18n(Astro.url);
 const heroImage = backgroundImage || '/images/Product/hero-background.png';
 ---
 
-<section id="process-hero" class="relative h-[200px] pt-20 lg:pt-24">
+<section id="materials-hero" class="relative h-[200px] pt-20 lg:pt-24">
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
     <img
       src={heroImage}
-      alt={t.processPage.heroAlt}
+      alt={t.materials.pageTitle}
       class="w-full h-full object-cover"
       fetchpriority="high"
       loading="eager"
@@ -27,6 +27,6 @@ const heroImage = backgroundImage || '/images/Product/hero-background.png';
 <!-- Page Title - Positioned below the hero -->
 <div class="bg-white py-8 lg:py-12">
   <h1 class="text-4xl lg:text-5xl font-semibold text-brand-primary text-center tracking-tight">
-    {t.processPage.title}
+    {t.materials.pageTitle}
   </h1>
 </div>

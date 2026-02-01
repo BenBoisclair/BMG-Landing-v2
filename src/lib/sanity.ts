@@ -14,11 +14,11 @@ export const sanityClient = createClient({
 });
 
 // Type for language selection
-export type Language = 'en' | 'th' | 'ar';
+export type Language = 'en' | 'th' | 'ar' | 'hi' | 'zh';
 
 // Helper to get localized field value
 export function getLocalizedValue<T>(
-  obj: { en?: T; th?: T; ar?: T } | undefined,
+  obj: { en?: T; th?: T; ar?: T; hi?: T; zh?: T } | undefined,
   lang: Language,
   fallback?: T
 ): T | undefined {

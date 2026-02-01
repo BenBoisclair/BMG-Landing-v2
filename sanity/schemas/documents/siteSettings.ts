@@ -9,6 +9,8 @@ export const siteSettings = defineType({
     { name: 'hero', title: 'Hero Section' },
     { name: 'mission', title: 'Mission Section' },
     { name: 'statistics', title: 'Statistics' },
+    { name: 'materials', title: 'Materials Page' },
+    { name: 'pageHeroes', title: 'Page Hero Images' },
     { name: 'contact', title: 'Contact Info' },
     { name: 'navigation', title: 'Navigation' },
     { name: 'footer', title: 'Footer' },
@@ -58,6 +60,16 @@ export const siteSettings = defineType({
       },
     }),
     defineField({
+      name: 'heroVideoExternalUrl',
+      title: 'Hero Video URL',
+      type: 'url',
+      group: 'hero',
+      description: 'External video URL (YouTube, Vimeo, or direct .mp4 link). Used if no video file is uploaded.',
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https'],
+      }),
+    }),
+    defineField({
       name: 'heroPoster',
       title: 'Hero Video Poster',
       type: 'image',
@@ -80,6 +92,80 @@ export const siteSettings = defineType({
       title: 'Mission Description',
       type: 'localizedText',
       group: 'mission',
+    }),
+
+    // Materials Page
+    defineField({
+      name: 'materialsCategoryPremium',
+      title: 'Premium Category Label',
+      type: 'localizedString',
+      group: 'materials',
+      description: 'Label for the A++ Premium Italian Marble category',
+      initialValue: {
+        en: 'Premium Italian Marble',
+        th: 'หินเครื่องประดับ',
+        ar: 'حجر المجوهرات',
+        zh: '优质意大利大理石',
+        hi: 'प्रीमियम इतालवी संगमरमर',
+      },
+    }),
+    defineField({
+      name: 'materialsCategoryLuxury',
+      title: 'Luxury Category Label',
+      type: 'localizedString',
+      group: 'materials',
+      description: 'Label for the A+ Luxury Stone category',
+      initialValue: {
+        en: 'Luxury Stone',
+        th: 'หินหรูหรา',
+        ar: 'حجر فاخر',
+        zh: '奢华石材',
+        hi: 'लक्जरी स्टोन',
+      },
+    }),
+    defineField({
+      name: 'materialsCategoryClassic',
+      title: 'Classic Category Label',
+      type: 'localizedString',
+      group: 'materials',
+      description: 'Label for the A Natural Stone category',
+      initialValue: {
+        en: 'Natural Stone',
+        th: 'หินธรรมชาติ',
+        ar: 'حجر طبيعي',
+        zh: '天然石材',
+        hi: 'प्राकृतिक पत्थर',
+      },
+    }),
+
+    // Page Hero Images
+    defineField({
+      name: 'materialsPageHeroImage',
+      title: 'Materials Page Hero',
+      type: 'image',
+      group: 'pageHeroes',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'projectsPageHeroImage',
+      title: 'Projects Page Hero',
+      type: 'image',
+      group: 'pageHeroes',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'processPageHeroImage',
+      title: 'Process Page Hero',
+      type: 'image',
+      group: 'pageHeroes',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'contactPageHeroImage',
+      title: 'Contact Page Hero',
+      type: 'image',
+      group: 'pageHeroes',
+      options: { hotspot: true },
     }),
 
     // Statistics
