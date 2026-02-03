@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { useI18n } from '../i18n/utils';
+
+const { lang, t } = useI18n(Astro.url);
+---
+
+<BaseLayout
+  title={`${t.footer.termsConditions} | ${t.meta.title}`}
+  description="Terms and Conditions for Bangkok Modern Granite"
+  lang={lang}
+>
+  <Header pageType="project" />
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-8">
+        {t.footer.termsConditions}
+      </h1>
+
+      <div class="prose prose-lg max-w-none text-gray-700">
+        <p class="text-sm text-gray-500 mb-8">Last updated: February 2025</p>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
+          <p>
+            By accessing and using this website, you accept and agree to be bound by the terms
+            and provisions of this agreement. If you do not agree to these terms, please do
+            not use this website.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">2. Products and Services</h2>
+          <p>
+            Bangkok Modern Granite Co., Ltd. provides premium granite and stone products,
+            including but not limited to:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Natural granite slabs and tiles</li>
+            <li>Custom stone fabrication</li>
+            <li>Religious and architectural stonework</li>
+            <li>Installation services</li>
+          </ul>
+          <p class="mt-2">
+            Product images on this website are for illustration purposes. Actual colors and
+            patterns may vary due to the natural characteristics of stone materials.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">3. Price and Payment</h2>
+          <p>
+            All prices displayed on this website are estimates and subject to change based on:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Material availability</li>
+            <li>Project specifications</li>
+            <li>Quantity ordered</li>
+            <li>Delivery location</li>
+          </ul>
+          <p class="mt-2">
+            Final pricing will be provided in a formal quotation after consultation.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">4. Intellectual Property</h2>
+          <p>
+            All content on this website, including text, images, logos, and designs, is the
+            property of Bangkok Modern Granite Co., Ltd. and is protected by copyright laws.
+            Unauthorized use or reproduction is prohibited.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">5. Limitation of Liability</h2>
+          <p>
+            Bangkok Modern Granite Co., Ltd. shall not be liable for any direct, indirect,
+            incidental, or consequential damages arising from the use of this website or
+            the inability to use this website.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">6. Website Usage</h2>
+          <p>You agree not to:</p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Use this website for any unlawful purpose</li>
+            <li>Attempt to gain unauthorized access to any systems</li>
+            <li>Interfere with the proper functioning of this website</li>
+            <li>Collect information about other users without consent</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">7. Governing Law</h2>
+          <p>
+            These terms and conditions are governed by and construed in accordance with
+            the laws of the Kingdom of Thailand. Any disputes shall be subject to the
+            exclusive jurisdiction of the Thai courts.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">8. Changes to Terms</h2>
+          <p>
+            We reserve the right to modify these terms at any time. Changes will be
+            effective immediately upon posting to this website. Your continued use of
+            the website constitutes acceptance of the modified terms.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">9. Contact Us</h2>
+          <p>
+            If you have any questions about these Terms and Conditions, please contact us at:
+          </p>
+          <p class="mt-2">
+            <strong>Bangkok Modern Granite Co., Ltd.</strong><br />
+            Email: info@bmg.co.th<br />
+            Phone: +66-2-xxx-xxxx
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

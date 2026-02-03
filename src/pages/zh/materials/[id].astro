@@ -10,14 +10,19 @@ import { getAllMaterials, getMaterialById, type SanityMaterial } from '../../../
 import { getLocalizedValue, type Language } from '../../../lib/sanity';
 import { urlFor } from '../../../lib/sanityImage';
 
-// Generate static paths for all materials
+// Generate static paths for all materials with error handling
 export async function getStaticPaths() {
-  const materials = await getAllMaterials();
+  try {
+    const materials = await getAllMaterials();
 
-  return materials.map((material) => ({
-    params: { id: material.internalId?.current || material._id },
-    props: { materialId: material.internalId?.current || material._id },
-  }));
+    return materials.map((material) => ({
+      params: { id: material.internalId?.current || material._id },
+      props: { materialId: material.internalId?.current || material._id },
+    }));
+  } catch (error) {
+    console.error('Failed to generate static paths for zh/materials:', error);
+    return [];
+  }
 }
 
 const lang = 'zh';
@@ -39,10 +44,10 @@ const materialDescription = getLocalizedValue(material?.description, lang as Lan
   t.materials.items[id as keyof typeof t.materials.items]?.description ||
   '';
 
-// Get image URL - prefer Sanity, fallback to static
+// Get image URL - prefer Sanity, fallback to static with null safety
 const heroImageUrl = material?.mainImage?.asset
   ? urlFor(material.mainImage).width(1920).height(800).format('webp').url()
-  : `/materials/${id}/${id}.jpg`;
+  : '/images/Product/bmg-logo.png'; // Safe fallback
 
 const category = material?.category || 'classic';
 ---

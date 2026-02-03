@@ -33,11 +33,14 @@ const posterUrl = siteSettings?.heroPoster
           class="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         />
-        {/* Iframe overlays the poster */}
+        {/* Iframe overlays the poster with security attributes */}
         <iframe
           src={videoInfo.embedUrl}
           class="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0"
           allow="autoplay; fullscreen"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+          referrerpolicy="no-referrer"
           title="Hero background video"
           aria-hidden="true"
         />

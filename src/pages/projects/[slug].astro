@@ -6,19 +6,24 @@ import ProjectDetailHero from '../../components/sections/ProjectDetailHero.astro
 import ProjectDetailContent from '../../components/sections/ProjectDetailContent.astro';
 import ProjectDetailGallery from '../../components/sections/ProjectDetailGallery.astro';
 import RelatedProjects from '../../components/sections/RelatedProjects.astro';
-import { getTranslations, defaultLang } from '../../i18n/utils';
+import { getTranslations, defaultLang, getLangFromUrl } from '../../i18n/utils';
 import { getAllProjects, getProjectById, type SanityProject } from '../../lib/queries/projects';
 import { getLocalizedValue, type Language } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 
-// Generate static paths for all projects
+// Generate static paths for all projects with error handling
 export async function getStaticPaths() {
-  const projects = await getAllProjects();
+  try {
+    const projects = await getAllProjects();
 
-  return projects.map((project) => ({
-    params: { slug: project.internalId?.current || project._id },
-    props: { projectId: project.internalId?.current || project._id },
-  }));
+    return projects.map((project) => ({
+      params: { slug: project.internalId?.current || project._id },
+      props: { projectId: project.internalId?.current || project._id },
+    }));
+  } catch (error) {
+    console.error('Failed to generate static paths for projects:', error);
+    return [];
+  }
 }
 
 const { slug } = Astro.params;
@@ -27,9 +32,9 @@ const { projectId } = Astro.props;
 // Fetch project from Sanity
 const project = await getProjectById(projectId);
 
-// Fallback to i18n translations if Sanity data is incomplete
-const t = getTranslations(defaultLang);
-const lang = defaultLang as Language;
+// Get language from URL context (for localized routes)
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = getTranslations(lang);
 
 // Get localized content from Sanity or fallback to i18n
 const projectName = getLocalizedValue(project?.name, lang) ||
@@ -63,16 +68,18 @@ const heroImageUrl = project?.heroImage?.asset
     ? urlFor(project.mainImage).width(1920).height(800).format('webp').url()
     : '/images/Product/bmg-logo.png';
 
-// Get gallery images
+// Get gallery images with null safety
 const galleryImages = project?.gallery?.length
-  ? project.gallery.map(img => urlFor(img).width(800).height(600).format('webp').url())
+  ? project.gallery
+      .filter(img => img?.asset) // Filter out invalid images
+      .map(img => urlFor(img).width(800).height(600).format('webp').url())
   : [];
 ---
 
 <BaseLayout
   title={`${projectName} | ${t.meta.title}`}
   description={description.slice(0, 160)}
-  lang={defaultLang}
+  lang={lang}
 >
   <Header pageType="project" />
 

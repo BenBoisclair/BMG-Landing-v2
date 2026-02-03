@@ -10,17 +10,8 @@ import TrustedCultures from '../../components/sections/TrustedCultures.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import Contact from '../../components/sections/Contact.astro';
 import { useI18n } from '../../i18n/utils';
-import { getSiteSettings } from '../../lib/queries/siteSettings';
-import { urlFor } from '../../lib/sanityImage';
 
 const { lang, t } = useI18n(Astro.url);
-
-// Fetch site settings for hero video
-const siteSettings = await getSiteSettings();
-
-// Priority: uploaded video URL > external URL
-const heroVideoUrl = siteSettings?.heroVideoUrl || siteSettings?.heroVideoExternalUrl;
-const heroPosterUrl = siteSettings?.heroPoster ? urlFor(siteSettings.heroPoster).width(1920).height(1080).format('webp').url() : undefined;
 ---
 
 <BaseLayout
@@ -31,7 +22,7 @@ const heroPosterUrl = siteSettings?.heroPoster ? urlFor(siteSettings.heroPoster)
   <Header />
 
   <main>
-    <Hero videoUrl={heroVideoUrl} posterUrl={heroPosterUrl} />
+    <Hero />
     <Showcase />
     <Process />
     <PriceEstimation />

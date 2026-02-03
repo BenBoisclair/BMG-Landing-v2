@@ -1,47 +1,83 @@
 ---
 import { useI18n } from '../../i18n/utils';
 import Container from '../ui/Container.astro';
+import { getAllProcessSteps, type SanityProcessStep } from '../../lib/queries/processSteps';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 
-const { t, isRTL } = useI18n(Astro.url);
+const { t, isRTL, lang } = useI18n(Astro.url);
 
-// Step data with placeholder images
-const steps = [
-  {
-    number: t.process.steps['1'].number,
-    title: t.process.steps['1'].title,
-    titleShort: t.process.steps['1'].titleShort,
-    description: t.process.steps['1'].description,
-    image: '/images/Landing/ProcessImage.jpg',
-  },
-  {
-    number: t.process.steps['2'].number,
-    title: t.process.steps['2'].title,
-    titleShort: t.process.steps['2'].titleShort,
-    description: t.process.steps['2'].description,
-    image: '/images/Product/consultation-meeting.png',
-  },
-  {
-    number: t.process.steps['3'].number,
-    title: t.process.steps['3'].title,
-    titleShort: t.process.steps['3'].titleShort,
-    description: t.process.steps['3'].description,
-    image: '/images/Product/construction-scaffolding.png',
-  },
-  {
-    number: t.process.steps['4'].number,
-    title: t.process.steps['4'].title,
-    titleShort: t.process.steps['4'].titleShort,
-    description: t.process.steps['4'].description,
-    image: '/images/Product/curved-building.png',
-  },
-  {
-    number: t.process.steps['5'].number,
-    title: t.process.steps['5'].title,
-    titleShort: t.process.steps['5'].titleShort,
-    description: t.process.steps['5'].description,
-    image: '/images/Product/building-exterior.png',
-  },
+// Default step images (fallback)
+const defaultStepImages = [
+  '/images/Landing/ProcessImage.jpg',
+  '/images/Product/consultation-meeting.png',
+  '/images/Product/construction-scaffolding.png',
+  '/images/Product/curved-building.png',
+  '/images/Product/building-exterior.png',
 ];
+
+// Fetch process steps from Sanity
+const sanitySteps = await getAllProcessSteps();
+
+// Helper to get step image URL
+const getStepImage = (step: SanityProcessStep, index: number): string => {
+  if (step.image?.asset) {
+    return urlFor(step.image).width(800).height(600).format('webp').url();
+  }
+  return defaultStepImages[index] || defaultStepImages[0];
+};
+
+// Build steps array from Sanity data with i18n fallback
+const steps = sanitySteps.length > 0
+  ? sanitySteps.slice(0, 5).map((step, index) => {
+      const stepKey = step.stepNumber.toString() as keyof typeof t.process.steps;
+      const i18nStep = t.process.steps[stepKey];
+      return {
+        number: step.stepNumber.toString().padStart(2, '0'),
+        title: getLocalizedValue(step.title, lang as Language) || i18nStep?.title || '',
+        titleShort: getLocalizedValue(step.titleShort, lang as Language) || i18nStep?.titleShort || '',
+        description: getLocalizedValue(step.description, lang as Language) || i18nStep?.description || '',
+        image: getStepImage(step, index),
+      };
+    })
+  : // Fallback to i18n if Sanity returns empty
+    [
+      {
+        number: t.process.steps['1'].number,
+        title: t.process.steps['1'].title,
+        titleShort: t.process.steps['1'].titleShort,
+        description: t.process.steps['1'].description,
+        image: defaultStepImages[0],
+      },
+      {
+        number: t.process.steps['2'].number,
+        title: t.process.steps['2'].title,
+        titleShort: t.process.steps['2'].titleShort,
+        description: t.process.steps['2'].description,
+        image: defaultStepImages[1],
+      },
+      {
+        number: t.process.steps['3'].number,
+        title: t.process.steps['3'].title,
+        titleShort: t.process.steps['3'].titleShort,
+        description: t.process.steps['3'].description,
+        image: defaultStepImages[2],
+      },
+      {
+        number: t.process.steps['4'].number,
+        title: t.process.steps['4'].title,
+        titleShort: t.process.steps['4'].titleShort,
+        description: t.process.steps['4'].description,
+        image: defaultStepImages[3],
+      },
+      {
+        number: t.process.steps['5'].number,
+        title: t.process.steps['5'].title,
+        titleShort: t.process.steps['5'].titleShort,
+        description: t.process.steps['5'].description,
+        image: defaultStepImages[4],
+      },
+    ];
 
 // Icons for each step (SVG paths)
 const icons = [
@@ -187,7 +223,7 @@ const icons = [
   .collapsed-content .step-number {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #e74c3c;
+    color: var(--color-step-number);
     margin-bottom: 0.5rem;
   }
 
@@ -248,7 +284,7 @@ const icons = [
   .expanded-header .step-number {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #e74c3c;
+    color: var(--color-step-number);
   }
 
   .expanded-header .step-title {

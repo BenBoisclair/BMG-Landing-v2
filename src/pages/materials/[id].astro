@@ -5,19 +5,24 @@ import Footer from '../../components/layout/Footer.astro';
 import MaterialDetailHero from '../../components/sections/MaterialDetailHero.astro';
 import MaterialDetailContent from '../../components/sections/MaterialDetailContent.astro';
 import RelatedMaterials from '../../components/sections/RelatedMaterials.astro';
-import { getTranslations, defaultLang } from '../../i18n/utils';
+import { getTranslations, defaultLang, getLangFromUrl } from '../../i18n/utils';
 import { getAllMaterials, getMaterialById, type SanityMaterial } from '../../lib/queries/materials';
 import { getLocalizedValue, type Language } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 
-// Generate static paths for all materials
+// Generate static paths for all materials with error handling
 export async function getStaticPaths() {
-  const materials = await getAllMaterials();
+  try {
+    const materials = await getAllMaterials();
 
-  return materials.map((material) => ({
-    params: { id: material.internalId?.current || material._id },
-    props: { materialId: material.internalId?.current || material._id },
-  }));
+    return materials.map((material) => ({
+      params: { id: material.internalId?.current || material._id },
+      props: { materialId: material.internalId?.current || material._id },
+    }));
+  } catch (error) {
+    console.error('Failed to generate static paths for materials:', error);
+    return [];
+  }
 }
 
 const { id } = Astro.params;
@@ -26,9 +31,9 @@ const { materialId } = Astro.props;
 // Fetch material from Sanity
 const material = await getMaterialById(materialId);
 
-// Fallback to i18n translations if Sanity data is incomplete
-const t = getTranslations(defaultLang);
-const lang = defaultLang as Language;
+// Get language from URL context (for localized routes)
+const lang = getLangFromUrl(Astro.url) as Language;
+const t = getTranslations(lang);
 
 // Get localized content from Sanity or fallback to i18n
 const materialName = getLocalizedValue(material?.name, lang) ||
@@ -39,10 +44,10 @@ const materialDescription = getLocalizedValue(material?.description, lang) ||
   t.materials.items[id as keyof typeof t.materials.items]?.description ||
   '';
 
-// Get image URL - prefer Sanity, fallback to static
+// Get image URL - prefer Sanity, fallback to static with null safety
 const heroImageUrl = material?.mainImage?.asset
   ? urlFor(material.mainImage).width(1920).height(800).format('webp').url()
-  : `/materials/${id}/${id}.jpg`;
+  : '/images/Product/bmg-logo.png'; // Safe fallback
 
 const category = material?.category || 'classic';
 ---
@@ -50,7 +55,7 @@ const category = material?.category || 'classic';
 <BaseLayout
   title={`${materialName} | ${t.meta.title}`}
   description={materialDescription.slice(0, 160)}
-  lang={defaultLang}
+  lang={lang}
 >
   <Header pageType="project" />
 

@@ -133,8 +133,12 @@ function transformMaterials(materials: SanityMaterial[], category: string) {
 </BaseLayout>
 
 <script>
+  // Use AbortController for proper event listener cleanup
+  const controller = new AbortController();
+  const { signal } = controller;
+
   // Handle tab changes - query DOM inside handler to avoid stale references
-  function handleTabChange(e) {
+  function handleTabChange(e: CustomEvent) {
     const { categoryId, categoryLabel: label } = e.detail;
     const categoryLabelEl = document.querySelector('.category-label');
     const panels = document.querySelectorAll('.materials-panel');
@@ -156,17 +160,17 @@ function transformMaterials(materials: SanityMaterial[], category: string) {
   }
 
   // Handle filter changes (placeholder - can be expanded later)
-  function handleFilterChange(e) {
+  function handleFilterChange(e: CustomEvent) {
     const { filterId } = e.detail;
-    console.log('Filter changed:', filterId);
     // Future: Implement actual filtering logic
   }
 
-  // Remove existing listeners to prevent duplicates, then add fresh ones
-  document.removeEventListener('materials-tab-change', handleTabChange);
-  document.removeEventListener('materials-filter-change', handleFilterChange);
-  document.addEventListener('materials-tab-change', handleTabChange);
-  document.addEventListener('materials-filter-change', handleFilterChange);
+  // Add event listeners with AbortController for proper cleanup
+  document.addEventListener('materials-tab-change', handleTabChange as EventListener, { signal });
+  document.addEventListener('materials-filter-change', handleFilterChange as EventListener, { signal });
+
+  // Clean up on page navigation (Astro View Transitions)
+  document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
 </script>
 
 <style>

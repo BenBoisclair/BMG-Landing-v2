@@ -14,6 +14,12 @@ const PUBLIC_SANITY_PROJECT_ID = env.PUBLIC_SANITY_PROJECT_ID || '';
 const PUBLIC_SANITY_DATASET = env.PUBLIC_SANITY_DATASET || 'production';
 const PUBLIC_SANITY_API_VERSION = env.PUBLIC_SANITY_API_VERSION || '2024-01-01';
 
+// Validate required environment variables at build time
+if (process.env.NODE_ENV === 'production' && !PUBLIC_SANITY_PROJECT_ID) {
+  console.warn('\n⚠️  Warning: PUBLIC_SANITY_PROJECT_ID is not set.');
+  console.warn('   Sanity CMS features may not work correctly.\n');
+}
+
 // https://astro.build/config
 export default defineConfig({
   // Site URL for sitemap generation

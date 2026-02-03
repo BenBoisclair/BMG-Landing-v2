@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { useI18n } from '../i18n/utils';
+
+const { lang, t } = useI18n(Astro.url);
+---
+
+<BaseLayout
+  title={`${t.footer.privacyPolicy} | ${t.meta.title}`}
+  description="Privacy Policy for Bangkok Modern Granite"
+  lang={lang}
+>
+  <Header pageType="project" />
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl lg:text-4xl font-bold text-brand-primary mb-8">
+        {t.footer.privacyPolicy}
+      </h1>
+
+      <div class="prose prose-lg max-w-none text-gray-700">
+        <p class="text-sm text-gray-500 mb-8">Last updated: February 2025</p>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">1. Information We Collect</h2>
+          <p>
+            When you use our contact form, we collect the following information:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Name (first name and surname)</li>
+            <li>Email address</li>
+            <li>Phone number</li>
+            <li>WhatsApp number (optional)</li>
+            <li>Project details and inquiries</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">2. How We Use Your Information</h2>
+          <p>We use the collected information to:</p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Respond to your inquiries about our granite products and services</li>
+            <li>Provide quotes and project estimates</li>
+            <li>Communicate about ongoing projects</li>
+            <li>Send important updates about your orders</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">3. Data Protection</h2>
+          <p>
+            We implement appropriate security measures to protect your personal information.
+            Your data is stored securely and is only accessible to authorized personnel who
+            need it to fulfill your requests.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">4. Third-Party Services</h2>
+          <p>
+            Our website uses the following third-party services:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Sanity CMS for content management</li>
+            <li>Vercel for website hosting</li>
+          </ul>
+          <p class="mt-2">
+            These services have their own privacy policies governing how they handle data.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">5. Your Rights</h2>
+          <p>You have the right to:</p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Request access to your personal data</li>
+            <li>Request correction of inaccurate data</li>
+            <li>Request deletion of your data</li>
+            <li>Withdraw consent at any time</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">6. Contact Us</h2>
+          <p>
+            If you have any questions about this Privacy Policy, please contact us at:
+          </p>
+          <p class="mt-2">
+            <strong>Bangkok Modern Granite Co., Ltd.</strong><br />
+            Email: info@bmg.co.th<br />
+            Phone: +66-2-xxx-xxxx
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

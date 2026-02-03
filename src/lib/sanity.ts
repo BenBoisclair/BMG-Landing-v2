@@ -6,11 +6,19 @@ const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || '';
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
 const apiVersion = import.meta.env.PUBLIC_SANITY_API_VERSION || '2024-01-01';
 
+// Validate required environment variables
+if (!projectId && import.meta.env.PROD) {
+  console.warn('Warning: PUBLIC_SANITY_PROJECT_ID is not set. Sanity queries will fail.');
+}
+
 export const sanityClient = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: import.meta.env.PROD,
+  requestTagPrefix: 'bmg',
+  // Note: Request timeout is handled in individual query functions
+  // using AbortController when needed for long-running queries
 });
 
 // Type for language selection

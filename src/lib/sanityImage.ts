@@ -1,6 +1,8 @@
 import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { sanityClient } from './sanity';
+
+// Define SanityImageSource type locally to avoid import path issues
+type SanityImageSource = Parameters<ReturnType<typeof imageUrlBuilder>['image']>[0];
 
 const builder = imageUrlBuilder(sanityClient);
 

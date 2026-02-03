@@ -212,15 +212,17 @@ export const POST: APIRoute = async ({ request }) => {
       remark: sanitizedData.remark,
     };
 
-    // Log for debugging (remove in production or use proper logging)
-    console.log('Contact form submission received:', {
-      timestamp: new Date().toISOString(),
-      clientId,
-      data: {
-        ...processedData,
-        email: processedData.email.replace(/(.{2}).*(@.*)/, '$1***$2'), // Mask email in logs
-      },
-    });
+    // Only log in development mode
+    if (import.meta.env.DEV) {
+      console.log('Contact form submission received:', {
+        timestamp: new Date().toISOString(),
+        clientId,
+        data: {
+          ...processedData,
+          email: processedData.email.replace(/(.{2}).*(@.*)/, '$1***$2'), // Mask email in logs
+        },
+      });
+    }
 
     // 9. Return success response
     return new Response(
@@ -231,8 +233,10 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 200, headers }
     );
   } catch (error) {
-    // Log error for debugging
-    console.error('Contact form error:', error);
+    // Only log errors in development mode
+    if (import.meta.env.DEV) {
+      console.error('Contact form error:', error);
+    }
 
     return new Response(
       JSON.stringify({

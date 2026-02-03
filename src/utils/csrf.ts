@@ -21,6 +21,7 @@ export interface CSRFTokenData {
 
 const CSRF_TOKEN_KEY = 'bmg_csrf_token';
 const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
+const CSRF_COOKIE_NAME = 'bmg_csrf';
 const TOKEN_EXPIRY_MS = 30 * 60 * 1000; // 30 minutes
 const TOKEN_LENGTH = 32;
 
@@ -186,60 +187,149 @@ export function withCSRFToken(options: RequestInit = {}): RequestInit {
 // ============================================
 
 /**
- * Validates CSRF token from request headers
+ * Validates CSRF token from request headers using double-submit cookie pattern
  * Use this in API route handlers
+ *
+ * Security: Uses timing-safe comparison to prevent timing attacks
  */
 export function validateCSRFFromRequest(request: Request): boolean {
-  const token = request.headers.get(CSRF_TOKEN_HEADER);
+  const headerToken = request.headers.get(CSRF_TOKEN_HEADER);
+  const cookieHeader = request.headers.get('Cookie');
 
-  if (!token) {
+  if (!headerToken) {
     return false;
   }
 
-  // For server-side validation, we need to compare against a stored token
-  // In a real implementation, this would check against a server-side session store
-  // For now, we rely on the token format validation and origin checks
-
   // Basic token format validation
-  if (token.length !== TOKEN_LENGTH * 2) {
+  if (headerToken.length !== TOKEN_LENGTH * 2) {
     return false;
   }
 
   // Check that token contains only valid hex characters
-  if (!/^[0-9a-f]+$/i.test(token)) {
+  if (!/^[0-9a-f]+$/i.test(headerToken)) {
     return false;
   }
 
-  return true;
+  // Double-submit cookie validation: compare header token with cookie token
+  if (!cookieHeader) {
+    // No cookie header means the double-submit pattern cannot be validated
+    // Reject the request for security
+    return false;
+  }
+
+  const cookies = parseCookies(cookieHeader);
+  const cookieToken = cookies[CSRF_COOKIE_NAME];
+
+  if (!cookieToken) {
+    // CSRF cookie not present - reject the request
+    return false;
+  }
+
+  // Use timing-safe comparison to prevent timing attacks
+  return timingSafeEqual(headerToken, cookieToken);
+}
+
+/**
+ * Parse cookies from Cookie header string
+ */
+function parseCookies(cookieHeader: string): Record<string, string> {
+  const cookies: Record<string, string> = {};
+  const pairs = cookieHeader.split(';');
+
+  for (const pair of pairs) {
+    const [name, ...rest] = pair.trim().split('=');
+    if (name) {
+      cookies[name] = rest.join('=');
+    }
+  }
+
+  return cookies;
+}
+
+/**
+ * Timing-safe string comparison to prevent timing attacks
+ */
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+
+  return result === 0;
 }
 
 /**
  * Extracts and validates the origin from a request
  * Returns true if the origin matches the expected host
+ *
+ * Security: Uses exact domain matching to prevent subdomain bypass attacks
+ * (e.g., attacker.localhost or evil-bmg.co.th)
  */
 export function validateRequestOrigin(request: Request, allowedOrigins: string[] = []): boolean {
   const origin = request.headers.get('Origin');
   const referer = request.headers.get('Referer');
 
-  // If no origin/referer, request might be from same origin
+  // If no origin/referer, request might be from non-browser client
+  // For API endpoints, we should require origin validation
+  // Only allow same-origin requests (browsers always send origin for CORS)
   if (!origin && !referer) {
-    return true;
+    // Check if this is a same-origin fetch (browsers may omit origin for same-origin)
+    // For security, default to rejecting requests without origin in production
+    // Note: Some same-origin requests may be blocked; adjust if needed for your use case
+    return false;
   }
 
-  const originToCheck = origin || (referer ? new URL(referer).origin : null);
+  let originToCheck: string | null = null;
+
+  // Parse origin/referer safely
+  try {
+    if (origin) {
+      originToCheck = origin;
+    } else if (referer) {
+      const refererUrl = new URL(referer);
+      originToCheck = refererUrl.origin;
+    }
+  } catch {
+    // Invalid URL format - reject the request
+    return false;
+  }
 
   if (!originToCheck) {
+    // Origin could not be determined - reject for security
+    return false;
+  }
+
+  // Parse the origin to extract hostname
+  let hostname: string;
+  try {
+    const originUrl = new URL(originToCheck);
+    hostname = originUrl.hostname;
+  } catch {
+    return false;
+  }
+
+  // Allow localhost only with exact match (prevents attacker.localhost)
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
     return true;
   }
 
-  // Allow localhost in development
-  if (originToCheck.includes('localhost') || originToCheck.includes('127.0.0.1')) {
-    return true;
-  }
-
-  // Check against allowed origins if provided
+  // Check against allowed origins using exact domain matching
   if (allowedOrigins.length > 0) {
-    return allowedOrigins.some((allowed) => originToCheck.includes(allowed));
+    return allowedOrigins.some((allowed) => {
+      // Exact hostname match (e.g., "bmg.co.th" matches "bmg.co.th")
+      if (hostname === allowed) {
+        return true;
+      }
+      // Or hostname ends with .allowed (e.g., "www.bmg.co.th" matches "bmg.co.th")
+      if (hostname.endsWith('.' + allowed)) {
+        return true;
+      }
+      return false;
+    });
   }
 
   return true;
