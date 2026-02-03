@@ -4,48 +4,65 @@
  * Features: Click-to-zoom, pulsing markers, hover tooltips, click popups, filters
  */
 import 'leaflet/dist/leaflet.css'; // Import at build time to avoid CSP issues
-import projectsData from '../../data/projects.json';
-import geocodedData from '../../data/geocoded-locations.json';
 import { useI18n } from '../../i18n/utils';
+import { getProjectsForMap } from '../../lib/queries/projects';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanityImage';
 import MapFilters from './map/MapFilters.astro';
 import MapSidebar from './map/MapSidebar.astro';
 
 const { t, lang } = useI18n(Astro.url);
 
-// Flatten all projects
-const allProjects = projectsData.projectTypes.flatMap(type => type.projects);
+// Fetch projects with coordinates from Sanity
+const sanityProjects = await getProjectsForMap();
 
 // Build markers data to pass to client
-const markersData = allProjects
-  .filter(project => geocodedData.locations[project.id as keyof typeof geocodedData.locations])
-  .map(project => {
-    const geo = geocodedData.locations[project.id as keyof typeof geocodedData.locations];
-    const projectTranslations = t.project?.projects?.[project.id as keyof typeof t.project.projects];
+const markersData = sanityProjects.map(project => {
+  const projectTranslations = t.project?.projects?.[project.internalId as keyof typeof t.project.projects];
 
-    // Get first sentence of description for sidebar
-    const fullDescription = projectTranslations?.description || '';
-    const shortDescription = fullDescription.split('\n')[0].substring(0, 80);
+  // Get localized name (from Sanity or fallback to i18n translations)
+  const name = getLocalizedValue(project.name, lang as Language) ||
+    projectTranslations?.name ||
+    project.internalId;
 
-    return {
-      id: project.id,
-      name: projectTranslations?.name || project.id,
-      location: projectTranslations?.location || '',
-      description: shortDescription,
-      image: project.image,
-      categories: project.categories,
-      lat: geo.lat,
-      lng: geo.lng,
-      region: geo.region,
-      country: geo.country,
-    };
-  });
+  // Get localized location
+  const location = getLocalizedValue(project.location, lang as Language) ||
+    projectTranslations?.location ||
+    '';
 
-// Region data
-const regions = Object.entries(geocodedData.regions).map(([id, data]) => ({
-  id,
-  name: data.name,
-  bounds: data.bounds,
-}));
+  // Get first sentence of description for sidebar
+  const fullDescription = projectTranslations?.description || '';
+  const shortDescription = fullDescription.split('\n')[0].substring(0, 80);
+
+  // Generate image URL from Sanity
+  const imageUrl = project.mainImage?.asset
+    ? urlFor(project.mainImage).width(400).height(300).format('webp').url()
+    : '/images/Product/bmg-logo.png';
+
+  return {
+    id: project.internalId,
+    name,
+    location,
+    description: shortDescription,
+    image: imageUrl,
+    categories: [project.category],
+    lat: project.lat,
+    lng: project.lng,
+    region: project.region || 'asia',
+    country: project.country,
+  };
+});
+
+// Region bounds (configuration data, not content)
+const regions = [
+  { id: 'all', name: 'All Regions', bounds: [[-60, -180], [80, 180]] },
+  { id: 'americas', name: 'Americas', bounds: [[-55, -170], [72, -30]] },
+  { id: 'europe', name: 'Europe', bounds: [[35, -25], [72, 45]] },
+  { id: 'asia', name: 'Asia', bounds: [[-10, 60], [55, 150]] },
+  { id: 'middle-east', name: 'Middle East', bounds: [[10, 30], [45, 65]] },
+  { id: 'oceania', name: 'Oceania', bounds: [[-50, 110], [0, 180]] },
+  { id: 'africa', name: 'Africa', bounds: [[-35, -20], [38, 55]] },
+];
 ---
 
 <div class="interactive-map-v2">

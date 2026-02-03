@@ -19,6 +19,10 @@ export interface SanityProject {
   material?: LocalizedString;
   customer?: string;
   location?: LocalizedString;
+  coordinates?: { lat: number; lng: number };
+  region?: 'americas' | 'europe' | 'asia' | 'middle-east' | 'oceania' | 'africa';
+  country?: string;
+  city?: string;
   mainImage: any;
   heroImage?: any;
   gallery: any[];
@@ -28,6 +32,21 @@ export interface SanityProject {
     ogImage?: any;
   };
   order: number;
+}
+
+// Map marker data structure
+export interface MapProject {
+  _id: string;
+  internalId: string;
+  name: LocalizedString;
+  category: 'religious' | 'legacy' | 'architectural';
+  mainImage: any;
+  location?: LocalizedString;
+  lat: number;
+  lng: number;
+  region: string;
+  country?: string;
+  city?: string;
 }
 
 // Get all projects with error handling
@@ -137,5 +156,30 @@ export async function getProjectsGroupedByCategory(): Promise<{
   } catch (error) {
     console.error('Failed to group projects by category:', error);
     return { religious: [], legacy: [], architectural: [] };
+  }
+}
+
+// Get projects with coordinates for map display
+export async function getProjectsForMap(): Promise<MapProject[]> {
+  try {
+    const result = await sanityClient.fetch(`
+      *[_type == "project" && defined(coordinates)] | order(category asc, order asc) {
+        _id,
+        "internalId": internalId.current,
+        name,
+        category,
+        mainImage,
+        location,
+        "lat": coordinates.lat,
+        "lng": coordinates.lng,
+        region,
+        country,
+        city
+      }
+    `);
+    return result || [];
+  } catch (error) {
+    console.error('Failed to fetch projects for map:', error);
+    return [];
   }
 }

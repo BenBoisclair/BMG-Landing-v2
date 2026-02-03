@@ -67,6 +67,40 @@ export const project = defineType({
       description: 'Where the project is installed',
     }),
     defineField({
+      name: 'coordinates',
+      title: 'Map Coordinates',
+      type: 'geopoint',
+      description: 'Latitude/longitude for map display',
+    }),
+    defineField({
+      name: 'region',
+      title: 'Region',
+      type: 'string',
+      description: 'Geographic region for map filtering',
+      options: {
+        list: [
+          { title: 'Americas', value: 'americas' },
+          { title: 'Europe', value: 'europe' },
+          { title: 'Asia', value: 'asia' },
+          { title: 'Middle East', value: 'middle-east' },
+          { title: 'Oceania', value: 'oceania' },
+          { title: 'Africa', value: 'africa' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'country',
+      title: 'Country',
+      type: 'string',
+      description: 'Country where the project is located',
+    }),
+    defineField({
+      name: 'city',
+      title: 'City',
+      type: 'string',
+      description: 'City where the project is located',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
