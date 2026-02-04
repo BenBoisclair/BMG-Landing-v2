@@ -144,6 +144,14 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
         ))}
       </nav>
 
+      <!-- Desktop CTA Button -->
+      <a
+        href="#contact"
+        class="hidden lg:inline-flex items-center px-5 py-2.5 bg-bmg-gold text-white text-sm font-medium rounded-lg hover:bg-bmg-gold/90 transition-colors duration-200 whitespace-nowrap"
+      >
+        {t.nav.requestConversation}
+      </a>
+
       <!-- Language Dropdown (Desktop) - Flag Only -->
       <div class="hidden lg:flex items-center relative">
         <button
@@ -255,6 +263,14 @@ const languageOptions = Object.entries(languages).map(([code, name]) => ({
           {link.label}
         </a>
       ))}
+
+      <!-- Mobile CTA Button -->
+      <a
+        href="#contact"
+        class="block mx-4 mt-4 px-4 py-3 bg-bmg-gold text-white text-center text-lg font-medium font-montserrat rounded-lg hover:bg-bmg-gold/90 transition-colors duration-200"
+      >
+        {t.nav.requestConversation}
+      </a>
 
       <!-- Language Selector (Mobile) - Inline Flags -->
       <div class="mt-4 pt-4 border-t border-white/10">

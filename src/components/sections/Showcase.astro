@@ -1,13 +1,20 @@
 ---
 import { useI18n } from '../../i18n/utils';
 import Container from '../ui/Container.astro';
+import { getSiteSettings } from '../../lib/queries/siteSettings';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
 
 // Import showcase images
 import thumbnail1 from '../../assets/images/showcase/thumbnail-1.svg';
 import thumbnail2 from '../../assets/images/showcase/thumbnail-2.svg';
 import thumbnail3 from '../../assets/images/showcase/thumbnail-3.svg';
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
+
+// Fetch mission content from Sanity with i18n fallback
+const siteSettings = await getSiteSettings();
+const missionTitle = getLocalizedValue(siteSettings?.missionTitle, lang as Language) || t.mission.title;
+const missionDescription = getLocalizedValue(siteSettings?.missionDescription, lang as Language) || t.mission.description;
 
 // Model definitions with their GLB files
 const models = [
@@ -55,10 +62,10 @@ const modelsData = {
       <!-- Text Content (Default) -->
       <div>
         <h2 class="text-4xl lg:text-5xl font-bold text-[#2C266C] mb-6 uppercase">
-          {t.mission.title}
+          {missionTitle}
         </h2>
-        <p class="text-gray-600 text-lg leading-relaxed">
-          {t.mission.description}
+        <p class="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
+          {missionDescription}
         </p>
       </div>
 

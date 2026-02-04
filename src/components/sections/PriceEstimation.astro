@@ -1,8 +1,14 @@
 ---
 import { useI18n } from '../../i18n/utils';
 import Container from '../ui/Container.astro';
+import { getPricingConfig } from '../../lib/queries/pricing';
 
 const { t, lang } = useI18n(Astro.url);
+
+// Fetch pricing config from Sanity to check if calculator is enabled
+const pricingConfig = await getPricingConfig();
+// Default to true if not set (backwards compatible)
+const isCalculatorEnabled = pricingConfig?.enabled !== false;
 
 // Image paths for stone grades
 const stoneImages = {
@@ -80,18 +86,19 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
       </p>
     </div>
 
+    {isCalculatorEnabled ? (
     <!-- Main Calculator Card -->
     <!-- Added mx-auto to center it when width changes -->
-    <div 
-      class="bg-white rounded-2xl shadow-xl overflow-hidden mx-auto" 
-      data-calculator 
+    <div
+      class="bg-white rounded-2xl shadow-xl overflow-hidden mx-auto"
+      data-calculator
       data-state="initial"
       id="calculator-container"
     >
       <!-- Tab Header -->
-      <div 
-        class="flex flex-row border-b border-brand-medium/30 relative h-[200px] sm:h-[300px]" 
-        role="tablist" 
+      <div
+        class="flex flex-row border-b border-brand-medium/30 relative h-[200px] sm:h-[300px]"
+        role="tablist"
         aria-label="Sculpture type"
         id="tab-container"
       >
@@ -326,6 +333,22 @@ const materialsLink = lang === 'en' ? '/materials' : `/${lang}/materials`;
         </div>
       </div>
     </div>
+    ) : (
+    <!-- Calculator Disabled - Show CTA Only -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden mx-auto p-8 lg:p-12 text-center">
+      <div class="max-w-md mx-auto">
+        <p class="text-gray-600 text-base lg:text-lg mb-6">
+          {t.priceEstimation.subtitle}
+        </p>
+        <a
+          href="#contact"
+          class="inline-block px-8 py-3 bg-bmg-gold text-white font-semibold rounded-lg hover:bg-bmg-gold/90 transition-colors"
+        >
+          {t.priceEstimation.getCustomQuote}
+        </a>
+      </div>
+    </div>
+    )}
     </div>
   </Container>
 </section>

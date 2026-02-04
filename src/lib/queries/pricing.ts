@@ -24,6 +24,7 @@ export interface SanityDetailLevel {
 
 export interface SanityPricingConfig {
   _id: string;
+  enabled?: boolean;
   title?: { en?: string; th?: string; ar?: string };
   subtitle?: { en?: string; th?: string; ar?: string };
   sculptureTypes?: SanitySculptureType[];
@@ -43,6 +44,7 @@ export async function getPricingConfig(): Promise<SanityPricingConfig | null> {
     `
     *[_type == "pricingConfig" && _id == $id][0] {
       _id,
+      enabled,
       title,
       subtitle,
       sculptureTypes,

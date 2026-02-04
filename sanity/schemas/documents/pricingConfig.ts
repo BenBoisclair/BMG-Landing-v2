@@ -6,6 +6,13 @@ export const pricingConfig = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'enabled',
+      title: 'Enable Price Calculator',
+      type: 'boolean',
+      description: 'When disabled, the section text will show but the calculator buttons will be hidden',
+      initialValue: true,
+    }),
+    defineField({
       name: 'title',
       title: 'Section Title',
       type: 'localizedString',

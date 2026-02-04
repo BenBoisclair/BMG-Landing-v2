@@ -22,10 +22,15 @@ const { name, role, quote, rating = 5 } = Astro.props;
     ))}
   </div>
 
-  <!-- Quote -->
-  <p class="testimonial-quote mb-6">
-    {quote}
-  </p>
+  <!-- Quote with scroll container -->
+  <div class="quote-container">
+    <div class="quote-scroll">
+      <p class="testimonial-quote">
+        {quote}
+      </p>
+    </div>
+    <div class="quote-fade"></div>
+  </div>
 
   <!-- Author -->
   <div>
@@ -41,6 +46,47 @@ const { name, role, quote, rating = 5 } = Astro.props;
       0 12px 40px rgba(0, 0, 0, 0.06);
   }
 
+  .quote-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-scroll {
+    height: 180px;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+
+  .quote-scroll::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .quote-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .quote-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  .quote-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 4px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .quote-fade.hidden {
+    opacity: 0;
+  }
+
   .testimonial-quote {
     color: var(--color-text-secondary);
     font-family: 'Montserrat', sans-serif;
@@ -48,6 +94,7 @@ const { name, role, quote, rating = 5 } = Astro.props;
     font-style: normal;
     font-weight: 400;
     line-height: 30px;
+    margin-bottom: 0;
   }
 
   .testimonial-name {
@@ -68,3 +115,31 @@ const { name, role, quote, rating = 5 } = Astro.props;
     line-height: 100%;
   }
 </style>
+
+<script>
+  function initQuoteScrollFade() {
+    document.querySelectorAll('.quote-scroll').forEach((el) => {
+      const fade = el.nextElementSibling as HTMLElement | null;
+
+      function updateFade() {
+        const hasOverflow = el.scrollHeight > el.clientHeight;
+        const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 5;
+
+        if (!hasOverflow || isAtBottom) {
+          fade?.classList.add('hidden');
+        } else {
+          fade?.classList.remove('hidden');
+        }
+      }
+
+      updateFade();
+      el.addEventListener('scroll', updateFade);
+    });
+  }
+
+  // Run on initial load
+  initQuoteScrollFade();
+
+  // Re-run when Astro navigates (for View Transitions)
+  document.addEventListener('astro:page-load', initQuoteScrollFade);
+</script>
