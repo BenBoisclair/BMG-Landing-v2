@@ -2,10 +2,17 @@
 import StatItem from '../ui/StatItem.astro';
 import InteractiveMapV2 from '../ui/InteractiveMapV2.astro';
 import { useI18n } from '../../i18n/utils';
+import { getSiteSettings } from '../../lib/queries/siteSettings';
+import { getLocalizedValue, type Language } from '../../lib/sanity';
 
-const { t } = useI18n(Astro.url);
+const { t, lang } = useI18n(Astro.url);
+const siteSettings = await getSiteSettings();
 
-const stats = [
+// Use Sanity statistics or fallback to hardcoded defaults
+const stats = siteSettings?.statistics?.map(stat => ({
+  value: stat.value,
+  label: getLocalizedValue(stat.label, lang as Language) || stat.value,
+})) || [
   { value: '6', label: t.trustedCultures.stats.countriesDelivered },
   { value: '500+', label: t.trustedCultures.stats.projectsCompleted },
   { value: '30+', label: t.trustedCultures.stats.yearsExperience },

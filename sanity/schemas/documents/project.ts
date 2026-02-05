@@ -145,22 +145,34 @@ export const project = defineType({
       description: 'Lower numbers appear first',
       initialValue: 100,
     }),
+    defineField({
+      name: 'active',
+      title: 'Active',
+      type: 'boolean',
+      description: 'When disabled, project will not appear on the website',
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {
       title: 'name.en',
       subtitle: 'category',
       media: 'mainImage',
+      active: 'active',
     },
-    prepare({ title, subtitle, media }) {
+    prepare({ title, subtitle, media, active }) {
       const categoryLabels: Record<string, string> = {
         religious: 'Religious',
         legacy: 'Legacy & Memorial',
         architectural: 'Architectural',
       };
+      const isInactive = active === false;
+      const displayTitle = isInactive ? `🚫 ${title || 'Untitled Project'}` : (title || 'Untitled Project');
+      const categoryLabel = categoryLabels[subtitle] || subtitle;
+      const displaySubtitle = isInactive ? `INACTIVE • ${categoryLabel}` : categoryLabel;
       return {
-        title: title || 'Untitled Project',
-        subtitle: categoryLabels[subtitle] || subtitle,
+        title: displayTitle,
+        subtitle: displaySubtitle,
         media,
       };
     },

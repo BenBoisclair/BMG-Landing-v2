@@ -32,6 +32,7 @@ export interface SanityProject {
     ogImage?: any;
   };
   order: number;
+  active?: boolean;
 }
 
 // Map marker data structure
@@ -53,7 +54,7 @@ export interface MapProject {
 export async function getAllProjects(): Promise<SanityProject[]> {
   try {
     const result = await sanityClient.fetch(`
-      *[_type == "project"] | order(category asc, order asc) {
+      *[_type == "project" && active != false] | order(category asc, order asc) {
         _id,
         internalId,
         name,
@@ -84,7 +85,7 @@ export async function getProjectsByCategory(
   try {
     const result = await sanityClient.fetch(
       `
-      *[_type == "project" && category == $category] | order(order asc) {
+      *[_type == "project" && category == $category && active != false] | order(order asc) {
         _id,
         internalId,
         name,
@@ -115,7 +116,7 @@ export async function getProjectById(id: string): Promise<SanityProject | null> 
   try {
     return await sanityClient.fetch(
       `
-      *[_type == "project" && internalId.current == $id][0] {
+      *[_type == "project" && internalId.current == $id && active != false][0] {
         _id,
         internalId,
         name,
@@ -163,7 +164,7 @@ export async function getProjectsGroupedByCategory(): Promise<{
 export async function getProjectsForMap(): Promise<MapProject[]> {
   try {
     const result = await sanityClient.fetch(`
-      *[_type == "project" && defined(coordinates)] | order(category asc, order asc) {
+      *[_type == "project" && defined(coordinates) && active != false] | order(category asc, order asc) {
         _id,
         "internalId": internalId.current,
         name,
