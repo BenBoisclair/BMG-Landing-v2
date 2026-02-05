@@ -4,9 +4,9 @@
  * Features: Click-to-zoom, pulsing markers, hover tooltips, click popups, filters
  */
 import 'leaflet/dist/leaflet.css'; // Import at build time to avoid CSP issues
-import { useI18n } from '../../i18n/utils';
+import { useI18n, getLocalizedPath, type Language } from '../../i18n/utils';
 import { getProjectsForMap } from '../../lib/queries/projects';
-import { getLocalizedValue, type Language } from '../../lib/sanity';
+import { getLocalizedValue, type Language as SanityLanguage } from '../../lib/sanity';
 import { urlFor } from '../../lib/sanityImage';
 import MapFilters from './map/MapFilters.astro';
 import MapSidebar from './map/MapSidebar.astro';
@@ -21,12 +21,12 @@ const markersData = sanityProjects.map(project => {
   const projectTranslations = t.project?.projects?.[project.internalId as keyof typeof t.project.projects];
 
   // Get localized name (from Sanity or fallback to i18n translations)
-  const name = getLocalizedValue(project.name, lang as Language) ||
+  const name = getLocalizedValue(project.name, lang as SanityLanguage) ||
     projectTranslations?.name ||
     project.internalId;
 
   // Get localized location
-  const location = getLocalizedValue(project.location, lang as Language) ||
+  const location = getLocalizedValue(project.location, lang as SanityLanguage) ||
     projectTranslations?.location ||
     '';
 
@@ -50,6 +50,7 @@ const markersData = sanityProjects.map(project => {
     lng: project.lng,
     region: project.region || 'asia',
     country: project.country,
+    url: getLocalizedPath(lang as Language, `/projects/${project.internalId}`),
   };
 });
 
@@ -215,7 +216,7 @@ const regions = [
             <div class="popup-categories">
               ${m.categories.map((cat: string) => `<span class="category-tag">${cat}</span>`).join('')}
             </div>
-            <a href="/${lang}/projects/${m.id}" class="popup-btn">View Project</a>
+            <a href="${m.url}" class="popup-btn">View Project</a>
           </div>
         </div>
       `;
@@ -230,7 +231,7 @@ const regions = [
         </div>
         <div class="popup-list">
           ${markerData.map(m => `
-            <a href="/${lang}/projects/${m.id}" class="popup-list-item">
+            <a href="${m.url}" class="popup-list-item">
               <img src="${m.image}" alt="${m.name}" class="list-item-image" />
               <div class="list-item-content">
                 <span class="list-item-name">${m.name}</span>
