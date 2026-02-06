@@ -1,0 +1,145 @@
+---
+interface Props {
+  name: string;
+  id?: string;
+  required?: boolean;
+  placeholder?: string;
+  options: { value: string; label: string }[];
+}
+
+const {
+  name,
+  id = name,
+  required = false,
+  placeholder = 'Please Select...',
+  options,
+} = Astro.props;
+---
+
+<div class="custom-select relative" data-select>
+  <input type="hidden" name={name} id={id} data-input value="" />
+
+  <button
+    type="button"
+    class="select-trigger w-full h-[50px] px-4 rounded-md border border-border bg-white text-left flex items-center justify-between outline-none transition-all duration-200 text-gray-900 cursor-pointer focus:ring-2 focus:ring-bmg-primary focus:border-transparent"
+    data-select-trigger
+    aria-haspopup="listbox"
+    aria-expanded="false"
+  >
+    <span class="select-trigger__label truncate text-gray-500" data-select-label>{placeholder}</span>
+    <svg class="w-5 h-5 text-gray-400 flex-shrink-0 ml-2 transition-transform duration-200" data-select-chevron viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+
+  {/* Desktop dropdown */}
+  <ul
+    class="select-dropdown hidden absolute z-50 left-0 right-0 mt-1 max-h-60 overflow-auto rounded-md border border-border bg-white shadow-lg py-1"
+    data-select-dropdown
+    role="listbox"
+  >
+    {options.map((opt, i) => (
+      <li
+        class="select-dropdown__option px-4 py-2.5 text-gray-900 cursor-pointer hover:bg-gray-100 transition-colors duration-150"
+        data-select-option
+        data-value={opt.value}
+        role="option"
+        tabindex="-1"
+      >
+        {opt.label}
+      </li>
+    ))}
+  </ul>
+
+  {/* Mobile bottom sheet */}
+  <div class="select-sheet hidden fixed inset-0 z-[9998]" data-select-sheet>
+    <div class="select-sheet__backdrop absolute inset-0 bg-black/50" data-select-sheet-backdrop></div>
+    <div class="select-sheet__panel absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[70vh] flex flex-col" data-select-sheet-panel>
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+        <span class="text-base font-medium text-gray-900" data-select-sheet-title>{placeholder}</span>
+        <button type="button" class="p-1 text-gray-400 hover:text-gray-600" data-select-sheet-close aria-label="Close">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <ul class="overflow-auto flex-1 pb-safe" role="listbox" data-select-sheet-list>
+        {options.map((opt) => (
+          <li
+            class="select-sheet__option flex items-center justify-between px-5 py-4 text-base text-gray-900 cursor-pointer active:bg-gray-100 transition-colors duration-150 border-b border-gray-100 last:border-b-0"
+            data-select-sheet-option
+            data-value={opt.value}
+            role="option"
+            tabindex="-1"
+          >
+            <span>{opt.label}</span>
+            <svg class="select-sheet__check w-5 h-5 text-bmg-primary hidden" data-check-icon fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Trigger font-size 16px prevents iOS Safari auto-zoom */
+  .select-trigger {
+    font-size: 16px;
+  }
+
+  /* Desktop dropdown animation */
+  .select-dropdown {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+  }
+
+  .select-dropdown.open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Mobile sheet animation */
+  .select-sheet__panel {
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .select-sheet.open .select-sheet__panel {
+    transform: translateY(0);
+  }
+
+  .select-sheet__backdrop {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .select-sheet.open .select-sheet__backdrop {
+    opacity: 1;
+  }
+
+  /* Safe area for bottom sheet on iOS */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  /* Active option highlight in dropdown */
+  .select-dropdown__option.is-focused {
+    background-color: #f3f4f6;
+  }
+
+  .select-dropdown__option.is-selected {
+    font-weight: 500;
+    color: var(--color-bmg-primary, #2563eb);
+  }
+
+  .select-sheet__option.is-selected {
+    font-weight: 500;
+    color: var(--color-bmg-primary, #2563eb);
+  }
+</style>

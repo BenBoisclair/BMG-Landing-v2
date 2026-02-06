@@ -84,7 +84,7 @@ export function parseVideoUrl(url: string | undefined | null): VideoInfo {
   if (youtubeId) {
     return {
       type: 'youtube',
-      embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&showinfo=0&rel=0&enablejsapi=1`,
       directUrl: null,
     };
   }

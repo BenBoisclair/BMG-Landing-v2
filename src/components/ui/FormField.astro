@@ -1,4 +1,6 @@
 ---
+import Select from './Select.astro';
+
 /**
  * FormField - A unified form field component that combines FormInput, FormSelect, and FormPhoneInput
  * with consistent validation, error handling, and styling.
@@ -94,7 +96,6 @@ const normalizedOptions = options.map(opt =>
 const baseInputClasses = 'w-full px-3 rounded-md border border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:border-transparent outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
 const inputClasses = `${baseInputClasses} h-[50px] flex flex-col justify-center items-start gap-3`;
 const textareaClasses = `${baseInputClasses} py-3 flex flex-col justify-start items-start gap-3`;
-const selectClasses = `${inputClasses} appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1.5em_1.5em] bg-[right_0.5rem_center] bg-no-repeat pr-10`;
 const phoneSelectClasses = 'h-[50px] px-3 border-r border-border bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 appearance-none cursor-pointer bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1em_1em] bg-[right_0.25rem_center] bg-no-repeat pr-6';
 const phoneInputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring-bmg-primary focus:outline-none transition-all duration-200 text-gray-900 placeholder-gray-500';
 ---
@@ -138,19 +139,14 @@ const phoneInputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring
       />
     </div>
   ) : isSelect ? (
-    <!-- Select dropdown -->
-    <select
-      id={name}
+    <!-- Custom Select -->
+    <Select
       name={name}
+      id={name}
       required={required}
-      class={selectClasses}
-      data-input
-    >
-      <option value="" disabled selected>{selectPlaceholder}</option>
-      {normalizedOptions.map((opt) => (
-        <option value={opt.value}>{opt.label}</option>
-      ))}
-    </select>
+      placeholder={selectPlaceholder}
+      options={normalizedOptions}
+    />
   ) : isTextarea ? (
     <!-- Textarea -->
     <textarea
@@ -184,12 +180,14 @@ const phoneInputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring
 <style>
   /* Error state styling */
   .form-field.has-error [data-input],
-  .form-field.has-error [data-phone-wrapper] {
+  .form-field.has-error [data-phone-wrapper],
+  .form-field.has-error [data-select-trigger] {
     border-color: #ef4444;
   }
 
   .form-field.has-error [data-input]:focus,
-  .form-field.has-error [data-country-select]:focus {
+  .form-field.has-error [data-country-select]:focus,
+  .form-field.has-error [data-select-trigger]:focus {
     --tw-ring-color: #ef4444;
   }
 
@@ -199,7 +197,8 @@ const phoneInputClasses = 'flex-1 h-[50px] px-3 bg-white focus:ring-2 focus:ring
 
   /* Valid state styling */
   .form-field.is-valid [data-input],
-  .form-field.is-valid [data-phone-wrapper] {
+  .form-field.is-valid [data-phone-wrapper],
+  .form-field.is-valid [data-select-trigger] {
     border-color: #22c55e;
   }
 </style>

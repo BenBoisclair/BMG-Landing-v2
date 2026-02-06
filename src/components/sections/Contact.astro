@@ -468,12 +468,13 @@ const validationTranslations = JSON.stringify({
 
     let isSubmitting = false;
 
-    // Attach blur event listeners for real-time validation
+    // Attach blur/change event listeners for real-time validation
     const fields = form.querySelectorAll('[data-form-field]');
     fields.forEach((field) => {
       const input = field.querySelector('[data-input]');
       if (input) {
         input.addEventListener('blur', () => validateField(field));
+        input.addEventListener('change', () => validateField(field));
         input.addEventListener('input', () => {
           if (field.classList.contains('has-error')) {
             validateField(field);
@@ -549,4 +550,8 @@ const validationTranslations = JSON.stringify({
       }
     });
   });
+</script>
+
+<script>
+  import '../../scripts/select';
 </script>

@@ -1,7 +1,7 @@
 /**
  * Header Module
  * Handles all header-related functionality including:
- * - Mobile menu toggle
+ * - Mobile menu toggle with header background sync
  * - Smooth scrolling for anchor links
  * - Products dropdown (hover on desktop, accordion on mobile)
  * - Language dropdown (desktop)
@@ -33,10 +33,24 @@ const ELEMENTS = {
 const HEADER_CLASSES = {
   transparent: 'bg-transparent',
   scrolled: 'bg-brand-primary/80 backdrop-blur-md',
+  menuOpen: 'bg-black/95',
 } as const;
 
 let dropdownInstances: DropdownInstance[] = [];
 let throttledScrollHandler: ((() => void) & { cancel: () => void }) | null = null;
+let mobileMenuOpen = false;
+
+/**
+ * Removes all header background state classes
+ */
+function clearHeaderBgClasses(header: HTMLElement): void {
+  const all = [
+    ...HEADER_CLASSES.transparent.split(' '),
+    ...HEADER_CLASSES.scrolled.split(' '),
+    ...HEADER_CLASSES.menuOpen.split(' '),
+  ];
+  header.classList.remove(...all);
+}
 
 /**
  * Initializes the mobile menu toggle functionality
@@ -44,17 +58,34 @@ let throttledScrollHandler: ((() => void) & { cancel: () => void }) | null = nul
 function initMobileMenu(): void {
   const menuButton = document.getElementById(ELEMENTS.mobileMenuButton);
   const mobileMenu = document.getElementById(ELEMENTS.mobileMenu);
+  const header = document.getElementById(ELEMENTS.header);
 
   if (!menuButton || !mobileMenu) return;
 
+  const menuOpenClasses = HEADER_CLASSES.menuOpen.split(' ');
+
   menuButton.addEventListener('click', () => {
+    const isOpening = mobileMenu.classList.contains('hidden');
     mobileMenu.classList.toggle('hidden');
+    mobileMenuOpen = isOpening;
+
+    if (header) {
+      if (isOpening) {
+        clearHeaderBgClasses(header);
+        header.classList.add(...menuOpenClasses);
+      } else {
+        // Restore scroll-based background
+        updateHeaderBackground();
+      }
+    }
   });
 
   // Close menu when clicking navigation links (except language dropdown links)
   mobileMenu.querySelectorAll('a:not([id^="mobile-language"])').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.add('hidden');
+      mobileMenuOpen = false;
+      updateHeaderBackground();
     });
   });
 }
@@ -65,6 +96,8 @@ function initMobileMenu(): void {
 function closeMobileMenu(): void {
   const mobileMenu = document.getElementById(ELEMENTS.mobileMenu);
   mobileMenu?.classList.add('hidden');
+  mobileMenuOpen = false;
+  updateHeaderBackground();
 }
 
 /**
@@ -164,10 +197,14 @@ function initLanguageDropdowns(): void {
  * Updates header background color based on scroll position
  * Adds solid background when scrolled past hero section
  * Supports different hero sections based on page type (landing vs project)
+ * Skipped when mobile menu is open (menu controls the background)
  */
 function updateHeaderBackground(): void {
   const header = document.getElementById(ELEMENTS.header);
   if (!header) return;
+
+  // When mobile menu is open, keep the menu background
+  if (mobileMenuOpen) return;
 
   // Determine which hero section to use based on page type
   const pageType = header.dataset.pageType || 'landing';
@@ -178,9 +215,10 @@ function updateHeaderBackground(): void {
   const transparentClasses = HEADER_CLASSES.transparent.split(' ');
   const scrolledClasses = HEADER_CLASSES.scrolled.split(' ');
 
+  clearHeaderBgClasses(header);
+
   // If no hero section exists, keep solid background
   if (!heroSection) {
-    header.classList.remove(...transparentClasses);
     header.classList.add(...scrolledClasses);
     return;
   }
@@ -190,10 +228,8 @@ function updateHeaderBackground(): void {
   const scrollPosition = window.scrollY;
 
   if (scrollPosition > heroThreshold) {
-    header.classList.remove(...transparentClasses);
     header.classList.add(...scrolledClasses);
   } else {
-    header.classList.remove(...scrolledClasses);
     header.classList.add(...transparentClasses);
   }
 }
